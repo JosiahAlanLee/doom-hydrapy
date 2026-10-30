@@ -1,6 +1,6 @@
-# Null Run 003 — two book demons as seeded encounters
+# Null Run — book demons as seeded encounters
 
-Repetiel and Calmor are adapted from Josiah Alan-Lee's *Pseudomonarchia
+Repetiel, Calmor, Probator and Jurisiel are adapted from Josiah Alan-Lee's *Pseudomonarchia
 Escalationum*. The source is the [Book III catalogue at the inspected commit](https://github.com/JosiahAlanLee/Codex-Intervallorum/blob/b789e03f30034bc8403f8a40aaf83842885aaad5/books/03_escalationum/manuscript/catalogue.json).
 Their forms and bindings supply the themes; the combat rules below are new game
 interpretations. No book artwork or apparatus drawing implementation is copied.
@@ -10,8 +10,8 @@ operating manual. It is an adaptation, not a claim that the book describes comba
 
 ## Campaign and practice
 
-Both appear once per five-floor campaign, on floors three and five. A seed-driven
-shuffle selects their order, which repeats for the same seed. Health varies within
+Two different demons appear per five-floor campaign, on floors three and five. A seed-driven
+shuffle selects them from the four-demon bank, which repeats for the same seed. Health varies within
 bounded ranges. Each encounter gets a reachable binding tile, preferably inside
 a two-cell side alcove for cover, plus nearby supplies. The exit stays locked
 while the boss is alive; binding opens a damage window, not an immediate victory.
@@ -26,6 +26,8 @@ are separate from a campaign save and reset inventory like any new run.
 | --- | --- | --- | --- |
 | Repetiel | Two mouths on a return tube; repeated intake | On the marked ring, press F, release, then press F again. Holding F counts once. | A shot followed 18 tics later by an echo retaining its original direction and vertical velocity |
 | Calmor | A softly lined bell demanding a calmer account | Stay on the ring without moving or firing for two seconds. Movement, knockback or attack input interrupts the charge. | One aimed shot while the player is quiet; a three-shot spread while the player is firing |
+| Probator | A magnifying glass examining its own handle, demanding impossible proof | Hit its sealed shield, then tap F on the ring to acknowledge that proof | Two closely spaced fireballs |
+| Jurisiel | A sideways doorway carried through another doorway, disputing scope | Enter the amber A ring, then cross the cyan B ring | Two diverging fireballs |
 
 Each completed binding exposes the boss for eight seconds of simulation time.
 Pausing the browser game also pauses that window. When it closes, repeat the
@@ -36,7 +38,7 @@ sprites and modified Doom archetype state machines, not new 3D creature models.
 
 ## Native boundaries
 
-Classes 5/6 use marked THING options. `rogue_boss.c` owns one encounter context per
+Classes 5/6 and the extended classes 9/10 use marked THING options. `rogue_boss.c` owns one encounter context per
 level, reset before level memory is freed. It validates a tagged seal sector,
 observes native use/attack/movement, gates incoming boss damage and level exits,
 and schedules Repetiel's echo. A malformed external PWAD without a seal leaves
@@ -53,16 +55,16 @@ keep Freedoom's license and credits with distributed WADs.
 
 ## Validation and limits
 
-`FREEDOOM_WAD=/path/to/freedoom2.wad python -m unittest -v test_rogue test_bosses`
+`FREEDOOM_WAD=/path/to/freedoom2.wad python -m unittest -v test_rogue test_bosses test_gloamwood`
 checks the base game plus seed selection, reachable bindings, isolated studies,
 holding/repeating use, stillness and attack resets, vulnerability expiry, real
 shield impacts, weapon-caused defeat, exit locks/releases, exact echo direction,
 Calmor's panic spread and ordinary-map isolation. Existing `test_ipc.py` covers
 the deterministic demo path. Test fixtures are not combat-balance signoff.
 
-Audio, mouse look, perks and save/resume remain future work. Creature assets from
-the user's Gloamwood project have not been ported: design notes are located, but
-the actual world/addon is still in a separate conversation or on the tablet.
+Audio, mouse look, perks and save/resume remain future work. New Gloamwood
+interpretations are described in [GLOAMWOOD.md](GLOAMWOOD.md); its original
+geometry/textures are unavailable and have not been ported.
 DeepSeek's separate modular art kit was generated from a generic brief, then
 reproduced and visually reviewed independently. Its 24 combinations and four
 pose studies are not integrated into these encounters. Book/game source and

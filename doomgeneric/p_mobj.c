@@ -33,6 +33,7 @@
 
 #include "doomstat.h"
 #include "rogue_ai.h"
+#include "rogue_creature.h"
 
 
 void G_PlayerReborn (int player);
@@ -441,6 +442,7 @@ P_NightmareRespawn (mobj_t* mobj)
 //
 void P_MobjThinker (mobj_t* mobj)
 {
+    if (Rogue_CreatureThink(mobj)) {Rogue_Visual(mobj);return;}
     // momentum movement
     if (mobj->momx
 	|| mobj->momy
@@ -572,6 +574,7 @@ int		iquetail;
 
 void P_RemoveMobj (mobj_t* mobj)
 {
+    Rogue_CreatureRemove(mobj);
     if ((mobj->flags & MF_SPECIAL)
 	&& !(mobj->flags & MF_DROPPED)
 	&& (mobj->type != MT_INV)

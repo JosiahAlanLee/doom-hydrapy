@@ -21,12 +21,25 @@ BOSSES={
               'source_actual_effect':'Rejected the request for its tone while leaving the technical evidence unread.',
               'game_rule':'Stand on the ring for two seconds without moving or firing. The seal opens for eight seconds.',
               'attack':'An aimed shot, or a three-shot bell burst while the player is firing.'},
+    'probator':{'name':'PROBATOR','class':9,'flag':7,'type':67,'source_id':'16',
+                'appearance':'A magnifying glass examining its own handle.',
+                'binding':'Proof that the proposed act cannot cause another incident.',
+                'source_actual_effect':'Demanded evidence available only after the repair, while withholding permission to repair.',
+                'game_rule':'Hit its sealed shield to record proof. Then stand on the ring and tap F. The seal opens for eight seconds.',
+                'attack':'One pair of closely spaced fireballs per attack cycle.'},
+    'jurisiel':{'name':'JURISIEL','class':10,'flag':7,'type':68,'source_id':'34',
+                'appearance':'A sideways doorway carried through another doorway.',
+                'binding':'A scope statement signed by the owner whose identity remains disputed.',
+                'source_actual_effect':'Passed the physical fault between service definitions until neither queue retained it.',
+                'game_rule':'Enter the amber A ring, then cross into the cyan B ring. The seal opens for eight seconds.',
+                'attack':'Two diverging shots framing a narrow passage.'},
 }
 
 
-def encounter(seed,floor):
+def encounter(seed,floor,kind=None):
     order=list(BOSSES)
     random.Random(seed^0xD3A0B055).shuffle(order)
     if floor not in [3,5]:return None
-    key=order[[3,5].index(floor)]
+    key=kind if kind is not None else order[[3,5].index(floor)]
+    if key not in BOSSES:raise ValueError('Unknown demon')
     return {'kind':key,**BOSSES[key],'source':SOURCE}

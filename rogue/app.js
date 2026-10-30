@@ -39,7 +39,7 @@ async function newRun(random){
   const currentOwner=owner;setPlaying(false);keys.clear();
   try{
     const state=await post('new',{seed,owner:currentOwner,mode:$('run-mode').value});owner=null;lastState=state;$('seed').value=seed;
-    overlay('A NEW ARRANGEMENT','Same engine. New trouble.',state.mode==='campaign'?'Five floors. Two book demons. One life.':'A binding study. Open the seal, then defeat the demon.','ENTER THE RUN ↗');
+    overlay('A NEW ARRANGEMENT','Same engine. New trouble.',state.mode==='campaign'?'Five floors. Two of four book demons. One life.':state.study_rule||'A binding study. Open the seal, then defeat the demon.','ENTER THE RUN ↗');
     notice('Run generated. Click Enter the Run when you’re ready.');
   }catch(e){notice(e.message);}
   finally{busy=false;$('new').disabled=$('retry').disabled=$('play').disabled=false;}
@@ -64,22 +64,29 @@ async function stateLoop(){
     const r=await fetch('/api/state');if(!r.ok)throw new Error('Server unavailable.');lastState=await r.json();
     const s=lastState;$('connection').textContent=s.error?'ENGINE ERROR':'ENGINE ONLINE';
     if(seenRevision!==s.revision){seenRevision=s.revision;$('run-mode').value=s.mode;$('seed').value=s.seed;}
-    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS. TWO BOOK DEMONS. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
+    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS. TWO OF FOUR BOOK DEMONS. ONE LIFE.':s.study_rule?'GLOAMWOOD STUDY. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
     $('floor').textContent=s.floor_name;$('run-id').textContent='SEED '+s.seed;
     $('health').innerHTML=Number(s.health)+'<span>%</span>';$('armor').innerHTML=Number(s.armor)+'<span>%</span>';
     $('kills').innerHTML=Number(s.kills)+'<span>/ '+Number(s.total_kills)+'</span>';
     $('mode').textContent=s.dead?'RUN ENDED':s.won?'CLEARED':s.paused?'PAUSED':'EXPLORING';
     $('status').textContent=s.dead?'The dungeon keeps what it takes.':s.won?'All five floors cleared.':s.paused?'Waiting for the next step.':'Floor '+s.map+' of '+s.floors+' · '+Math.floor(s.level_tics/35)+' seconds';
-    if(s.won&&s.mode!=='campaign')$('status').textContent='The demon is bound. Study complete.';
+    if(s.won&&s.mode!=='campaign')$('status').textContent='You found the way out. Study complete.';
     const b=s.boss;$('boss-panel').hidden=!b;
     if(b){
       $('boss-panel').dataset.phase=b.phase;$('boss-name').textContent=b.name;
       $('boss-phase').textContent=b.phase==='bound'?'BOUND / EXIT OPEN':b.phase==='exposed'?'EXPOSED / '+(b.open_ticks/35).toFixed(1)+'s':'SEALED / BINDING REQUIRED';
       $('boss-health').textContent=b.health+' / '+b.max_health+' HEALTH';$('boss-hp').max=b.max_health;$('boss-hp').value=b.health;
-      $('boss-binding').max=b.class===5?2:70;$('boss-binding').value=b.phase==='exposed'?(b.class===5?2:70):(b.class===5?b.stamps:b.still_ticks);
-      $('boss-progress').textContent=b.phase==='bound'?'EXIT UNLOCKED':b.phase==='exposed'?'STRIKE NOW':b.class===5?'INTAKE 01 / '+b.stamps+' OF 2':'QUIET / '+Math.round(b.still_ticks/70*100)+'%';
+      const maximum=b.class===6?70:2;
+      $('boss-binding').max=maximum;$('boss-binding').value=b.phase==='exposed'?maximum:b.class===5?b.stamps:b.class===6?b.still_ticks:b.class===9?Number(b.proof):b.gate_stage;
+      $('boss-progress').textContent=b.phase==='bound'?'EXIT UNLOCKED':b.phase==='exposed'?'STRIKE NOW':b.class===5?'INTAKE 01 / '+b.stamps+' OF 2':b.class===6?'QUIET / '+Math.round(b.still_ticks/70*100)+'%':b.class===9?(b.proof?'PROOF RECORDED / RETURN TO RING':'PROOF REQUIRED / HIT THE SHIELD'):(b.gate_stage?'A ACCEPTED / CROSS INTO B':'ENTER THE AMBER A RING');
       $('boss-rule').textContent=b.phase==='bound'?'The exit will now let you pass.':b.phase==='exposed'?'The seal is open. Hurt the demon before it closes.':(b.on_seal?'ON THE RING. ':'FIND THE GLOWING RING. ')+s.boss_rule;
     }
+    const c=s.creatures||{},gripped=c.effect==='grip',warning=c.shriek_warning>0;
+    $('creature-panel').hidden=!(s.study_rule||c.watched||c.hunting||c.effect||warning);
+    $('creature-panel').dataset.danger=gripped||warning?'yes':'no';
+    $('grip-escape').hidden=!gripped;$('grip-escape').value=c.escape_ticks||0;
+    $('creature-name').textContent=gripped?'BREAK THE GRIP':c.effect==='shriek'?'STONE REDEAD / SHRIEK':warning?'STONE REDEAD / TAKE COVER':c.hunting?'THE HOLLOW / MOVING':c.watched?'THE HOLLOW / WATCHED':s.mode==='redead'?'STONE REDEAD':'THE HOLLOW';
+    $('creature-rule').textContent=gripped?'Hold F until the bar fills, or hurt the creature. You can still turn and fire.':c.effect==='shriek'?'Movement will return shortly. You can still turn and fire.':warning?'Its mask is raised. Break line of sight before the shriek lands.':c.hunting?'Something is crawling while you look away.':c.watched?'You are holding it still. It will move when you look away.':s.study_rule||'Watch the split tree. Look away and it crawls.';
     if(s.dead||s.won||s.error){setPlaying(false);owner=null;keys.clear();
       overlay(s.won?'YOU FOUND A WAY OUT':s.error?'ENGINE PAUSED':'ONE LIFE. SPENT.',s.won?'The descent is complete.':s.error?'Something stopped the run.':'The labyrinth wins this time.',s.error||'Replay this seed, or start somewhere stranger.',s.error?'RETRY THE RUN ↻':'REPLAY THIS SEED ↻');
     }

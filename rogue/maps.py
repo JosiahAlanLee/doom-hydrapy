@@ -15,10 +15,13 @@ import json
 import math
 import random
 import struct
+from rogue.bosses import BOSSES
+from rogue.inhabitants import CREATURES, options
 
 TILE = 128
 FLOORS = 5
 SIZE = 33
+ENEMY_TYPES={3004,3001,3002,9,3005}|{b['type'] for b in (CREATURES|BOSSES).values()}
 THEMES = [
     ('RELAY / 01', 'STARTAN3', 'FLOOR4_8', 'CEIL3_5', 192),
     ('OXIDE / 02', 'BROWN1', 'FLOOR0_1', 'CEIL3_5', 160),
@@ -56,7 +59,7 @@ def distances(cells, start):
     return parent
 
 
-def generate(seed, number):
+def generate(seed, number, boss_kind=None):
     if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 0xffffffff:
         raise ValueError('seed must be an unsigned 32-bit integer')
     if not 1 <= number <= FLOORS:
@@ -152,7 +155,7 @@ def generate(seed, number):
         route.append(parents[route[-1]])
     route.reverse()
     from rogue.bosses import encounter
-    boss=encounter(seed,number)
+    boss=encounter(seed,number,kind=boss_kind)
     reserved=set()
     if boss:
         boss_cell=route[-5];anchor=route[-9];binding_cell=anchor
@@ -171,6 +174,10 @@ def generate(seed, number):
             if found:break
         profiles[binding_cell]={**profiles[binding_cell],'tag':777,'light':255,'flat':'FLOOR4_6'}
         boss={**boss,'cell':boss_cell,'binding_cell':binding_cell,'intake':boss['source_id']}
+        if boss['kind']=='jurisiel':
+            secondary_cell=a if found else route[-8]
+            profiles[secondary_cell]={**profiles[secondary_cell],'tag':778,'light':255,'flat':'FLOOR4_6'}
+            boss['secondary_cell']=secondary_cell
         reserved={p for p in cells if min(abs(p[0]-boss_cell[0])+abs(p[1]-boss_cell[1]),
                                           abs(p[0]-binding_cell[0])+abs(p[1]-binding_cell[1]))<=2}
     occupied = {start, exit_cell}|reserved
@@ -197,8 +204,13 @@ def generate(seed, number):
         enemy_kinds += [3005]
     for p in distant[:5+number*3]:
         item(p,rng.choice(enemy_kinds),rng.randrange(4)*90)
+    # Sparse Gloamwood encounters; keep the start, exits and boss alcoves clear.
+    for name in ['hollow']+(['redead'] if number>=2 else []):
+        for p in distant:
+            if p not in occupied and abs(p[0]-start[0])+abs(p[1]-start[1])>=10:
+                if item(p,CREATURES[name]['type'],rng.randrange(4)*90):break
     variants=[]
-    classes={3004:(1,'skitter'),3002:(2,'bastion'),3001:(3,'cantor'),3005:(4,'shiver')}
+    classes={3004:(1,'skitter'),3002:(2,'bastion'),3001:(3,'cantor'),3005:(4,'shiver'),66:(7,'hollow'),65:(7,'redead')}
     for i,t in enumerate(things):
         if t[3] in classes:
             variant,name=classes[t[3]];roll=rng.randrange(16)
@@ -213,7 +225,7 @@ def generate(seed, number):
                 break
     if boss:
         p=boss['cell'];variant=boss['class'];roll=rng.randrange(16)
-        things.append((p[0]*TILE+64,p[1]*TILE+64,rng.randrange(4)*90,boss['type'],7|(variant<<8)|(roll<<11)))
+        things.append((p[0]*TILE+64,p[1]*TILE+64,rng.randrange(4)*90,boss['type'],options(boss['kind'],roll)))
         variants.append({'kind':boss['kind'],'roll':roll,'x':p[0]*TILE+64,'y':p[1]*TILE+64})
         # Supply the fight without requiring a lucky weapon/ammo roll.
         for p in sorted(reserved-{boss['cell'],boss['binding_cell'],exit_cell,start})[:3]:
@@ -299,6 +311,7 @@ def map_lumps(floor,custom_seals=False):
             z=profile.get('floor',0)
             tile_flat=profile.get('flat',flat)
             if custom_seals and floor.boss and (x,y)==tuple(floor.boss['binding_cell']):tile_flat='RSEAL'+str(floor.boss['class'])
+            if custom_seals and profile.get('tag')==778:tile_flat='RSEAL10B'
             sectors.append(struct.pack('<hh8s8shhh',z,z+profile.get('height',128+32*(floor.number%2)) if opened else z,
                                        name8('FLOOR0_1' if exit_tile else tile_flat),name8(profile.get('ceiling',ceiling)),
                                        255 if exit_tile else profile.get('light',light),0,profile.get('tag',0)))
@@ -330,12 +343,35 @@ def map_lumps(floor,custom_seals=False):
     ]
 
 
+def creature_study(seed,kind):
+    if kind not in CREATURES:raise ValueError('Unknown creature study')
+    if isinstance(seed,bool) or not isinstance(seed,int) or not 0<=seed<=0xffffffff:
+        raise ValueError('seed must be an unsigned 32-bit integer')
+    cells={(x,y) for x in range(1,13) for y in range(1,8)}-{(6,5),(6,6),(7,5),(7,6)}
+    start,exit_cell=(3,3),(11,6)
+    profiles={p:{'floor':0,'height':192,'light':208,'wall':'STONE2',
+                 'flat':'FLAT5_4','ceiling':'CEIL5_1','shape':'gloam-gallery'} for p in cells}
+    parent=distances(cells,start);route=[exit_cell]
+    while route[-1]!=start:route.append(parent[route[-1]])
+    route.reverse()
+    b=CREATURES[kind];x,y=448,448;mx,my=(1088,448) if kind=='hollow' else (960,448)
+    things=[(x,y,0,1,7),(mx,my,180,b['type'],options(kind,seed%16)),
+            (x,y,0,2001,7),(x,y,0,2049,7),(x,y,0,2049,7),(x,y,0,2018,7),
+            (320,832,0,2012,7)]
+    return Floor(1,cells,[(1,1,12,7)],start,exit_cell,route,things,
+                 ('STUDY / '+b['name'],*THEMES[2][1:]),
+                 {'rooms':[{'shape':'gloam-gallery','bounds':(1,1,12,7)}],'max_step':0},
+                 profiles,[{'kind':kind,'roll':seed%16,'x':mx,'y':my}])
+
+
 def campaign(seed, output, assets=None, practice=None):
     output=Path(output)
     floors=[generate(seed,i) for i in range(1,FLOORS+1)]
     if practice:
-        if practice not in ['repetiel','calmor']:raise ValueError('Unknown boss study')
-        f=next(f for f in floors if f.boss and f.boss['kind']==practice)
+        if practice in CREATURES:f=creature_study(seed,practice)
+        elif practice in BOSSES:f=generate(seed,3,boss_kind=practice)
+        else:raise ValueError('Unknown encounter study')
+    if practice in BOSSES:
         f.number=1;f.start=tuple(f.boss['binding_cell'])
         parents=distances(f.cells,f.start);f.route=[f.exit]
         while f.route[-1]!=f.start:f.route.append(parents[f.route[-1]])
@@ -346,14 +382,13 @@ def campaign(seed, output, assets=None, practice=None):
         x,y=f.start[0]*TILE+64,f.start[1]*TILE+64
         # Isolate the boss instead of importing a floor's ordinary encounters
         # into a supposed practice fight. Campaign encounters are unchanged.
-        enemy_types={3004,3001,3002,9,3005,3003,69}
         f.things=[(x,y,angle,1,7)]+[t for t in f.things if t[3]!=1 and
-                 (t[3] not in enemy_types or t[3]==f.boss['type'])]+[(x,y,0,2001,7),(x,y,0,2049,7),(x,y,0,2049,7),(x,y,0,2019,7)]
+                 (t[3] not in ENEMY_TYPES or t[3]==f.boss['type'])]+[(x,y,0,2001,7),(x,y,0,2049,7),(x,y,0,2049,7),(x,y,0,2019,7)]
         f.variants=[v for v in f.variants if v['kind']==practice]
-        floors=[f]
+    if practice:floors=[f]
     lumps=[lump for f in floors for lump in map_lumps(f,custom_seals=bool(assets))]
     if assets:
-        from rogue.creatures import sprite_lumps
+        from rogue.creatures import sprite_lumps, FAMILIES
         lumps.extend(sprite_lumps(assets,seed))
     data=bytearray(); directory=[]
     for name,payload in lumps:
@@ -362,16 +397,16 @@ def campaign(seed, output, assets=None, practice=None):
     wad=struct.pack('<4sII',b'PWAD',len(lumps),12+len(data))+data+b''.join(directory)
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_bytes(wad)
-    manifest={'format':'doom-rogue-3','seed':seed,'mode':practice or 'campaign','floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
+    manifest={'format':'doom-rogue-4','seed':seed,'mode':practice or 'campaign','floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
     if assets:
         manifest['sprite_assets']={'sha256':hashlib.sha256(Path(assets).read_bytes()).hexdigest(),
                                    'source':'Freedoom IWAD supplied by the operator',
-                                   'generated_families':['POSS','SARG','TROO','HEAD','BOSS','BOS2'],
+                                   'generated_families':list(FAMILIES),
                                    'other_sprites':'Freedoom originals; retain Freedoom license and credits'}
     for f in floors:
         manifest['floors'].append({'number':f.number,'name':f.theme[0],'rooms':len(f.rooms),
                                   'open_tiles':len(f.cells),'start':f.start,'exit':f.exit,
-                                  'route':f.route,'monsters':sum(t[3] in [3004,3001,3002,9,3005,3003,69] for t in f.things),
+                                  'route':f.route,'monsters':sum(t[3] in ENEMY_TYPES for t in f.things),
                                   'architecture':f.architecture,'variants':f.variants,
                                   'boss':f.boss,
                                   'cells':sorted(f.cells)})

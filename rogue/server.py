@@ -18,6 +18,8 @@ from PIL import Image
 
 from client import Doom
 from rogue.maps import campaign, FLOORS
+from rogue.bosses import BOSSES
+from rogue.inhabitants import CREATURES
 
 ROOT=Path(__file__).resolve().parent
 # Doom key IDs; WASD maps to the engine's forward/strafe defaults. Browser codes are
@@ -43,7 +45,7 @@ class Game:
     def new_run(self,seed,mode='campaign'):
         if isinstance(seed,bool) or not isinstance(seed,int) or not 0<=seed<=0xffffffff:
             raise ValueError('Seed must be a whole number from 0 to 4294967295.')
-        if mode not in ['campaign','repetiel','calmor']:raise ValueError('Unknown run mode.')
+        if mode not in ['campaign',*BOSSES,*CREATURES]:raise ValueError('Unknown run mode.')
         with self.lock:
             self.release()
             if self.engine:self.engine.close();self.engine=None
@@ -89,6 +91,7 @@ class Game:
             floor=min(max(self.state.get('map',1),1),len(self.manifest['floors']))
             return {**self.state,'seed':self.manifest['seed'],'floor_name':self.manifest['floors'][floor-1]['name'],
                     'floors':len(self.manifest['floors']),'mode':self.manifest['mode'],
+                    'study_rule':CREATURES.get(self.manifest['mode'],{}).get('rule'),
                     'boss_rule':self.manifest['floors'][floor-1]['boss']['game_rule'] if self.manifest['floors'][floor-1]['boss'] else None,
                     'paused':self.paused,'revision':self.revision,
                     'frame':self.frame_seq,'error':self.error}

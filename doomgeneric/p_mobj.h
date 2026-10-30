@@ -274,6 +274,12 @@ typedef struct mobj_s
     // For nightmare respawn.
     mapthing_t		spawnpoint;	
 
+#ifdef DOOM_ROGUE
+    // Per-instance encounter state; ordinary builds retain their original layout.
+    int rogue_awake, rogue_frozen, rogue_pose;
+    int rogue_phase, rogue_until, rogue_cooldown;
+#endif
+
     // Thing being chased/attacked for tracers.
     struct mobj_s*	tracer;	
     

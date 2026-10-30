@@ -8,6 +8,7 @@ import unittest
 
 from rogue.bosses import BOSSES,encounter
 from rogue.maps import generate,campaign,distances
+from rogue.inhabitants import options
 from test_rogue import fixture_wad
 
 
@@ -34,12 +35,13 @@ def arena(path,kind,on_seal=True):
     f.cells={(x,y) for x in range(1,12) for y in range(1,7)}
     f.profiles={p:{'floor':0,'height':192,'light':224} for p in f.cells}
     f.profiles[(2,2)]['tag']=777
+    if kind=='jurisiel':f.profiles[(3,2)]['tag']=778
     f.start=(2,2) if on_seal else (3,2);f.exit=(4,2);f.boss=None
     px,py=f.start[0]*128+64,f.start[1]*128+64
     data=BOSSES[kind]
     # The boss initially looks away so the binding rule is isolated from AI.
     # Real weapon damage and legitimate fixture pickups are still used.
-    f.things=[(px,py,0,1,7),(1088,320,0,data['type'],7|(data['class']<<8)),
+    f.things=[(px,py,0,1,7),(1088,320,0,data['type'],options(kind)),
               (px,py,0,2006,7),(px,py,0,17,7),(px,py,0,17,7),(px,py,0,17,7),
               (px,py,0,2022,7)]
     fixture_wad(path,[f])
@@ -50,16 +52,21 @@ class BossMaps(unittest.TestCase):
         orders=set()
         for seed in range(16):
             order=tuple(encounter(seed,n)['kind'] for n in [3,5]);orders.add(order)
-            self.assertEqual(set(order),set(BOSSES))
+            self.assertEqual(len(set(order)),2)
+            self.assertTrue(set(order)<=set(BOSSES))
             self.assertIsNone(encounter(seed,1))
             for number in [3,5]:
                 f=generate(seed,number);b=f.boss
                 self.assertIn(tuple(b['binding_cell']),distances(f.cells,f.start))
                 self.assertEqual(f.profiles[tuple(b['binding_cell'])]['tag'],777)
-                self.assertEqual(sum(t[3] in [3003,69] for t in f.things),1)
+                self.assertEqual(sum(t[3] in [b['type'] for b in BOSSES.values()] for t in f.things),1)
+                if b['kind']=='jurisiel':
+                    self.assertIn(tuple(b['secondary_cell']),distances(f.cells,f.start))
+                    self.assertEqual(f.profiles[tuple(b['secondary_cell'])]['tag'],778)
                 self.assertTrue(b['source_actual_effect'])
                 self.assertEqual(f.boss,generate(seed,number).boss)
-        self.assertEqual(len(orders),2)
+        self.assertGreaterEqual(len(orders),4)
+        self.assertEqual(set().union(*(set(order) for order in orders)),set(BOSSES))
 
     def test_practice_modes_start_on_the_seal(self):
         with tempfile.TemporaryDirectory() as t:
@@ -77,7 +84,7 @@ class BossMaps(unittest.TestCase):
 class BossEngine(unittest.TestCase):
     def test_echo_direction_and_calmor_panic_burst(self):
         with tempfile.TemporaryDirectory() as t:
-            for kind in BOSSES:
+            for kind in ['repetiel','calmor']:
                 path=Path(t)/'attacks.wad';f=generate(42,1)
                 f.cells={(x,y) for x in range(1,12) for y in range(1,7)}
                 f.profiles={p:{'floor':0,'height':192,'light':224} for p in f.cells}
@@ -155,7 +162,13 @@ class BossEngine(unittest.TestCase):
                     with self.engine(path) as d:
                         pulse(d,0xad,1);d.advance(35)
                         if kind=='repetiel':pulse(d,0xa2);pulse(d,0xa2)
-                        else:d.advance(90)
+                        elif kind=='calmor':d.advance(90)
+                        elif kind=='probator':
+                            d.advance(60);pulse(d,ord('2'),1);d.advance(35)
+                            pulse(d,0xa3,10)
+                            self.assertTrue(d.state()['boss']['proof']);pulse(d,0xa2)
+                        else:
+                            walk_x(d,448);walk_x(d,320)
                         self.assertEqual(d.state()['boss']['phase'],'exposed')
                         hp=d.state()['boss']['health']
                         # BFG is fixture gear to test gate/death transitions
