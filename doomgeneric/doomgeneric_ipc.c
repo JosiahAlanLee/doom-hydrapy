@@ -6,6 +6,7 @@
 #include "g_game.h"
 #include "rogue_ai.h"
 #include "rogue_boss.h"
+#include "rogue_creature.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -37,7 +38,8 @@ static void state(void) {
  p->mo ? p->mo->x/65536.0 : 0.0,p->mo ? p->mo->y/65536.0 : 0.0,p->mo ? p->mo->angle*(360.0/4294967296.0) : 0.0,
  leveltime,gametic,gamestate,p->playerstate==PST_DEAD?"true":"false",
  rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");
- Rogue_BossJSON(reply);fprintf(reply,"}\n");fflush(reply);
+ Rogue_BossJSON(reply);fprintf(reply,",\"creatures\":");Rogue_CreatureStatus(reply);
+ fprintf(reply,"}\n");fflush(reply);
 }
 static uint64_t now(void) {struct timespec t; clock_gettime(CLOCK_MONOTONIC,&t); return t.tv_sec*1000ULL+t.tv_nsec/1000000;}
 void DG_Init(void) {

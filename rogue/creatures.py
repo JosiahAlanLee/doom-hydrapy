@@ -14,7 +14,8 @@ import struct
 import numpy as np
 from PIL import Image,ImageDraw
 
-FAMILIES={'POSS':'skitter','SARG':'bastion','TROO':'cantor','HEAD':'shiver','BOSS':'repetiel','BOS2':'calmor'}
+FAMILIES={'POSS':'skitter','SARG':'bastion','TROO':'cantor','HEAD':'shiver','BOSS':'repetiel','BOS2':'calmor',
+          'SKEL':'hollow','CPOS':'redead','FATT':'probator','BSPI':'jurisiel'}
 
 
 def wad_lumps(path):
@@ -31,6 +32,9 @@ def wad_lumps(path):
 
 
 def creature(kind,seed,frame):
+    if kind in ['hollow','redead','probator','jurisiel']:
+        from rogue.gloam_art import draw
+        return draw(kind,seed,frame)
     rng=random.Random((seed<<5)+list(FAMILIES.values()).index(kind))
     image=Image.new('RGBA',(96,112));pen=ImageDraw.Draw(image)
     phase=frame*math.pi/2
@@ -162,7 +166,7 @@ def sprite_lumps(assets,seed):
         if name=='F_END':active=False;continue
         if active:flats.append((name,data))
     if not flats:raise ValueError('Freedoom flat namespace not found')
-    for kind,number in [('repetiel',5),('calmor',6)]:
+    for kind,number in [('repetiel',5),('calmor',6),('probator',9),('jurisiel',10),('jurisiel-b',11)]:
         tile=Image.new('RGB',(64,64),(14,32,28));p=ImageDraw.Draw(tile)
         p.ellipse((3,3,60,60),outline=(201,255,99),width=3)
         p.ellipse((9,9,54,54),outline=(79,183,134),width=1)
@@ -170,11 +174,29 @@ def sprite_lumps(assets,seed):
             p.line([(21,20),(21,40),(32,46),(43,40),(43,20)],fill=(201,255,99),width=3)
             p.ellipse((15,14,27,24),outline=(255,133,73),width=2)
             p.ellipse((37,14,49,24),outline=(255,133,73),width=2)
-        else:
+        elif number==6:
             p.polygon([(32,17),(39,22),(40,35),(47,43),(17,43),(24,35),(25,22)],outline=(201,255,99))
             p.ellipse((19,39,45,47),outline=(255,133,73),width=2)
+        elif number==9:
+            p.ellipse((18,14,43,39),outline=(201,255,99),width=3)
+            p.line((38,37,46,49,29,48,23,39),fill=(255,133,73),width=3)
+            p.ellipse((26,24,34,32),fill=(255,133,73))
+        else:
+            color=(255,173,71) if number==10 else (86,226,216)
+            p.ellipse((3,3,60,60),outline=color,width=3)
+            p.rectangle((20,15,43,48),outline=color,width=3)
+            if number==10:
+                p.line((25,43,32,22,39,43),fill=color,width=3)
+                p.line((28,35,36,35),fill=color,width=3)
+            else:
+                p.line((26,22,26,43),fill=color,width=3)
+                p.arc((22,22,39,33),270,90,fill=color,width=3)
+                p.arc((22,32,39,43),270,90,fill=color,width=3)
+                p.line((26,22,32,22),fill=color,width=2)
+                p.line((26,33,32,33),fill=color,width=2)
+                p.line((26,43,32,43),fill=color,width=2)
         rgb=np.asarray(tile).astype(np.int32)
         unique,inverse=np.unique(rgb.reshape(-1,3),axis=0,return_inverse=True)
         nearest=((unique[:,None,:]-palette[None,:,:].astype(np.int32))**2).sum(2).argmin(1)
-        flats.append(('RSEAL'+str(number),nearest[inverse].astype(np.uint8).tobytes()))
+        flats.append(('RSEAL10B' if number==11 else 'RSEAL'+str(number),nearest[inverse].astype(np.uint8).tobytes()))
     return [('S_START',b'')]+original+generated+[('S_END',b''),('F_START',b'')]+flats+[('F_END',b'')]

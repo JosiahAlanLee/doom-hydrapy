@@ -39,6 +39,8 @@
 
 #include "p_inter.h"
 #include "rogue_boss.h"
+#include "rogue_ai.h"
+#include "rogue_creature.h"
 
 
 #define BONUSADD	6
@@ -751,6 +753,7 @@ P_KillMobj
 	break;
 	
       case MT_CHAINGUY:
+	if (Rogue_Class(target)==8) return;
 	item = MT_CHAINGUN;
 	break;
 	
@@ -795,7 +798,8 @@ P_DamageMobj
     if (target->health <= 0)
 	return;
 
-    if (Rogue_BossGuard(target)) return;
+    if (Rogue_BossGuard(target, source)) return;
+    Rogue_CreatureHurt(target);
 
     if ( target->flags & MF_SKULLFLY )
     {

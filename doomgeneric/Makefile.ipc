@@ -27,6 +27,7 @@ SRC_DOOM = dummy.o am_map.o doomdef.o doomstat.o dstrings.o d_event.o d_items.o 
 OBJS += $(addprefix $(OBJDIR)/, $(SRC_DOOM))
 OBJS += $(OBJDIR)/rogue_ai.o
 OBJS += $(OBJDIR)/rogue_boss.o
+OBJS += $(OBJDIR)/rogue_creature.o
 
 all:	 $(OUTPUT)
 
@@ -46,6 +47,7 @@ $(OUTPUT):	$(OBJS)
 $(OBJS): | $(OBJDIR)
 $(OBJS): rogue_ai.h
 $(OBJS): rogue_boss.h
+$(OBJS): rogue_creature.h p_mobj.h
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)

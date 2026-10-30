@@ -25,6 +25,7 @@
 #include "d_event.h"
 
 #include "p_local.h"
+#include "rogue_creature.h"
 
 #include "doomstat.h"
 
@@ -143,6 +144,8 @@ void P_MovePlayer (player_t* player)
     ticcmd_t*		cmd;
 	
     cmd = &player->cmd;
+
+    Rogue_PlayerFilter(player);
 	
     player->mo->angle += (cmd->angleturn<<16);
 

@@ -890,7 +890,8 @@ void A_BspiAttack (mobj_t *actor)
     A_FaceTarget (actor);
 
     // launch a missile
-    P_SpawnMissile (actor, actor->target, MT_ARACHPLAZ);
+    if (!Rogue_BossAttack(actor))
+        P_SpawnMissile (actor, actor->target, MT_ARACHPLAZ);
 }
 
 
@@ -1100,7 +1101,7 @@ void A_SkelFist (mobj_t*	actor)
     {
 	damage = ((P_Random()%10)+1)*6;
 	S_StartSound (actor, sfx_skepch);
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
     }
 }
 
@@ -1349,6 +1350,7 @@ void A_FatRaise (mobj_t *actor)
 
 void A_FatAttack1 (mobj_t* actor)
 {
+    if (Rogue_BossAttack(actor)) return;
     mobj_t*	mo;
     mobj_t*     target;
     int		an;
@@ -1369,6 +1371,7 @@ void A_FatAttack1 (mobj_t* actor)
 
 void A_FatAttack2 (mobj_t* actor)
 {
+    if (Rogue_Class(actor)==9) return;
     mobj_t*	mo;
     mobj_t*     target;
     int		an;
@@ -1388,6 +1391,7 @@ void A_FatAttack2 (mobj_t* actor)
 
 void A_FatAttack3 (mobj_t*	actor)
 {
+    if (Rogue_Class(actor)==9) return;
     mobj_t*	mo;
     mobj_t*     target;
     int		an;

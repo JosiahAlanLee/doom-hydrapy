@@ -14,6 +14,11 @@ browser provides WASD/arrow/fire/use controls, pause/retry/new seed and optional
 GL treatments. Run `python -m rogue.server --wad /path/to/freedoom2.wad` after
 building the engine. The timed performance/capture path below remains separate.
 
+[The Gloamwood iteration](GLOAMWOOD.md) adds a watched/crawling Hollow, Stone
+ReDead's telegraphed shriek and escapable grip, two more book demons, and
+individual encounter studies. Campaigns choose two of four demons for their
+boss floors. These use new art rather than imported Minecraft assets.
+
 [Book-boss encounters](BOSSES.md) add Repetiel and Calmor on seeded campaign
 floors, with distinct binding rules, shield windows and native attacks. Choose a
 binding study in the browser to practice either encounter directly.

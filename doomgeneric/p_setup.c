@@ -23,6 +23,7 @@
 
 #include "z_zone.h"
 #include "rogue_boss.h"
+#include "rogue_creature.h"
 
 #include "deh_main.h"
 #include "i_swap.h"
@@ -768,6 +769,7 @@ P_SetupLevel
     S_Start ();			
 
     Rogue_BossReset();
+    Rogue_CreatureReset();
     Z_FreeTags (PU_LEVEL, PU_PURGELEVEL-1);
 
     // UNUSED W_Profile ();
