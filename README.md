@@ -70,18 +70,52 @@ publishing and even afterward. Reader retries copies spanning a publication.
 The supplied reader assumes coherent x86-64 memory; do not treat this as a portable
 cross-architecture atomic ABI. Alpha is filled to 255 by the client.
 
-## Music and remaining work
+## Polyphonic live take
 
-extract_wad.py extracts unmodified MIDI/MUS/demo lumps and per-lump SHA256s.
-The official release contains MIDI music. Output manifests, complete Freedoom
-credits, both WAD hashes and music audits accompany this prototype outside git.
-No validated tracker scores or Rack soundtrack are delivered: every audited track
-exceeds six concurrent notes (lowest Phase 2 count: seven), and some change tempo.
-A six-monophonic-lane reduction would alter the composition. Decide whether to
-allow multiple six-lane stem passes, a wider/polyphonic rig, or explicit reductions.
-Then select 3–4 credited pieces and implement timing/voice mapping with roundtrip
-note-event comparison. Score validation alone cannot prove a faithful conversion.
+The complete four-minute take is in the sibling output folder
+`doom-hydrapy-20261030/take/`: H.264/AAC MP4, 24-bit stereo WAV, report,
+completion.json, SHA256SUMS, instrument mapping, gate audit and final-video review sheets.
+This branch adds a separate polyphonic path, as approved for this project:
 
-No four-minute simultaneous MP4/WAV proof take, held-frame/xrun figures, Studio
-keyboard integration, game-event output, or Gorgon prewarm validation is claimed.
-Eight-second scenecheck videos use the checker's test audio, NOT Freedoom/Rack.
+* `compile_music.py`: MIDI → timed note/controller events, including tempo maps,
+  sustain, RPN pitch-bend sensitivity, velocity, volume, expression and pan.
+* `poly/`: optional GPL Rack sequencer/mixer. Eighteen installed synth instances
+  play all 5,857 notes in a single simultaneous live pass; no note reduction or
+  multiple stem passes. Gate-loopback inputs audit physical cable edges.
+* Gorgon's six audio lanes stay muted. Its transport drives the visual scene lane,
+  Doom's 35 Hz tics and an absolute-time Z automation ramp feeding the sequencer.
+  The raw clock pulse is diagnostic only, since counting edges accumulated errors.
+* CZish uses its eight-voice single-line mode, Vastish uses native eight-voice
+  programs, and OTIS Sampler uses polyphonic original drum samples. Spoon Bender
+  adds stereo echo/space. Detailed timbre substitutions and capacities are delivered.
+* All four complete Phase 1 compositions play: D_INTRO, D_BUNNY, D_INTER and D_E3M2.
+  Credits: Korp (based on Tyler "Picklehammer" Pantella), Goji, Stratos, and
+  Lola "BlueWorrior" Harvey respectively. Exact titles/times are in the report.
+* Demos switch at 0, 7, 70 and 145 seconds: Phase 1 DEMO1/E1M6, Phase 2
+  DEMO2/MAP10, Phase 1 DEMO3/E3M9 and Phase 2 DEMO4/MAP23. There is no demo loop.
+  Terminal, print, scan and feedback treatments change once per minute.
+
+`performance.py` is the optional GPL Studio patch. It reads `DOOM_TAKE_ROOT`
+and keeps all engine code in child processes. `setup_take.py` builds the private
+rig and validated visual-clock score. `run_capture.sh smoke` records the rapid
+switch excerpt; `run_capture.sh poly` records 240 seconds. Build the C engine,
+Rack plugin and namespace shim first. Python take dependencies are numpy, mido
+and soundfile. These scripts use the workstation's frozen HydraPy/Gorgon copies
+and Rack installation; paths are explicit in the scripts and report.
+
+`test_music.py` verifies tempo changes, sustain, RPN bends, all source pitches,
+velocities/timings and non-stealing allocation. `finalize_take.py` verifies the
+live gate proof, muxes the take with a measured clock/offset correction, fully
+decodes it, and extracts final-video sheets. Visual inspection is a separate
+required signoff. `analyze_sync.py` measures paired 1 Hz optical/audio gates.
+All official music lumps in the selected release are MIDI; a MUS parser is not
+implemented in this branch. Original download URLs and hashes remain in PROVENANCE.json.
+
+The synths are documented substitutes, not General MIDI replicas. Per-instance
+voice retirement one second after note-off bounds substitute release tails;
+it does not shorten held MIDI notes or drop attacks. Mod wheel maps to restrained
+5 Hz pitch vibrato. The music finishes at 226.6 s, followed by effect decay and a
+quiet game-only tail. Studio keyboard and game-event signals remain future work.
+
+See poly/README.md for the sequencer ABI, private JACK namespace and buffer setup.
+No host repository was changed and this work was not pushed by Codex.
