@@ -161,6 +161,7 @@ void D_ProcessEvents (void)
 //
 
 // wipegamestate can be set to -1 to force a wipe on the next draw
+extern int DG_ExternalClock;
 gamestate_t     wipegamestate = GS_DEMOSCREEN;
 extern  boolean setsizeneeded;
 extern  int             showMessages;
@@ -194,6 +195,8 @@ void D_Display (void)
 		oldgamestate = -1;                      // force background redraw
 		borderdrawcount = 3;
     }
+
+    if (DG_ExternalClock) wipegamestate = gamestate;
 
     // save the current screen if about to wipe
     if (gamestate != wipegamestate)

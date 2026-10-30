@@ -1,0 +1,19 @@
+{
+  "engine_url": "https://github.com/ozkl/doomgeneric",
+  "engine_revision": "e257a09527062bfb986b6e5e0780839b6cbd5b71",
+  "game_data_url": "https://github.com/freedoom/freedoom/releases/download/v0.13.0/freedoom-0.13.0.zip",
+  "files": [
+    {
+      "path": "/home/echevarian/dev/shared/codex/doom-hydrapy-20261030/freedoom-0.13.0.zip",
+      "sha256": "3f9b264f3e3ce503b4fb7f6bdcb1f419d93c7b546f4df3e874dd878db9688f59"
+    },
+    {
+      "path": "/home/echevarian/dev/shared/codex/doom-hydrapy-20261030/data/freedoom-0.13.0/freedoom2.wad",
+      "sha256": "a8772e088847032510d97ba2312406a6998f21cbab44d4ff10696faa9c0ecd4b"
+    },
+    {
+      "path": "/home/echevarian/dev/shared/codex/doom-hydrapy-20261030/data/freedoom-0.13.0/freedoom1.wad",
+      "sha256": "7323bcc168c5a45ff10749b339960e98314740a734c30d4b9f3337001f9e703d"
+    }
+  ]
+}

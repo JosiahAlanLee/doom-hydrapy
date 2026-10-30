@@ -10,3 +10,9 @@ Debug/
 Release/
 Build/
 doomgeneric.map
+
+doomgeneric/build/
+doomgeneric/doom-ipc
+doomgeneric/doom-ipc.map
+runtime/*
+__pycache__/
