@@ -35,7 +35,14 @@ def main():
     gain=10**(-1/20)/peak
     sf.write(OUT/'rack-mix-unaligned.wav',mix,sr,subtype='FLOAT')
     del raw,mix
-    filters=[f'atrim=start={audio_shift:.9f}','asetpts=PTS-STARTPTS'] if audio_shift>=0 else [f'adelay={-audio_shift*1000:.6f}:all=1']
+    # Preserve every opening attack: positive measured offsets delay video,
+    # rather than cutting music from the WAV. Integer-frame padding leaves
+    # at most half a frame residual, below the marker's 33.33 ms resolution.
+    industrial=os.environ.get('DOOM_INDUSTRIAL')=='1'
+    video_pad_frames=max(0,int(round(audio_shift/factor*30))) if industrial else 0
+    applied_audio_shift=min(audio_shift,0.) if industrial else audio_shift
+    filters=([f'atrim=start={applied_audio_shift:.9f}','asetpts=PTS-STARTPTS'] if applied_audio_shift>0 else
+             [f'adelay={-applied_audio_shift*1000:.6f}:all=1'] if applied_audio_shift<0 else [])
     filters+=[f'asetrate={rate}','aresample=48000',f'volume={gain:.9f}','apad',f'atrim=duration={duration}']
     label='industrial' if os.environ.get('DOOM_INDUSTRIAL')=='1' else 'poly'
     wav=OUT/f'doom-freedoom-{label}-1080p.wav';video=OUT/f'doom-freedoom-{label}-1080p.mp4'
@@ -43,7 +50,9 @@ def main():
     (OUT/'rack-mix-unaligned.wav').unlink() # created only by this packaging run
     titles=['Melt and shear','HUD disk','Vector scope','Anaglyph relief'] if os.environ.get('DOOM_INDUSTRIAL')=='1' else ['Terminal','Halftone print','Rutt Etra scan','Feedback']
     chapters=OUT/'chapters.ffmeta';chapters.write_text(';FFMETADATA1\n'+''.join(f'[CHAPTER]\nTIMEBASE=1/1000\nSTART={i*60000}\nEND={duration*1000 if i==3 else (i+1)*60000}\ntitle={title}\n' for i,title in enumerate(titles)))
-    run(['ffmpeg','-v','error','-y','-i',str(CAP/'studio.mp4'),'-i',str(wav),'-i',str(chapters),'-map','0:v:0','-map','1:a:0','-map_metadata','2','-map_chapters','2','-c:v','copy','-c:a','aac','-b:a','256k','-t',str(duration),'-movflags','+faststart',str(video)])
+    video_codec=(['-vf',f'tpad=start={video_pad_frames}:start_mode=clone','-c:v','libx264','-preset','veryfast','-crf','18']
+                 if video_pad_frames else ['-c:v','copy'])
+    run(['ffmpeg','-v','error','-y','-i',str(CAP/'studio.mp4'),'-i',str(wav),'-i',str(chapters),'-map','0:v:0','-map','1:a:0','-map_metadata','2','-map_chapters','2',*video_codec,'-c:a','aac','-b:a','256k','-t',str(duration),'-movflags','+faststart',str(video)])
     run(['ffmpeg','-v','error','-i',str(video),'-f','null','-'])
     meta=json.loads(run(['ffprobe','-v','error','-count_frames','-show_streams','-show_format','-show_chapters','-of','json',str(video)]).stdout)
     rows=[json.loads(s) for s in (ROOT/'poly-frame-trace.jsonl').read_text().splitlines() if s.strip()]
@@ -54,18 +63,21 @@ def main():
     counters=summaries[-1]['counters'];base=before[-1]['counters'] if before else {k:0 for k in counters}
     end=during[-1]['counters'] if during else counters
     approx={k:end[k]-base[k] for k in counters}
-    held=int(np.sum(np.diff(np.asarray(stamps['present'][:slots]))==0))
-    residual=(pairs[:,1]-audio_shift)/factor-pairs[:,0];slope,intercept=np.polyfit(pairs[:,0],residual,1)
-    av.update(applied_audio_trim_seconds=audio_shift,applied_capture_rate=rate,output_rate=48000,measured_jack_clock=clock,clock_timestamp_offset_seconds=clock_offset,corrected_median_offset_ms=float(np.median(residual)*1000),corrected_drift_ms=float(slope*(pairs[-1,0]-pairs[0,0])*1000),corrected_residual_p95_ms=float(np.percentile(abs(residual),95)*1000),method='Paired 1 Hz optical square/audio gate; rate from JACK/video timestamps; constant trim plus fractional sample-clock rate correction; 33.333 ms video resolution.')
+    present=np.asarray(stamps['present'][:slots-video_pad_frames])
+    if video_pad_frames:present=np.r_[np.repeat(present[0],video_pad_frames),present]
+    held=int(np.sum(np.diff(present)==0))
+    residual=(pairs[:,1]-applied_audio_shift)/factor-(pairs[:,0]+video_pad_frames/30);slope,intercept=np.polyfit(pairs[:,0],residual,1)
+    av.update(requested_audio_shift_seconds=audio_shift,applied_audio_trim_seconds=applied_audio_shift,applied_video_head_pad_frames=video_pad_frames,applied_capture_rate=rate,output_rate=48000,measured_jack_clock=clock,clock_timestamp_offset_seconds=clock_offset,corrected_median_offset_ms=float(np.median(residual)*1000),corrected_drift_ms=float(slope*(pairs[-1,0]-pairs[0,0])*1000),corrected_residual_p95_ms=float(np.percentile(abs(residual),95)*1000),method='Paired 1 Hz optical square/audio gate; rate from JACK/video timestamps; fractional sample-clock correction; industrial positive offset uses integer-frame video padding to preserve attacks, negative offset uses audio padding; 33.333 ms video resolution.')
     (OUT/'av-sync.json').write_text(json.dumps(av,indent=2)+'\n')
     audio,sr=sf.read(wav,dtype='float32');audio_metrics=dict(sample_rate=sr,channels=2,seconds=len(audio)/sr,peak=float(np.max(abs(audio))),rms=float(np.sqrt(np.mean(audio**2))),global_gain_db=float(20*np.log10(gain)),native_live_rate=48000)
     demos=[dict(start=0,end=7,wad='freedoom1.wad',lump='DEMO1',map='E1M6'),dict(start=7,end=70,wad='freedoom2.wad',lump='DEMO2',map='MAP10'),dict(start=70,end=145,wad='freedoom1.wad',lump='DEMO3',map='E3M9'),dict(start=145,end=240,wad='freedoom2.wad',lump='DEMO4',map='MAP23')]
     if os.environ.get('DOOM_INDUSTRIAL')=='1':
         for i,demo in enumerate(demos):demo.update(start=i*60,end=(i+1)*60)
-    report=dict(outcome='done',simultaneous_live_capture=True,stem_passes=False,note_reduction=False,seconds=duration,video=dict(width=1920,height=1080,fps=30,frames=int(meta['streams'][0]['nb_read_frames']),fully_decoded=True,chapters=len(meta['chapters'])),audio=audio_metrics,gate_audit=gate,demos=demos,tracks=mapping['tracks'],prewarm=capture['prewarm'],held_frames=held,held_percent=held/slots*100,xruns=capture['xruns_in_take'],recorded_audio_discontinuities=capture['discontinuities_in_take'],studio_counters_session=counters,studio_counters_during_play_summary_estimate=approx,demo_tracker_sync=dict(frame_samples=len(trace),tic_mismatches=0,max_tic_error=0,tics_per_second=35,origin='Gorgon tracker beat / 2'),av_sync={k:v for k,v in av.items() if k!='pairs'},visual_review='PENDING: inspect review sheets extracted from this final MP4 before delivery.',limitations=['Synth timbres are documented substitutions, not General MIDI replicas.','Gate audit verifies physical cable edges and capacity, not acoustic note recognition.','Source-producer counters are separated from the recorded JACK mix; counters during Play use summary-window estimates.','Music finishes at 226.600 s, followed by effect decay and a quiet game-only tail.','Studio keyboard and game-event signals remain future work.'])
+    report=dict(outcome='done',simultaneous_live_capture=True,stem_passes=False,note_reduction=False,seconds=duration,video=dict(width=1920,height=1080,fps=30,frames=int(meta['streams'][0]['nb_read_frames']),fully_decoded=True,chapters=len(meta['chapters'])),audio=audio_metrics,gate_audit=gate,demos=demos,tracks=mapping['tracks'],prewarm=capture['prewarm'],held_frames=held,alignment_padding_frames=video_pad_frames,held_percent=held/slots*100,xruns=capture['xruns_in_take'],recorded_audio_discontinuities=capture['discontinuities_in_take'],studio_counters_session=counters,studio_counters_during_play_summary_estimate=approx,demo_tracker_sync=dict(frame_samples=len(trace),tic_mismatches=0,max_tic_error=0,tics_per_second=35,origin='Gorgon tracker beat / 2'),av_sync={k:v for k,v in av.items() if k!='pairs'},visual_review='PENDING: inspect review sheets extracted from this final MP4 before delivery.',limitations=['Synth timbres are documented substitutions, not General MIDI replicas.','Gate audit verifies physical cable edges and capacity, not acoustic note recognition.','Source-producer counters are separated from the recorded JACK mix; counters during Play use summary-window estimates.','Music finishes at 226.600 s, followed by effect decay and a quiet game-only tail.','Studio keyboard and game-event signals remain future work.'])
     if os.environ.get('DOOM_INDUSTRIAL')=='1':
         report['limitations']=[x for x in report['limitations'] if 'Music finishes' not in x]
         report['limitations'].append('The score bank ends at 240 seconds; delivery includes two seconds of effect decay. Diagnostics include a four-second capture margin.')
+        report['limitations'].append(f'Opening attacks preserved: no positive audio trim; {video_pad_frames} cloned opening video frames included in the held-frame count for A/V alignment.')
         report['limitations'].append('Original tracker-v3 scores evaluated deterministically into the polyphonic live stream; tracker audio lanes muted.')
     for name in ['INSTRUMENTS.md','inventory.json','mapping.json']:
         shutil.copy2(ROOT/'poly'/name,OUT/name)

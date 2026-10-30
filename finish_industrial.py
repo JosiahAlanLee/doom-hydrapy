@@ -35,7 +35,7 @@ def main():
            f"- WAV peak {a['peak']:.6f}, RMS {a['rms']:.6f}. Global gain {a['global_gain_db']:.3f} dB.",
            '- Studio producer counters: '+json.dumps(d['studio_counters_session']),
            '- Studio counters during play (summary-window estimate): '+json.dumps(d['studio_counters_during_play_summary_estimate']),
-           '- Prewarm: '+json.dumps(d['prewarm']),'- Final-video inspection: '+args.visual_review,
+           '- Prewarm: '+json.dumps(d['prewarm']),f"- Alignment preserves opening attacks: audio trim {s['applied_audio_trim_seconds']:.6f} s; opening video padding {s.get('applied_video_head_pad_frames',0)} frames (included in holds).",'- Final-video inspection: '+args.visual_review,
            '','## Music and instruments','','Four original six-lane tracker-v3 scores; no existing game music used. See mapping.json and INSTRUMENTS.md. PVX is a behavioral approximation inspired by the Polivoks circuit, without measurements from Josiah’s hardware.','']
     for t in d['tracks']:lines.append(f"- {t['start']:.3f}–{t['end']:.3f}s: {t['title']}, {t['notes']} notes; {t['credit']}.")
     lines+=['','DEMO1–4 and melt/disk/vector/anaglyph scenes change at 0, 60, 120 and 180 seconds.','',*('- '+x for x in d['limitations']),'',f"Local code: {d['git_branch']} at {d['git_commit']}. Nothing pushed."]
