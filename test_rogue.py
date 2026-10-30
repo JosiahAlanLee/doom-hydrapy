@@ -31,6 +31,41 @@ def fixture_wad(path,floors,player_only=False):
 
 
 class MapTests(unittest.TestCase):
+    def test_architecture_and_native_variant_flags(self):
+        for seed in [0,42,20261030,4294967295]:
+            kinds=set()
+            for number in range(1,6):
+                f=generate(seed,number)
+                shapes={r['shape'] for r in f.architecture['rooms']}
+                self.assertTrue({'nave','ring','ribs','cross'}<=shapes)
+                self.assertGreater(max(p['height'] for p in f.profiles.values()),384)
+                self.assertTrue(any(p['height']==112 for p in f.profiles.values()))
+                self.assertTrue(any(p['floor']>0 for p in f.profiles.values()))
+                for p in f.cells:
+                    for q in [(p[0]+1,p[1]),(p[0],p[1]+1)]:
+                        if q in f.cells:self.assertLessEqual(abs(f.profiles[p]['floor']-f.profiles[q]['floor']),16)
+                for t in f.things:
+                    if t[3] in [3004,3002,3001,3005]:
+                        self.assertIn((t[4]>>8)&7,[1,2,3,4]);kinds.add((t[4]>>8)&7)
+                        self.assertLess(t[4],32768)
+            self.assertEqual(kinds,{1,2,3,4})
+
+    def test_original_sprite_patch_encoding(self):
+        import numpy as np
+        from rogue.creatures import creature,patch
+        palette=np.arange(256,dtype=np.uint8)[:,None].repeat(3,axis=1)
+        a=creature('skitter',42,0)
+        self.assertEqual(a.tobytes(),creature('skitter',42,0).tobytes())
+        self.assertNotEqual(a.tobytes(),creature('skitter',43,0).tobytes())
+        data=patch(a,palette);w,h,left,top=struct.unpack_from('<4h',data)
+        self.assertEqual((w,h,left,top),(96,112,48,112))
+        for x in range(w):
+            pos=struct.unpack_from('<I',data,8+x*4)[0]
+            while data[pos]!=255:
+                start,length=data[pos:pos+2];self.assertLessEqual(start+length,h)
+                pos+=length+4
+            self.assertLess(pos,len(data))
+
     def test_connected_safe_spawn_and_different_seeds(self):
         for seed in [0,1,42,20261030,4294967295]:
             for n in range(1,FLOORS+1):
@@ -70,6 +105,41 @@ class MapTests(unittest.TestCase):
 
 @unittest.skipUnless(os.environ.get('FREEDOOM_WAD'),'Set FREEDOOM_WAD for real-engine tests')
 class EngineTests(unittest.TestCase):
+    def test_native_enemy_variants_and_cantor_fan(self):
+        from client import Doom
+        with tempfile.TemporaryDirectory() as t:
+            f=generate(42,1);f.cells={(x,y) for x in range(1,13) for y in range(1,8)};f.profiles={}
+            f.start=(2,2);f.exit=(11,6);f.things=[(320,320,0,1,7)]
+            for cls,typ in [(1,3004),(2,3002),(3,3001),(4,3005)]:
+                for roll in [0,15]:
+                    f.things.append((cls*128+384,roll//15*256+448,180,typ,7|(cls<<8)|(roll<<11)))
+            path=Path(t)/'classes.wad';fixture_wad(path,[f])
+            with Doom(os.environ['FREEDOOM_WAD'],demo=None,pwad=path,rogue_floors=1) as d:
+                mobs=[m for m in d.monsters() if not m['missile']]
+                self.assertEqual(len(mobs),8)
+                for cls in range(1,5):
+                    pair=sorted([m for m in mobs if m['class']==cls],key=lambda m:m['roll'])
+                    self.assertLess(pair[0]['spawnhealth'],pair[1]['spawnhealth'])
+                    if cls==1:self.assertGreater(pair[0]['speed'],pair[0]['base_speed'])
+                    if cls==2:self.assertLess(pair[0]['speed'],pair[0]['base_speed'])
+                    if cls==4:
+                        self.assertFalse(pair[0]['shadow']);self.assertTrue(pair[0]['luminous'])
+            with Doom(os.environ['FREEDOOM_WAD'],demo=None,pwad=path) as d:
+                self.assertTrue(all(m['speed']==m['base_speed'] and m['height']==56 for m in d.monsters()))
+            # An isolated cantor must emit two diverging projectiles, not just
+            # different stats on the ordinary single-shot monster.
+            # Face the target along the engine's initial eastward chase dir;
+            # avoid spending this attack test on a long turnaround wander.
+            f.things=[(832,320,180,1,7),(320,320,0,3001,7|(3<<8))]
+            fixture_wad(path,[f])
+            with Doom(os.environ['FREEDOOM_WAD'],demo=None,pwad=path,rogue_floors=1) as d:
+                for _ in range(300):
+                    d.advance(1)
+                    shots=[m for m in d.monsters() if m['missile'] and m['source_class']==3]
+                    if len(shots)>=2:break
+                self.assertGreaterEqual(len(shots),2)
+                self.assertNotEqual(shots[0]['angle'],shots[1]['angle'])
+
     def test_death_is_terminal_and_disconnect_releases_controls(self):
         from rogue.server import Game
         with tempfile.TemporaryDirectory() as t:

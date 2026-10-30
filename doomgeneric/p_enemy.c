@@ -34,6 +34,7 @@
 // State.
 #include "doomstat.h"
 #include "r_state.h"
+#include "rogue_ai.h"
 
 // Data.
 #include "sounds.h"
@@ -800,7 +801,7 @@ void A_PosAttack (mobj_t* actor)
     S_StartSound (actor, sfx_pistol);
     angle += (P_Random()-P_Random())<<20;
     damage = ((P_Random()%5)+1)*3;
-    P_LineAttack (actor, angle, MISSILERANGE, slope, damage);
+    P_LineAttack (actor, angle, MISSILERANGE, slope, Rogue_Damage(actor,damage));
 }
 
 void A_SPosAttack (mobj_t* actor)
@@ -907,13 +908,14 @@ void A_TroopAttack (mobj_t* actor)
     {
 	S_StartSound (actor, sfx_claw);
 	damage = (P_Random()%8+1)*3;
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
 	return;
     }
 
     
-    // launch a missile
-    P_SpawnMissile (actor, actor->target, MT_TROOPSHOT);
+    // The generative cantor throws a readable two-shot fan.
+    if (!Rogue_Fan(actor))
+        P_SpawnMissile (actor, actor->target, MT_TROOPSHOT);
 }
 
 
@@ -928,7 +930,7 @@ void A_SargAttack (mobj_t* actor)
     if (P_CheckMeleeRange (actor))
     {
 	damage = ((P_Random()%10)+1)*4;
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
     }
 }
 
@@ -943,7 +945,7 @@ void A_HeadAttack (mobj_t* actor)
     if (P_CheckMeleeRange (actor))
     {
 	damage = (P_Random()%6+1)*10;
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
 	return;
     }
     

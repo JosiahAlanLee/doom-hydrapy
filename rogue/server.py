@@ -49,7 +49,7 @@ class Game:
             self.revision+=1;self.error=None;self.paused=True;self.owner=None
             folder=self.run_dir/f'run-{time.time_ns()}-{seed}'
             folder.mkdir()
-            self.manifest=campaign(seed,folder/'dungeon.wad')
+            self.manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad)
             (folder/'manifest.json').write_text(json.dumps(self.manifest,indent=2)+'\n')
             self.engine=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=FLOORS)
             self.frame_seq=0;self.render()

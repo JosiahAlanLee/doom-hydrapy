@@ -46,6 +46,12 @@ class Doom:
         line=self.proc.stdout.readline()
         if not line.startswith('STATE '): raise RuntimeError('invalid engine state response')
         return json.loads(line[6:])
+    def monsters(self):
+        self.proc.stdin.write('MOBS\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine MOBS timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('MOBS '):raise RuntimeError('invalid monster state response')
+        return json.loads(line[5:])
     def advance(self,n):
         if not 0<=n<=35000: raise ValueError('STEP range 0..35000')
         old=self.tic;self.command(f'STEP {n}')

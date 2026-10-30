@@ -65,7 +65,7 @@ async function stateLoop(){
     $('floor').textContent=s.floor_name;$('run-id').textContent='SEED '+s.seed;
     $('health').innerHTML=Number(s.health)+'<span>%</span>';$('armor').innerHTML=Number(s.armor)+'<span>%</span>';
     $('kills').innerHTML=Number(s.kills)+'<span>/ '+Number(s.total_kills)+'</span>';
-    $('mode').textContent=s.dead?'RUN ENDED':s.won?'CLEARED':s.paused?'PAUSED':'LIVE / 35 HZ';
+    $('mode').textContent=s.dead?'RUN ENDED':s.won?'CLEARED':s.paused?'PAUSED':'EXPLORING';
     $('status').textContent=s.dead?'The dungeon keeps what it takes.':s.won?'All five floors cleared.':s.paused?'Waiting for the next step.':'Floor '+s.map+' of '+s.floors+' · '+Math.floor(s.level_tics/35)+' seconds';
     if(s.dead||s.won||s.error){setPlaying(false);owner=null;keys.clear();
       overlay(s.won?'YOU FOUND A WAY OUT':s.error?'ENGINE PAUSED':'ONE LIFE. SPENT.',s.won?'The descent is complete.':s.error?'Something stopped the run.':'The labyrinth wins this time.',s.error||'Replay this seed, or start somewhere stranger.',s.error?'RETRY THE RUN ↻':'REPLAY THIS SEED ↻');
@@ -85,7 +85,23 @@ if(gl){
   void main(){vec2 v=vec2(uv.x,1.-uv.y);vec3 c=texture2D(img,v).rgb;float l=lum(c);
     if(mode>.5&&mode<1.5){float s=.9+.1*sin(v.y*1256.);c=vec3(.18,1.,.43)*l*s;}
     else if(mode>1.5&&mode<2.5){float x=lum(texture2D(img,v+vec2(px.x,0.)).rgb);float y=lum(texture2D(img,v+vec2(0.,px.y)).rgb);float edge=clamp(length(vec2(l-x,l-y))*5.,0.,1.);c=mix(vec3(.91,.92,.84),vec3(.04,.09,.07),max(edge,(1.-l)*.3));}
-    else if(mode>2.5){float q=floor(l*3.99)/3.;c=mix(vec3(.08,.12,.13),vec3(.91,.93,.78),q);}
+    else if(mode>2.5&&mode<3.5){float q=floor(l*3.99)/3.;c=mix(vec3(.08,.12,.13),vec3(.91,.93,.78),q);}
+    // Argon's doomSobelVectorScope kernel, adapted by Codex for this standalone
+    // browser. Central differences and red/amber hazard isolation are retained;
+    // the capture scene's feedback and tracker modulation are not reproduced.
+    else if(mode>3.5){
+      vec3 wl=vec3(.2126,.7152,.0722);
+      vec3 cx1=texture2D(img,v+vec2(px.x,0.)).rgb,cx0=texture2D(img,v-vec2(px.x,0.)).rgb;
+      vec3 cy1=texture2D(img,v+vec2(0.,px.y)).rgb,cy0=texture2D(img,v-vec2(0.,px.y)).rgb;
+      float gx=dot(cx1-cx0,wl),gy=dot(cy1-cy0,wl),l0=dot(c,wl);
+      float grad=clamp(length(vec2(gx,gy))*2.4*2.2,0.,1.);
+      float wall=abs(gx)/(abs(gx)+abs(gy)+.0001);
+      float red=clamp(c.r-max(c.g,c.b)*.85,0.,1.);
+      float muzzle=clamp((l0-.62)*2.5,0.,1.)*clamp(c.r-c.b,0.,1.);
+      float haz=clamp((red*1.8+muzzle*1.5)*1.4,0.,1.);
+      c=vec3(grad*(.12+.25*(1.-wall))+haz*.98,grad*(.85+.15*wall)+haz*.36,grad*(.45+.5*wall)+haz*.14)+c*.35*.35;
+      c=clamp(c*(.82+.18*sin(v.y*200.*6.2831853)),0.,1.);
+    }
     gl_FragColor=vec4(c,1.);}`;
   function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;}
   const program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vertex));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);

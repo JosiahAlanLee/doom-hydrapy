@@ -4,6 +4,7 @@
 #include "doomtype.h"
 #include "doomstat.h"
 #include "g_game.h"
+#include "rogue_ai.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -80,6 +81,7 @@ int main(int argc,char **argv){
    for(unsigned i=0;i<n;i++){virtual_ms=1000+(++clock_tics)*1000/35;tick();}
   } else if(sscanf(line,"KEY %d %u",&down,&k)==2 && k<=255 && head-tail<1024){queue[head%1024].down=!!down;queue[head++%1024].key=k;}
   else if(!strcmp(line,"STATE\n")){state();continue;}
+  else if(!strcmp(line,"MOBS\n")){Rogue_Report(reply);continue;}
   else if(!strncmp(line,"QUIT",4))break;
   else {fprintf(reply,"ERROR\n");fflush(reply);continue;}
   fprintf(reply,"OK %d %llu\n",gametic,(unsigned long long)frames);fflush(reply);

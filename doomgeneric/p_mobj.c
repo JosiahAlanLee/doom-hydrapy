@@ -32,6 +32,7 @@
 #include "s_sound.h"
 
 #include "doomstat.h"
+#include "rogue_ai.h"
 
 
 void G_PlayerReborn (int player);
@@ -495,7 +496,7 @@ void P_MobjThinker (mobj_t* mobj)
 
 	P_NightmareRespawn (mobj);
     }
-
+    Rogue_Visual(mobj);
 }
 
 
@@ -822,6 +823,7 @@ void P_SpawnMapThing (mapthing_t* mthing)
     
     mobj = P_SpawnMobj (x,y,z, i);
     mobj->spawnpoint = *mthing;
+    Rogue_Apply(mobj,mthing);
 
     if (mobj->tics > 0)
 	mobj->tics = 1 + (P_Random () % mobj->tics);
@@ -964,6 +966,7 @@ P_SpawnMissile
 	S_StartSound (th, th->info->seesound);
 
     th->target = source;	// where it came from
+    Rogue_Projectile(source,th);
     an = R_PointToAngle2 (source->x, source->y, dest->x, dest->y);
 
     // fuzzy player

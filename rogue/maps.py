@@ -7,7 +7,7 @@ axis BSP uses the same boundaries, so no segment splitting is needed. Keep the
 map small enough for vanilla Doom's signed-short coordinates and block offsets.
 """
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 import argparse
 import hashlib
@@ -18,7 +18,7 @@ import struct
 
 TILE = 128
 FLOORS = 5
-SIZE = 25
+SIZE = 33
 THEMES = [
     ('RELAY / 01', 'STARTAN3', 'FLOOR4_8', 'CEIL3_5', 192),
     ('OXIDE / 02', 'BROWN1', 'FLOOR0_1', 'CEIL3_5', 160),
@@ -38,6 +38,9 @@ class Floor:
     route: list
     things: list
     theme: tuple
+    architecture: dict = field(default_factory=dict)
+    profiles: dict = field(default_factory=dict)
+    variants: list = field(default_factory=list)
 
 
 def distances(cells, start):
@@ -58,20 +61,42 @@ def generate(seed, number):
     if not 1 <= number <= FLOORS:
         raise ValueError('floor must be 1..5')
     rng = random.Random((seed << 8) | number)
-    cells, rooms = set(), []
-    for attempt in range(180):
-        w, h = rng.randint(3, 6), rng.randint(3, 6)
+    cells, rooms, shapes = set(), [], []
+    profiles = {}
+    for attempt in range(400):
+        w, h = rng.randint(5, 9), rng.randint(5, 9)
         x, y = rng.randint(1, SIZE-w-1), rng.randint(1, SIZE-h-1)
         if any(x-1 < a+c and x+w+1 > a and y-1 < b+d and y+h+1 > b for a,b,c,d in rooms):
             continue
-        rooms.append((x,y,w,h))
-        cells.update((a,b) for a in range(x,x+w) for b in range(y,y+h))
+        index=len(rooms)
+        shape=['nave','ring','ribs','cross','terrace','cloister'][index%6]
+        room={(a,b) for a in range(x,x+w) for b in range(y,y+h)}
+        cx,cy=x+w//2,y+h//2
+        if shape=='ring':
+            room-={(a,b) for a in range(cx-1,cx+2) for b in range(cy-1,cy+2)}
+        elif shape in ['ribs','cloister','nave']:
+            # Paired piers frame a clear central nave. They are solid geometry.
+            for a in range(x+1,x+w-1,2):
+                for b in [y+1,y+h-2]:
+                    if abs(b-cy)>0:room.discard((a,b))
+        elif shape=='cross':
+            room={p for p in room if abs(p[0]-cx)<=1 or abs(p[1]-cy)<=1}
+        rooms.append((x,y,w,h));shapes.append(shape)
+        cells.update(room)
+        for p in sorted(room):
+            profiles[p]={'floor':0,'height':rng.choice([384,512,640]) if shape!='cross' else 192,
+                         'light':{'ring':160,'ribs':160,'nave':192,'cross':144,'terrace':192,'cloister':176}[shape],
+                         'wall':rng.choice([THEMES[number-1][1], 'METAL2']),
+                         'flat':THEMES[number-1][2], 'ceiling':THEMES[number-1][3], 'shape':shape}
         if len(rooms) >= 7 + number:
             break
     if len(rooms) < 3:
         raise RuntimeError('insufficient rooms')
     # Connect the nearest unconnected room to the existing tree; add two cycles.
-    centres = [(x+w//2,y+h//2) for x,y,w,h in rooms]
+    centres = []
+    for x,y,w,h in rooms:
+        candidates=[p for p in sorted(cells) if x<=p[0]<x+w and y<=p[1]<y+h]
+        centres.append(min(candidates,key=lambda p:(abs(p[0]-(x+w//2))+abs(p[1]-(y+h//2)),p)))
     joined = {0}
     edges = []
     while len(joined) < len(rooms):
@@ -90,6 +115,33 @@ def generate(seed, number):
             cells.update((x,j) for j in range(min(y,yy),max(y,yy)+1))
             cells.update((i,yy) for i in range(min(x,xx),max(x,xx)+1))
     start = centres[0]
+    # Room construction and connecting passages can cut through a pier. The
+    # final cell set, not the earlier room mask, is authoritative.
+    for p in sorted(cells):
+        if p not in profiles:
+            profiles[p]={'floor':0,'height':112,'light':128,'wall':'METAL2',
+                         'flat':THEMES[number-1][2],'ceiling':THEMES[number-1][3],'shape':'passage'}
+    boundary=[p for p in sorted(cells) if any(q not in cells for q in [(p[0]+1,p[1]),(p[0]-1,p[1]),(p[0],p[1]+1),(p[0],p[1]-1)])]
+    depths={p:0 for p in boundary};queue=deque(boundary)
+    while queue:
+        p=queue.popleft()
+        for q in [(p[0]+1,p[1]),(p[0]-1,p[1]),(p[0],p[1]+1),(p[0],p[1]-1)]:
+            if q in cells and q not in depths:depths[q]=depths[p]+1;queue.append(q)
+    for p in sorted(cells):
+        profile=profiles[p]
+        if profile['shape'] in ['terrace','ring','cloister']:profile['floor']=16*min(depths[p],3)
+        # Quantized room heights keep Doom's visplane budget predictable.
+        room=next((r for r in rooms if r[0]<=p[0]<r[0]+r[2] and r[1]<=p[1]<r[1]+r[3]),None)
+        if room and profile['shape']!='passage':
+            index=rooms.index(room);profile['height']=[512,640,384,192,384,512][index%6]
+    # Enforce walkable rises on EVERY edge, including carved connections.
+    changed=True
+    while changed:
+        changed=False
+        for p in sorted(cells):
+            for q in [(p[0]+1,p[1]),(p[0]-1,p[1]),(p[0],p[1]+1),(p[0],p[1]-1)]:
+                if q in cells and profiles[p]['floor']>profiles[q]['floor']+16:
+                    profiles[p]['floor']=profiles[q]['floor']+16;changed=True
     parents = distances(cells,start)
     assert len(parents) == len(cells)
     # BFS insertion order is deterministic; the last point is a furthest tile.
@@ -109,7 +161,7 @@ def generate(seed, number):
     # Pistol start; first room has a shotgun, shells and health. Never spawn
     # monsters within six tiles' Manhattan distance of the starting point.
     start_room = [(x,y) for x in range(rooms[0][0],rooms[0][0]+rooms[0][2])
-                  for y in range(rooms[0][1],rooms[0][1]+rooms[0][3]) if (x,y)!=start]
+                  for y in range(rooms[0][1],rooms[0][1]+rooms[0][3]) if (x,y)!=start and (x,y) in cells]
     rng.shuffle(start_room)
     for kind in [2001,2008,2008,2011]:
         item(start_room.pop(),kind)
@@ -117,11 +169,18 @@ def generate(seed, number):
     rng.shuffle(candidates)
     distant = [p for p in candidates if abs(p[0]-start[0])+abs(p[1]-start[1]) >= 6
                and abs(p[0]-exit_cell[0])+abs(p[1]-exit_cell[1]) >= 2]
-    enemy_kinds = [3004,3004,3001,3001] + ([3002,9] if number >= 2 else [])
+    enemy_kinds = [3004,3004,3001,3001] + ([3002] if number >= 2 else [])
     if number >= 4:
         enemy_kinds += [3005]
     for p in distant[:5+number*3]:
         item(p,rng.choice(enemy_kinds),rng.randrange(4)*90)
+    variants=[]
+    classes={3004:(1,'skitter'),3002:(2,'bastion'),3001:(3,'cantor'),3005:(4,'shiver')}
+    for i,t in enumerate(things):
+        if t[3] in classes:
+            variant,name=classes[t[3]];roll=rng.randrange(16)
+            things[i]=(*t[:4],t[4]|(variant<<8)|(roll<<11))
+            variants.append({'kind':name,'roll':roll,'x':t[0],'y':t[1]})
     remaining = [p for p in candidates if p not in occupied]
     for i,p in enumerate(remaining[:12+number]):
         item(p,[2007,2008,2011,2012,2018,2048][i%6])
@@ -132,7 +191,8 @@ def generate(seed, number):
     direction = route[1][0]-start[0], route[1][1]-start[1]
     angle = {(1,0):0,(0,1):90,(-1,0):180,(0,-1):270}[direction]
     things.insert(0,(start[0]*TILE+64,start[1]*TILE+64,angle,1,7))
-    return Floor(number,cells,rooms,start,exit_cell,route,things,THEMES[number-1])
+    return Floor(number,cells,rooms,start,exit_cell,route,things,THEMES[number-1],
+                 {'rooms':[{'shape':s,'bounds':r} for r,s in zip(rooms,shapes)],'max_step':16},profiles,variants)
 
 
 def name8(s):
@@ -156,7 +216,9 @@ def map_lumps(floor):
                 side_ids.append(65535)
                 continue
             side_ids.append(len(sides))
-            sides.append(struct.pack('<hh8s8s8sH',0,0,name8(wall),name8(wall),name8(wall if back is None else '-'),sindex(*cell)))
+            # A closed cell's facing wall uses the neighboring room's material.
+            material=floor.profiles.get(cell,{}).get('wall',wall)
+            sides.append(struct.pack('<hh8s8s8sH',0,0,name8(material),name8(material),name8(material if back is None else '-'),sindex(*cell)))
         idx = len(lines)
         is_exit = floor.exit in [front,back] and front in floor.cells and back in floor.cells
         flags = 4 if back is not None else 1
@@ -203,9 +265,11 @@ def map_lumps(floor):
         for x in range(n):
             opened=(x,y) in floor.cells
             exit_tile=(x,y)==floor.exit
-            sectors.append(struct.pack('<hh8s8shhh',0,128+32*(floor.number%2) if opened else 0,
-                                       name8('FLOOR0_1' if exit_tile else flat),name8(ceiling),
-                                       255 if exit_tile else light,0,0))
+            profile=floor.profiles.get((x,y),{})
+            z=profile.get('floor',0)
+            sectors.append(struct.pack('<hh8s8shhh',z,z+profile.get('height',128+32*(floor.number%2)) if opened else z,
+                                       name8('FLOOR0_1' if exit_tile else profile.get('flat',flat)),name8(profile.get('ceiling',ceiling)),
+                                       255 if exit_tile else profile.get('light',light),0,0))
     # BLOCKMAP: add each line to both sides of a block boundary, including
     # endpoints. Offsets are 16-bit WORD indices, not byte offsets.
     dim=n+2; origin=-TILE; blocks=[set() for _ in range(dim*dim)]
@@ -234,10 +298,13 @@ def map_lumps(floor):
     ]
 
 
-def campaign(seed, output):
+def campaign(seed, output, assets=None):
     output=Path(output)
     floors=[generate(seed,i) for i in range(1,FLOORS+1)]
     lumps=[lump for f in floors for lump in map_lumps(f)]
+    if assets:
+        from rogue.creatures import sprite_lumps
+        lumps.extend(sprite_lumps(assets,seed))
     data=bytearray(); directory=[]
     for name,payload in lumps:
         directory.append(struct.pack('<II8s',12+len(data),len(payload),name8(name)))
@@ -245,11 +312,17 @@ def campaign(seed, output):
     wad=struct.pack('<4sII',b'PWAD',len(lumps),12+len(data))+data+b''.join(directory)
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_bytes(wad)
-    manifest={'format':'doom-rogue-1','seed':seed,'floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
+    manifest={'format':'doom-rogue-2','seed':seed,'floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
+    if assets:
+        manifest['sprite_assets']={'sha256':hashlib.sha256(Path(assets).read_bytes()).hexdigest(),
+                                   'source':'Freedoom IWAD supplied by the operator',
+                                   'generated_families':['POSS','SARG','TROO','HEAD'],
+                                   'other_sprites':'Freedoom originals; retain Freedoom license and credits'}
     for f in floors:
         manifest['floors'].append({'number':f.number,'name':f.theme[0],'rooms':len(f.rooms),
                                   'open_tiles':len(f.cells),'start':f.start,'exit':f.exit,
                                   'route':f.route,'monsters':sum(t[3] in [3004,3001,3002,9,3005] for t in f.things),
+                                  'architecture':f.architecture,'variants':f.variants,
                                   'cells':sorted(f.cells)})
     return manifest
 
@@ -258,7 +331,8 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--seed',type=int,default=20261030)
     parser.add_argument('--out',type=Path,required=True)
+    parser.add_argument('--assets',type=Path,help='Freedoom IWAD for the complete generated-creature sprite namespace')
     args=parser.parse_args()
-    manifest=campaign(args.seed,args.out)
+    manifest=campaign(args.seed,args.out,assets=args.assets)
     args.out.with_suffix('.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(args.out,manifest['sha256'])

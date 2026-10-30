@@ -7,7 +7,9 @@ Game assets are from [Freedoom 0.13.0](https://github.com/freedoom/freedoom/rele
 BSD licensed. No commercial WAD or original Doom music is included.
 
 **Playable generative mode:** [Null Run](ROGUELIKE.md) builds five seeded
-floors with enemies/supplies, inventory carryover and one-life runs. A local
+floors with enemies/supplies, inventory carryover and one-life runs. The current
+[worlds/creatures iteration](WORLDS.md) adds ribbed halls, ring chambers, terraces,
+four procedurally drawn monster families and Argon's green-vector view. A local
 browser provides WASD/arrow/fire/use controls, pause/retry/new seed and optional
 GL treatments. Run `python -m rogue.server --wad /path/to/freedoom2.wad` after
 building the engine. The timed performance/capture path below remains separate.
