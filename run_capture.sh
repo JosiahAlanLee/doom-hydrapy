@@ -16,6 +16,7 @@ if [[ $mode == smoke ]]; then
 else
  export DOOM_SMOKE=0
  duration=240
+ if [[ ${DOOM_INDUSTRIAL:-0} == 1 ]]; then duration=244; fi
 fi
 extra_plugins=()
 if [[ ${DOOM_INDUSTRIAL:-0} == 1 ]]; then
