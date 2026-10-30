@@ -7,6 +7,7 @@ from hydrapy import *
 from hydrapy.live import register_hook
 from client import Doom
 import ascii_op
+import legible_ops
 ROOT=Path(os.environ['DOOM_TAKE_ROOT']);SMOKE=os.environ.get('DOOM_SMOKE')=='1'
 STUDIO=dict(title='Freedoom / Gorgon / polyphonic live take')
 set_bpm(120)
@@ -23,8 +24,8 @@ def draw(t):
     last.update(seconds=sec,demo=idx+1,local=local,tic=engine.tic-engine.base,expected=int(local*35+1e-8))
     return frame
 source=src(FrameSource(draw)).pixelate(640,400)
-scene('doom-terminal')(lambda:source.doomAscii(100).contrast(1.1))
-scene('doom-print')(lambda:source.brightness(.12).saturate(.3).halftone(5,.65,.75).color(1,.82,.59))
+scene('doom-terminal')(lambda:source.doomLegibleAscii(240))
+scene('doom-print')(lambda:source.doomLegiblePrint())
 scene('doom-scan')(lambda:source.ruttetra(100,.12,1.1,.25).color(.4,1,.8))
 scene('doom-feedback')(lambda:source.blend(src(o0).scale(1.006).scrollX(.002),.25).posterize(5,.7).saturate(.6))
 # A 1 Hz white sync square in the top-left corner, paired with an audio gate.
