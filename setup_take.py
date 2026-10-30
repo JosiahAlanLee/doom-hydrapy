@@ -3,7 +3,7 @@ import base64,copy,json,os,shutil,sys
 from pathlib import Path
 import numpy as np
 REPO=Path(__file__).resolve().parent;ROOT=Path(os.environ.get('DOOM_TAKE_ROOT',str(REPO.parent/'doom-hydrapy-20261030')))
-OLD=ROOT.parent/'gorgon-r3b-20261030'
+OLD=REPO.parent/'gorgon-r3b-20261030'
 sys.path.insert(0,str(OLD/'runtime'))
 from hydrapy.tracker_v3 import validate,empty_pattern
 

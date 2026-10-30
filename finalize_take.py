@@ -6,7 +6,7 @@ import numpy as np
 import soundfile as sf
 from analyze_sync import sync
 REPO=Path(__file__).resolve().parent;ROOT=Path(os.environ.get('DOOM_TAKE_ROOT',str(REPO.parent/'doom-hydrapy-20261030')));CAP=ROOT/'poly-capture';OUT=Path(os.environ.get('DOOM_DELIVERY_DIR',str(ROOT/'take')));OUT.mkdir(exist_ok=True)
-sys.path.insert(0,str(ROOT.parent/'gorgon-r3b-20261030/runtime'))
+sys.path.insert(0,str(REPO.parent/'gorgon-r3b-20261030/runtime'))
 from hydrapy.recording import fit,load,offset
 
 def run(cmd):return subprocess.run(cmd,check=True,capture_output=True,text=True)
