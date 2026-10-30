@@ -14,6 +14,10 @@ browser provides WASD/arrow/fire/use controls, pause/retry/new seed and optional
 GL treatments. Run `python -m rogue.server --wad /path/to/freedoom2.wad` after
 building the engine. The timed performance/capture path below remains separate.
 
+[Book-boss encounters](BOSSES.md) add Repetiel and Calmor on seeded campaign
+floors, with distinct binding rules, shield windows and native attacks. Choose a
+binding study in the browser to practice either encounter directly.
+
 Everything here, including the optional plugin, stays in this standalone GPL repo.
 Neither HydraPy nor Gorgon was changed. The engine communicates through stdin/stdout
 and a private mmap file; no engine library is loaded into either host. This layout

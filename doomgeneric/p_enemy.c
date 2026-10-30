@@ -35,6 +35,7 @@
 #include "doomstat.h"
 #include "r_state.h"
 #include "rogue_ai.h"
+#include "rogue_boss.h"
 
 // Data.
 #include "sounds.h"
@@ -979,7 +980,8 @@ void A_BruisAttack (mobj_t* actor)
     }
     
     // launch a missile
-    P_SpawnMissile (actor, actor->target, MT_BRUISERSHOT);
+    if (!Rogue_BossAttack(actor))
+        P_SpawnMissile (actor, actor->target, MT_BRUISERSHOT);
 }
 
 

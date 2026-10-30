@@ -40,18 +40,19 @@ class Game:
         self.thread=threading.Thread(target=self.loop,daemon=True,name='doom-run')
         self.thread.start()
 
-    def new_run(self,seed):
+    def new_run(self,seed,mode='campaign'):
         if isinstance(seed,bool) or not isinstance(seed,int) or not 0<=seed<=0xffffffff:
             raise ValueError('Seed must be a whole number from 0 to 4294967295.')
+        if mode not in ['campaign','repetiel','calmor']:raise ValueError('Unknown run mode.')
         with self.lock:
             self.release()
             if self.engine:self.engine.close();self.engine=None
             self.revision+=1;self.error=None;self.paused=True;self.owner=None
             folder=self.run_dir/f'run-{time.time_ns()}-{seed}'
             folder.mkdir()
-            self.manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad)
+            self.manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode)
             (folder/'manifest.json').write_text(json.dumps(self.manifest,indent=2)+'\n')
-            self.engine=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=FLOORS)
+            self.engine=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(self.manifest['floors']))
             self.frame_seq=0;self.render()
 
     def release(self):
@@ -85,9 +86,11 @@ class Game:
 
     def snapshot(self):
         with self.lock:
-            floor=min(max(self.state.get('map',1),1),FLOORS)
+            floor=min(max(self.state.get('map',1),1),len(self.manifest['floors']))
             return {**self.state,'seed':self.manifest['seed'],'floor_name':self.manifest['floors'][floor-1]['name'],
-                    'floors':FLOORS,'paused':self.paused,'revision':self.revision,
+                    'floors':len(self.manifest['floors']),'mode':self.manifest['mode'],
+                    'boss_rule':self.manifest['floors'][floor-1]['boss']['game_rule'] if self.manifest['floors'][floor-1]['boss'] else None,
+                    'paused':self.paused,'revision':self.revision,
                     'frame':self.frame_seq,'error':self.error}
 
     def render(self):
@@ -173,7 +176,7 @@ def handler(game,token,port):
                 elif path=='/api/new':
                     with game.lock:
                         if game.owner and data.get('owner')!=game.owner:raise ValueError('Another tab has the controls.')
-                        game.new_run(data.get('seed'));result=game.snapshot()
+                        game.new_run(data.get('seed'),data.get('mode','campaign'));result=game.snapshot()
                 else:return self.respond({'error':'Not found.'},status=404)
                 self.respond(result)
             except (ValueError,TypeError) as exc:self.respond({'error':str(exc)},status=400)

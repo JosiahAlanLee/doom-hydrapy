@@ -6,9 +6,9 @@
 <body>
 <main>
   <header><a class="wordmark" href="/">NULL<span>RUN</span><i>01—05</i></a>
-  <div class="edition">GENERATIVE DOOM / 002<br><span>SOMETHING ELSE LIVES HERE.</span></div>
+  <div class="edition">GENERATIVE DOOM / 003<br><span>THE BOOK HAS FOUND YOU.</span></div>
   <div class="signal"><b></b><span id="connection">CONNECTING</span></div></header>
-  <section class="heading"><div><p class="eyebrow">FIVE FLOORS. ONE LIFE.</p><h1>The architecture<br>doesn’t remember you.</h1></div>
+  <section class="heading"><div><p class="eyebrow" id="run-length">FIVE FLOORS. ONE LIFE.</p><h1>The architecture<br>doesn’t remember you.</h1></div>
   <p class="intro">Ribbed halls. Stepped courts. Moving things.<br>Find supplies. Keep moving. Reach the light.<br>Your health and weapons follow you down.</p></section>
   <section class="console" aria-label="Doom play area">
     <div class="bar"><span><i class="square"></i><span id="floor">RELAY / 01</span></span><span id="run-id">SEED —</span><span id="mode">PAUSED</span></div>
@@ -19,9 +19,14 @@
     </div>
     <div class="telemetry"><div><small>HEALTH</small><strong id="health">100<span>%</span></strong></div><div><small>ARMOR</small><strong id="armor">0<span>%</span></strong></div><div><small>ENCOUNTERS</small><strong id="kills">0<span>/ 0</span></strong></div><div class="status"><small>RUN STATUS</small><p id="status">Waiting for the first step.</p></div><button id="pause" class="quiet">PAUSE <span>Ⅱ</span></button></div>
   </section>
+  <section id="boss-panel" class="boss-panel" hidden aria-label="Boss encounter">
+    <div class="boss-title"><p class="eyebrow">A PASSAGE FROM THE BOOK</p><h2 id="boss-name">REPETIEL</h2><p id="boss-phase">SEALED</p></div>
+    <div class="boss-vitals"><div><span id="boss-health">—</span><span id="boss-progress">—</span></div><progress id="boss-hp" max="1" value="1" aria-label="Boss health"></progress><progress id="boss-binding" max="1" value="0" aria-label="Binding progress"></progress></div>
+    <p id="boss-rule" class="boss-rule">Find the glowing ring.</p>
+  </section>
   <section class="below"><div class="controls"><p class="eyebrow">HANDS ON THE MACHINE</p><div class="keys"><span><kbd>W A S D</kbd>Move / strafe</span><span><kbd>← →</kbd>Turn</span><span><kbd>SPACE</kbd>Fire</span><span><kbd>F</kbd>Use</span><span><kbd>SHIFT</kbd>Run</span><span><kbd>TAB</kbd>Map</span><span><kbd>1—7</kbd>Weapon</span><span><kbd>ESC</kbd>Pause</span></div><p class="note">Step onto the bright floor tile to descend. Focus leaves the game? It pauses.</p></div>
-  <div class="run-options"><label class="eyebrow" for="seed">RUN SEED</label><div class="seed-row"><input id="seed" type="text" inputmode="numeric" maxlength="10" value="20261030" aria-label="Run seed"><button id="retry" title="Restart this seed">RETRY ↺</button><button id="new" class="new" title="New random seed">NEW RUN ↗</button></div><label class="eyebrow filter-label" for="filter">VIEW TREATMENT</label><select id="filter"><option value="4" selected>ARGON / GREEN VECTOR</option><option value="0">RAW / KEEP IT LEGIBLE</option><option value="1">PHOSPHOR / GREEN SIGNAL</option><option value="2">INK / CONTOUR STUDY</option><option value="3">PRINT / FOUR TONES</option></select><p class="note" id="notice" role="status">A new run resets inventory. The same seed rebuilds the same labyrinth.</p></div></section>
+  <div class="run-options"><label class="eyebrow" for="seed">RUN SEED</label><div class="seed-row"><input id="seed" type="text" inputmode="numeric" maxlength="10" value="20261030" aria-label="Run seed"><button id="retry" title="Restart this seed">RETRY ↺</button><button id="new" class="new" title="New random seed">NEW RUN ↗</button></div><label class="eyebrow filter-label" for="run-mode">NEXT RUN</label><select id="run-mode"><option value="campaign">FIVE-FLOOR DESCENT / RANDOM BOSSES</option><option value="repetiel">REPETIEL / BINDING STUDY</option><option value="calmor">CALMOR / BINDING STUDY</option></select><label class="eyebrow filter-label" for="filter">VIEW TREATMENT</label><select id="filter"><option value="4" selected>ARGON / GREEN VECTOR</option><option value="0">RAW / KEEP IT LEGIBLE</option><option value="1">PHOSPHOR / GREEN SIGNAL</option><option value="2">INK / CONTOUR STUDY</option><option value="3">PRINT / FOUR TONES</option></select><p class="note" id="notice" role="status">Choose a study to start at that boss’s binding ring. New Run resets inventory.</p></div></section>
   <section class="bestiary"><p class="eyebrow">LOCAL INHABITANTS</p><div><span><b>SKITTER</b>Fast. Fragile. Too many legs.</span><span><b>BASTION</b>Hard to stagger. Close-range trouble.</span><span><b>CANTOR</b>Two fireballs. Leave a gap.</span><span><b>SHIVER</b>Floating. Flickering. Unwelcome.</span></div></section>
-  <footer><span>NULL RUN / EXPERIMENT 002</span><span>GENERATED MAPS + CREATURES · FREEDOOM ASSETS · ARGON VECTOR VIEW</span><span>NO QUARTERS REQUIRED.</span></footer>
+  <footer><span>NULL RUN / EXPERIMENT 003</span><span>BOOK DEMONS BY JOSIAH ALAN-LEE · FREEDOOM ASSETS · ARGON VECTOR VIEW</span><span>NO QUARTERS REQUIRED.</span></footer>
 </main>
 </body></html>

@@ -3,7 +3,7 @@
 const $=id=>document.getElementById(id);
 const token=document.querySelector('meta[name="run-token"]').content;
 const controls=new Set(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyQ','KeyE','Space','ControlLeft','KeyF','ShiftLeft','ShiftRight','Tab','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7']);
-let owner=null,playing=false,keys=new Set(),sending=false,lastState=null,busy=false;
+let owner=null,playing=false,keys=new Set(),sending=false,lastState=null,busy=false,seenRevision=null;
 async function post(path,data){
   const r=await fetch('/api/'+path,{method:'POST',headers:{'Content-Type':'application/json','X-Run-Token':token},body:JSON.stringify(data)});
   const result=await r.json();if(!r.ok)throw new Error(result.error||'Connection failed.');return result;
@@ -38,14 +38,15 @@ async function newRun(random){
   busy=true;$('new').disabled=$('retry').disabled=$('play').disabled=true;
   const currentOwner=owner;setPlaying(false);keys.clear();
   try{
-    const state=await post('new',{seed,owner:currentOwner});owner=null;lastState=state;$('seed').value=seed;
-    overlay('A NEW ARRANGEMENT','Same engine. New trouble.','Five connected floors. One life.','ENTER THE RUN ↗');
+    const state=await post('new',{seed,owner:currentOwner,mode:$('run-mode').value});owner=null;lastState=state;$('seed').value=seed;
+    overlay('A NEW ARRANGEMENT','Same engine. New trouble.',state.mode==='campaign'?'Five floors. Two book demons. One life.':'A binding study. Open the seal, then defeat the demon.','ENTER THE RUN ↗');
     notice('Run generated. Click Enter the Run when you’re ready.');
   }catch(e){notice(e.message);}
   finally{busy=false;$('new').disabled=$('retry').disabled=$('play').disabled=false;}
 }
 $('play').addEventListener('click',play);$('pause').addEventListener('click',pause);
 $('new').addEventListener('click',()=>newRun(true));$('retry').addEventListener('click',()=>newRun(false));
+for(const id of ['seed','run-mode'])$(id).addEventListener('focus',()=>{if(playing)pause();});
 $('viewport').addEventListener('click',()=>{if(playing)$('viewport').focus();});
 document.addEventListener('keydown',e=>{
   if(e.target instanceof HTMLInputElement||e.target instanceof HTMLSelectElement)return;
@@ -62,11 +63,23 @@ async function stateLoop(){
   try{
     const r=await fetch('/api/state');if(!r.ok)throw new Error('Server unavailable.');lastState=await r.json();
     const s=lastState;$('connection').textContent=s.error?'ENGINE ERROR':'ENGINE ONLINE';
+    if(seenRevision!==s.revision){seenRevision=s.revision;$('run-mode').value=s.mode;$('seed').value=s.seed;}
+    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS. TWO BOOK DEMONS. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
     $('floor').textContent=s.floor_name;$('run-id').textContent='SEED '+s.seed;
     $('health').innerHTML=Number(s.health)+'<span>%</span>';$('armor').innerHTML=Number(s.armor)+'<span>%</span>';
     $('kills').innerHTML=Number(s.kills)+'<span>/ '+Number(s.total_kills)+'</span>';
     $('mode').textContent=s.dead?'RUN ENDED':s.won?'CLEARED':s.paused?'PAUSED':'EXPLORING';
     $('status').textContent=s.dead?'The dungeon keeps what it takes.':s.won?'All five floors cleared.':s.paused?'Waiting for the next step.':'Floor '+s.map+' of '+s.floors+' · '+Math.floor(s.level_tics/35)+' seconds';
+    if(s.won&&s.mode!=='campaign')$('status').textContent='The demon is bound. Study complete.';
+    const b=s.boss;$('boss-panel').hidden=!b;
+    if(b){
+      $('boss-panel').dataset.phase=b.phase;$('boss-name').textContent=b.name;
+      $('boss-phase').textContent=b.phase==='bound'?'BOUND / EXIT OPEN':b.phase==='exposed'?'EXPOSED / '+(b.open_ticks/35).toFixed(1)+'s':'SEALED / BINDING REQUIRED';
+      $('boss-health').textContent=b.health+' / '+b.max_health+' HEALTH';$('boss-hp').max=b.max_health;$('boss-hp').value=b.health;
+      $('boss-binding').max=b.class===5?2:70;$('boss-binding').value=b.phase==='exposed'?(b.class===5?2:70):(b.class===5?b.stamps:b.still_ticks);
+      $('boss-progress').textContent=b.phase==='bound'?'EXIT UNLOCKED':b.phase==='exposed'?'STRIKE NOW':b.class===5?'INTAKE 01 / '+b.stamps+' OF 2':'QUIET / '+Math.round(b.still_ticks/70*100)+'%';
+      $('boss-rule').textContent=b.phase==='bound'?'The exit will now let you pass.':b.phase==='exposed'?'The seal is open. Hurt the demon before it closes.':(b.on_seal?'ON THE RING. ':'FIND THE GLOWING RING. ')+s.boss_rule;
+    }
     if(s.dead||s.won||s.error){setPlaying(false);owner=null;keys.clear();
       overlay(s.won?'YOU FOUND A WAY OUT':s.error?'ENGINE PAUSED':'ONE LIFE. SPENT.',s.won?'The descent is complete.':s.error?'Something stopped the run.':'The labyrinth wins this time.',s.error||'Replay this seed, or start somewhere stranger.',s.error?'RETRY THE RUN ↻':'REPLAY THIS SEED ↻');
     }

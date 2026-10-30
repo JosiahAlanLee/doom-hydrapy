@@ -14,7 +14,7 @@ import struct
 import numpy as np
 from PIL import Image,ImageDraw
 
-FAMILIES={'POSS':'skitter','SARG':'bastion','TROO':'cantor','HEAD':'shiver'}
+FAMILIES={'POSS':'skitter','SARG':'bastion','TROO':'cantor','HEAD':'shiver','BOSS':'repetiel','BOS2':'calmor'}
 
 
 def wad_lumps(path):
@@ -37,7 +37,7 @@ def creature(kind,seed,frame):
     sway=round(math.sin(phase)*3)
     core=(201,255,99,255);edge=(79,183,134,255);metal=(26,62,53,255);dark=(9,19,22,255)
     eye=(255,133,73,255)
-    death_start={'skitter':7,'bastion':8,'cantor':8,'shiver':5}[kind]
+    death_start={'skitter':7,'bastion':8,'cantor':8,'shiver':5,'repetiel':8,'calmor':8}[kind]
     dead=frame>=death_start
     attack=frame in range(max(3,death_start-3),death_start)
     cx=48+sway;cy=52
@@ -74,7 +74,7 @@ def creature(kind,seed,frame):
             x=cx-14+j*7;pen.line([(x,74),(x+sway,88),(x-sway,102)],fill=edge,width=1)
         if attack:
             pen.ellipse((cx-23,30,cx+23,76),outline=eye,width=2)
-    else:
+    elif kind=='shiver':
         for j in range(4):
             y=25+j*12
             pen.polygon([(cx,y-8),(cx-28+j*3,y+12),(cx,y+25),(cx+28-j*3,y+12)],outline=edge,fill=dark)
@@ -82,6 +82,29 @@ def creature(kind,seed,frame):
         pen.ellipse((cx-6,46,cx+6,58),fill=eye if attack else core)
         for j in range(5):
             x=cx-16+j*8;pen.line([(x,75),(x+sway*2,90),(x-sway,104)],fill=edge,width=1)
+    elif kind=='repetiel':
+        # Two mouths, one return tube; new pixel art from the book description.
+        pen.line([(cx-24,27),(cx-24,73),(cx-18,87),(cx,94),(cx+18,87),(cx+24,73),(cx+24,27)],fill=edge,width=13)
+        pen.line([(cx-24,27),(cx-24,73),(cx-18,87),(cx,94),(cx+18,87),(cx+24,73),(cx+24,27)],fill=metal,width=7)
+        for sign in [-1,1]:
+            x=cx+sign*24
+            pen.ellipse((x-15,13,x+15,39),fill=dark,outline=core,width=2)
+            for j in range(4):
+                xx=x-9+j*6;pen.line((xx,17,xx,22+(j%2)*3),fill=eye if attack else core,width=2)
+                pen.line((xx,35,xx,30-(j%2)*3),fill=core,width=2)
+            for y in [45,58,70]:pen.line((x-8,y,x+8,y),fill=core,width=1)
+            pen.line((cx+sign*11,90,cx+sign*14,104,cx+sign*23,104),fill=edge,width=3)
+        if attack:pen.arc((cx-43,3,cx+43,51),180,350,fill=eye,width=2)
+    else:  # Calmor: muffled bell and its visible lining, not a generic giant.
+        pen.line((cx-34,103,cx-34,13,cx+6,13,cx+6,24),fill=edge,width=3)
+        pen.polygon([(cx,25),(cx+10,29),(cx+13,55),(cx+29,78),(cx+34,87),
+                     (cx-34,87),(cx-29,78),(cx-13,55),(cx-10,29)],fill=metal,outline=core)
+        pen.ellipse((cx-34,78,cx+34,95),fill=dark,outline=core,width=2)
+        for j in range(8):
+            x=cx-27+j*8;pen.line((x,83,x+6,91),fill=edge,width=2)
+        pen.line((cx,65,cx,91+sway),fill=eye if attack else core,width=4)
+        pen.ellipse((cx-5,88+sway,cx+5,99+sway),fill=eye if attack else core)
+        for j in range(3):pen.arc((cx-37-j*3,28-j*3,cx+37+j*3,96+j*3),285,340,fill=edge,width=1)
     if dead:
         # Collapse after the family's real death-state boundary, leaving an
         # unmistakable corpse instead of animating a living silhouette.
@@ -132,4 +155,26 @@ def sprite_lumps(assets,seed):
     for family,kind in FAMILIES.items():
         for frame in range(26):
             generated.append((family+chr(65+frame)+'0',patch(creature(kind,seed,frame),palette)))
-    return [('S_START',b'')]+original+generated+[('S_END',b'')]
+    # Preserve the full flat namespace when adding the two native seal tiles.
+    flats=[];active=False
+    for name,data in lumps:
+        if name=='F_START':active=True;continue
+        if name=='F_END':active=False;continue
+        if active:flats.append((name,data))
+    if not flats:raise ValueError('Freedoom flat namespace not found')
+    for kind,number in [('repetiel',5),('calmor',6)]:
+        tile=Image.new('RGB',(64,64),(14,32,28));p=ImageDraw.Draw(tile)
+        p.ellipse((3,3,60,60),outline=(201,255,99),width=3)
+        p.ellipse((9,9,54,54),outline=(79,183,134),width=1)
+        if number==5:
+            p.line([(21,20),(21,40),(32,46),(43,40),(43,20)],fill=(201,255,99),width=3)
+            p.ellipse((15,14,27,24),outline=(255,133,73),width=2)
+            p.ellipse((37,14,49,24),outline=(255,133,73),width=2)
+        else:
+            p.polygon([(32,17),(39,22),(40,35),(47,43),(17,43),(24,35),(25,22)],outline=(201,255,99))
+            p.ellipse((19,39,45,47),outline=(255,133,73),width=2)
+        rgb=np.asarray(tile).astype(np.int32)
+        unique,inverse=np.unique(rgb.reshape(-1,3),axis=0,return_inverse=True)
+        nearest=((unique[:,None,:]-palette[None,:,:].astype(np.int32))**2).sum(2).argmin(1)
+        flats.append(('RSEAL'+str(number),nearest[inverse].astype(np.uint8).tobytes()))
+    return [('S_START',b'')]+original+generated+[('S_END',b''),('F_START',b'')]+flats+[('F_END',b'')]

@@ -22,6 +22,7 @@
 #include <math.h>
 
 #include "z_zone.h"
+#include "rogue_boss.h"
 
 #include "deh_main.h"
 #include "i_swap.h"
@@ -766,6 +767,7 @@ P_SetupLevel
     // Make sure all sounds are stopped before Z_FreeTags.
     S_Start ();			
 
+    Rogue_BossReset();
     Z_FreeTags (PU_LEVEL, PU_PURGELEVEL-1);
 
     // UNUSED W_Profile ();

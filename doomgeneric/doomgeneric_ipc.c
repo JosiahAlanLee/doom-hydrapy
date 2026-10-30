@@ -5,6 +5,7 @@
 #include "doomstat.h"
 #include "g_game.h"
 #include "rogue_ai.h"
+#include "rogue_boss.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -23,6 +24,7 @@ static unsigned head, tail;
 static int rogue_floors;
 static void tick(void) {
  doomgeneric_Tick();
+ Rogue_BossTick();
  // Five floors avoid commercial Doom's MAP06/11 narrative finale hooks.
  // G_DoWorldDone retains the player's inventory and health normally.
  if(rogue_floors && gamestate==GS_INTERMISSION && gamemap<rogue_floors)
@@ -30,11 +32,12 @@ static void tick(void) {
 }
 static void state(void) {
  player_t *p=&players[consoleplayer];
- fprintf(reply,"STATE {\"map\":%d,\"health\":%d,\"armor\":%d,\"weapon\":%d,\"ammo\":[%d,%d,%d,%d],\"kills\":%d,\"total_kills\":%d,\"items\":%d,\"secrets\":%d,\"x\":%.4f,\"y\":%.4f,\"angle\":%.4f,\"level_tics\":%d,\"tic\":%d,\"gamestate\":%d,\"dead\":%s,\"won\":%s}\n",
+ fprintf(reply,"STATE {\"map\":%d,\"health\":%d,\"armor\":%d,\"weapon\":%d,\"ammo\":[%d,%d,%d,%d],\"kills\":%d,\"total_kills\":%d,\"items\":%d,\"secrets\":%d,\"x\":%.4f,\"y\":%.4f,\"angle\":%.4f,\"level_tics\":%d,\"tic\":%d,\"gamestate\":%d,\"dead\":%s,\"won\":%s,\"boss\":",
  gamemap,p->health,p->armorpoints,p->readyweapon,p->ammo[0],p->ammo[1],p->ammo[2],p->ammo[3],p->killcount,totalkills,p->itemcount,p->secretcount,
  p->mo ? p->mo->x/65536.0 : 0.0,p->mo ? p->mo->y/65536.0 : 0.0,p->mo ? p->mo->angle*(360.0/4294967296.0) : 0.0,
  leveltime,gametic,gamestate,p->playerstate==PST_DEAD?"true":"false",
- rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");fflush(reply);
+ rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");
+ Rogue_BossJSON(reply);fprintf(reply,"}\n");fflush(reply);
 }
 static uint64_t now(void) {struct timespec t; clock_gettime(CLOCK_MONOTONIC,&t); return t.tv_sec*1000ULL+t.tv_nsec/1000000;}
 void DG_Init(void) {
