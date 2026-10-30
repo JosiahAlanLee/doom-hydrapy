@@ -41,7 +41,8 @@ def main():
     wav=OUT/f'doom-freedoom-{label}-1080p.wav';video=OUT/f'doom-freedoom-{label}-1080p.mp4'
     run(['ffmpeg','-v','error','-y','-i',str(OUT/'rack-mix-unaligned.wav'),'-af',','.join(filters),'-c:a','pcm_s24le',str(wav)])
     (OUT/'rack-mix-unaligned.wav').unlink() # created only by this packaging run
-    chapters=OUT/'chapters.ffmeta';chapters.write_text(';FFMETADATA1\n'+''.join(f'[CHAPTER]\nTIMEBASE=1/1000\nSTART={i*60000}\nEND={duration*1000 if i==3 else (i+1)*60000}\ntitle={title}\n' for i,title in enumerate(['Terminal','Halftone print','Rutt Etra scan','Feedback'])))
+    titles=['Melt and shear','HUD disk','Vector scope','Anaglyph relief'] if os.environ.get('DOOM_INDUSTRIAL')=='1' else ['Terminal','Halftone print','Rutt Etra scan','Feedback']
+    chapters=OUT/'chapters.ffmeta';chapters.write_text(';FFMETADATA1\n'+''.join(f'[CHAPTER]\nTIMEBASE=1/1000\nSTART={i*60000}\nEND={duration*1000 if i==3 else (i+1)*60000}\ntitle={title}\n' for i,title in enumerate(titles)))
     run(['ffmpeg','-v','error','-y','-i',str(CAP/'studio.mp4'),'-i',str(wav),'-i',str(chapters),'-map','0:v:0','-map','1:a:0','-map_metadata','2','-map_chapters','2','-c:v','copy','-c:a','aac','-b:a','256k','-t',str(duration),'-movflags','+faststart',str(video)])
     run(['ffmpeg','-v','error','-i',str(video),'-f','null','-'])
     meta=json.loads(run(['ffprobe','-v','error','-count_frames','-show_streams','-show_format','-show_chapters','-of','json',str(video)]).stdout)

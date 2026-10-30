@@ -38,7 +38,7 @@ def main():
            '- Prewarm: '+json.dumps(d['prewarm']),'- Final-video inspection: '+args.visual_review,
            '','## Music and instruments','','Four original six-lane tracker-v3 scores; no existing game music used. See mapping.json and INSTRUMENTS.md. PVX is a behavioral approximation inspired by the Polivoks circuit, without measurements from Josiah’s hardware.','']
     for t in d['tracks']:lines.append(f"- {t['start']:.3f}–{t['end']:.3f}s: {t['title']}, {t['notes']} notes; {t['credit']}.")
-    lines+=['','DEMO1–4 and terminal/print/scan/feedback scenes change at 0, 60, 120 and 180 seconds.','',*('- '+x for x in d['limitations']),'',f"Local code: {d['git_branch']} at {d['git_commit']}. Nothing pushed."]
+    lines+=['','DEMO1–4 and melt/disk/vector/anaglyph scenes change at 0, 60, 120 and 180 seconds.','',*('- '+x for x in d['limitations']),'',f"Local code: {d['git_branch']} at {d['git_commit']}. Nothing pushed."]
     (out/'report.md').write_text('\n'.join(lines)+'\n')
     files=sorted(f for f in out.rglob('*') if f.is_file() and f.name!='SHA256SUMS')
     (out/'SHA256SUMS').write_text(''.join(f'{sha(f)}  {f.relative_to(out)}\n' for f in files))

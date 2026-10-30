@@ -27,7 +27,7 @@ def compile_scores(paths, output):
             if e.get('locks'):raise ValueError('Unmapped per-note locks; map them before performing')
             notes.append(dict(id=len(notes)+1,start=offset+e['at']*scale,end=offset+(e['at']+e['duration'])*scale,
                               ch=e['lane'],note=note_midi(e['note']),vel=e['vel'],track=Path(path).stem))
-        tracks.append(dict(title=Path(path).stem,credit='Original composition by DeepSeek; reviewed by Codex',
+        tracks.append(dict(title=Path(path).stem,bpm=score['bpm'],credit='Original composition by DeepSeek; reviewed by Codex',
                            start=offset,end=offset+duration,notes=len(notes)-start,source=str(path)))
         offset+=duration
     routes=[];events=[]

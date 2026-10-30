@@ -23,7 +23,8 @@ def generate(smoke=False):
             for e in active.values():ev.append([i*3+3-.03,0,e[2],e[3],0,0,e[6]])
         schedule['events']=sorted(ev,key=lambda e:(e[0],e[1]));(ROOT/'poly/smoke-schedule.json').write_text(json.dumps(schedule))
     score=json.loads((OLD/'score.json').read_text());score.update(bpm=120,loop=False,pattern=0,chain=[0,1,2,3,4],seed=20261030,sound=False,patterns=[None]*128,mutes=[True]*6)
-    for i,name in enumerate(['doom-terminal','doom-print','doom-scan','doom-feedback']):
+    names=['doom-melt','doom-disk','doom-vector','doom-relief'] if os.environ.get('DOOM_INDUSTRIAL')=='1' else ['doom-terminal','doom-print','doom-scan','doom-feedback']
+    for i,name in enumerate(names):
         p=empty_pattern(i);rows=6 if smoke else 120;p.update(name=name,rate=.25,bar=rows if smoke else 30,bars=1 if smoke else 4)
         p['lanes']=[dict(len=rows,cells=[None]*rows,transforms=[]) for _ in range(6)];p['scenes']=[dict(r=0,name=name,fade=0)];p['keys']['z']=[dict(r=0,v=(i*(3 if smoke else 60))/240),dict(r=rows-1,v=(i*(3 if smoke else 60)+(rows-1)*.5)/240)];p['easing']['z']='linear';score['patterns'][i]=p
     tail=empty_pattern(4);tail["keys"]["z"]=[dict(r=0,v=(12 if smoke else 240)/240)];score["patterns"][4]=tail
