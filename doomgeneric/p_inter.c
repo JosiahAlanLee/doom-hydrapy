@@ -38,6 +38,7 @@
 #include "s_sound.h"
 
 #include "p_inter.h"
+#include "rogue_boss.h"
 
 
 #define BONUSADD	6
@@ -793,6 +794,8 @@ P_DamageMobj
 		
     if (target->health <= 0)
 	return;
+
+    if (Rogue_BossGuard(target)) return;
 
     if ( target->flags & MF_SKULLFLY )
     {

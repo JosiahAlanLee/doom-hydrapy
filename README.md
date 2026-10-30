@@ -6,6 +6,18 @@ was unavailable. See LICENSE, README.TXT and README.upstream.md for upstream cre
 Game assets are from [Freedoom 0.13.0](https://github.com/freedoom/freedoom/releases/tag/v0.13.0),
 BSD licensed. No commercial WAD or original Doom music is included.
 
+**Playable generative mode:** [Null Run](ROGUELIKE.md) builds five seeded
+floors with enemies/supplies, inventory carryover and one-life runs. The current
+[worlds/creatures iteration](WORLDS.md) adds ribbed halls, ring chambers, terraces,
+four procedurally drawn monster families and Argon's green-vector view. A local
+browser provides WASD/arrow/fire/use controls, pause/retry/new seed and optional
+GL treatments. Run `python -m rogue.server --wad /path/to/freedoom2.wad` after
+building the engine. The timed performance/capture path below remains separate.
+
+[Book-boss encounters](BOSSES.md) add Repetiel and Calmor on seeded campaign
+floors, with distinct binding rules, shield windows and native attacks. Choose a
+binding study in the browser to practice either encounter directly.
+
 Everything here, including the optional plugin, stays in this standalone GPL repo.
 Neither HydraPy nor Gorgon was changed. The engine communicates through stdin/stdout
 and a private mmap file; no engine library is loaded into either host. This layout

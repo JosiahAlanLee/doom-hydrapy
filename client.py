@@ -1,21 +1,30 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 """Pipe-controlled engine; no engine library is loaded into Python."""
 from pathlib import Path
-import mmap, os, select, struct, subprocess, tempfile
+import json, mmap, os, select, struct, subprocess, tempfile
 import numpy as np
 
 class Doom:
-    def __init__(self, wad, demo='demo1', locked=True, loop_seconds=None):
+    def __init__(self, wad, demo='demo1', locked=True, loop_seconds=None,
+                 pwad=None, rogue_floors=None):
         if loop_seconds is not None and (not np.isfinite(loop_seconds) or loop_seconds<=0): raise ValueError("positive loop duration required")
         self.loop_seconds=loop_seconds
         self.wad, self.demo, self.locked = str(Path(wad).resolve()), demo, locked
+        self.pwad = str(Path(pwad).resolve()) if pwad else None
+        self.rogue_floors = rogue_floors
+        if rogue_floors is not None and (not isinstance(rogue_floors, int) or not 1 <= rogue_floors <= 5):
+            raise ValueError('rogue_floors must be 1..5')
+        (Path(__file__).parent/'runtime').mkdir(exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(prefix='doom-', dir=Path(__file__).parent/'runtime')
         self.start()
     def start(self):
         env = dict(os.environ, DOOM_FRAME=self.tmp.name+'/frame')
+        env.pop('DOOM_ROGUE_FLOORS', None)
+        if self.rogue_floors: env['DOOM_ROGUE_FLOORS']=str(self.rogue_floors)
         if self.locked: env['DOOM_LOCKED']='1'
         else: env.pop('DOOM_LOCKED',None)
         args=[str(Path(__file__).parent/'doomgeneric/doom-ipc'), '-iwad',self.wad, '-config',self.tmp.name+'/doom.cfg']
+        if self.pwad: args += ['-file', self.pwad]
         if self.demo: args += ['-playdemo',self.demo]
         else: args += ['-warp','1','-skill','3']
         self.log=open(self.tmp.name+'/engine.log','w')
@@ -31,6 +40,18 @@ class Doom:
     def command(self, text):
         self.proc.stdin.write(text+'\n');self.proc.stdin.flush();self._read()
     def key(self, code, down): self.command(f'KEY {int(down)} {code}')
+    def state(self):
+        self.proc.stdin.write('STATE\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine STATE timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('STATE '): raise RuntimeError('invalid engine state response')
+        return json.loads(line[6:])
+    def monsters(self):
+        self.proc.stdin.write('MOBS\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine MOBS timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('MOBS '):raise RuntimeError('invalid monster state response')
+        return json.loads(line[5:])
     def advance(self,n):
         if not 0<=n<=35000: raise ValueError('STEP range 0..35000')
         old=self.tic;self.command(f'STEP {n}')

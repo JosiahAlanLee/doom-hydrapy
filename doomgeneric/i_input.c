@@ -319,7 +319,8 @@ void I_GetEvent(void)
             {
                 D_PostEvent(&event);
             }
-            break;
+            // Drain releases as well as presses before the next game tic.
+            // Otherwise a rapid key-up followed by another key can be delayed.
         }
     }
 
