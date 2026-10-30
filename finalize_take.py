@@ -79,7 +79,9 @@ def main():
         report['limitations'].append('The score bank ends at 240 seconds; delivery includes two seconds of effect decay. Diagnostics include a four-second capture margin.')
         report['limitations'].append(f'Opening attacks preserved: no positive audio trim; {video_pad_frames} cloned opening video frames included in the held-frame count for A/V alignment.')
         report['limitations'].append('Original tracker-v3 scores evaluated deterministically into the polyphonic live stream; tracker audio lanes muted.')
-    for name in ['INSTRUMENTS.md','inventory.json','mapping.json']:
+    deliverables=['INSTRUMENTS.md','inventory.json','mapping.json']
+    if industrial:deliverables.append('industrial-pvx-routing.json')
+    for name in deliverables:
         shutil.copy2(ROOT/'poly'/name,OUT/name)
     shutil.copy2(ROOT/'provenance.json',OUT/'provenance.json')
     (OUT/'gate-audit.json').write_text(json.dumps(gate,indent=2)+'\n')
