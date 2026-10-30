@@ -12,15 +12,18 @@ def generate(smoke=False):
     schedule=json.loads((ROOT/'poly/schedule.json').read_text())
     if smoke:
         ev=[]
+        offs={e[6]:e for e in schedule['events'] if e[1]==0}
         for i,tr in enumerate(schedule['tracks']):
-            start=tr['start'];stop=start+3;active={}
-            for e in schedule['events']:
-                if not start<=e[0]<stop:continue
-                e=copy.copy(e);e[0]=e[0]-start+i*3
-                ev.append(e)
-                if e[1]==1:active[e[6]]=e
-                elif e[1]==0:active.pop(e[6],None)
-            for e in active.values():ev.append([i*3+3-.03,0,e[2],e[3],0,0,e[6]])
+            start=tr['start'];stop=start+3
+            for original in schedule['events']:
+                if not start<=original[0]<stop:continue
+                if original[1] in (2,3):
+                    event=copy.copy(original);event[0]=event[0]-start+i*3;ev.append(event)
+                elif original[1]==1:
+                    end=min(offs[original[6]][0],stop-1/48000)
+                    if end<=original[0]:continue
+                    event=copy.copy(original);event[0]=event[0]-start+i*3;ev.append(event)
+                    off=copy.copy(offs[original[6]]);off[0]=end-start+i*3;ev.append(off)
         schedule['events']=sorted(ev,key=lambda e:(e[0],e[1]));(ROOT/'poly/smoke-schedule.json').write_text(json.dumps(schedule))
     score=json.loads((OLD/'score.json').read_text());score.update(bpm=120,loop=False,pattern=0,chain=[0,1,2,3,4],seed=20261030,sound=False,patterns=[None]*128,mutes=[True]*6)
     names=['doom-melt','doom-disk','doom-vector','doom-relief'] if os.environ.get('DOOM_INDUSTRIAL')=='1' else ['doom-terminal','doom-print','doom-scan','doom-feedback']
