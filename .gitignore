@@ -16,3 +16,7 @@ doomgeneric/doom-ipc
 doomgeneric/doom-ipc.map
 runtime/*
 __pycache__/
+
+poly/build/
+poly/dist/
+*.so
