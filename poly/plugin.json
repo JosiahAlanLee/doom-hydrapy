@@ -1,0 +1,1 @@
+{"slug":"DoomPoly","name":"Doom Polyphonic Take","version":"2.0.0","license":"GPL-2.0-or-later","brand":"DoomHydraPy","author":"Codex","modules":[{"slug":"Stream","name":"Freedoom Stream","description":"Externally clocked polyphonic MIDI event stream and gate audit","tags":["Sequencer","Polyphonic"]}]}
