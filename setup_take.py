@@ -20,7 +20,9 @@ def generate(smoke=False):
                 if original[1] in (2,3):
                     event=copy.copy(original);event[0]=event[0]-start+i*3;ev.append(event)
                 elif original[1]==1:
-                    end=min(offs[original[6]][0],stop-1/48000)
+                    # Quiet guard between excerpts; never truncate a late attack before it starts.
+                    if original[0]>=stop-.031:continue
+                    end=min(offs[original[6]][0],stop-.030)
                     if end<=original[0]:continue
                     event=copy.copy(original);event[0]=event[0]-start+i*3;ev.append(event)
                     off=copy.copy(offs[original[6]]);off[0]=end-start+i*3;ev.append(off)

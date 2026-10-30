@@ -17,7 +17,7 @@ struct Stream:Module {
  std::vector<Event> events;std::vector<Route> routes;
  std::array<std::array<Voice,VOICES>,BANKS> voices{};
  size_t cursor=0;double elapsed=0,raw=0;uint64_t frames=0,clocks=0,on=0,off=0,seen=0;
- bool running=false,clockHigh=false,firstClock=true;double lastAbsolute=-1;
+ bool running=false,clockHigh=false,firstClock=true;double lastAbsolute=-1,clockOrigin=0;
  double* proof=nullptr;size_t proofSize=0;int sourceNotes=0;
  // INPUTS: run, clock, 32 gate monitor banks, 32 audio return banks.
  // OUTPUTS: 32*(pitch,gate,velocity), stereo mix and optical/audio sync pulse.
@@ -45,10 +45,12 @@ struct Stream:Module {
  void process(const ProcessArgs& args) override {
   bool run=inputs[0].getVoltage()>1;
   bool high=inputs[1].getVoltage()>1;
-  if(run&&!running){elapsed=raw=0;frames=clocks=on=off=seen=0;cursor=0;firstClock=true;clockHigh=false;lastAbsolute=-1;for(auto& bank:voices)for(auto& v:bank)v=Voice();}
+  if(run&&!running){elapsed=raw=0;frames=clocks=on=off=seen=0;cursor=0;firstClock=true;clockHigh=false;lastAbsolute=-1;clockOrigin=double(inputs[66].getVoltage())*24.;if(!std::isfinite(clockOrigin))clockOrigin=0;for(auto& bank:voices)for(auto& v:bank)v=Voice();}
   if(run){
    if(high&&!clockHigh){clocks++;}
-   double absolute=double(inputs[66].getVoltage())*24.;
+   // RUN can arrive after the CV has advanced by a control handoff block.
+   // Anchor once so short beat-zero notes cannot turn on and off in one sample.
+   double absolute=std::max(0.,double(inputs[66].getVoltage())*24.-clockOrigin);
    // Z is a linear absolute-time automation lane. During its last-row hold,
    // coast on Rack samples; the next pattern re-anchors without counting edges.
    if(std::abs(absolute-lastAbsolute)>1e-7){elapsed=absolute;lastAbsolute=absolute;}
