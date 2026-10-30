@@ -33,6 +33,7 @@ def main():
            f"- Demo/tracker sync: {d['demo_tracker_sync']['frame_samples']} samples; {d['demo_tracker_sync']['tic_mismatches']} mismatches.",
            f"- Corrected A/V median offset: {s['corrected_median_offset_ms']:.3f} ms; drift {s['corrected_drift_ms']:.3f} ms; residual p95 {s['corrected_residual_p95_ms']:.3f} ms. Marker measurement resolution: 33.333 ms.",
            f"- WAV peak {a['peak']:.6f}, RMS {a['rms']:.6f}. Global gain {a['global_gain_db']:.3f} dB.",
+           '- Audio mastering: '+a.get('mastering','none recorded'),
            '- Studio producer counters: '+json.dumps(d['studio_counters_session']),
            '- Studio counters during play (summary-window estimate): '+json.dumps(d['studio_counters_during_play_summary_estimate']),
            '- Prewarm: '+json.dumps(d['prewarm']),f"- Alignment preserves opening attacks: audio trim {s['applied_audio_trim_seconds']:.6f} s; opening video padding {s.get('applied_video_head_pad_frames',0)} frames (included in holds).",'- Final-video inspection: '+args.visual_review,
