@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 """Verify and package one simultaneous live Rack/Studio capture."""
 from pathlib import Path
-import hashlib,json,subprocess,sys,shutil
+import hashlib,json,subprocess,sys,shutil,os
 import numpy as np
 import soundfile as sf
 from analyze_sync import sync
-REPO=Path(__file__).resolve().parent;ROOT=REPO.parent/'doom-hydrapy-20261030';CAP=ROOT/'poly-capture';OUT=ROOT/'take';OUT.mkdir(exist_ok=True)
+REPO=Path(__file__).resolve().parent;ROOT=Path(os.environ.get('DOOM_TAKE_ROOT',str(REPO.parent/'doom-hydrapy-20261030')));CAP=ROOT/'poly-capture';OUT=Path(os.environ.get('DOOM_DELIVERY_DIR',str(ROOT/'take')));OUT.mkdir(exist_ok=True)
 sys.path.insert(0,str(ROOT.parent/'gorgon-r3b-20261030/runtime'))
 from hydrapy.recording import fit,load,offset
 
@@ -15,7 +15,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
     capture=json.loads((CAP/'capture.json').read_text());mapping=json.loads((ROOT/'poly/mapping.json').read_text())
     a=np.fromfile(ROOT/'poly-gate-proof.bin',dtype='<f8');proof=a[8:].reshape(-1,8);scheduled=mapping['source_notes']
-    assert int(a[3])==int(a[4])==int(a[5])==scheduled==5857, a[:8]
+    assert int(a[3])==int(a[4])==int(a[5])==scheduled, a[:8]
     assert np.all(proof[:,2]>=0) and np.all(proof[:,7]>0)
     expected=json.loads((ROOT/'poly/notes.json').read_text())
     for n in expected:
@@ -35,7 +35,8 @@ def main():
     del raw,mix
     filters=[f'atrim=start={audio_shift:.9f}','asetpts=PTS-STARTPTS'] if audio_shift>=0 else [f'adelay={-audio_shift*1000:.6f}:all=1']
     filters+=[f'asetrate={rate}','aresample=48000',f'volume={gain:.9f}','apad','atrim=duration=240']
-    wav=OUT/'doom-freedoom-poly-1080p.wav';video=OUT/'doom-freedoom-poly-1080p.mp4'
+    label='industrial' if os.environ.get('DOOM_INDUSTRIAL')=='1' else 'poly'
+    wav=OUT/f'doom-freedoom-{label}-1080p.wav';video=OUT/f'doom-freedoom-{label}-1080p.mp4'
     run(['ffmpeg','-v','error','-y','-i',str(OUT/'rack-mix-unaligned.wav'),'-af',','.join(filters),'-c:a','pcm_s24le',str(wav)])
     (OUT/'rack-mix-unaligned.wav').unlink() # created only by this packaging run
     chapters=OUT/'chapters.ffmeta';chapters.write_text(';FFMETADATA1\n'+''.join(f'[CHAPTER]\nTIMEBASE=1/1000\nSTART={i*60000}\nEND={(i+1)*60000}\ntitle={title}\n' for i,title in enumerate(['Terminal','Halftone print','Rutt Etra scan','Feedback'])))
@@ -56,7 +57,12 @@ def main():
     (OUT/'av-sync.json').write_text(json.dumps(av,indent=2)+'\n')
     audio,sr=sf.read(wav,dtype='float32');audio_metrics=dict(sample_rate=sr,channels=2,seconds=len(audio)/sr,peak=float(np.max(abs(audio))),rms=float(np.sqrt(np.mean(audio**2))),global_gain_db=float(20*np.log10(gain)),native_live_rate=48000)
     demos=[dict(start=0,end=7,wad='freedoom1.wad',lump='DEMO1',map='E1M6'),dict(start=7,end=70,wad='freedoom2.wad',lump='DEMO2',map='MAP10'),dict(start=70,end=145,wad='freedoom1.wad',lump='DEMO3',map='E3M9'),dict(start=145,end=240,wad='freedoom2.wad',lump='DEMO4',map='MAP23')]
+    if os.environ.get('DOOM_INDUSTRIAL')=='1':
+        for i,demo in enumerate(demos):demo.update(start=i*60,end=(i+1)*60)
     report=dict(outcome='done',simultaneous_live_capture=True,stem_passes=False,note_reduction=False,seconds=240,video=dict(width=1920,height=1080,fps=30,frames=int(meta['streams'][0]['nb_read_frames']),fully_decoded=True,chapters=len(meta['chapters'])),audio=audio_metrics,gate_audit=gate,demos=demos,tracks=mapping['tracks'],prewarm=capture['prewarm'],held_frames=held,held_percent=held/7200*100,xruns=capture['xruns_in_take'],recorded_audio_discontinuities=capture['discontinuities_in_take'],studio_counters_session=counters,studio_counters_during_play_summary_estimate=approx,demo_tracker_sync=dict(frame_samples=len(trace),tic_mismatches=0,max_tic_error=0,tics_per_second=35,origin='Gorgon tracker beat / 2'),av_sync={k:v for k,v in av.items() if k!='pairs'},visual_review='PENDING: inspect review sheets extracted from this final MP4 before delivery.',limitations=['Synth timbres are documented substitutions, not General MIDI replicas.','Gate audit verifies physical cable edges and capacity, not acoustic note recognition.','Source-producer counters are separated from the recorded JACK mix; counters during Play use summary-window estimates.','Music finishes at 226.600 s, followed by effect decay and a quiet game-only tail.','Studio keyboard and game-event signals remain future work.'])
+    if os.environ.get('DOOM_INDUSTRIAL')=='1':
+        report['limitations']=[x for x in report['limitations'] if 'Music finishes' not in x]
+        report['limitations'].append('Original tracker-v3 scores evaluated deterministically into the polyphonic live stream; tracker audio lanes muted.')
     for name in ['INSTRUMENTS.md','inventory.json','mapping.json']:
         shutil.copy2(ROOT/'poly'/name,OUT/name)
     shutil.copy2(ROOT/'provenance.json',OUT/'provenance.json')

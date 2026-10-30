@@ -2,7 +2,7 @@
 import base64,copy,json,os,shutil,sys
 from pathlib import Path
 import numpy as np
-REPO=Path(__file__).resolve().parent;ROOT=REPO.parent/'doom-hydrapy-20261030'
+REPO=Path(__file__).resolve().parent;ROOT=Path(os.environ.get('DOOM_TAKE_ROOT',str(REPO.parent/'doom-hydrapy-20261030')))
 OLD=ROOT.parent/'gorgon-r3b-20261030'
 sys.path.insert(0,str(OLD/'runtime'))
 from hydrapy.tracker_v3 import validate,empty_pattern
@@ -49,7 +49,11 @@ def generate(smoke=False):
     noise=rng.normal(0,1,len(t));samples.append(noise*.5*np.exp(-t*28))
     for route in schedule['routes']:
         idx=route['index'];mid=100+idx;inst=route['instrument'];data={};params=[]
-        if inst=='CZish':
+        if inst=='PVX':
+            config=json.loads((ROOT/'pvx-routing.json').read_text())
+            plugin=config['plugin'];audioport=config['audio'];pitchport=config['pitch'];gateport=config['gate']
+            params=[dict(id=int(k),value=v) for k,v in config.get('params',{}).get(str(route['channel']),{}).items()]
+        elif inst=='CZish':
             plugin='CZishLab';params=[dict(id=k,value=v) for k,v in [(0,(idx%3)),(5,.7),(8,0),(4,160)]];audioport=2;pitchport=0;gateport=1
             # schema omitted intentionally: installed plugin migrates legacy envelope times.
         elif inst=='Vastish':
@@ -61,9 +65,10 @@ def generate(smoke=False):
             pcm=np.clip(samples[route['family']]*20000,-32767,32767).astype('<i2')
             data=dict(schema=1,rate=sr,name='Doom substitute family '+str(route['family']),pcm16le=base64.b64encode(pcm.tobytes()).decode(),engineMode=0,filterMode=2,gated=False,linearLevel=True,declick=True)
             params=[dict(id=6,value=.7)]
-        modules.append(dict(id=mid,plugin=plugin,model=inst,pos=[idx*40,380],params=params,data=data))
+        modules.append(dict(id=mid,plugin=plugin,model=config['model'] if inst=='PVX' else inst,pos=[idx*40,380],params=params,data=data))
         cable(2,idx*3,mid,pitchport);cable(2,idx*3+1,mid,gateport)
         if inst=='Vastish':cable(2,idx*3+2,mid,2)
+        if inst=='PVX' and config.get('velocity') is not None:cable(2,idx*3+2,mid,config['velocity'])
         if inst=='OtisSampler':cable(2,idx*3+2,mid,8)
         cable(2,idx*3+1,2,2+idx) # physical gate return for edge audit
         cable(mid,audioport,2,34+idx)

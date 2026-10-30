@@ -10,9 +10,9 @@ import ascii_op
 ROOT=Path(os.environ['DOOM_TAKE_ROOT']);SMOKE=os.environ.get('DOOM_SMOKE')=='1'
 STUDIO=dict(title='Freedoom / Gorgon / polyphonic live take')
 set_bpm(120)
-beat=tracker.beat();intervals=[0,3,6,9] if SMOKE else [0,7,70,145]
+beat=tracker.beat();intervals=[0,3,6,9] if SMOKE else ([0,60,120,180] if os.environ.get('DOOM_INDUSTRIAL')=='1' else [0,7,70,145])
 configs=[('freedoom1.wad','demo1'),('freedoom2.wad','demo2'),('freedoom1.wad','demo3'),('freedoom2.wad','demo4')]
-engines=[Doom(ROOT/'data/freedoom-0.13.0'/wad,demo) for wad,demo in configs]
+engines=[Doom(Path(os.environ.get('DOOM_DATA_ROOT',str(ROOT)))/'data/freedoom-0.13.0'/wad,demo) for wad,demo in configs]
 for e in engines:atexit.register(e.close)
 trace=open(ROOT/('smoke-frame-trace.jsonl' if SMOKE else 'poly-frame-trace.jsonl'),'w',buffering=65536)
 last={}
