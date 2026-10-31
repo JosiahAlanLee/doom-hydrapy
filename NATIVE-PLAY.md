@@ -12,6 +12,15 @@ Music requires a separately configured Gorgon tracker score and Rack patch.
 The patch reads the named JACK input `rack_return`; connect a Rack mix output
 there for the optional treatment modulation. RAW bypasses that treatment.
 
+The Afterimage ByteBus formant lead also needs the optical waveform registered
+by `rogue.audio.optical_lead()`. It runs the original score-pitched Harmonograph
+as an audio source without drawing it over the game. Omitting that source leaves
+Lookup shaping a static address, which produces DC-like thumps when gated.
+The private launcher checks for both optical source channels before playing.
+Use the Audio-2 output's DC filter and remove residual subsonic content before
+mastering recordings. Master the original float audio before encoding AAC.
+Tracker `loop=false` selects the full chain; `loop=true` repeats one pattern.
+
 ## Controls
 
 | Key | Action |
