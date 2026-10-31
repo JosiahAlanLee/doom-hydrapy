@@ -278,6 +278,9 @@ typedef struct mobj_s
     // Per-instance encounter state; ordinary builds retain their original layout.
     int rogue_awake, rogue_frozen, rogue_pose;
     int rogue_phase, rogue_until, rogue_cooldown;
+    int rogue_attack_count, rogue_dead_started;
+    angle_t rogue_aim;
+    fixed_t rogue_slope;
 #endif
 
     // Thing being chased/attacked for tracers.

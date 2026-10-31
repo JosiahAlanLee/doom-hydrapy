@@ -34,6 +34,7 @@
 #include "doomstat.h"
 #include "rogue_ai.h"
 #include "rogue_creature.h"
+#include "rogue_argon.h"
 
 
 void G_PlayerReborn (int player);
@@ -442,6 +443,7 @@ P_NightmareRespawn (mobj_t* mobj)
 //
 void P_MobjThinker (mobj_t* mobj)
 {
+    if (Rogue_ArgonThink(mobj)) {Rogue_Visual(mobj);return;}
     if (Rogue_CreatureThink(mobj)) {Rogue_Visual(mobj);return;}
     // momentum movement
     if (mobj->momx

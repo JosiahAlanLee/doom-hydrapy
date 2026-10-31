@@ -35,6 +35,28 @@ class DesktopControls(TestCase):
                 with self.assertRaisesRegex(ValueError,'native player'):d.action({'action':action},automated=True)
             self.assertEqual(d.owner,'native-player')
 
+    def test_campaign_player_rejects_studies_before_releasing_player(self):
+        with TemporaryDirectory() as root:
+            d=self.control(root);d.loading=False;d.campaign_only=True
+            d.pause=Mock()
+            for mode in ['strobe','memory','pillar','corridor','surveyor','hollow']:
+                with self.assertRaisesRegex(ValueError,'five-floor campaign'):d.new(mode)
+            d.pause.assert_not_called()
+            self.assertEqual(d.owner,'native-player')
+
+    def test_autostart_waits_for_window_focus(self):
+        from collections import deque
+        from time import monotonic
+        with TemporaryDirectory() as root:
+            d=self.control(root);d.closed=False;d.bind=Mock();d.focused=False
+            d.pending_start=True;d.owner=None;d.loading=False;d.resume=Mock()
+            d.frames=deque(maxlen=181);d.capture_requested=False;d.last_report=monotonic()
+            renderer=SimpleNamespace(ctx=SimpleNamespace(info={'GL_RENDERER':'test'}))
+            d.tick(None,renderer)
+            d.resume.assert_not_called();self.assertTrue(d.pending_start)
+            d.focused=True;d.tick(None,renderer)
+            d.resume.assert_called_once_with();self.assertFalse(d.pending_start)
+
     def test_steady_view_is_visual_only_and_validates_boolean(self):
         with TemporaryDirectory() as root:
             d=self.control(root)

@@ -13,6 +13,18 @@ CREATURES = {
                'family': 'CPOS', 'rule': 'Break sight during its shriek. If gripped, hold F or hurt it to escape.'},
 }
 
+NEW_CREATURES = {
+    'surveyor': {'name':'THE SURVEYOR', 'class':11, 'flag':7, 'type':9,
+                 'family':'SPOS', 'rule':'Its lens locks a line. Step sideways during the warning.'},
+    'wire_shambler': {'name':'BALLAST HUSK', 'class':12, 'flag':7, 'type':84,
+                      'family':'SSWV', 'rule':'Its maw charges an arc. Break sight or retreat before the discharge.'},
+    'threshold_mimic': {'name':'THRESHOLD MIMIC', 'class':13, 'flag':7, 'type':64,
+                       'family':'VILE', 'rule':'The false door stays put. Stand back when the seam opens.'},
+    'vore_spindle': {'name':'VORE SPINDLE', 'class':14, 'flag':7, 'type':3006,
+                    'family':'SKUL', 'rule':'Watch its pods charge. Keep moving and put a wall between you and the spore.'},
+}
+CREATURES.update(NEW_CREATURES)
+
 
 def options(kind, roll=0):
     """Class 7 is extended by an otherwise unused native actor type.

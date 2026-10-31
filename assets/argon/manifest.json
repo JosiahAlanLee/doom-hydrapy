@@ -1,0 +1,162 @@
+{
+  "license": "GPL-2.0-or-later",
+  "attribution": "Derived from the user-supplied 'Nullrun Monsters.py' (SPDX-License-Identifier: GPL-2.0-or-later). Original concepts and attribution retained; the offline art bank is integrated into native gameplay by the separately documented Argon encounter code.",
+  "states": [
+    "idle",
+    "walk",
+    "warning",
+    "attack",
+    "hurt",
+    "death"
+  ],
+  "frames_per_state": 4,
+  "seed_base": 20261030,
+  "variants": [
+    {
+      "kind": "SURVEYOR",
+      "variant": "A",
+      "variant_index": 0,
+      "variant_name": "TRIPOD",
+      "seed": 20261030,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind SURVEYOR --variant A --state <state> --frame <0..3> --seed 20261030 --out <file>"
+    },
+    {
+      "kind": "SURVEYOR",
+      "variant": "B",
+      "variant_index": 1,
+      "variant_name": "GIMBAL",
+      "seed": 20261040,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind SURVEYOR --variant B --state <state> --frame <0..3> --seed 20261040 --out <file>"
+    },
+    {
+      "kind": "WIRE_SHAMBLER",
+      "variant": "A",
+      "variant_index": 0,
+      "variant_name": "BALLAST HUSK",
+      "seed": 20261130,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind WIRE_SHAMBLER --variant A --state <state> --frame <0..3> --seed 20261130 --out <file>"
+    },
+    {
+      "kind": "WIRE_SHAMBLER",
+      "variant": "B",
+      "variant_index": 1,
+      "variant_name": "CABLE TOWER",
+      "seed": 20261140,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind WIRE_SHAMBLER --variant B --state <state> --frame <0..3> --seed 20261140 --out <file>"
+    },
+    {
+      "kind": "THRESHOLD_MIMIC",
+      "variant": "A",
+      "variant_index": 0,
+      "variant_name": "LINTEL DOOR",
+      "seed": 20261230,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind THRESHOLD_MIMIC --variant A --state <state> --frame <0..3> --seed 20261230 --out <file>"
+    },
+    {
+      "kind": "THRESHOLD_MIMIC",
+      "variant": "B",
+      "variant_index": 1,
+      "variant_name": "FALSE EXIT",
+      "seed": 20261240,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind THRESHOLD_MIMIC --variant B --state <state> --frame <0..3> --seed 20261240 --out <file>"
+    },
+    {
+      "kind": "VORE_SPINDLE",
+      "variant": "A",
+      "variant_index": 0,
+      "variant_name": "PENDULUM",
+      "seed": 20261330,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind VORE_SPINDLE --variant A --state <state> --frame <0..3> --seed 20261330 --out <file>"
+    },
+    {
+      "kind": "VORE_SPINDLE",
+      "variant": "B",
+      "variant_index": 1,
+      "variant_name": "CEILING LURKER",
+      "seed": 20261340,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "frames_per_state": 4,
+      "prerender_command": "python monster_renderer.py --kind VORE_SPINDLE --variant B --state <state> --frame <0..3> --seed 20261340 --out <file>"
+    }
+  ],
+  "atlases": {
+    "VORE_SPINDLE_B.png": "c2cd344c35f7572ab0ce30f5557f54fd8828dc20456cda15f68dd5aa1fae021a",
+    "SURVEYOR_B.png": "a51280d955d19e823f1d708dbe46772d392339576ac6a6588e4ecec6946a37f4",
+    "THRESHOLD_MIMIC_A.png": "a7ac820a5f6b6aa02328e199de44894c65ec3f5c1f8bb51275c0b62e2ad61685",
+    "WIRE_SHAMBLER_B.png": "fdde89731c9b9e46decc80e7740d8a2f0ca9b6f959a928dde9de9e44cc93012a",
+    "WIRE_SHAMBLER_A.png": "a3cffeb8b63fb9dd5a25f6716bcd7cf423232f03543077d12a8a43e07728fc88",
+    "SURVEYOR_A.png": "22dd2c1eb85d2140f38e9699315cb94836c919c3ae1eec314783d593079abd29",
+    "VORE_SPINDLE_A.png": "651ea82b1cebf67680d90767cb0342d3c275cdac26d5f7679986e401009f3c09",
+    "THRESHOLD_MIMIC_B.png": "002d732d2bb484b7bc7b875292d546250a11011eca905a0bea4eaa33cd6d841f"
+  }
+}
