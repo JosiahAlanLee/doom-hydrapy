@@ -8,6 +8,7 @@
 #include "d_event.h"
 #include "rogue_ai.h"
 #include "rogue_creature.h"
+#include "rogue_strobe.h"
 
 enum { SHAMBLE, WARNING, LUNGE, GRIP, STAGGER };
 static mobj_t *holder;
@@ -70,7 +71,7 @@ int Rogue_CreatureThink(mobj_t *actor) {
   stop(actor);return 1;
  }
  if(kind==7) {
-  int seen=watched(actor,p);
+  int seen=watched(actor,p) && Rogue_StrobeIlluminated(actor);
   if(seen)actor->rogue_awake=1;
   int was_frozen=actor->rogue_frozen;
   actor->rogue_frozen=seen || !actor->rogue_awake;

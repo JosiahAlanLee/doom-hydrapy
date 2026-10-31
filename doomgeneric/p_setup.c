@@ -24,6 +24,8 @@
 #include "z_zone.h"
 #include "rogue_boss.h"
 #include "rogue_creature.h"
+#include "rogue_arch.h"
+#include "rogue_strobe.h"
 
 #include "deh_main.h"
 #include "i_swap.h"
@@ -770,6 +772,8 @@ P_SetupLevel
 
     Rogue_BossReset();
     Rogue_CreatureReset();
+    Rogue_ArchReset();
+    Rogue_StrobeReset();
     Z_FreeTags (PU_LEVEL, PU_PURGELEVEL-1);
 
     // UNUSED W_Profile ();
@@ -831,6 +835,8 @@ P_SetupLevel
 	
     // set up world state
     P_SpawnSpecials ();
+    Rogue_ArchLoad();
+    Rogue_StrobeLoad();
 	
     // build subsector connect matrix
     //	UNUSED P_ConnectSubsectors ();
