@@ -1,0 +1,224 @@
+{
+  "format": "nullrun-environment-kit-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "title": "Null Run environment kits: Drowned Records, Switchyard Chapel, After Hours Pavilion",
+  "paths": {
+    "wall": "art/{set_id}/walls/{index:02d}.png",
+    "flat": "art/{set_id}/flats/{index:02d}.png",
+    "prop": "art/{set_id}/props/{slot}.png",
+    "kit_sheet": "sheets/{set_id}-kit.png",
+    "tiling_sheet": "sheets/{set_id}-tiling.png"
+  },
+  "seam_behavior": {
+    "walls": "All eight wall tiles are RGB 128x128 and seamless on both axes. Opposite edge rows and columns are exactly equal. Tiles 07 and 08 are landmark accent panels: each wraps independently, and the pair is an authored adjacent motif rather than a continuous split image.",
+    "flats": "All four flats are RGB 64x64 and seamless on both axes. Opposite edge rows and columns are exactly equal.",
+    "props": "All props are RGBA 96x128 cut-outs with at least three transparent pixels on every edge and feet/bases at the bottom. They are not tiled and have no opaque rectangular backdrop."
+  },
+  "selection": {
+    "notes": "Suggestions only. Codex owns seeded selection and native integration. Use one kit as a whole-run or whole-tier identity; do not mix kits per room. Keep walls 07 and 08 together.",
+    "suggested_cycle": [
+      "drowned_records",
+      "switchyard_chapel",
+      "after_hours_pavilion"
+    ],
+    "suggested_seed_use": "Derive the set from the run seed as a separate choice from map layout, so the same layout can be replayed with a different kit."
+  },
+  "floor_variation": {
+    "notes": "Metadata only; Codex implements any variation. Flats 01-04 are a complete floor/ceiling set and should not be mixed with another kit.",
+    "rules": [
+      "flats/01 is the primary floor.",
+      "flats/02 is the utility or service floor for plant rooms, trenches and back-of-house.",
+      "flats/03 is the ordinary ceiling.",
+      "flats/04 is the lit or fixture ceiling; it is never a floor.",
+      "Vary floors by room function, not by random per-tile substitution."
+    ]
+  },
+  "sets": [
+    {
+      "id": "drowned_records",
+      "name": "DROWNED RECORDS",
+      "description": "A flood-marked paper archive and pump bureaucracy: chalk-bone filing walls, petrol waterlines, silted ceramic panels and copper shelf trim. Filing drawers, tide gauges, pressure seals and layered paper strata surround a circular flood register bolted through a filing facade. Old water is suggested by stains, not live physics.",
+      "palette": {
+        "chalk": "#E8E1CC",
+        "bone": "#D8CFB6",
+        "paper": "#C4B99C",
+        "silt": "#A79778",
+        "petrol": "#2F4147",
+        "slate": "#566A70",
+        "copper": "#9A6238",
+        "copper_light": "#C98B56",
+        "ink": "#1B2528",
+        "glass": "#9DAA9E"
+      },
+      "landmark": {
+        "name": "The Flood Register",
+        "description": "A circular tide-register wheel embedded in a wall of filing drawers. Its copper ring is bolted through the cabinet face; the scale carries two zero marks and the pointer sweeps into a drawer bank. The paired panels are a filing facade (07) and the register plate (08).",
+        "walls": [
+          7,
+          8
+        ]
+      },
+      "props": {
+        "service_lamp": {
+          "display_name": "Silt-Gauge Inspection Lamp",
+          "description": "A caged copper inspection lantern on a paper-wrapped plinth with a small silt gauge. Small freestanding floor fixture."
+        },
+        "cable_shrine": {
+          "display_name": "Pressure-Seal Paper Stack",
+          "description": "A pallet of compressed paper bales under ceramic pressure seals, copper straps, a hand lever and a blank record plate. Freestanding archive utility object."
+        },
+        "directory_sign": {
+          "display_name": "Flood Register Lectern",
+          "description": "A two-legged lectern carrying the portable tide register wheel, a hanging blank slip and a stack of ledgers. Landmark directory object with a solid base."
+        }
+      },
+      "gameplay_notes": "Cosmetic material set only; no mechanics, collision, light or sound changes are claimed. Mid-dark petrol, slate and copper surfaces keep bright binding-ring colours legible. Suggested as a whole-run or whole-tier identity, never mixed per room.",
+      "wall_roles": [
+        "primary wall",
+        "relief / panel",
+        "structural material",
+        "service hardware",
+        "shutter / window",
+        "wayfinding / accent",
+        "landmark A",
+        "landmark B"
+      ],
+      "flat_roles": [
+        "primary floor",
+        "utility floor",
+        "ordinary ceiling",
+        "lit ceiling"
+      ],
+      "seam_behavior": {
+        "walls_01_08": "seamless both axes; exact opposite-edge equality",
+        "flats_01_04": "seamless both axes; exact opposite-edge equality",
+        "props": "RGBA cut-out, transparent margin, bottom anchored, not tiled"
+      }
+    },
+    {
+      "id": "switchyard_chapel",
+      "name": "SWITCHYARD CHAPEL",
+      "description": "An ossified power exchange and ceramic relay forest: ivory porcelain brick, rust-red iron, charcoal cable braids and warm amber indicators. Chunky fluting, stacked relay niches and sagging bundled cable give clear silhouettes around a silent radial conductor fan. No religious symbol is copied from an existing game.",
+      "palette": {
+        "ivory": "#DDD6C0",
+        "porcelain": "#EFEAD8",
+        "bone": "#BFB7A1",
+        "rust": "#8E3F2B",
+        "rust_light": "#B65C3B",
+        "iron": "#3B3734",
+        "charcoal": "#252423",
+        "cable": "#171818",
+        "amber": "#E0A13C",
+        "amber_light": "#FFD487",
+        "oxide": "#6D3927"
+      },
+      "landmark": {
+        "name": "The Silent Conductor",
+        "description": "A nine-fin porcelain insulator fan around a dead charcoal hub. Two cable braids descend from the hub; one terminates in a blank porcelain cap. The paired panels are the fan (07) and a braided cable gallery (08). No live power, bloom or motion is depicted.",
+        "walls": [
+          7,
+          8
+        ]
+      },
+      "props": {
+        "service_lamp": {
+          "display_name": "Porcelain Pilot Lamp",
+          "description": "A squat porcelain petticoat pedestal carrying a caged amber pilot lamp under a rust hood. Small static fixture."
+        },
+        "cable_shrine": {
+          "display_name": "Ossified Relay Shrine",
+          "description": "A freestanding iron rack of three ceramic relay spools wrapped by sagging cable braids, with one amber pilot. Utility sculpture, not an altar or a passage."
+        },
+        "directory_sign": {
+          "display_name": "Annunciator Directory",
+          "description": "A two-legged iron annunciator board with twelve amber relay windows, twin porcelain horns, conduit and a blank nameplate. Directory object; no text is drawn."
+        }
+      },
+      "gameplay_notes": "Cosmetic material set only; no electrical, combat or traversal mechanics are claimed. Rust-red and charcoal fields are broken by ivory porcelain and small amber indicators, leaving bright binding rings distinct. Suggested as a whole-run or whole-tier identity.",
+      "wall_roles": [
+        "primary wall",
+        "relief / panel",
+        "structural material",
+        "service hardware",
+        "shutter / window",
+        "wayfinding / accent",
+        "landmark A",
+        "landmark B"
+      ],
+      "flat_roles": [
+        "primary floor",
+        "utility floor",
+        "ordinary ceiling",
+        "lit ceiling"
+      ],
+      "seam_behavior": {
+        "walls_01_08": "seamless both axes; exact opposite-edge equality",
+        "flats_01_04": "seamless both axes; exact opposite-edge equality",
+        "props": "RGBA cut-out, transparent margin, bottom anchored, not tiled"
+      }
+    },
+    {
+      "id": "after_hours_pavilion",
+      "name": "AFTER HOURS PAVILION",
+      "description": "A deserted transit and convention concourse: dusty plum plaster, worn brass, pale geometric terrazzo and shuttered service windows. Deeply folded baffles, unclaimed queue apparatus and deliberately contradictory abstract pictogram wayfinding lead to an impossible split-faced ticket and directory kiosk.",
+      "palette": {
+        "plum": "#6E5768",
+        "plum_dark": "#463645",
+        "plum_light": "#8D7488",
+        "slate": "#5D6872",
+        "terrazzo": "#D9D3C5",
+        "terrazzo_dark": "#B3AA99",
+        "brass": "#A8864C",
+        "brass_light": "#D2B06E",
+        "cream": "#EFE7D6",
+        "ink": "#241F28",
+        "dust": "#A79C90"
+      },
+      "landmark": {
+        "name": "The Split-Faced Night Kiosk",
+        "description": "A two-panel kiosk facade. Panel 07 is a real directory face with a route map, blank slot columns and a ticket recess. Panel 08 is the same architecture inlaid solid in terrazzo with no opening; its route line leaves the map and re-enters at the wrong height.",
+        "walls": [
+          7,
+          8
+        ]
+      },
+      "props": {
+        "service_lamp": {
+          "display_name": "Queue-Call Bollard",
+          "description": "A terrazzo-based brass bollard with a folded plum shade, a cream underside and a call button plate. Small static fixture."
+        },
+        "cable_shrine": {
+          "display_name": "Unclaimed Queue Apparatus",
+          "description": "A single brass stanchion with a heavy base, a retractable belt sagging in a loose decorative loop, and a blank split-arrow tag. Freestanding queue hardware."
+        },
+        "directory_sign": {
+          "display_name": "Split-Faced Ticket Kiosk",
+          "description": "A two-legged kiosk whose left face has a working directory and ticket slot while its right face is the same architecture inlaid solid in terrazzo, including a pale inlaid ticket stub. No door or opening is drawn."
+        }
+      },
+      "gameplay_notes": "Cosmetic material set only; no transit, queue or door mechanics are claimed. Plum and slate fields with pale terrazzo and brass keep bright binding-ring colours readable. Suggested as a whole-run or whole-tier identity; the split-faced kiosk is a deliberate impossible detail, not a hidden route.",
+      "wall_roles": [
+        "primary wall",
+        "relief / panel",
+        "structural material",
+        "service hardware",
+        "shutter / window",
+        "wayfinding / accent",
+        "landmark A",
+        "landmark B"
+      ],
+      "flat_roles": [
+        "primary floor",
+        "utility floor",
+        "ordinary ceiling",
+        "lit ceiling"
+      ],
+      "seam_behavior": {
+        "walls_01_08": "seamless both axes; exact opposite-edge equality",
+        "flats_01_04": "seamless both axes; exact opposite-edge equality",
+        "props": "RGBA cut-out, transparent margin, bottom anchored, not tiled"
+      }
+    }
+  ]
+}

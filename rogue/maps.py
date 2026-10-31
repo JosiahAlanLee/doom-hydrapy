@@ -427,10 +427,13 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
         f.variants=[v for v in f.variants if v['kind']==practice]
     if practice:floors=[f]
     else:floors=[generate(seed,i) for i in range(1,FLOORS+1)]
+    environment=None
     if identity and not practice:
         if not assets:raise ValueError('Threshold identity requires the supplied Freedoom assets')
         from rogue.threshold_assets import apply_identity
         floors=apply_identity(floors,seed)
+        from rogue.environments import apply as apply_environment
+        environment=apply_environment(floors,seed)
     lumps=[lump for f in floors for lump in map_lumps(f,custom_seals=bool(assets))]
     from rogue.bosses import metadata as boss_metadata
     lumps.append(boss_metadata(floors))
@@ -438,14 +441,14 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
     if practice in STROBES:lumps.append(strobe_metadata(floors[0]))
     if assets:
         from rogue.creatures import sprite_lumps, FAMILIES
-        bank=sprite_lumps(assets,seed)
+        bank=sprite_lumps(assets,seed,environment)
         if practice in STUDIES:
             at=next(i for i,(name,_) in enumerate(bank) if name=='F_END')
             bank[at:at]=flats(assets)
         lumps.extend(bank)
         if identity and not practice:
             from rogue.threshold_assets import wall_lumps
-            lumps.extend(wall_lumps(assets))
+            lumps.extend(wall_lumps(assets,environment))
     data=bytearray(); directory=[]
     for name,payload in lumps:
         directory.append(struct.pack('<II8s',12+len(data),len(payload),name8(name)))
@@ -453,9 +456,12 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
     wad=struct.pack('<4sII',b'PWAD',len(lumps),12+len(data))+data+b''.join(directory)
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_bytes(wad)
-    manifest={'format':'doom-rogue-6','seed':seed,'mode':practice or 'campaign',
+    manifest={'format':'doom-rogue-7','seed':seed,'mode':practice or 'campaign',
               'identity':'threshold' if identity and not practice else 'classic',
               'floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
+    if environment:
+        from rogue.environments import describe
+        manifest['environment']=describe(environment)
     if assets:
         manifest['sprite_assets']={'sha256':hashlib.sha256(Path(assets).read_bytes()).hexdigest(),
                                    'source':'Freedoom IWAD supplied by the operator',

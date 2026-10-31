@@ -167,7 +167,7 @@ def patch(image,palette):
     return struct.pack('<4h',width,height,width//2,height)+struct.pack('<'+'I'*width,*offsets)+b''.join(columns)
 
 
-def sprite_lumps(assets,seed):
+def sprite_lumps(assets,seed,environment=None):
     lumps=wad_lumps(assets)
     palette=np.frombuffer(next(data for name,data in lumps if name=='PLAYPAL')[:768],dtype=np.uint8).reshape(256,3)
     active=False;original=[]
@@ -178,8 +178,16 @@ def sprite_lumps(assets,seed):
     if not original:raise ValueError('Freedoom sprite namespace not found')
     generated=[]
     for family,kind in FAMILIES.items():
+        prop=None
+        if environment and kind in ('service_lamp','cable_shrine','directory_sign'):
+            from rogue.environments import picture as environment_picture
+            prop=environment_picture(environment,'props',kind)
         for frame in range(26):
-            generated.append((family+chr(65+frame)+'0',patch(creature(kind,seed,frame),palette)))
+            if environment and kind in ('latchwing','relay_choir'):
+                from rogue.environments import draw_mob
+                image=draw_mob(environment,kind,seed,frame)
+            else:image=prop if prop is not None else creature(kind,seed,frame)
+            generated.append((family+chr(65+frame)+'0',patch(image,palette)))
     # Preserve the full flat namespace when adding the two native seal tiles.
     flats=[];active=False
     for name,data in lumps:
@@ -221,5 +229,5 @@ def sprite_lumps(assets,seed):
         nearest=((unique[:,None,:]-palette[None,:,:].astype(np.int32))**2).sum(2).argmin(1)
         flats.append(('RSEAL10B' if number==11 else 'RSEAL'+str(number),nearest[inverse].astype(np.uint8).tobytes()))
     from rogue.threshold_assets import flat_lumps
-    flats.extend(flat_lumps(palette))
+    flats.extend(flat_lumps(palette,environment))
     return [('S_START',b'')]+original+generated+[('S_END',b''),('F_START',b'')]+flats+[('F_END',b'')]

@@ -1,0 +1,474 @@
+{
+  "assets": {
+    "mobs/after_hours_pavilion/latchwing_A.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 25531,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/after_hours_pavilion/latchwing_B.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 25092,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/after_hours_pavilion/relay_choir_A.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 24067,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/after_hours_pavilion/relay_choir_B.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 26488,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/drowned_records/latchwing_A.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 22472,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/drowned_records/latchwing_B.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 20310,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/drowned_records/relay_choir_A.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 24528,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/drowned_records/relay_choir_B.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 30669,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/switchyard_chapel/latchwing_A.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 21845,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/switchyard_chapel/latchwing_B.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 20142,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/switchyard_chapel/relay_choir_A.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 30784,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "mobs/switchyard_chapel/relay_choir_B.png": {
+      "anchor": "bottom y=120; >=3 px transparent padding",
+      "bytes": 22812,
+      "cell": "128x128",
+      "columns": 4,
+      "frames": 24,
+      "height": 768,
+      "layout": "idle, walk, warning, attack, hurt, death",
+      "mode": "RGBA",
+      "rows": 6,
+      "states": [
+        "idle",
+        "walk",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "width": 512
+    },
+    "sheets/after_hours_pavilion-mobs.png": {
+      "bytes": 136014,
+      "height": 1810,
+      "kind": "sheet",
+      "layout": "checkerboard contact/detail",
+      "mode": "RGB",
+      "width": 1180
+    },
+    "sheets/drowned-records-creepy.png": {
+      "bytes": 67701,
+      "height": 1410,
+      "kind": "sheet",
+      "layout": "checkerboard contact/detail",
+      "mode": "RGB",
+      "width": 1180
+    },
+    "sheets/drowned_records-mobs.png": {
+      "bytes": 135260,
+      "height": 1810,
+      "kind": "sheet",
+      "layout": "checkerboard contact/detail",
+      "mode": "RGB",
+      "width": 1180
+    },
+    "sheets/switchyard_chapel-mobs.png": {
+      "bytes": 137300,
+      "height": 1810,
+      "kind": "sheet",
+      "layout": "checkerboard contact/detail",
+      "mode": "RGB",
+      "width": 1180
+    }
+  },
+  "check_receipts": {
+    "expansion-checks.json": null,
+    "mob-checks.json": {
+      "bytes": 9456,
+      "mutable_check_output": true,
+      "sha256": "d7f2e76c0a60575cf7f2699b7e2e71cb4766f3fb243956ac33c808b7119ec4e8"
+    },
+    "music/after_hours_pavilion/checks.json": {
+      "bytes": 4832,
+      "mutable_check_output": true,
+      "sha256": "2a09aa8dba1d966ac810c60f97a34c75ab7d59a8eb8cd9b97d95d8d783e85711"
+    },
+    "music/drowned_records/checks.json": {
+      "bytes": 4810,
+      "mutable_check_output": true,
+      "sha256": "bf7a3349963a094a17feceedfa99d1c26da8417bb2bbe0a545de95bbf5dbfc01"
+    },
+    "music/switchyard_chapel/checks.json": {
+      "bytes": 4822,
+      "mutable_check_output": true,
+      "sha256": "cc55be31074c3c487d40d19b0b82b0ad8a9041cb409923fa3d0def1fe092c6ac"
+    }
+  },
+  "credits": "EXPANSION.md and the original CREDITS.md",
+  "excluded": [
+    "expansion-manifest.json",
+    "expansion-checks.json",
+    "mob-checks.json",
+    "music/*/checks.json",
+    "manifest.json",
+    "checks.json",
+    "_scratch/**",
+    ".mob-check-*/**",
+    ".check-tmp-*/**",
+    "__pycache__/**",
+    "*.pyc"
+  ],
+  "files": {
+    "EXPANSION.md": "a05ea9ccc2280ec185c7c734daabb28f41c7cef11edd8c3c6894ba987b006849",
+    "encounters.json": "22b058d938c1dfef71f8ba5f68d6667d93e265de357421be0818c89ec8ac9134",
+    "make_expansion_manifest.py": "9505f5f77e5cfab565a64820a86903724d246a8d9a04ba310fc9d60ac23382af",
+    "mob_art.py": "2c20c1d5ff8d30ceaafca7b552c8e4ce80fc61dfaa8f942be258ae7999c9aacd",
+    "mob_checks.py": "7bbacde5e968ac54d99ddc8f7efad6c1713221b48218aa5e5ae6f751cd06c1fb",
+    "mobs/after_hours_pavilion/latchwing_A.png": "87ae4a6f3096d59ad7a534cb31877ea6b1a3fd69b73f0a72b67610ca03c90134",
+    "mobs/after_hours_pavilion/latchwing_B.png": "a2d53f1f0fa5fef12a7d4f1a1ae418c6f3a6fb90083b1a2abda4a090081e2852",
+    "mobs/after_hours_pavilion/relay_choir_A.png": "dcb433d0f6afc106b8dbbfac36403e9af678b86150367487918969dce1e2197e",
+    "mobs/after_hours_pavilion/relay_choir_B.png": "6d6cb4ade7dffeaece1e2ab3aa0d888f9bb8292083967559d3a89759414a005b",
+    "mobs/drowned_records/latchwing_A.png": "8cca6d6c30906e06c22e6994277d4d2354e4c9734eff8a5917c86d8dc6745812",
+    "mobs/drowned_records/latchwing_B.png": "4bf9b9af4d0b24a156edcd835b9443cfa189786540e5e69bd0bb274fe68049a2",
+    "mobs/drowned_records/relay_choir_A.png": "be57a9ce0f9dc5197005ec4ac7734022e5dbc5a1d5b98e11e0738143b02937f9",
+    "mobs/drowned_records/relay_choir_B.png": "9a86b217f955821270dc78b3ba868016265333dafbed77d7edf0d1a5b1b6d5d4",
+    "mobs/switchyard_chapel/latchwing_A.png": "476a28d792f02ad2288bde5f00e0baae30a7779d07d373eab6272b9194d2e64f",
+    "mobs/switchyard_chapel/latchwing_B.png": "5cf6655060ceb8f9af7631ef61adeee7eb6091dbe14d3004aba72c4d81caf397",
+    "mobs/switchyard_chapel/relay_choir_A.png": "f353aa57bc43e9732a631a58365c9732a7736c5060b539d906950fe16e4576e8",
+    "mobs/switchyard_chapel/relay_choir_B.png": "b78f1f90fc0895027f43d9b441cf826cc3d716eced3f58dd78a2b044f920059f",
+    "music/after_hours_pavilion/README.md": "81c3cb437dc566a0e2f6c6e011fe77a3f05f23009cc03cd6dc5957c671bdfac8",
+    "music/after_hours_pavilion/patch-plan.json": "d83c0adf840431cafa313e462a27d814a4bd25c6cf45baa22a1f572c6a9e943a",
+    "music/after_hours_pavilion/score.json": "737e361d3d244726c5567204ff60f7ef9620c5699a0436790e23534c390fbbc3",
+    "music/after_hours_pavilion/score.py": "7d5bcd6363a644bc27bd1daf943a81041a43c37f92021386189def5998a99f5c",
+    "music/catalogue.json": "1efaa0db54b894b0b1988b3fdd49ab7f1de3dea13bc30f6881abef80e6d6c23b",
+    "music/check_music.py": "c59817a4147077bb5791688450b83b856f35f7fce3362925c2f2fd3be38253e0",
+    "music/common.py": "ebbfd5a64caf7b2173b2ea00d326abf63cc877b7e89bded8f385448e006f48d0",
+    "music/drowned_records/README.md": "0dabadae96cdac090b28b4cdea4ca3b88f2722873f6998bce36b29d6c0cfce0f",
+    "music/drowned_records/patch-plan.json": "4de802711b5d2bfa56ba2c9c9cbbb0133b8f5e52d67083478c2f0ed76379ea0d",
+    "music/drowned_records/score.json": "dac0d67eebbb26ef4b92308fe809cd05ead91eef2a0c0c84e37f06d2e9c0dd28",
+    "music/drowned_records/score.py": "99c7437e9d698e21e0d244bb72edde20afb528df53d6d7d6b2c418e84a09bea6",
+    "music/switchyard_chapel/README.md": "fe4de610a86cc8df5d6d33ff983b39be020076f317c8337bab202b64bb47c914",
+    "music/switchyard_chapel/patch-plan.json": "d8496cc80b515bf316d1832f02c518b2307ae8d0059d8d9931e612f5cb2a1d18",
+    "music/switchyard_chapel/score.json": "5cd35fe6b14e388b2385a555607c0e375207daf2c4329ea8b333d39d34cdf7f5",
+    "music/switchyard_chapel/score.py": "1001b6a9bea6620675a12830091ba790cadf0469973515f46a4f35e8d1f7aa65",
+    "sheets/after_hours_pavilion-mobs.png": "1588c57abf270d8964a589726e03ba23bc1d705b0f18c3c8fe5d787a3a332f20",
+    "sheets/drowned-records-creepy.png": "e53caf20b14370fb1c715039049ec2188471eb8e999cd6105f8b18605c7cb22e",
+    "sheets/drowned_records-mobs.png": "0bbb4364fc9a21ec47939b1709670d189bc6de47d2616af4aa2acc011d09d3b3",
+    "sheets/switchyard_chapel-mobs.png": "b247258dfa77b3d56d3e0b385a6bcb8672d133c8d8e7b9e64ec392b24025794c"
+  },
+  "format": "nullrun-environment-expansion-manifest-1",
+  "generation_commands": [
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python mob_art.py --out .",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python mob_checks.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python music/drowned_records/score.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python music/switchyard_chapel/score.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python music/after_hours_pavilion/score.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python music/check_music.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python expansion_checks.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python make_expansion_manifest.py"
+  ],
+  "layout": {
+    "atlas": "512x768 RGBA, 4 columns x 6 rows, 128x128 cells, 24 cells",
+    "mob_states": [
+      "idle",
+      "walk",
+      "warning",
+      "attack",
+      "hurt",
+      "death"
+    ],
+    "props": "no new actor IDs; six identities on two existing behavior families",
+    "scores": "hydrapy-tracker-3, 4/4, 16 rows/bar, rate 1, loop=False, exactly 120.000 s"
+  },
+  "license": "GPL-2.0-or-later",
+  "notes": [
+    "Stable expansion sources, generated art, written scores and patch plans are hashed.",
+    "mob-checks.json, music/*/checks.json and expansion-checks.json are mutable receipts and are not in the stable set.",
+    "The original 45-art manifest/checks are referenced in original_kit and were not rewritten.",
+    "No audio was rendered or auditioned; native frame mapping, Rack mapping and audio acceptance are Codex work."
+  ],
+  "original_kit": {
+    "art_bundle_sha256": "ec32c74a83bcda524012df63ccfb37e6574e55a9e17d4ab3524ef6a7c8bf7daf",
+    "art_pngs": 45,
+    "checks": "checks.json",
+    "checks_sha256": "a80012e65fc1bc784e78b7559b6dba43fec943c61b6289cbb58a9067a3af993f",
+    "manifest": "manifest.json",
+    "manifest_sha256": "98643153a1845aa03d176ba95c0c0f4052147b44ab3305f5667427f8ecd9fe94",
+    "note": "The original 45-art manifest/check receipt are preserved as the record for the completed environment kit; they are not rewritten by this expansion."
+  },
+  "scores": {
+    "after_hours_pavilion": {
+      "bars": 56,
+      "bpm": 112,
+      "checks": "music/after_hours_pavilion/checks.json",
+      "key": 7,
+      "patch_plan": "music/after_hours_pavilion/patch-plan.json",
+      "patterns": 7,
+      "score": "music/after_hours_pavilion/score.json",
+      "seconds": 120.0,
+      "sha256": "737e361d3d244726c5567204ff60f7ef9620c5699a0436790e23534c390fbbc3"
+    },
+    "drowned_records": {
+      "bars": 48,
+      "bpm": 96,
+      "checks": "music/drowned_records/checks.json",
+      "key": 5,
+      "patch_plan": "music/drowned_records/patch-plan.json",
+      "patterns": 6,
+      "score": "music/drowned_records/score.json",
+      "seconds": 120.0,
+      "sha256": "dac0d67eebbb26ef4b92308fe809cd05ead91eef2a0c0c84e37f06d2e9c0dd28"
+    },
+    "switchyard_chapel": {
+      "bars": 64,
+      "bpm": 128,
+      "checks": "music/switchyard_chapel/checks.json",
+      "key": 2,
+      "patch_plan": "music/switchyard_chapel/patch-plan.json",
+      "patterns": 8,
+      "score": "music/switchyard_chapel/score.json",
+      "seconds": 120.0,
+      "sha256": "5cd35fe6b14e388b2385a555607c0e375207daf2c4329ea8b333d39d34cdf7f5"
+    }
+  },
+  "sizes": {
+    "EXPANSION.md": 9083,
+    "encounters.json": 6845,
+    "make_expansion_manifest.py": 7485,
+    "mob_art.py": 66141,
+    "mob_checks.py": 18714,
+    "mobs/after_hours_pavilion/latchwing_A.png": 25531,
+    "mobs/after_hours_pavilion/latchwing_B.png": 25092,
+    "mobs/after_hours_pavilion/relay_choir_A.png": 24067,
+    "mobs/after_hours_pavilion/relay_choir_B.png": 26488,
+    "mobs/drowned_records/latchwing_A.png": 22472,
+    "mobs/drowned_records/latchwing_B.png": 20310,
+    "mobs/drowned_records/relay_choir_A.png": 24528,
+    "mobs/drowned_records/relay_choir_B.png": 30669,
+    "mobs/switchyard_chapel/latchwing_A.png": 21845,
+    "mobs/switchyard_chapel/latchwing_B.png": 20142,
+    "mobs/switchyard_chapel/relay_choir_A.png": 30784,
+    "mobs/switchyard_chapel/relay_choir_B.png": 22812,
+    "music/after_hours_pavilion/README.md": 2377,
+    "music/after_hours_pavilion/patch-plan.json": 3678,
+    "music/after_hours_pavilion/score.json": 160611,
+    "music/after_hours_pavilion/score.py": 5343,
+    "music/catalogue.json": 2002,
+    "music/check_music.py": 15299,
+    "music/common.py": 4914,
+    "music/drowned_records/README.md": 2606,
+    "music/drowned_records/patch-plan.json": 3728,
+    "music/drowned_records/score.json": 130766,
+    "music/drowned_records/score.py": 5727,
+    "music/switchyard_chapel/README.md": 2486,
+    "music/switchyard_chapel/patch-plan.json": 3612,
+    "music/switchyard_chapel/score.json": 280117,
+    "music/switchyard_chapel/score.py": 6174,
+    "sheets/after_hours_pavilion-mobs.png": 136014,
+    "sheets/drowned-records-creepy.png": 67701,
+    "sheets/drowned_records-mobs.png": 135260,
+    "sheets/switchyard_chapel-mobs.png": 137300
+  },
+  "source_seed": 20261031,
+  "title": "Null Run environment expansion: six signature mobs and three environment-keyed 120-second scores",
+  "totals": {
+    "atlases": 12,
+    "bytes": 1508723,
+    "frames": 288,
+    "mob_sheets": 4,
+    "scores": 3,
+    "stable_files": 36
+  }
+}

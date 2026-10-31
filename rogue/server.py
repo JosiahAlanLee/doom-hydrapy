@@ -105,7 +105,13 @@ class Game:
             encounters=entry.get('bosses') or ([entry['boss']] if entry['boss'] else [])
             selected=(self.state.get('boss') or {}).get('name')
             current=next((b for b in encounters if b['name']==selected),None)
-            return {**self.state,'seed':self.manifest['seed'],'floor_name':entry['name'],
+            state=self.state
+            environment=self.manifest.get('environment')
+            if environment:
+                from rogue.environments import present_state
+                state=present_state(state,environment['id'])
+            return {**state,'seed':self.manifest['seed'],'floor_name':entry['name'],
+                    'environment':environment,
                     'office':entry.get('office'),
                     'identity':self.manifest.get('identity','classic'),
                     'floors':len(self.manifest['floors']),'mode':self.manifest['mode'],
