@@ -65,6 +65,15 @@ Map-only PWADs without the extra art safely fall back to native sprite frames.
 The full art namespace contains original standing/crawl/warning/grip/death poses
 and new seal flats. Ordinary maps outside roguelike mode retain base behavior.
 
+### Material refinement
+
+The creature art now uses worn bark, bone, stone, cloth and tarnished metal,
+with broad shaded planes, narrow bevels and sparse seeded chips. Five shades
+per source material keep generation bounded and preserve large readable shapes
+under the green-vector filter. All six Gloamwood/book forms share this finish.
+ReDead's grip pose crouches its mask near the first-person camera's height.
+Sprite dimensions, frame assignments and native movement/combat code are unchanged.
+
 Run the native checks with `FREEDOOM_WAD=/path/to/freedoom2.wad python -m unittest
 -v test_rogue test_bosses test_gloamwood`. Tests use real keys, weapon hits,
 movement, sight and exit transitions; they do not set health or force bindings.
