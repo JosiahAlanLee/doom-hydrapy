@@ -164,6 +164,7 @@ typedef enum
     SPR_BRS1,
     SPR_TLMP,
     SPR_TLP2,
+    SPR_VEND,
     NUMSPRITES
 
 } spritenum_t;
@@ -1137,6 +1138,8 @@ typedef enum
     S_TECH2LAMP2,
     S_TECH2LAMP3,
     S_TECH2LAMP4,
+    S_VENDOR_IDLE,
+    S_VENDOR_SPENT,
     NUMSTATES
 } statenum_t;
 
@@ -1294,6 +1297,7 @@ typedef enum {
     MT_MISC84,
     MT_MISC85,
     MT_MISC86,
+    MT_VENDING,
     NUMMOBJTYPES
 
 } mobjtype_t;

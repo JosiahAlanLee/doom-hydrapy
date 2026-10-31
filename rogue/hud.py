@@ -32,9 +32,14 @@ def decorate(image,state):
     d.line((0,22,639,22),fill=LINE)
     text(d,(12,5),'NULL RUN',AMBER)
     text(d,(80,5),' / '+state.get('floor_name','THRESHOLD'),INK)
+    upkeep=state.get('vending') or {}
+    if upkeep.get('active'):text(d,(436,5),f"SCRAP {upkeep['credits']:03}",AMBER)
     direction=['E','NE','N','NW','W','SW','S','SE'][round(float(state.get('angle',0))/45)%8]
     text(d,(540,5),f"{state.get('map',1):02}/{state.get('floors',7):02}  {direction}",MUTED)
+    vendor=upkeep.get('vendor') or {}
     cue=(state.get('argon') or {}).get('cue')
+    if vendor.get('near') and not upkeep.get('menu_open'):
+        cue='UPKEEP / DISPENSED THIS FLOOR' if vendor.get('spent') else 'F / RIGHT CLICK : UPKEEP'
     if cue:
         width=round(d.textlength(cue,font=font()))
         x=max(10,(640-width)//2)
@@ -57,13 +62,34 @@ def decorate(image,state):
     d.rectangle((0,353,639,399),fill=PANEL)
     d.line((0,353,639,353),fill=LINE)
     for x in (169,301,419):d.line((x,362,x,390),fill=LINE)
-    text(d,(12,359),'HEALTH',MUTED);text(d,(12,372),max(0,health),DANGER if health<25 else INK,22)
-    bar(d,75,389,75,health,DANGER if health<25 else AMBER)
+    cap=upkeep.get('max_health',100)
+    text(d,(12,359),f'HEALTH /{cap}' if cap>100 else 'HEALTH',MUTED);text(d,(12,372),max(0,health),DANGER if health<25 else INK,22)
+    bar(d,75,389,75,100*health/max(1,cap),DANGER if health<25 else AMBER)
     text(d,(184,359),'ARMOUR',MUTED);text(d,(184,377),max(0,armour),INK)
     bar(d,233,389,52,armour,(129,174,187))
     text(d,(316,359),'AMMO',MUTED);text(d,(316,372),rounds,INK,22)
     text(d,(434,359),WEAPONS[weapon],AMBER)
     text(d,(434,377),f"{state.get('kills',0):02}/{state.get('total_kills',0):02} | CACHE {state.get('secrets',0):02}",MUTED)
+    return image
+
+
+SHOP_ROWS=tuple((46,121+i*61,593,176+i*61) for i in range(3))
+
+
+def shop_overlay(image,state,error=None):
+    d=ImageDraw.Draw(image);upkeep=state['vending']
+    d.rectangle((28,48,611,337),fill=PANEL,outline=LINE)
+    d.line((28,48,132,48),fill=AMBER,width=3)
+    text(d,(46,61),'UPKEEP / NO REFUNDS',AMBER,22)
+    text(d,(46,95),f"SCRAP {upkeep['credits']:03}  /  ONE PURCHASE PER FLOOR  /  RUN PAUSED",MUTED)
+    for i,offer in enumerate(upkeep['vendor']['offers']):
+        x,y,r,b=SHOP_ROWS[i];available=offer['cost']<=upkeep['credits']
+        colour=INK if available else MUTED
+        d.rectangle((x,y,r,b),outline=AMBER if available else LINE)
+        text(d,(x+10,y+6),f"{i+1}  {offer['title']} / {offer['rank']+1}",colour)
+        text(d,(r-94,y+6),f"{offer['cost']:02} SCRAP",AMBER if available else MUTED)
+        text(d,(x+10,y+29),offer['description'],colour)
+    text(d,(46,312),error or '1-3 or CLICK choose  /  ESC leave without buying',DANGER if error else MUTED)
     return image
 
 CREDIT_LINES=[

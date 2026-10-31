@@ -75,6 +75,14 @@ class Doom:
         line=self.proc.stdout.readline()
         if not line.startswith('MOBS '):raise RuntimeError('invalid monster state response')
         return json.loads(line[5:])
+    def buy(self, vendor, slot):
+        if type(vendor) is not int or not 1<=vendor<=65535 or type(slot) is not int or not 0<=slot<3:
+            raise ValueError('Invalid machine or offer')
+        self.proc.stdin.write(f'VEND {vendor} {slot}\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]:raise TimeoutError('engine VEND timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('VEND '):raise RuntimeError('invalid purchase response')
+        return json.loads(line[5:])
     def advance(self,n):
         if not 0<=n<=35000: raise ValueError('STEP range 0..35000')
         old=self.tic;self.command(f'STEP {n}')

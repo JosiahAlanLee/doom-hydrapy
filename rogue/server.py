@@ -35,12 +35,13 @@ KEYS={'KeyW':0xad,'KeyS':0xaf,'KeyA':0xa0,'KeyD':0xa1,
 
 
 class Game:
-    def __init__(self,wad,run_dir,seed=20261030,identity=False,*,render_scale=1):
+    def __init__(self,wad,run_dir,seed=20261030,identity=False,*,render_scale=1,vending=False):
         if type(render_scale) is not int or render_scale not in (1,2):
             raise ValueError('render_scale must be 1 or 2')
         self.render_scale=render_scale
         self.wad=Path(wad).resolve()
         self.identity=bool(identity)
+        self.vending=bool(vending)
         self.run_dir=Path(run_dir).resolve();self.run_dir.mkdir(parents=True,exist_ok=True)
         self.lock=threading.RLock();self.engine=None;self.stop_event=threading.Event()
         self.owner=None;self.last_input=0;self.held=set();self.paused=True
@@ -57,7 +58,7 @@ class Game:
         with self.lock:
             folder=self.run_dir/f'run-{time.time_ns()}-{seed}'
             folder.mkdir()
-            manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode,identity=self.identity)
+            manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode,identity=self.identity,vending=self.vending)
             (folder/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
             clean_hud=self.identity and mode=='campaign'
             candidate=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(manifest['floors']),
@@ -76,6 +77,8 @@ class Game:
 
     def acquire(self):
         with self.lock:
+            if self.state.get('vending',{}).get('menu_open'):
+                raise ValueError('Close the machine before resuming.')
             if self.owner and time.monotonic()-self.last_input<4:
                 raise ValueError('Another tab has the controls. Pause it or wait four seconds.')
             self.owner=secrets.token_urlsafe(24);self.last_input=time.monotonic()
@@ -90,17 +93,32 @@ class Game:
         with self.lock:
             if not owner or owner!=self.owner:raise ValueError('Click Play to take the controls.')
             self.last_input=time.monotonic()
-            self.paused=bool(paused)
-            requested={KEYS[k] for k in keys} if not paused else set()
+            shopping=self.state.get('vending',{}).get('menu_open',False)
+            self.paused=bool(paused or shopping)
+            requested={KEYS[k] for k in keys} if not self.paused else set()
             if self.state.get('dead') or self.state.get('won'):requested=set()
             # Full snapshots are idempotent; missed browser key-up events cannot
             # leave a key held. Transitions go to the engine exactly once.
             for k in sorted(self.held-requested):self.engine.key(k,False)
             for k in sorted(requested-self.held):self.engine.key(k,True)
             self.held=requested
-            if paused:self.owner=None;self.turn_pending=0
+            if self.paused:self.owner=None;self.turn_pending=0
             elif not self.state.get('dead') and not self.state.get('won'):
                 self.turn_pending=max(-4096,min(4096,self.turn_pending+turn))
+
+    def purchase(self,vendor,slot,revision):
+        with self.lock:
+            if type(revision) is not int or revision!=self.revision:
+                raise ValueError('That offer belongs to an earlier run.')
+            if not self.paused:raise ValueError('Open a machine first.')
+            result=self.engine.buy(vendor,slot)
+            self.render()
+            return result
+
+    def close_shop(self):
+        with self.lock:
+            self.engine.command('VCLOSE')
+            self.render()
 
     def snapshot(self):
         with self.lock:
@@ -146,7 +164,7 @@ class Game:
                     if not self.paused and not self.state.get('dead') and not self.state.get('won'):
                         if self.turn_pending:self.engine.turn(self.turn_pending);self.turn_pending=0
                         self.engine.advance(1);self.render()
-                        if self.state.get('dead') or self.state.get('won'):
+                        if self.state.get('dead') or self.state.get('won') or self.state.get('vending',{}).get('menu_open'):
                             self.release();self.paused=True;self.owner=None
                 except Exception as exc:
                     self.error=str(exc);self.paused=True;self.owner=None

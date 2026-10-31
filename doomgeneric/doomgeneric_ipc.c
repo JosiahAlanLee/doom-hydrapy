@@ -11,6 +11,7 @@
 #include "rogue_argon.h"
 #include "rogue_arch.h"
 #include "rogue_strobe.h"
+#include "rogue_vending.h"
 #include "d_event.h"
 #include <stdio.h>
 #include <string.h>
@@ -36,6 +37,7 @@ static void tick(void) {
  }
  doomgeneric_Tick();
  Rogue_BossTick();
+ Rogue_VendingTick();
  // Generated campaigns continue through MAP06 without the commercial finale.
  // G_DoWorldDone retains the player's inventory and health normally.
  if(rogue_floors && gamestate==GS_INTERMISSION && gamemap<rogue_floors)
@@ -53,6 +55,7 @@ static void state(void) {
  fprintf(reply,",\"argon\":");Rogue_ArgonStatus(reply);
  fprintf(reply,",\"architecture\":");Rogue_ArchJSON(reply);
  fprintf(reply,",\"strobe\":");Rogue_StrobeJSON(reply);
+ fprintf(reply,",\"vending\":");Rogue_VendingJSON(reply);
  fprintf(reply,",\"motion\":{\"z\":%.4f,\"momx\":%.4f,\"momy\":%.4f,\"momz\":%.4f,\"view_z\":%.4f,\"reaction_time\":%d}",
  p->mo?p->mo->z/65536.0:0.0,p->mo?p->mo->momx/65536.0:0.0,p->mo?p->mo->momy/65536.0:0.0,
  p->mo?p->mo->momz/65536.0:0.0,p->viewz/65536.0,p->mo?p->mo->reactiontime:0);
@@ -99,7 +102,7 @@ int main(int argc,char **argv){
    if(select(1,&fds,NULL,NULL,&timeout)==0){tick();continue;}
   }
   if(!fgets(line,sizeof(line),stdin))break;
-  unsigned n,k;int down,turn;
+  unsigned n,k;int down,turn;char extra;
   if(sscanf(line,"STEP %u",&n)==1 && n<=35000){
    for(unsigned i=0;i<n;i++){virtual_ms=1000+(++clock_tics)*1000/35;tick();}
   } else if(sscanf(line,"KEY %d %u",&down,&k)==2 && k<=255 && head-tail<1024){queue[head%1024].down=!!down;queue[head++%1024].key=k;}
@@ -111,6 +114,8 @@ int main(int argc,char **argv){
   else if(!strcmp(line,"STROBE_VIEW 0\n"))Rogue_StrobeView(0);
   else if(!strcmp(line,"STROBE_VIEW 1\n"))Rogue_StrobeView(1);
   else if(sscanf(line,"STROBE_SYNC %u",&n)==1 && n<2100)Rogue_StrobeSync(n);
+  else if(sscanf(line,"VEND %u %u %c",&n,&k,&extra)==2){Rogue_VendingBuy(reply,n,k);continue;}
+  else if(!strcmp(line,"VCLOSE\n"))Rogue_VendingClose();
   else if(!strcmp(line,"STATE\n")){state();continue;}
   else if(!strcmp(line,"MOBS\n")){Rogue_Report(reply);continue;}
   else if(!strncmp(line,"QUIT",4))break;
