@@ -1,0 +1,5 @@
+Argon (Gemini 3.1 Pro) supplied Acoustic Stillness and Surveyor Brackets from an explicitly approved text-only design brief on 2026-10-31. No new game source files or credentials were attached. Codex preserved the originals and corrected the rectangular aim guard, sample/control/color bounds, strength fade and source alpha in these reviewed kernels.
+
+The standalone GLSL330 kernels passed 21 software OpenGL contract checks each before this integration. They are converted into HydraPy texture functions by cue_ops.py, with the host's texture coordinates/resolution and scalar cue inputs. The game cues use actual native charge/attack state, not generated animation timers. The HUD is composited afterward. No state changes, camera movement or generated enemies are part of these shaders.
+
+These files are part of this GPL-3.0-or-later backend. Their hardware/combined-pipeline checks are recorded separately; earlier software results alone do not establish native GPU performance or clean audio.
