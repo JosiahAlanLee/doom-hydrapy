@@ -6,12 +6,13 @@ import numpy as np
 
 class Doom:
     def __init__(self, wad, demo='demo1', locked=True, loop_seconds=None,
-                 pwad=None, rogue_floors=None):
+                 pwad=None, rogue_floors=None, clean_hud=False):
         if loop_seconds is not None and (not np.isfinite(loop_seconds) or loop_seconds<=0): raise ValueError("positive loop duration required")
         self.loop_seconds=loop_seconds
         self.wad, self.demo, self.locked = str(Path(wad).resolve()), demo, locked
         self.pwad = str(Path(pwad).resolve()) if pwad else None
         self.rogue_floors = rogue_floors
+        self.clean_hud = bool(clean_hud)
         if rogue_floors is not None and (not isinstance(rogue_floors, int) or not 1 <= rogue_floors <= 5):
             raise ValueError('rogue_floors must be 1..5')
         (Path(__file__).parent/'runtime').mkdir(exist_ok=True)
@@ -21,6 +22,10 @@ class Doom:
         env = dict(os.environ, DOOM_FRAME=self.tmp.name+'/frame')
         env.pop('DOOM_ROGUE_FLOORS', None)
         if self.rogue_floors: env['DOOM_ROGUE_FLOORS']=str(self.rogue_floors)
+        env.pop('DOOM_CLEAN_HUD',None)
+        if self.clean_hud:
+            env['DOOM_CLEAN_HUD']='1'
+            Path(self.tmp.name+'/doom.cfg').write_text('screenblocks 11\n')
         if self.locked: env['DOOM_LOCKED']='1'
         else: env.pop('DOOM_LOCKED',None)
         args=[str(Path(__file__).parent/'doomgeneric/doom-ipc'), '-iwad',self.wad, '-config',self.tmp.name+'/doom.cfg']
@@ -35,7 +40,10 @@ class Doom:
     def _read(self, prefix='OK'):
         if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine timeout: '+self.tmp.name+'/engine.log')
         line=self.proc.stdout.readline().strip().split()
-        if not line or line[0]!=prefix: raise RuntimeError('engine failed: '+self.tmp.name+'/engine.log')
+        if not line or line[0]!=prefix:
+            self.log.flush()
+            detail=Path(self.tmp.name+'/engine.log').read_text(errors='replace')[-1200:]
+            raise RuntimeError('engine failed (exit '+str(self.proc.poll())+', response '+str(line)[:160]+'): '+self.tmp.name+'/engine.log\n'+detail)
         self.tic,self.frames=map(int,line[1:])
     def command(self, text):
         self.proc.stdin.write(text+'\n');self.proc.stdin.flush();self._read()
