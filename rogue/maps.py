@@ -370,10 +370,12 @@ def creature_study(seed,kind):
 
 def campaign(seed, output, assets=None, practice=None):
     from rogue.architecture import STUDIES,study,metadata,flats
+    from rogue.strobe import STROBES,study as strobe_study,metadata as strobe_metadata
     output=Path(output)
     floors=[generate(seed,i) for i in range(1,FLOORS+1)]
     if practice:
-        if practice in STUDIES:f=study(seed,practice)
+        if practice in STROBES:f=strobe_study(seed)
+        elif practice in STUDIES:f=study(seed,practice)
         elif practice in CREATURES:f=creature_study(seed,practice)
         elif practice in BOSSES:f=generate(seed,3,boss_kind=practice)
         else:raise ValueError('Unknown encounter study')
@@ -394,6 +396,7 @@ def campaign(seed, output, assets=None, practice=None):
     if practice:floors=[f]
     lumps=[lump for f in floors for lump in map_lumps(f,custom_seals=bool(assets))]
     if practice in STUDIES:lumps.append(metadata(floors[0]))
+    if practice in STROBES:lumps.append(strobe_metadata(floors[0]))
     if assets:
         from rogue.creatures import sprite_lumps, FAMILIES
         bank=sprite_lumps(assets,seed)

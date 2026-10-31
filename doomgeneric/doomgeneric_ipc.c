@@ -8,6 +8,7 @@
 #include "rogue_boss.h"
 #include "rogue_creature.h"
 #include "rogue_arch.h"
+#include "rogue_strobe.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -41,6 +42,7 @@ static void state(void) {
  rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");
  Rogue_BossJSON(reply);fprintf(reply,",\"creatures\":");Rogue_CreatureStatus(reply);
  fprintf(reply,",\"architecture\":");Rogue_ArchJSON(reply);
+ fprintf(reply,",\"strobe\":");Rogue_StrobeJSON(reply);
  fprintf(reply,",\"motion\":{\"z\":%.4f,\"momx\":%.4f,\"momy\":%.4f,\"momz\":%.4f,\"view_z\":%.4f,\"reaction_time\":%d}",
  p->mo?p->mo->z/65536.0:0.0,p->mo?p->mo->momx/65536.0:0.0,p->mo?p->mo->momy/65536.0:0.0,
  p->mo?p->mo->momz/65536.0:0.0,p->viewz/65536.0,p->mo?p->mo->reactiontime:0);
@@ -90,6 +92,9 @@ int main(int argc,char **argv){
   if(sscanf(line,"STEP %u",&n)==1 && n<=35000){
    for(unsigned i=0;i<n;i++){virtual_ms=1000+(++clock_tics)*1000/35;tick();}
   } else if(sscanf(line,"KEY %d %u",&down,&k)==2 && k<=255 && head-tail<1024){queue[head%1024].down=!!down;queue[head++%1024].key=k;}
+  else if(!strcmp(line,"STROBE_VIEW 0\n"))Rogue_StrobeView(0);
+  else if(!strcmp(line,"STROBE_VIEW 1\n"))Rogue_StrobeView(1);
+  else if(sscanf(line,"STROBE_SYNC %u",&n)==1 && n<2100)Rogue_StrobeSync(n);
   else if(!strcmp(line,"STATE\n")){state();continue;}
   else if(!strcmp(line,"MOBS\n")){Rogue_Report(reply);continue;}
   else if(!strncmp(line,"QUIT",4))break;

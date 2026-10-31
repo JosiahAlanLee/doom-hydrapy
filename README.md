@@ -53,8 +53,9 @@ engine.close()
 Coordinates sample texel centres for crisp default filtering. Four build(ctx) scenes
 are under scenes/, with an optional bitmap ASCII texture operator registered via
 HydraPy.add_op. Scene source time is renderer seconds, 35 game tics per second.
-For a tracker beat clock use seconds = beat * 60 / bpm at the transport origin;
-transport integration and live Rack capture have NOT been completed.
+For this demo adapter, use seconds = beat * 60 / bpm at the transport origin.
+The separate native-play patch and live VCV integration are described in
+[NATIVE-PLAY.md](NATIVE-PLAY.md).
 
 `Doom(..., demo=None)` starts a playable level; `key(code, down)` queues input.
 `LaneKeys.update(fire, pitch, move, use)` maps held tracker signals to fire,
@@ -132,12 +133,17 @@ The synths are documented substitutes, not General MIDI replicas. Per-instance
 voice retirement one second after note-off bounds substitute release tails;
 it does not shorten held MIDI notes or drop attacks. Mod wheel maps to restrained
 5 Hz pitch vibrato. The music finishes at 226.6 s, followed by effect decay and a
-quiet game-only tail. Studio keyboard and game-event signals remain future work.
+quiet game-only tail. This timed take does not map live keyboard/game events
+into its score; native play uses its own window controller.
 
 See poly/README.md for the sequencer ABI, private JACK namespace and buffer setup.
-No host repository was changed and this work was not pushed by Codex.
+No host repository was changed; the optional integration stays in this standalone repository.
 
 ## Architectural studies
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the silent corridor seam, five-corner
 pillar loop and unseen passage mutations. Choose a study under Next Run, then Retry.
+
+## Native desktop play
+
+[Native play](NATIVE-PLAY.md) adds the fluorescent Hollow study, direct picture-window controls and a reference Studio patch for live HydraPy/VCV use. RAW is the default; F3 cycles the optional GPU treatments.

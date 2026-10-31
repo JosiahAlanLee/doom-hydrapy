@@ -34,6 +34,7 @@
 #include "sounds.h"
 
 #include "p_pspr.h"
+#include "rogue_strobe.h"
 
 #define LOWERSPEED		FRACUNIT*6
 #define RAISESPEED		FRACUNIT*6
@@ -541,6 +542,7 @@ A_Saw
 
 static void DecreaseAmmo(player_t *player, int ammonum, int amount)
 {
+    if (amount > 0) Rogue_StrobeShot(player);
     if (ammonum < NUMAMMO)
     {
         player->ammo[ammonum] -= amount;
