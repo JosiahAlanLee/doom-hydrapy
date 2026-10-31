@@ -1,0 +1,98 @@
+{
+  "format": "nullrun-environment-expansion-checks-1",
+  "source_seed": 20261031,
+  "passed": true,
+  "failed": [],
+  "checks": [
+    {
+      "id": "original_45_art_preserved",
+      "pass": true,
+      "detail": "original manifest, 45 art PNGs, 57 hashed files and 19/19 check receipt unchanged",
+      "problems": []
+    },
+    {
+      "id": "mobs_12_atlases_288_frames",
+      "pass": true,
+      "detail": "12 RGBA 512x768 atlases, 288 frames, four sheets, six identities on two existing families",
+      "problems": []
+    },
+    {
+      "id": "scores_three_120s",
+      "pass": true,
+      "detail": "three original 120.000 s scores, 21/21 checks each, catalogue hashes match, distinctness verified",
+      "problems": []
+    },
+    {
+      "id": "no_audio_video_firmware_or_actor_ids",
+      "pass": true,
+      "detail": "no audio/video/firmware extensions; no actor/type IDs; expansion size 2253846 B"
+    },
+    {
+      "id": "nonclaim_documentation",
+      "pass": true,
+      "detail": "EXPANSION.md and the three score READMEs state the 120 s facts and audio/native non-claims"
+    },
+    {
+      "id": "expansion_manifest_integrity",
+      "pass": true,
+      "detail": "36 stable expansion files and 16 PNG assets hashed; receipts and original references match",
+      "problems": []
+    }
+  ],
+  "metrics": {
+    "original": {
+      "manifest_sha256": "98643153a1845aa03d176ba95c0c0f4052147b44ab3305f5667427f8ecd9fe94",
+      "checks_sha256": "a80012e65fc1bc784e78b7559b6dba43fec943c61b6289cbb58a9067a3af993f",
+      "files_hashed": 57,
+      "art_pngs": 45,
+      "art_bundle_sha256": "ec32c74a83bcda524012df63ccfb37e6574e55a9e17d4ab3524ef6a7c8bf7daf",
+      "original_checked": true
+    },
+    "mobs": {
+      "atlases": 12,
+      "frames": 288,
+      "atlas_bundle_sha256": "6449aa7afc3cdc4e7c4d903442e2405c785fdcc2f9a55de647f8719452469c19"
+    },
+    "scores": {
+      "drowned_records": {
+        "bpm": 96,
+        "bars": 48,
+        "patterns": 6,
+        "seconds": 120.0,
+        "sha256": "dac0d67eebbb26ef4b92308fe809cd05ead91eef2a0c0c84e37f06d2e9c0dd28"
+      },
+      "switchyard_chapel": {
+        "bpm": 128,
+        "bars": 64,
+        "patterns": 8,
+        "seconds": 120.0,
+        "sha256": "5cd35fe6b14e388b2385a555607c0e375207daf2c4329ea8b333d39d34cdf7f5"
+      },
+      "after_hours_pavilion": {
+        "bpm": 112,
+        "bars": 56,
+        "patterns": 7,
+        "seconds": 120.0,
+        "sha256": "737e361d3d244726c5567204ff60f7ef9620c5699a0436790e23534c390fbbc3"
+      }
+    },
+    "boundaries": {
+      "forbidden_files": [],
+      "forbidden_keys": [],
+      "expansion_files": 45,
+      "expansion_bytes": 2253846,
+      "largest_bytes": 280117
+    }
+  },
+  "limitations": [
+    "Structural checks only; visual quality, native sprite mapping and audio quality are not proved.",
+    "No native game, PLAYPAL, Rack patch, audio render or audition was run.",
+    "Six identities reuse the existing latchwing and relay_choir behavior families; no new AI or actor IDs exist.",
+    "Codex owns native integration, frame mapping, collision, performance, Rack/audio and final review."
+  ],
+  "nonclaims": [
+    "No audio/video/firmware files are included.",
+    "No sample, existing music or copied game pixel is included.",
+    "No gameplay, actor ID, mechanic or loaded patch is claimed."
+  ]
+}

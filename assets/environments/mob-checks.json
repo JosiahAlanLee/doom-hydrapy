@@ -1,0 +1,361 @@
+{
+  "format": "nullrun-environment-mob-checks-1",
+  "source_seed": 20261031,
+  "atlases": 12,
+  "frames": 288,
+  "atlas_bundle_sha256": "6449aa7afc3cdc4e7c4d903442e2405c785fdcc2f9a55de647f8719452469c19",
+  "passed": true,
+  "failed": [],
+  "checks": [
+    {
+      "id": "atlases_12",
+      "pass": true,
+      "detail": "12 atlases; missing=[]; extra=[]"
+    },
+    {
+      "id": "sheets_4",
+      "pass": true,
+      "detail": "4/4 mob sheets present; missing=[]"
+    },
+    {
+      "id": "encounters_present",
+      "pass": true,
+      "detail": "encounters.json exists"
+    },
+    {
+      "id": "atlas_layout_512x768_rgba_24",
+      "pass": true,
+      "detail": "12 atlases x 24 cells = 288 frames; 512x768 RGBA; crisp 0/255 alpha",
+      "atlases": {
+        "mobs/drowned_records/latchwing_A.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/drowned_records/latchwing_B.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/drowned_records/relay_choir_A.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/drowned_records/relay_choir_B.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/switchyard_chapel/latchwing_A.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/switchyard_chapel/latchwing_B.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/switchyard_chapel/relay_choir_A.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/switchyard_chapel/relay_choir_B.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/after_hours_pavilion/latchwing_A.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/after_hours_pavilion/latchwing_B.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/after_hours_pavilion/relay_choir_A.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        },
+        "mobs/after_hours_pavilion/relay_choir_B.png": {
+          "width": 512,
+          "height": 768,
+          "mode": "RGBA",
+          "cells": 24
+        }
+      }
+    },
+    {
+      "id": "padding_alpha_grounding",
+      "pass": true,
+      "detail": "every frame has >=3 px transparent padding, a y=120 floor anchor and no opaque backdrop",
+      "problems": []
+    },
+    {
+      "id": "stable_body_feet_anchors",
+      "pass": true,
+      "detail": "foot baseline y=120 throughout and body centres stay within 12 px of x=64"
+    },
+    {
+      "id": "final_death_corpse_visible",
+      "pass": true,
+      "detail": "all 12 final death frames contain a visible, non-blank corpse",
+      "problems": []
+    },
+    {
+      "id": "genuine_frame_animation",
+      "pass": true,
+      "detail": "every consecutive frame pair changes >=100 pixels; minimum 491; 21-23 unique cells per atlas"
+    },
+    {
+      "id": "silhouette_differences",
+      "pass": true,
+      "detail": "A/B max IoU 0.832; cross-design max IoU 0.686 (idle frame 0)"
+    },
+    {
+      "id": "encounters_schema",
+      "pass": true,
+      "detail": "three sets x two slots; six unique identities; exact behavior_family names; honest limits",
+      "problems": []
+    },
+    {
+      "id": "mob_sheets_present",
+      "pass": true,
+      "detail": "three full-atlas mob sheets and one larger creepy detail board",
+      "sheets": {
+        "sheets/drowned_records-mobs.png": [
+          1180,
+          1810,
+          "RGB"
+        ],
+        "sheets/switchyard_chapel-mobs.png": [
+          1180,
+          1810,
+          "RGB"
+        ],
+        "sheets/after_hours_pavilion-mobs.png": [
+          1180,
+          1810,
+          "RGB"
+        ],
+        "sheets/drowned-records-creepy.png": [
+          1180,
+          1410,
+          "RGB"
+        ]
+      }
+    },
+    {
+      "id": "bounded_mob_output_size",
+      "pass": true,
+      "detail": "atlases=294740 B (max 30784); sheets=476275 B; total=777860 B"
+    },
+    {
+      "id": "reproducible_same_seed",
+      "pass": true,
+      "detail": "17 files (12 atlases, 288 frames) identical in two fresh folders and match the committed output; generation 1.61s"
+    },
+    {
+      "id": "seed_affects_mobs",
+      "pass": true,
+      "detail": "12/12 atlases change at seed 20261032; encounters source_seed=20261032"
+    }
+  ],
+  "metrics": {
+    "animation": {
+      "min_consecutive_changed_pixels": 491,
+      "unique_cells_per_atlas": {
+        "mobs/drowned_records/latchwing_A.png": 23,
+        "mobs/drowned_records/latchwing_B.png": 23,
+        "mobs/drowned_records/relay_choir_A.png": 23,
+        "mobs/drowned_records/relay_choir_B.png": 23,
+        "mobs/switchyard_chapel/latchwing_A.png": 23,
+        "mobs/switchyard_chapel/latchwing_B.png": 23,
+        "mobs/switchyard_chapel/relay_choir_A.png": 21,
+        "mobs/switchyard_chapel/relay_choir_B.png": 22,
+        "mobs/after_hours_pavilion/latchwing_A.png": 23,
+        "mobs/after_hours_pavilion/latchwing_B.png": 23,
+        "mobs/after_hours_pavilion/relay_choir_A.png": 22,
+        "mobs/after_hours_pavilion/relay_choir_B.png": 22
+      }
+    },
+    "silhouettes": {
+      "a_b_iou": [
+        [
+          "drowned_records",
+          "latchwing",
+          0.518
+        ],
+        [
+          "drowned_records",
+          "relay_choir",
+          0.612
+        ],
+        [
+          "switchyard_chapel",
+          "latchwing",
+          0.249
+        ],
+        [
+          "switchyard_chapel",
+          "relay_choir",
+          0.653
+        ],
+        [
+          "after_hours_pavilion",
+          "latchwing",
+          0.501
+        ],
+        [
+          "after_hours_pavilion",
+          "relay_choir",
+          0.832
+        ]
+      ],
+      "cross_design_iou": [
+        [
+          "drowned_records",
+          "latchwing",
+          "drowned_records",
+          "relay_choir",
+          0.572
+        ],
+        [
+          "drowned_records",
+          "latchwing",
+          "switchyard_chapel",
+          "latchwing",
+          0.357
+        ],
+        [
+          "drowned_records",
+          "latchwing",
+          "switchyard_chapel",
+          "relay_choir",
+          0.63
+        ],
+        [
+          "drowned_records",
+          "latchwing",
+          "after_hours_pavilion",
+          "latchwing",
+          0.598
+        ],
+        [
+          "drowned_records",
+          "latchwing",
+          "after_hours_pavilion",
+          "relay_choir",
+          0.509
+        ],
+        [
+          "drowned_records",
+          "relay_choir",
+          "switchyard_chapel",
+          "latchwing",
+          0.229
+        ],
+        [
+          "drowned_records",
+          "relay_choir",
+          "switchyard_chapel",
+          "relay_choir",
+          0.516
+        ],
+        [
+          "drowned_records",
+          "relay_choir",
+          "after_hours_pavilion",
+          "latchwing",
+          0.686
+        ],
+        [
+          "drowned_records",
+          "relay_choir",
+          "after_hours_pavilion",
+          "relay_choir",
+          0.502
+        ],
+        [
+          "switchyard_chapel",
+          "latchwing",
+          "switchyard_chapel",
+          "relay_choir",
+          0.265
+        ],
+        [
+          "switchyard_chapel",
+          "latchwing",
+          "after_hours_pavilion",
+          "latchwing",
+          0.273
+        ],
+        [
+          "switchyard_chapel",
+          "latchwing",
+          "after_hours_pavilion",
+          "relay_choir",
+          0.337
+        ],
+        [
+          "switchyard_chapel",
+          "relay_choir",
+          "after_hours_pavilion",
+          "latchwing",
+          0.559
+        ],
+        [
+          "switchyard_chapel",
+          "relay_choir",
+          "after_hours_pavilion",
+          "relay_choir",
+          0.565
+        ],
+        [
+          "after_hours_pavilion",
+          "latchwing",
+          "after_hours_pavilion",
+          "relay_choir",
+          0.484
+        ]
+      ],
+      "cross_design_max": 0.686
+    },
+    "sizes": {
+      "atlas_total_bytes": 294740,
+      "atlas_max_bytes": 30784,
+      "sheet_total_bytes": 476275,
+      "mob_total_bytes": 777860
+    },
+    "reproducibility": {
+      "files_compared": 17,
+      "differences_between_fresh_folders": [],
+      "differences_from_committed": [],
+      "generation_seconds_first": 1.61,
+      "generation_seconds_second": 1.605
+    }
+  },
+  "notes": [
+    "Structural checks only; warning/attack readability and visual quality are not proved by scores.",
+    "The A/B variants differ in silhouette and detail, not merely hue; the checks measure alpha-mask IoU.",
+    "Six identities use the existing latchwing and relay_choir behavior families unchanged.",
+    "No actor IDs, AI, native frame mapping, gameplay or audio were implemented or tested here.",
+    "Codex owns native integration, frame mapping and visual acceptance."
+  ]
+}

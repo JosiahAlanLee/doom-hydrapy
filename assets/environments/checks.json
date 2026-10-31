@@ -1,0 +1,649 @@
+{
+  "format": "nullrun-environment-kit-checks-1",
+  "source_seed": 20261031,
+  "art_pngs": 45,
+  "sheet_pngs": 6,
+  "art_bundle_sha256": "ec32c74a83bcda524012df63ccfb37e6574e55a9e17d4ab3524ef6a7c8bf7daf",
+  "passed": true,
+  "failed": [],
+  "checks": [
+    {
+      "id": "art_count_45",
+      "pass": true,
+      "detail": "45 art PNGs; missing=[]; extra=[]",
+      "count": 45,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "id": "sheet_count_6",
+      "pass": true,
+      "detail": "6 sheet PNGs; missing=[]; extra=[]",
+      "count": 6
+    },
+    {
+      "id": "environments_json_present",
+      "pass": true,
+      "detail": "environments.json exists"
+    },
+    {
+      "id": "dimensions_and_modes",
+      "pass": true,
+      "detail": "all 45 art files have the expected size and mode",
+      "problems": []
+    },
+    {
+      "id": "unique_assets",
+      "pass": true,
+      "detail": "45 unique SHA256 values for 45 files",
+      "duplicates": []
+    },
+    {
+      "id": "nonblank_contrast",
+      "pass": true,
+      "detail": "all assets are nonblank and meet the documented contrast floor",
+      "weak": []
+    },
+    {
+      "id": "prop_alpha_padding_anchor",
+      "pass": true,
+      "detail": "all props are transparent cut-outs with >=3 px margins and bottom-anchored bases",
+      "problems": []
+    },
+    {
+      "id": "seam_exact_edges",
+      "pass": true,
+      "detail": "opposite edge rows and columns match exactly for all 36 wall/flat images",
+      "seams": [
+        {
+          "file": "art/drowned_records/walls/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/05.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/06.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/07.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/walls/08.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/flats/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/flats/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/flats/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/drowned_records/flats/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/05.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/06.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/07.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/walls/08.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/flats/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/flats/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/flats/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/switchyard_chapel/flats/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/05.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/06.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/07.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/walls/08.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/flats/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/flats/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/flats/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/after_hours_pavilion/flats/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        }
+      ]
+    },
+    {
+      "id": "seam_behavior_documented",
+      "pass": true,
+      "detail": "environments.json declares wall, flat and prop seam behaviour per set"
+    },
+    {
+      "id": "floor_ceiling_distinction",
+      "pass": true,
+      "detail": "each set has darker floors than ceilings and a lit ceiling with static fixture pixels",
+      "rows": {
+        "drowned_records": {
+          "floor_mean": 77.02,
+          "ceiling_mean": 166.57,
+          "difference": 89.56,
+          "flat04_bright_fraction": 0.231
+        },
+        "switchyard_chapel": {
+          "floor_mean": 62.99,
+          "ceiling_mean": 143.82,
+          "difference": 80.83,
+          "flat04_bright_fraction": 0.0564
+        },
+        "after_hours_pavilion": {
+          "floor_mean": 138.05,
+          "ceiling_mean": 184.86,
+          "difference": 46.8,
+          "flat04_bright_fraction": 0.0879
+        }
+      }
+    },
+    {
+      "id": "wall_bright_dark_hierarchy",
+      "pass": true,
+      "detail": "each base wall set includes dark and bright material roles",
+      "rows": {
+        "drowned_records": {
+          "min": 81.3,
+          "max": 189.0,
+          "range": 107.6,
+          "means": [
+            189.0,
+            161.9,
+            81.3,
+            82.4,
+            118.2,
+            145.9
+          ]
+        },
+        "switchyard_chapel": {
+          "min": 69.5,
+          "max": 206.8,
+          "range": 137.3,
+          "means": [
+            206.8,
+            69.5,
+            82.4,
+            103.5,
+            75.2,
+            140.3
+          ]
+        },
+        "after_hours_pavilion": {
+          "min": 86.0,
+          "max": 157.0,
+          "range": 71.0,
+          "means": [
+            98.6,
+            94.6,
+            124.0,
+            106.1,
+            86.0,
+            157.0
+          ]
+        }
+      }
+    },
+    {
+      "id": "inter_set_difference_beyond_recolor",
+      "pass": true,
+      "detail": "wall mean/max=0.230/0.408; flat mean/max=0.213/0.528; prop mean/max=0.540/0.723",
+      "metrics": {
+        "wall_same_index_iou": {
+          "drowned_records__switchyard_chapel": [
+            0.167,
+            0.144,
+            0.407,
+            0.18,
+            0.211,
+            0.229,
+            0.201,
+            0.172
+          ],
+          "drowned_records__after_hours_pavilion": [
+            0.232,
+            0.196,
+            0.218,
+            0.267,
+            0.26,
+            0.408,
+            0.222,
+            0.2
+          ],
+          "switchyard_chapel__after_hours_pavilion": [
+            0.259,
+            0.173,
+            0.312,
+            0.206,
+            0.197,
+            0.333,
+            0.162,
+            0.161
+          ]
+        },
+        "wall_mean": 0.23,
+        "wall_max": 0.408,
+        "flat_same_index_iou": {
+          "drowned_records__switchyard_chapel": [
+            0.197,
+            0.255,
+            0.106,
+            0.21
+          ],
+          "drowned_records__after_hours_pavilion": [
+            0.161,
+            0.147,
+            0.528,
+            0.191
+          ],
+          "switchyard_chapel__after_hours_pavilion": [
+            0.239,
+            0.171,
+            0.111,
+            0.24
+          ]
+        },
+        "flat_mean": 0.213,
+        "flat_max": 0.528,
+        "prop_alpha_iou": {
+          "service_lamp": {
+            "drowned_records__switchyard_chapel": 0.601,
+            "drowned_records__after_hours_pavilion": 0.539,
+            "switchyard_chapel__after_hours_pavilion": 0.445
+          },
+          "cable_shrine": {
+            "drowned_records__switchyard_chapel": 0.676,
+            "drowned_records__after_hours_pavilion": 0.348,
+            "switchyard_chapel__after_hours_pavilion": 0.349
+          },
+          "directory_sign": {
+            "drowned_records__switchyard_chapel": 0.723,
+            "drowned_records__after_hours_pavilion": 0.571,
+            "switchyard_chapel__after_hours_pavilion": 0.612
+          }
+        },
+        "prop_mean": 0.54,
+        "prop_max": 0.723,
+        "method": "high-pass geometric masks exclude the shared 3-4 px edge frame; a pure recolor or identical silhouette would score near 1.0"
+      }
+    },
+    {
+      "id": "distinct_prop_fiction",
+      "pass": true,
+      "detail": "all three sets give each native prop slot a different display_name"
+    },
+    {
+      "id": "environments_schema",
+      "pass": true,
+      "detail": "format, seed, three sets, palettes, landmarks, props and metadata paths are valid",
+      "problems": []
+    },
+    {
+      "id": "sheets_present_and_sized",
+      "pass": true,
+      "detail": "6 readable contact/tiling sheets at the documented dimensions",
+      "sheets": {
+        "sheets/drowned_records-kit.png": [
+          1180,
+          1530,
+          "RGB"
+        ],
+        "sheets/drowned_records-tiling.png": [
+          1180,
+          2860,
+          "RGB"
+        ],
+        "sheets/switchyard_chapel-kit.png": [
+          1180,
+          1530,
+          "RGB"
+        ],
+        "sheets/switchyard_chapel-tiling.png": [
+          1180,
+          2860,
+          "RGB"
+        ],
+        "sheets/after_hours_pavilion-kit.png": [
+          1180,
+          1530,
+          "RGB"
+        ],
+        "sheets/after_hours_pavilion-tiling.png": [
+          1180,
+          2860,
+          "RGB"
+        ]
+      }
+    },
+    {
+      "id": "bounded_output_size",
+      "pass": true,
+      "detail": "art=83453 B (max 4257); sheets=730659 B; kit=1041528 B",
+      "sizes": {
+        "art_total_bytes": 83453,
+        "art_max_bytes": 4257,
+        "sheet_total_bytes": 730659,
+        "kit_total_bytes": 1041528,
+        "png_total_bytes": 814112
+      }
+    },
+    {
+      "id": "reproducible_same_seed",
+      "pass": true,
+      "detail": "52 files (45 art PNGs) identical in two fresh folders and match the committed output; generation 1.53s",
+      "metrics": {
+        "files_compared": 52,
+        "pngs_compared": 51,
+        "fresh_folder_differences": [],
+        "committed_differences": [],
+        "generation_seconds_first": 1.529,
+        "generation_seconds_second": 1.54
+      }
+    },
+    {
+      "id": "seed_affects_assets",
+      "pass": true,
+      "detail": "45/45 art PNGs change at seed 20261032; environments source_seed=20261032"
+    },
+    {
+      "id": "manifest_integrity",
+      "pass": true,
+      "detail": "57 files hashed and matching; 51 art entries carry dimensions, mode and seam metadata",
+      "problems": []
+    }
+  ],
+  "metrics": {
+    "floor_ceiling": {
+      "drowned_records": {
+        "floor_mean": 77.02,
+        "ceiling_mean": 166.57,
+        "difference": 89.56,
+        "flat04_bright_fraction": 0.231
+      },
+      "switchyard_chapel": {
+        "floor_mean": 62.99,
+        "ceiling_mean": 143.82,
+        "difference": 80.83,
+        "flat04_bright_fraction": 0.0564
+      },
+      "after_hours_pavilion": {
+        "floor_mean": 138.05,
+        "ceiling_mean": 184.86,
+        "difference": 46.8,
+        "flat04_bright_fraction": 0.0879
+      }
+    },
+    "wall_hierarchy": {
+      "drowned_records": {
+        "min": 81.3,
+        "max": 189.0,
+        "range": 107.6,
+        "means": [
+          189.0,
+          161.9,
+          81.3,
+          82.4,
+          118.2,
+          145.9
+        ]
+      },
+      "switchyard_chapel": {
+        "min": 69.5,
+        "max": 206.8,
+        "range": 137.3,
+        "means": [
+          206.8,
+          69.5,
+          82.4,
+          103.5,
+          75.2,
+          140.3
+        ]
+      },
+      "after_hours_pavilion": {
+        "min": 86.0,
+        "max": 157.0,
+        "range": 71.0,
+        "means": [
+          98.6,
+          94.6,
+          124.0,
+          106.1,
+          86.0,
+          157.0
+        ]
+      }
+    },
+    "inter_set_structure": {
+      "wall_same_index_iou": {
+        "drowned_records__switchyard_chapel": [
+          0.167,
+          0.144,
+          0.407,
+          0.18,
+          0.211,
+          0.229,
+          0.201,
+          0.172
+        ],
+        "drowned_records__after_hours_pavilion": [
+          0.232,
+          0.196,
+          0.218,
+          0.267,
+          0.26,
+          0.408,
+          0.222,
+          0.2
+        ],
+        "switchyard_chapel__after_hours_pavilion": [
+          0.259,
+          0.173,
+          0.312,
+          0.206,
+          0.197,
+          0.333,
+          0.162,
+          0.161
+        ]
+      },
+      "wall_mean": 0.23,
+      "wall_max": 0.408,
+      "flat_same_index_iou": {
+        "drowned_records__switchyard_chapel": [
+          0.197,
+          0.255,
+          0.106,
+          0.21
+        ],
+        "drowned_records__after_hours_pavilion": [
+          0.161,
+          0.147,
+          0.528,
+          0.191
+        ],
+        "switchyard_chapel__after_hours_pavilion": [
+          0.239,
+          0.171,
+          0.111,
+          0.24
+        ]
+      },
+      "flat_mean": 0.213,
+      "flat_max": 0.528,
+      "prop_alpha_iou": {
+        "service_lamp": {
+          "drowned_records__switchyard_chapel": 0.601,
+          "drowned_records__after_hours_pavilion": 0.539,
+          "switchyard_chapel__after_hours_pavilion": 0.445
+        },
+        "cable_shrine": {
+          "drowned_records__switchyard_chapel": 0.676,
+          "drowned_records__after_hours_pavilion": 0.348,
+          "switchyard_chapel__after_hours_pavilion": 0.349
+        },
+        "directory_sign": {
+          "drowned_records__switchyard_chapel": 0.723,
+          "drowned_records__after_hours_pavilion": 0.571,
+          "switchyard_chapel__after_hours_pavilion": 0.612
+        }
+      },
+      "prop_mean": 0.54,
+      "prop_max": 0.723,
+      "method": "high-pass geometric masks exclude the shared 3-4 px edge frame; a pure recolor or identical silhouette would score near 1.0"
+    },
+    "sizes": {
+      "art_total_bytes": 83453,
+      "art_max_bytes": 4257,
+      "sheet_total_bytes": 730659,
+      "kit_total_bytes": 1041528,
+      "png_total_bytes": 814112
+    },
+    "reproducibility": {
+      "files_compared": 52,
+      "pngs_compared": 51,
+      "fresh_folder_differences": [],
+      "committed_differences": [],
+      "generation_seconds_first": 1.529,
+      "generation_seconds_second": 1.54
+    }
+  },
+  "notes": [
+    "These are structural and geometric checks. They do not prove visual quality.",
+    "Visual acceptance is not claimed; Codex owns native integration and visual review.",
+    "Structure metrics exclude the shared edge frame so they measure actual forms, not the kit frame.",
+    "Assets have not been palette-quantised to the Doom PLAYPAL or rendered in the native game.",
+    "The reproducibility check runs art.py twice in fresh folders inside this kit and removes them."
+  ],
+  "visual_acceptance": "not claimed; native renderer and human visual review are separate",
+  "elapsed_seconds": 5.124
+}

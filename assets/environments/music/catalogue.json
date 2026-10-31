@@ -1,0 +1,48 @@
+{
+  "format": "nullrun-environment-score-catalogue-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "notes": [
+    "Original written note data only; no audio was rendered or auditioned.",
+    "Paths are relative to the kit root. BPM and bars give exactly 120.000 s at 4/4.",
+    "Codex owns native playback, Rack mapping, revoicing and audio review."
+  ],
+  "sets": {
+    "drowned_records": {
+      "score": "music/drowned_records/score.json",
+      "checks": "music/drowned_records/checks.json",
+      "patch_plan": "music/drowned_records/patch-plan.json",
+      "bpm": 96,
+      "seconds": 120.0,
+      "bars": 48,
+      "patterns": 6,
+      "key": 5,
+      "mood": "Sparse flood-marked archive pressure: broken low pulses, long bass, warm reedy PVX and a restrained near-interval motif.",
+      "sha256": "dac0d67eebbb26ef4b92308fe809cd05ead91eef2a0c0c84e37f06d2e9c0dd28"
+    },
+    "switchyard_chapel": {
+      "score": "music/switchyard_chapel/score.json",
+      "checks": "music/switchyard_chapel/checks.json",
+      "patch_plan": "music/switchyard_chapel/patch-plan.json",
+      "bpm": 128,
+      "seconds": 120.0,
+      "bars": 64,
+      "patterns": 8,
+      "key": 2,
+      "mood": "Driving syncopated electro/FM machinery: irregular percussion, a strong bass figure, call/response lead, a sparse breakdown and a developed return.",
+      "sha256": "5cd35fe6b14e388b2385a555607c0e375207daf2c4329ea8b333d39d34cdf7f5"
+    },
+    "after_hours_pavilion": {
+      "score": "music/after_hours_pavilion/score.json",
+      "checks": "music/after_hours_pavilion/checks.json",
+      "patch_plan": "music/after_hours_pavilion/patch-plan.json",
+      "bpm": 112,
+      "seconds": 120.0,
+      "bars": 56,
+      "patterns": 7,
+      "key": 7,
+      "mood": "Off-kilter broken lounge: displaced bell/reed phrase, gentle mechanical bass, missing expected beats and a deliberately quiet middle.",
+      "sha256": "737e361d3d244726c5567204ff60f7ef9620c5699a0436790e23534c390fbbc3"
+    }
+  }
+}

@@ -30,29 +30,38 @@ def palette_indices(image,palette):
     nearest=((unique[:,None,:]-palette[None,:,:].astype(np.int32))**2).sum(2).argmin(1)
     return nearest[inverse].astype(np.uint8).tobytes()
 
-def flat_lumps(palette):
-    return [(f'NFLAT{i:02}',palette_indices(picture(f'flats/NFLAT{i:02}.png'),palette)) for i in range(1,5)]
+def flat_lumps(palette,environment=None):
+    result=[(f'NFLAT{i:02}',palette_indices(picture(f'flats/NFLAT{i:02}.png'),palette)) for i in range(1,5)]
+    if environment:
+        from rogue.environments import picture as environment_picture
+        result.extend((f'EFLAT{i:02}',palette_indices(environment_picture(environment,'flats',i),palette)) for i in range(1,5))
+    return result
 
-def wall_lumps(assets):
+def wall_lumps(assets,environment=None):
     from rogue.creatures import wad_lumps,patch
     lumps=dict(wad_lumps(assets))
     palette=np.frombuffer(lumps['PLAYPAL'][:768],dtype=np.uint8).reshape(256,3)
+    images=[(f'NWALL{i:02}',picture(f'walls/NWALL{i:02}.png')) for i in range(1,7)]
+    if environment:
+        from rogue.environments import picture as environment_picture
+        images.extend((f'EWALL{i:02}',environment_picture(environment,'walls',i)) for i in range(1,9))
+    extra=len(images)
     pnames=lumps['PNAMES'];count=struct.unpack_from('<I',pnames)[0]
-    if len(pnames)<4+8*count or count+6>=32768:raise ValueError('Invalid source PNAMES')
-    names=[f'NWALL{i:02}' for i in range(1,7)]
-    result=[(name,patch(picture(f'walls/{name}.png'),palette)) for name in names]
-    result.append(('PNAMES',struct.pack('<I',count+6)+pnames[4:4+8*count]+b''.join(name.encode().ljust(8,b'\0') for name in names)))
+    if len(pnames)<4+8*count or count+extra>=32768:raise ValueError('Invalid source PNAMES')
+    names=[name for name,_ in images]
+    result=[(name,patch(image.convert('RGBA'),palette)) for name,image in images]
+    result.append(('PNAMES',struct.pack('<I',count+extra)+pnames[4:4+8*count]+b''.join(name.encode().ljust(8,b'\0') for name in names)))
     textures=lumps['TEXTURE1'];n=struct.unpack_from('<I',textures)[0]
     offsets=list(struct.unpack_from('<'+'I'*n,textures,4))
     old_header=4+4*n
     if any(offset<old_header or offset>=len(textures) for offset in offsets):raise ValueError('Invalid source TEXTURE1')
-    data=bytearray(textures[old_header:]);new_offsets=[offset+24 for offset in offsets]
-    header=4+4*(n+6)
+    data=bytearray(textures[old_header:]);new_offsets=[offset+4*extra for offset in offsets]
+    header=4+4*(n+extra)
     for k,name in enumerate(names):
         new_offsets.append(header+len(data))
         data.extend(struct.pack('<8sIHHIH',name.encode().ljust(8,b'\0'),0,128,128,0,1))
         data.extend(struct.pack('<5h',0,0,count+k,1,0))
-    result.append(('TEXTURE1',struct.pack('<I',n+6)+struct.pack('<'+'I'*(n+6),*new_offsets)+data))
+    result.append(('TEXTURE1',struct.pack('<I',n+extra)+struct.pack('<'+'I'*(n+extra),*new_offsets)+data))
     return result
 
 def opening_bosses(floor,seed,props):

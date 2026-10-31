@@ -1,0 +1,191 @@
+{
+  "format": "nullrun-environment-score-checks-1",
+  "set_id": "after_hours_pavilion",
+  "score": "score.json",
+  "score_sha256": "737e361d3d244726c5567204ff60f7ef9620c5699a0436790e23534c390fbbc3",
+  "score_bytes": 160611,
+  "passed": true,
+  "failed": [],
+  "checks": [
+    {
+      "id": "tracker3_validate",
+      "pass": true,
+      "detail": "accepted by hydrapy.tracker_v3.validate"
+    },
+    {
+      "id": "timeline_120_seconds",
+      "pass": true,
+      "detail": "896 rows, 430080 ticks, 120.000000 s"
+    },
+    {
+      "id": "pattern_geometry",
+      "pass": true,
+      "detail": "7 x 8-bar patterns, rate 1, 16 rows/bar, finite chain 0-6"
+    },
+    {
+      "id": "header",
+      "pass": true,
+      "detail": "BPM 112, key 7, 7 patterns, 56 bars, loop=False"
+    },
+    {
+      "id": "six_lane_names",
+      "pass": true,
+      "detail": "kick / snare / hat-texture / lead / bass / counterline-atmosphere"
+    },
+    {
+      "id": "no_chords_one_cell_per_row",
+      "pass": true,
+      "detail": "each lane has at most one onset per row"
+    },
+    {
+      "id": "monophonic_no_gate_overlap",
+      "pass": true,
+      "detail": "all lane gates are disjoint, including chained pattern boundaries"
+    },
+    {
+      "id": "midi_24_96",
+      "pass": true,
+      "detail": "written range 36..84"
+    },
+    {
+      "id": "dynamics",
+      "pass": true,
+      "detail": "velocity 30..90, 27 levels"
+    },
+    {
+      "id": "rests_and_no_extended_silence",
+      "pass": true,
+      "detail": "empty-row share 0.78/0.92/0.87/0.93/0.84/0.98; max all-lane gap 5 rows"
+    },
+    {
+      "id": "score_file_matches",
+      "pass": true,
+      "detail": "score.json equals a fresh build with pretty indentation and trailing newline"
+    },
+    {
+      "id": "deterministic",
+      "pass": true,
+      "detail": "two builds are identical; sha256 737e361d3d244726c5567204ff60f7ef9620c5699a0436790e23534c390fbbc3"
+    },
+    {
+      "id": "patch_plan_low_cpu_intent",
+      "pass": true,
+      "detail": "six lanes, PVX lead/bass, simple percussion, optional clean Spoon Bender, PVX input2/VCA and no-firmware/no-bank/no-GPU/no-DC limits documented",
+      "problems": []
+    },
+    {
+      "id": "distinct_bpm",
+      "pass": true,
+      "detail": "bpm values [96, 128, 112]"
+    },
+    {
+      "id": "distinct_bars",
+      "pass": true,
+      "detail": "bars values [48, 64, 56]"
+    },
+    {
+      "id": "distinct_patterns",
+      "pass": true,
+      "detail": "patterns values [6, 8, 7]"
+    },
+    {
+      "id": "distinct_key",
+      "pass": true,
+      "detail": "key values [5, 2, 7]"
+    },
+    {
+      "id": "distinct_event_density",
+      "pass": true,
+      "detail": "event counts [443, 1768, 611]"
+    },
+    {
+      "id": "distinct_kick_rhythm",
+      "pass": true,
+      "detail": "first-pattern kick row sets differ: drowned_records=16 rows; switchyard_chapel=48 rows; after_hours_pavilion=32 rows"
+    },
+    {
+      "id": "distinct_lead_contour",
+      "pass": true,
+      "detail": "lead interval sequences differ across all three scores"
+    },
+    {
+      "id": "distinct_lead_register",
+      "pass": true,
+      "detail": "lead mean MIDI drowned_records=67.76, switchyard_chapel=72.95, after_hours_pavilion=70.69"
+    }
+  ],
+  "timeline": {
+    "bpm": 112,
+    "key": 7,
+    "bars": 56,
+    "patterns": 7,
+    "rows": 896,
+    "ticks": 430080,
+    "seconds": 120.0,
+    "loop": false,
+    "row_seconds": 0.13392857142857142
+  },
+  "lanes": {
+    "kick": {
+      "events": 200,
+      "rest_fraction": 0.7768,
+      "max_onset_gap_rows": 8
+    },
+    "snare": {
+      "events": 72,
+      "rest_fraction": 0.9196,
+      "max_onset_gap_rows": 266
+    },
+    "hat/texture": {
+      "events": 116,
+      "rest_fraction": 0.8705,
+      "max_onset_gap_rows": 262
+    },
+    "lead": {
+      "events": 61,
+      "rest_fraction": 0.9319,
+      "max_onset_gap_rows": 149
+    },
+    "bass": {
+      "events": 144,
+      "rest_fraction": 0.8393,
+      "max_onset_gap_rows": 10
+    },
+    "counterline/atmosphere": {
+      "events": 18,
+      "rest_fraction": 0.9799,
+      "max_onset_gap_rows": 78
+    }
+  },
+  "pitch": {
+    "lead": {
+      "min": 67,
+      "max": 74,
+      "count": 61,
+      "mean": 70.689
+    },
+    "bass": {
+      "min": 43,
+      "max": 55,
+      "count": 144,
+      "mean": 47.722
+    },
+    "counterline": {
+      "min": 74,
+      "max": 84,
+      "count": 18,
+      "mean": 79.722
+    }
+  },
+  "velocity": {
+    "min": 30,
+    "max": 90,
+    "levels": 27
+  },
+  "notes": [
+    "Validated with the supplied hydrapy.tracker_v3 reader; no reimplementation.",
+    "No audio was rendered or auditioned. Patch plans are intent only.",
+    "The score is original written note data; no sample or existing music is included.",
+    "Codex owns native playback, Rack mapping and audio review."
+  ]
+}

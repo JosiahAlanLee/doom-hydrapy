@@ -1,0 +1,78 @@
+{
+  "format": "nullrun-environment-mobs-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "title": "Null Run signature mobs for the three environment kits",
+  "behavior_families": {
+    "latchwing": "Existing class 15 CYBR family: telegraphed locked-direction dash. These six designs use it unchanged.",
+    "relay_choir": "Existing class 16 PAIN family: anchored telegraphed slow three-projectile fan. These six designs use it unchanged."
+  },
+  "notes": [
+    "Art only. Six new identities use two existing behavior families; no new AI, actor IDs, frame mapping or mechanics are introduced.",
+    "A and B are two variants of the same design and behavior family; they differ in shape and detail, not merely color.",
+    "Codex owns behavior, labels, native frame mapping, collision and visual validation.",
+    "The atlases are static art: four frames per state, six states, 128x128 cells in a 512x768 RGBA sheet."
+  ],
+  "sets": {
+    "drowned_records": {
+      "latchwing": {
+        "id": "shelf_widow",
+        "name": "SHELF WIDOW",
+        "description": "An ordinary bowed filing shelf that has learned to stand. Its front splits into a long, low negative-space body; paper folds become limbs and open drawers become wet mouths. It is found-object architecture first and an animal only when it unfolds.",
+        "behavior_family": "latchwing",
+        "warning_notes": "Warning is a slow separation of the cabinet face: drawer gaps widen, the dark interior lengthens, and folded paper limbs slide out. The locked-direction dash is shown as a low, committed lunge, never a teleport. Keep the empty cavity and drawer mouths readable at 128 px.",
+        "limits": "Existing latchwing family only: class 15 CYBR, telegraphed locked-direction dash. No new AI, phasing, teleportation, gaze or actor ID. Codex owns behavior and frame mapping.",
+        "atlas": "mobs/drowned_records/latchwing_A.png and mobs/drowned_records/latchwing_B.png"
+      },
+      "relay_choir": {
+        "id": "redacted_choir",
+        "name": "REDACTED CHOIR",
+        "description": "A hunched stack of waterlogged registrars and paper-veiled almost-faces. The blank regions are the point: no eyes, only seams and slowly rising ink pressure behind the paper. When it opens, three wet paper tongues fan out from the stack.",
+        "behavior_family": "relay_choir",
+        "warning_notes": "Warning is the ink level visibly climbing inside the blank face panels across four frames, with a copper pressure needle. It is slow, quiet and readable without a flash or a dark outline. The three-projectile fan is composed as three paper tongues, not a new mechanic.",
+        "limits": "Existing relay_choir family only: class 16 PAIN, anchored telegraphed slow three-projectile fan. No new AI, projectile count, phasing or actor ID. Codex owns behavior and frame mapping.",
+        "atlas": "mobs/drowned_records/relay_choir_A.png and mobs/drowned_records/relay_choir_B.png"
+      }
+    },
+    "switchyard_chapel": {
+      "latchwing": {
+        "id": "insulator_widow",
+        "name": "INSULATOR WIDOW",
+        "description": "A fluted ceramic and cable arthropod assembled from petticoat insulators, rust iron joints and heavy cable legs. Amber pressure glows between cracked ivory segments; it moves like a low, cautious machine that has been left energized too long.",
+        "behavior_family": "latchwing",
+        "warning_notes": "Warning separates the ceramic discs and shows amber pressure in the gaps while the cable legs coil. The dash is a stretched, low directional lunge with trailing cable, clearly different from the drowned shelf.",
+        "limits": "Existing latchwing family only: class 15 CYBR, telegraphed locked-direction dash. No new AI, electric damage, phasing or actor ID. Codex owns behavior and frame mapping.",
+        "atlas": "mobs/switchyard_chapel/latchwing_A.png and mobs/switchyard_chapel/latchwing_B.png"
+      },
+      "relay_choir": {
+        "id": "transformer_cantor",
+        "name": "TRANSFORMER CANTOR",
+        "description": "A stationary radial insulator and conductor body: a rust iron core inside a crown of ivory ceramic fins, braided cable roots and small amber pressure gauges. It does not walk; it rotates, opens and sings a wide three-part fan.",
+        "behavior_family": "relay_choir",
+        "warning_notes": "Warning is a slow outward rotation of the fin crown, three amber pressure eyes rising and three ceramic nozzles extending. The three-projectile fan is the existing anchored relay pattern, shown as a spreading mechanical fan, not a new attack.",
+        "limits": "Existing relay_choir family only: class 16 PAIN, anchored telegraphed slow three-projectile fan. No new AI, beam, chain lightning or actor ID. Codex owns behavior and frame mapping.",
+        "atlas": "mobs/switchyard_chapel/relay_choir_A.png and mobs/switchyard_chapel/relay_choir_B.png"
+      }
+    },
+    "after_hours_pavilion": {
+      "latchwing": {
+        "id": "queue_stalker",
+        "name": "QUEUE STALKER",
+        "description": "An empty folded service coat suspended on low articulated queue struts. The collar is an unfilled opening, the sleeves are flat pleats and a retractable belt hangs where an arm should be. It moves in short, over-civil scuttles.",
+        "behavior_family": "latchwing",
+        "warning_notes": "Warning unfolds the coat into a wider baffle, lifts the empty sleeves and opens the collar while the struts spread. The lunge is a low, compressed dash; the silhouette stays a coat and stand, never a soldier.",
+        "limits": "Existing latchwing family only: class 15 CYBR, telegraphed locked-direction dash. No new AI, possession, phasing or actor ID. Codex owns behavior and frame mapping.",
+        "atlas": "mobs/after_hours_pavilion/latchwing_A.png and mobs/after_hours_pavilion/latchwing_B.png"
+      },
+      "relay_choir": {
+        "id": "usher_cluster",
+        "name": "USHER CLUSTER",
+        "description": "A split-faced unattended ticket and usher arrangement: overlapping kiosk faces, folded brass baffles and three empty apertures of different sizes. The symmetry is deliberately broken; nothing inside the apertures is shown.",
+        "behavior_family": "relay_choir",
+        "warning_notes": "Warning unfolds the brass baffles and widens the empty apertures while small brass pressure flags rise. The three dark apertures become the three-tongue fan of the existing anchored relay pattern. No fake portal or gaze is drawn.",
+        "limits": "Existing relay_choir family only: class 16 PAIN, anchored telegraphed slow three-projectile fan. No new AI, portal, gaze or actor ID. Codex owns behavior and frame mapping.",
+        "atlas": "mobs/after_hours_pavilion/relay_choir_A.png and mobs/after_hours_pavilion/relay_choir_B.png"
+      }
+    }
+  }
+}
