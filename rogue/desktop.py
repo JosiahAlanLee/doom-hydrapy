@@ -15,7 +15,7 @@ import time
 from PIL import Image,ImageDraw,ImageFont
 from rogue.server import Game,KEYS
 from rogue.inhabitants import CREATURES
-from rogue.hud import decorate,overlay,font
+from rogue.hud import decorate,overlay,font,shop_overlay,SHOP_ROWS
 
 _current=None
 _replacement_lock=threading.RLock()
@@ -24,7 +24,7 @@ _replacement_lock=threading.RLock()
 class NativeGame(Game):
     def __init__(self,wad,run_dir,*,initial_mode='campaign',identity=True):
         self.initial_mode=initial_mode
-        super().__init__(wad,run_dir,identity=identity,render_scale=2)
+        super().__init__(wad,run_dir,identity=identity,render_scale=2,vending=True)
 
     def new_run(self,seed,mode=None):
         return super().new_run(seed,mode or self.initial_mode)
@@ -44,6 +44,7 @@ class Desktop:
         self.game=None;self.http=None;self.http_thread=None;self._callbacks=[]
         self._resource_state='pending';self._manage_current=False;self._previous=None;self._stage_resources=None
         self.owner=None;self.keys=set();self.input_source=None;self.api_until=0
+        self.shop_source=None;self.shop_error=None
         try:preferences=json.loads((self.root/'view-settings.json').read_text())
         except (OSError,ValueError):preferences={}
         if not isinstance(preferences,dict):preferences={}
@@ -121,7 +122,8 @@ class Desktop:
                 try:
                     n=int(self.headers.get('Content-Length','0'));assert 0<n<=4096
                     data=json.loads(self.rfile.read(n));assert isinstance(data,dict)
-                    control.action(data,automated=True);self.send({'ok':True})
+                    result=control.action(data,automated=True)
+                    self.send(result if isinstance(result,dict) else {'ok':True})
                 except (ValueError,TypeError,AssertionError) as e:self.send({'error':str(e)},400)
                 except Exception as e:self.send({'error':type(e).__name__+': '+str(e)},500)
         http=ThreadingHTTPServer(('127.0.0.1',self.port),Handler)
@@ -155,6 +157,7 @@ class Desktop:
         self.release_mouse()
 
     def resume(self,automated=False):
+        if self.shopping():return
         self.pause()
         self.show_credits=False
         if self.loading or self.game.state.get('dead') or self.game.state.get('won'):return
@@ -168,6 +171,7 @@ class Desktop:
         if self.campaign_only and mode!='campaign':raise ValueError('This player runs the seven-tier campaign')
         if mode not in ['strobe','campaign','memory','pillar','corridor',*CREATURES]:raise ValueError('Unknown run mode')
         self.pause()
+        self.shop_source=None;self.shop_error=None
         seed=secrets.randbits(32) if random_seed else self.game.manifest['seed']
         self.loading=True;self.pending_start=self.autostart
         def build():
@@ -183,7 +187,8 @@ class Desktop:
 
     def action(self,data,automated=False):
         action=data.get('action')
-        if automated and action in ['resume','pause','keys','new'] and self.input_source=='physical' and not self.game.paused:
+        physical_shop=self.shopping() and (getattr(self,'shop_source',None)=='physical' or self.input_source=='physical')
+        if automated and action in ['resume','pause','keys','new','buy','close_shop'] and (physical_shop or self.input_source=='physical' and not self.game.paused):
             raise ValueError('The native player has the controls')
         if action=='resume':self.resume(automated)
         elif action=='pause':self.pause()
@@ -193,6 +198,11 @@ class Desktop:
             if not self.owner or self.input_source!='api':raise ValueError('Acquire test controls first')
             self.keys=set(keys);self.api_until=time.monotonic()+1;self.api_events+=1
         elif action=='new':self.new(data.get('mode'),data.get('random_seed',False))
+        elif action=='buy':
+            if data.get('revision')!=self.game.revision:raise ValueError('That offer belongs to an earlier run.')
+            if data.get('vendor')!=self.game.state.get('vending',{}).get('vendor',{}).get('id'):raise ValueError('Wrong machine.')
+            return self.choose_offer(data.get('slot'))
+        elif action=='close_shop':self.leave_shop()
         elif action=='filter':
             mode=data.get('mode');
             if type(mode) is not int or not 0<=mode<=3:raise ValueError('Unknown treatment')
@@ -206,6 +216,32 @@ class Desktop:
             with self.game.lock:self.game.engine.command(f'STROBE_VIEW {int(enabled)}')
         elif action=='screenshot':self.capture_requested=True
         else:raise ValueError('Unknown action')
+
+    def shopping(self):
+        return bool(getattr(self.game,'state',{}).get('vending',{}).get('menu_open'))
+
+    def sync_shop(self):
+        if self.loading or not self.shopping():return
+        if getattr(self,'shop_source',None) is None:
+            self.shop_source=self.input_source or 'physical';self.shop_error=None
+        self.pause()
+
+    def choose_offer(self,slot):
+        if type(slot) is not int or not 0<=slot<3:raise ValueError('Unknown offer.')
+        if not self.shopping():raise ValueError('Open a machine first.')
+        self.sync_shop()
+        vendor=self.game.state['vending']['vendor']['id']
+        result=self.game.purchase(vendor,slot,self.game.revision)
+        self.shop_error=result.get('error');self.clear_frames=4
+        if result['ok']:
+            source=self.shop_source;self.shop_source=None
+            self.resume(automated=source=='api')
+        return result
+
+    def leave_shop(self):
+        if not self.shopping():return
+        self.pause();self.game.close_shop()
+        self.shop_source=None;self.shop_error=None;self.clear_frames=4
 
     def save_view(self):
         with self.view_lock:
@@ -249,6 +285,16 @@ class Desktop:
         self.physical_events+=1
         if action==g.RELEASE:self.keys.discard(code);return
         if action!=g.PRESS:return
+        if self.shopping():
+            self.sync_shop()
+            self.shop_source='physical'
+            if button==g.MOUSE_BUTTON_LEFT:
+                x,y=g.get_cursor_pos(self.window);w,h=g.get_window_size(self.window)
+                if w>0 and h>0:
+                    x,y=x*640/w,y*400/h
+                    for i,(a,b,r,s) in enumerate(SHOP_ROWS):
+                        if a<=x<=r and b<=y<=s:self.choose_offer(i);break
+            return
         if self.input_source=='api':self.pause()
         if self.game.paused:
             if button==g.MOUSE_BUTTON_LEFT:self.resume()
@@ -306,6 +352,13 @@ class Desktop:
         def key(_window,k,scancode,action,mods):
             if self.closed:return
             self.physical_events+=1
+            if self.shopping():
+                if k in keymap and action==glfw.RELEASE:self.keys.discard(keymap[k])
+                if action==glfw.PRESS:
+                    self.sync_shop();self.shop_source='physical'
+                    if glfw.KEY_1<=k<=glfw.KEY_3:self.choose_offer(k-glfw.KEY_1)
+                    elif k in [glfw.KEY_ESCAPE,glfw.KEY_F1]:self.leave_shop()
+                return
             if k in keymap:
                 if self.input_source=='api':self.pause()
                 if action==glfw.RELEASE:self.keys.discard(keymap[k])
@@ -358,7 +411,7 @@ class Desktop:
             state=self.cache['state'];rgb=self.cache['raw'].copy()
         else:raise RuntimeError('No native frame available')
         st=state.get('strobe',{});paused=state.get('paused',True) or self.loading
-        visual_key=(state.get('revision'),state.get('frame'),paused,self.mode,self.flicker,getattr(self,'mouse_sensitivity',3.),self.loading,self.game.error,getattr(self,'show_credits',False))
+        visual_key=(state.get('revision'),state.get('frame'),paused,self.mode,self.flicker,getattr(self,'mouse_sensitivity',3.),self.loading,self.game.error,getattr(self,'show_credits',False),getattr(self,'shop_error',None))
         if self.cache and self.cache.get('visual_key')==visual_key:
             im=self.cache['image']
         else:
@@ -372,6 +425,8 @@ class Desktop:
 
     def draw_screen(self,rgb,state,st,paused):
         im=Image.fromarray(rgb);draw=ImageDraw.Draw(im)
+        if state.get('vending',{}).get('menu_open'):
+            return shop_overlay(decorate(im,state),state,getattr(self,'shop_error',None))
         if self.campaign_only:
             im=decorate(im,state)
             if paused or state.get('dead') or state.get('won'):
@@ -413,6 +468,7 @@ class Desktop:
         now=time.monotonic();self.frames.append(now)
         if getattr(self,'pending_start',False) and self.focused and not self.loading:
             self.pending_start=False;self.resume()
+        self.sync_shop()
         if self.owner:
             if self.game.paused or (self.input_source=='api' and now>self.api_until) or (self.input_source=='physical' and not self.focused):self.pause()
             elif not self.loading:

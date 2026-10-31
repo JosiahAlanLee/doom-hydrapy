@@ -41,6 +41,7 @@ OBJS += $(OBJDIR)/rogue_creature.o
 OBJS += $(OBJDIR)/rogue_arch.o
 OBJS += $(OBJDIR)/rogue_strobe.o
 OBJS += $(OBJDIR)/rogue_argon.o
+OBJS += $(OBJDIR)/rogue_vending.o
 
 all:	 $(OUTPUT)
 
@@ -74,6 +75,7 @@ $(OBJS): rogue_creature.h p_mobj.h
 $(OBJS): rogue_arch.h
 $(OBJS): rogue_strobe.h
 $(OBJS): rogue_argon.h
+$(OBJS): rogue_vending.h
 
 -include $(OBJS:.o=.d)
 

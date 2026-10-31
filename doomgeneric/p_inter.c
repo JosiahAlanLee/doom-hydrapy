@@ -41,6 +41,7 @@
 #include "rogue_boss.h"
 #include "rogue_ai.h"
 #include "rogue_creature.h"
+#include "rogue_vending.h"
 
 
 #define BONUSADD	6
@@ -227,12 +228,13 @@ P_GiveBody
 ( player_t*	player,
   int		num )
 {
-    if (player->health >= MAXHEALTH)
+    int cap = Rogue_HealthCap(player, MAXHEALTH);
+    if (player->health >= cap)
 	return false;
 		
     player->health += num;
-    if (player->health > MAXHEALTH)
-	player->health = MAXHEALTH;
+    if (player->health > cap)
+	player->health = cap;
     player->mo->health = player->health;
 	
     return true;
@@ -799,6 +801,7 @@ P_DamageMobj
 	return;
 
     if (Rogue_BossGuard(target, source)) return;
+    damage = Rogue_UpgradeDamage(target, source, damage);
     Rogue_CreatureHurt(target);
 
     if ( target->flags & MF_SKULLFLY )

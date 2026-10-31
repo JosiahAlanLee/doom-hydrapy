@@ -400,7 +400,7 @@ def creature_study(seed,kind):
                  profiles,[{'kind':kind,'roll':seed%16,'x':mx,'y':my}])
 
 
-def campaign(seed, output, assets=None, practice=None, identity=False):
+def campaign(seed, output, assets=None, practice=None, identity=False, vending=False):
     from rogue.architecture import STUDIES,study,metadata,flats
     from rogue.strobe import STROBES,study as strobe_study,metadata as strobe_metadata
     output=Path(output)
@@ -434,7 +434,14 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
         floors=apply_identity(floors,seed)
         from rogue.environments import apply as apply_environment
         environment=apply_environment(floors,seed)
+    use_vending = bool(vending and identity and not practice)
+    if use_vending:
+        from rogue.vending import place
+        place(floors, seed)
     lumps=[lump for f in floors for lump in map_lumps(f,custom_seals=bool(assets))]
+    if use_vending:
+        from rogue.vending import metadata as vending_metadata
+        lumps.append(vending_metadata(floors, seed))
     from rogue.bosses import metadata as boss_metadata
     lumps.append(boss_metadata(floors))
     if practice in STUDIES:lumps.append(metadata(floors[0]))
@@ -442,6 +449,10 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
     if assets:
         from rogue.creatures import sprite_lumps, FAMILIES
         bank=sprite_lumps(assets,seed,environment)
+        if use_vending:
+            from rogue.vending import sprite_lumps as vending_sprites
+            at=next(i for i,(name,_) in enumerate(bank) if name=='S_END')
+            bank[at:at]=vending_sprites(assets)
         if practice in STUDIES:
             at=next(i for i,(name,_) in enumerate(bank) if name=='F_END')
             bank[at:at]=flats(assets)

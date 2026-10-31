@@ -17,6 +17,10 @@ mouse turn/fire/use, retry/new seed and lightweight Rack ambience. Use
 is available with `python -m rogue.server --wad /path/to/freedoom2.wad` after
 building the engine. The timed performance/capture path below remains separate.
 
+[UPKEEP vending machines](VENDING.md) add a native run economy: earn scrap from
+kills and caches, then choose one seeded upgrade per floor. Purchases carry
+through the run, with a paused choice menu and fresh upgrades on retry/new seed.
+
 [The Gloamwood iteration](GLOAMWOOD.md) adds a watched/crawling Hollow, Stone
 ReDead's telegraphed shriek and escapable grip, two more book demons, and
 individual encounter studies. These use original procedural art. The current

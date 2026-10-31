@@ -31,6 +31,7 @@
 #include "m_misc.h"
 #include "p_local.h"
 #include "rogue_arch.h"
+#include "rogue_vending.h"
 
 #include "s_sound.h"
 
@@ -1202,6 +1203,7 @@ void P_UseLines (player_t*	player)
     fixed_t	x2;
     fixed_t	y2;
 	
+    if (Rogue_VendingUse(player)) return;
     usething = player->mo;
 		
     angle = player->mo->angle >> ANGLETOFINESHIFT;

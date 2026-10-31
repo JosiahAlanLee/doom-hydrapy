@@ -26,6 +26,7 @@
 #include "rogue_creature.h"
 #include "rogue_arch.h"
 #include "rogue_strobe.h"
+#include "rogue_vending.h"
 
 #include "deh_main.h"
 #include "i_swap.h"
@@ -838,6 +839,7 @@ P_SetupLevel
     P_SpawnSpecials ();
     Rogue_ArchLoad();
     Rogue_StrobeLoad();
+    Rogue_VendingLoad();
 	
     // build subsector connect matrix
     //	UNUSED P_ConnectSubsectors ();

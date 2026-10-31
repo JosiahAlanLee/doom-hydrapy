@@ -26,6 +26,7 @@
 
 #include "p_local.h"
 #include "rogue_creature.h"
+#include "rogue_vending.h"
 
 #include "doomstat.h"
 
@@ -154,10 +155,10 @@ void P_MovePlayer (player_t* player)
     onground = (player->mo->z <= player->mo->floorz);
 	
     if (cmd->forwardmove && onground)
-	P_Thrust (player, player->mo->angle, cmd->forwardmove*2048);
+	P_Thrust (player, player->mo->angle, Rogue_MoveScale(player,cmd->forwardmove*2048));
     
     if (cmd->sidemove && onground)
-	P_Thrust (player, player->mo->angle-ANG90, cmd->sidemove*2048);
+	P_Thrust (player, player->mo->angle-ANG90, Rogue_MoveScale(player,cmd->sidemove*2048));
 
     if ( (cmd->forwardmove || cmd->sidemove) 
 	 && player->mo->state == &states[S_PLAY] )
