@@ -30,12 +30,15 @@ encounter area after a long chase and drop shells and a medikit when defeated.
 | Proof | Hit its shield once, then use F on its seal. Holding F while entering works. |
 | Passage | Enter amber A, then cyan B. |
 
-The two HUD cards show health, damage mode and opening time. The highlighted card
-owns the current hint and progress meter; standing on a seal takes priority over
-aim direction. The guidance points toward that boss's next seal. World markers
-identify F, A and B seals and change when opened or completed. An overhead badge
-confirms shield impacts. Other enemies and projectiles remain dangerous during a
-binding attempt.
+One compact health card appears for a nearby visible boss, an active seal or a
+recent nearby attack/hit. It clears after combat, defeat or leaving the encounter;
+there is no permanent pair of cards during exploration. Seal entry briefly shows
+an unfamiliar ritual tip; successful binding teaches that family for the run.
+Active ritual progress stays visible in one narrow strip above the bottom HUD.
+Proof and A-seal acknowledgements last three seconds; exposure needs only the
+health card's timer. Standing on a seal takes priority over aim direction. World
+markers identify F, A and B seals; overhead badges flash only on hits/opening.
+Other enemies and projectiles remain dangerous during a binding attempt.
 
 ## Requirements and launch
 

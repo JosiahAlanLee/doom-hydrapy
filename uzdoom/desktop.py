@@ -5,11 +5,12 @@ import numpy as np
 from PIL import Image,ImageDraw
 from rogue.desktop import Desktop as BaseDesktop
 from rogue.hud import overlay,shop_overlay,text,PANEL,MUTED,INK
-from .hud import decorate
+from .hud import decorate,EncounterHUD
 from .game import Game
 
 class Desktop(BaseDesktop):
     def __init__(self,*args,**kwargs):
+        self.encounter_hud=EncounterHUD()
         self.mouse_look=0.
         super().__init__(*args,**kwargs,game_factory=Game)
         if not (self.root/'view-settings.json').exists():self.mouse_sensitivity=1.
@@ -43,8 +44,8 @@ class Desktop(BaseDesktop):
         self._callbacks=[(setter,key if callback is previous else callback,old) for setter,callback,old in self._callbacks]
         self._key_callback=key
         g.set_window_title(self.window,'NULL RUN / TOWER')
-    def hud(self,state,paused):
-        layer=decorate(Image.new('RGBA',(640,400),(0,0,0,0)),state)
+    def hud(self,state,paused,encounter=None):
+        layer=decorate(Image.new('RGBA',(640,400),(0,0,0,0)),{**state,'paused':paused},encounter)
         if state.get('vending',{}).get('menu_open'):return shop_overlay(layer,state,self.shop_error)
         if paused or state.get('dead') or state.get('won'):
             layer=overlay(layer,state,self.show_credits,self.game.error,self.loading,self.mouse_sensitivity)
@@ -72,9 +73,11 @@ class Desktop(BaseDesktop):
         paused=state.get('paused',True) or self.loading
         # World pixels and instruments have separate GPU sources. Paint the
         # small instrument layer only when visible information changes.
-        visible={k:state.get(k) for k in ('health','armor','ammo','weapon','kills','total_kills','secrets','floor_name','map','floors','x','y','z','angle','boss','bosses','argon','vending','dead','won','revision')}
+        encounter=self.encounter_hud.prepare({**state,'paused':paused})
+        visible={k:state.get(k) for k in ('health','armor','ammo','weapon','kills','total_kills','secrets','floor_name','map','floors','angle','argon','vending','dead','won','revision')}
+        visible['encounter']=encounter
         key=(json.dumps(visible,sort_keys=True),paused,self.show_credits,self.game.error,self.shop_error,self.loading,self.mouse_sensitivity)
-        hud=self.cache['hud'] if self.cache and self.cache.get('hud_key')==key else np.asarray(self.hud(state,paused).resize((1280,800),Image.Resampling.NEAREST))
+        hud=self.cache['hud'] if self.cache and self.cache.get('hud_key')==key else np.asarray(self.hud(state,paused,encounter).resize((1280,800),Image.Resampling.NEAREST))
         self.cache={'raw':rgb,'state':state,'hud':hud,'hud_key':key};self.last_time=t
         return self.cache
 
