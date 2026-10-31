@@ -18,7 +18,7 @@ class ArgonCampaign(unittest.TestCase):
                 floor=generate(seed,number);reachable=distances(floor.cells,floor.start)
                 for kind,entry in NEW_CREATURES.items():
                     for t in floor.things:
-                        if t[3]!=entry['type']:continue
+                        if t[3]!=entry['type'] or ((t[4]>>8)&7)!=entry['flag']:continue
                         found.add(kind);cell=t[0]//128,t[1]//128
                         self.assertIn(cell,reachable)
                         self.assertGreaterEqual(abs(cell[0]-floor.start[0])+abs(cell[1]-floor.start[1]),6)

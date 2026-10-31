@@ -16,7 +16,8 @@ from PIL import Image,ImageDraw
 
 FAMILIES={'POSS':'skitter','SARG':'bastion','TROO':'cantor','HEAD':'shiver','BOSS':'repetiel','BOS2':'calmor',
           'SKEL':'hollow','CPOS':'redead','FATT':'probator','BSPI':'jurisiel',
-          'SPOS':'surveyor','SSWV':'wire_shambler','VILE':'threshold_mimic','SKUL':'vore_spindle'}
+          'SPOS':'surveyor','SSWV':'wire_shambler','VILE':'threshold_mimic','SKUL':'vore_spindle',
+          'CYBR':'latchwing','PAIN':'relay_choir','TLP2':'service_lamp','TLMP':'cable_shrine','COLU':'directory_sign'}
 
 
 def wad_lumps(path):
@@ -33,6 +34,12 @@ def wad_lumps(path):
 
 
 def creature(kind,seed,frame):
+    if kind in ('latchwing','relay_choir'):
+        from rogue.threshold_assets import draw_creature
+        return draw_creature(kind,seed,frame)
+    if kind in ('service_lamp','cable_shrine','directory_sign'):
+        from rogue.threshold_assets import draw_prop
+        return draw_prop(kind)
     if kind in ['surveyor','wire_shambler','threshold_mimic','vore_spindle']:
         from rogue.argon_art import draw
         return draw(kind,seed,frame)
@@ -213,4 +220,6 @@ def sprite_lumps(assets,seed):
         unique,inverse=np.unique(rgb.reshape(-1,3),axis=0,return_inverse=True)
         nearest=((unique[:,None,:]-palette[None,:,:].astype(np.int32))**2).sum(2).argmin(1)
         flats.append(('RSEAL10B' if number==11 else 'RSEAL'+str(number),nearest[inverse].astype(np.uint8).tobytes()))
+    from rogue.threshold_assets import flat_lumps
+    flats.extend(flat_lumps(palette))
     return [('S_START',b'')]+original+generated+[('S_END',b''),('F_START',b'')]+flats+[('F_END',b'')]

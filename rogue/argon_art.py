@@ -17,6 +17,9 @@ def atlas(kind, variant):
 
 
 def draw(kind, seed, frame):
+    if kind in ('latchwing','relay_choir'):
+        from rogue.threshold_assets import draw_creature
+        return draw_creature(kind,seed,frame)
     index = KINDS.index(kind)
     variant = 'AB'[(int(seed)+index)&1]
     # The last two native slots retain the completed corpse.

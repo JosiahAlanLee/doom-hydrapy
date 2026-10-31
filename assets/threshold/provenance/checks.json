@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "job": "20261030-230205-deepseek-nullrun-threshold-content",
+  "kit": "Threshold opening floor, art kit and 120-second score",
+  "author": "DeepSeek (model-assisted), directed by Josiah",
+  "license": "GPL-2.0-or-later",
+  "suites": {
+    "opening": {
+      "total": 230,
+      "passed": 230,
+      "failed": 0
+    },
+    "art": {
+      "total": 59,
+      "passed": 59,
+      "failed": 0
+    },
+    "score": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0
+    },
+    "integration": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0
+    }
+  },
+  "checks": [
+    {
+      "name": "opening_suite",
+      "pass": true,
+      "detail": "230/230 geometry checks across 12 seeds"
+    },
+    {
+      "name": "opening_overview",
+      "pass": true,
+      "detail": "PNG and JSON agree with the 12-seed suite"
+    },
+    {
+      "name": "opening_interface",
+      "pass": true,
+      "detail": "Floor number 1, start (5, 27), exit (7, 6), 351 cells"
+    },
+    {
+      "name": "reserved_types",
+      "pass": true,
+      "detail": "69/class15 latchwing and 71/class16 relay_choir present with flag 7 and options 1799 + roll*2048; surveyor/husk share the signed option space"
+    },
+    {
+      "name": "art_suite",
+      "pass": true,
+      "detail": "art-checks 59/59"
+    },
+    {
+      "name": "saved_assets_match",
+      "pass": true,
+      "detail": "27 generated assets match their saved PNGs"
+    },
+    {
+      "name": "art_contact_sheets",
+      "pass": true,
+      "detail": "three contact sheets present"
+    },
+    {
+      "name": "tiling_sheets",
+      "pass": true,
+      "detail": "6 wall 2x2 sheets 256x256 and 4 flat 2x2 sheets 128x128"
+    },
+    {
+      "name": "score_suite",
+      "pass": true,
+      "detail": "score-checks 17/17"
+    },
+    {
+      "name": "score_validator_rebuild",
+      "pass": true,
+      "detail": "fresh build passes hydrapy.tracker_v3.validate; nine 8-bar patterns, loop off"
+    },
+    {
+      "name": "score_file_matches",
+      "pass": true,
+      "detail": "score.json SHA-256 matches the validated fresh build"
+    },
+    {
+      "name": "patch_plan_lanes",
+      "pass": true,
+      "detail": "six lanes; PVX named for the riff/lead and bass"
+    },
+    {
+      "name": "patch_plan_low_cpu",
+      "pass": true,
+      "detail": "plan only; one restrained Spoon Bender; explicit no-firmware/no-DC/no-optical limits"
+    },
+    {
+      "name": "license_headers",
+      "pass": true,
+      "detail": "SPDX GPL-2.0-or-later on every Python source"
+    },
+    {
+      "name": "credits_license",
+      "pass": true,
+      "detail": "CREDITS names the direction, model-assisted production and license"
+    },
+    {
+      "name": "no_font_or_ui",
+      "pass": true,
+      "detail": "no font or UI file is included; Departure Mono/HUD stay with Codex"
+    },
+    {
+      "name": "required_files",
+      "pass": true,
+      "detail": "42 expected files present"
+    }
+  ],
+  "verified": [
+    "deterministic floor geometry, connectivity, loops, steps, props and 12-seed checks",
+    "creature atlas dimensions, transparency, anchoring, frame motion, corpses and tile seams",
+    "score validator, exact 120 s timeline, act markers, monophony, pitch policy and gestures",
+    "file presence, hashes, license headers and the absence of fonts/UI"
+  ],
+  "not_verified": [
+    "native Doom gameplay, WAD assembly, native palette readability or enemy behavior",
+    "audio audition, Rack patch load, recording or any video render",
+    "HUD/font replacement, which Codex owns"
+  ]
+}

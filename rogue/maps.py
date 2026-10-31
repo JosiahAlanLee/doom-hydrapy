@@ -331,8 +331,8 @@ def map_lumps(floor,custom_seals=False):
             if custom_seals and floor.boss and (x,y)==tuple(floor.boss['binding_cell']):tile_flat='RSEAL'+str(floor.boss['class'])
             if custom_seals and profile.get('tag')==778:tile_flat='RSEAL10B'
             sectors.append(struct.pack('<hh8s8shhh',z,z+profile.get('height',128+32*(floor.number%2)) if opened else z,
-                                       name8('FLOOR0_1' if exit_tile else tile_flat),name8(tile_ceiling),
-                                       255 if exit_tile else profile.get('light',light),0,profile.get('tag',0)))
+                                       name8(('NFLAT04' if floor.architecture.get('identity') else 'FLOOR0_1') if exit_tile else tile_flat),name8(tile_ceiling),
+                                       255 if exit_tile else profile.get('light',light),profile.get('special',0),profile.get('tag',0)))
     # BLOCKMAP: add each line to both sides of a block boundary, including
     # endpoints. Offsets are 16-bit WORD indices, not byte offsets.
     dim=n+2; origin=-TILE; blocks=[set() for _ in range(dim*dim)]
@@ -382,11 +382,15 @@ def creature_study(seed,kind):
                  profiles,[{'kind':kind,'roll':seed%16,'x':mx,'y':my}])
 
 
-def campaign(seed, output, assets=None, practice=None):
+def campaign(seed, output, assets=None, practice=None, identity=False):
     from rogue.architecture import STUDIES,study,metadata,flats
     from rogue.strobe import STROBES,study as strobe_study,metadata as strobe_metadata
     output=Path(output)
     floors=[generate(seed,i) for i in range(1,FLOORS+1)]
+    if identity and not practice:
+        if not assets:raise ValueError('Threshold identity requires the supplied Freedoom assets')
+        from rogue.threshold_assets import apply_identity
+        floors=apply_identity(floors,seed)
     if practice:
         if practice in STROBES:f=strobe_study(seed)
         elif practice in STUDIES:f=study(seed,practice)
@@ -418,6 +422,9 @@ def campaign(seed, output, assets=None, practice=None):
             at=next(i for i,(name,_) in enumerate(bank) if name=='F_END')
             bank[at:at]=flats(assets)
         lumps.extend(bank)
+        if identity and not practice:
+            from rogue.threshold_assets import wall_lumps
+            lumps.extend(wall_lumps(assets))
     data=bytearray(); directory=[]
     for name,payload in lumps:
         directory.append(struct.pack('<II8s',12+len(data),len(payload),name8(name)))
@@ -425,7 +432,7 @@ def campaign(seed, output, assets=None, practice=None):
     wad=struct.pack('<4sII',b'PWAD',len(lumps),12+len(data))+data+b''.join(directory)
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_bytes(wad)
-    manifest={'format':'doom-rogue-4','seed':seed,'mode':practice or 'campaign','floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
+    manifest={'format':'doom-rogue-4','seed':seed,'mode':practice or 'campaign','identity':'threshold' if identity else 'classic','floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
     if assets:
         manifest['sprite_assets']={'sha256':hashlib.sha256(Path(assets).read_bytes()).hexdigest(),
                                    'source':'Freedoom IWAD supplied by the operator',

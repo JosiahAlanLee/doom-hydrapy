@@ -39,13 +39,14 @@ async function newRun(random){
   const currentOwner=owner;setPlaying(false);keys.clear();
   try{
     const state=await post('new',{seed,owner:currentOwner,mode:$('run-mode').value});owner=null;lastState=state;$('seed').value=seed;
-    overlay('A NEW ARRANGEMENT','Same engine. New trouble.',state.mode==='campaign'?'Five floors. Two of four book demons. One life.':state.study_rule||'A binding study. Open the seal, then defeat the demon.','ENTER THE RUN ↗');
+    overlay('A NEW ARRANGEMENT','The night shift begins.',state.mode==='campaign'?'Five floors. Your supplies follow you down.':state.study_rule||'Find the marked ring. Open the passage.','ENTER THE RUN ↗');
     notice('Run generated. Click Enter the Run when you’re ready.');
   }catch(e){notice(e.message);}
   finally{busy=false;$('new').disabled=$('retry').disabled=$('play').disabled=false;}
 }
 $('play').addEventListener('click',play);$('pause').addEventListener('click',pause);
 $('new').addEventListener('click',()=>newRun(true));$('retry').addEventListener('click',()=>newRun(false));
+$('credits-panel').addEventListener('toggle',()=>{if($('credits-panel').open&&playing)pause();});
 for(const id of ['seed','run-mode'])$(id).addEventListener('focus',()=>{if(playing)pause();});
 $('viewport').addEventListener('click',()=>{if(playing)$('viewport').focus();});
 document.addEventListener('keydown',e=>{
@@ -62,9 +63,9 @@ setInterval(send,120);
 async function stateLoop(){
   try{
     const r=await fetch('/api/state');if(!r.ok)throw new Error('Server unavailable.');lastState=await r.json();
-    const s=lastState;$('connection').textContent=s.error?'ENGINE ERROR':'ENGINE ONLINE';
+    const s=lastState;$('connection').textContent=s.error?'RUN PAUSED':'CONNECTED';
     if(seenRevision!==s.revision){seenRevision=s.revision;$('run-mode').value=s.mode;$('seed').value=s.seed;}
-    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS. TWO OF FOUR BOOK DEMONS. ONE LIFE.':s.study_family==='architecture'?'ARCHITECTURE STUDY. WATCH YOUR WAY BACK.':s.study_rule?'GLOAMWOOD STUDY. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
+    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS / ONE LIFE':'ONE PASSAGE / ONE LIFE';
     $('floor').textContent=s.floor_name;$('run-id').textContent='SEED '+s.seed;
     $('health').innerHTML=Number(s.health)+'<span>%</span>';$('armor').innerHTML=Number(s.armor)+'<span>%</span>';
     $('kills').innerHTML=Number(s.kills)+'<span>/ '+Number(s.total_kills)+'</span>';

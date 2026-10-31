@@ -15,6 +15,7 @@ import time
 from PIL import Image,ImageDraw,ImageFont
 from rogue.server import Game,KEYS
 from rogue.inhabitants import CREATURES
+from rogue.hud import decorate,overlay,font
 
 _current=None
 
@@ -34,7 +35,7 @@ class Desktop:
     def __init__(self,root,wad,port=8773,campaign_only=True,autostart=True):
         self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True)
         self.campaign_only=bool(campaign_only);self.autostart=bool(autostart);self.pending_start=self.autostart
-        self.game=NativeGame(wad,self.root/'runs')
+        self.game=NativeGame(wad,self.root/'runs',identity=True)
         self.owner=None;self.keys=set();self.input_source=None;self.api_until=0
         try:preferences=json.loads((self.root/'view-settings.json').read_text())
         except (OSError,ValueError):preferences={}
@@ -48,8 +49,7 @@ class Desktop:
         self.gpu='';self.bound=False;self.physical_events=0;self.api_events=0
         self.last_report=0;self.capture_requested=False;self.jpeg=b'';self.capture_count=0
         self.token=secrets.token_urlsafe(32);self.port=port
-        self.font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',12)
-        self.titlefont=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',25)
+        self.font=font(11);self.titlefont=font(22);self.show_credits=False
         self._serve()
         atexit.register(self.close)
 
@@ -99,6 +99,7 @@ class Desktop:
 
     def resume(self,automated=False):
         self.pause()
+        self.show_credits=False
         if self.loading or self.game.state.get('dead') or self.game.state.get('won'):return
         self.owner=self.game.acquire();self.input_source='api' if automated else 'physical'
         self.api_until=time.monotonic()+1;self.need_sync=True;self.clear_frames=4
@@ -192,6 +193,8 @@ class Desktop:
             elif k in [glfw.KEY_ESCAPE,glfw.KEY_F1]:self.pause()
             elif k==glfw.KEY_R:self.new()
             elif k==glfw.KEY_N:self.new(random_seed=True)
+            elif k==glfw.KEY_C:
+                self.pause();self.show_credits=not self.show_credits
             elif not self.campaign_only and k==glfw.KEY_F2:self.action({'action':'flicker','enabled':not self.flicker})
             elif not self.campaign_only and k==glfw.KEY_F3:self.action({'action':'filter','mode':(self.mode+1)%4})
             elif not self.campaign_only and k in [glfw.KEY_F4,glfw.KEY_F5,glfw.KEY_F6,glfw.KEY_F7,glfw.KEY_F8]:
@@ -222,7 +225,7 @@ class Desktop:
             state=self.cache['state'];rgb=self.cache['raw'].copy()
         else:raise RuntimeError('No native frame available')
         st=state.get('strobe',{});paused=state.get('paused',True) or self.loading
-        visual_key=(state.get('revision'),state.get('frame'),paused,self.mode,self.flicker,self.loading,self.game.error)
+        visual_key=(state.get('revision'),state.get('frame'),paused,self.mode,self.flicker,self.loading,self.game.error,getattr(self,'show_credits',False))
         if self.cache and self.cache.get('visual_key')==visual_key:
             im=self.cache['image']
         else:
@@ -237,19 +240,9 @@ class Desktop:
     def draw_screen(self,rgb,state,st,paused):
         im=Image.fromarray(rgb);draw=ImageDraw.Draw(im)
         if self.campaign_only:
-            header=state.get('argon',{}).get('cue') or (state.get('floor_name','NULL RUN')+f"   |   FLOOR {state.get('map',1)} / {state.get('floors',5)}")
-            draw.rectangle((0,0,640,24),fill=(10,12,12));draw.text((9,5),header,font=self.font,fill=(226,222,205))
+            im=decorate(im,state)
             if paused or state.get('dead') or state.get('won'):
-                draw.rectangle((34,65,606,326),fill=(12,15,16),outline=(163,157,133),width=2)
-                title='NULL RUN / FIVE FLOORS'
-                prompt='ENTER resume / ESC pause'
-                if self.loading:prompt='ARRANGING THE NEXT RUN...'
-                elif state.get('dead'):title='THE RUN ENDS HERE';prompt='R retries this seed / N starts a new run'
-                elif state.get('won'):title='YOU FOUND THE WAY OUT';prompt='R retries this seed / N starts a new run'
-                draw.text((54,83),title,font=self.titlefont,fill=(231,223,198))
-                lines=[prompt,'WASD move / arrows or Q-E turn','SPACE or CTRL fire / F use','SHIFT run / TAB map / 1-7 weapons','R retry / N new seed']
-                if self.game.error:lines[0]='ERROR: '+self.game.error[:72]
-                for i,line in enumerate(lines):draw.text((54,139+i*30),line,font=self.font,fill=(201,201,188))
+                return overlay(im,state,getattr(self,'show_credits',False),self.game.error,self.loading)
             return im
         phase='FLASH / PINNED' if st.get('muzzle') else 'LIT / WATCH IT' if st.get('lit') else 'LAMP FAILURE / IT MOVES'
         if not st.get('active'):phase=state.get('floor_name','NULL RUN')

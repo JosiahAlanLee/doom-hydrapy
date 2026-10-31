@@ -1,0 +1,334 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "atlas_geometry [latchwing_A]",
+      "pass": true,
+      "detail": "(512, 768) RGBA"
+    },
+    {
+      "name": "warning_aperture [latchwing_A]",
+      "pass": true,
+      "detail": "warning silhouette 118px wide vs idle 92px"
+    },
+    {
+      "name": "frame_motion [latchwing_A]",
+      "pass": true,
+      "detail": "min consecutive frame difference 1056 px, max 2441 px"
+    },
+    {
+      "name": "transparent_padding [latchwing_A]",
+      "pass": true,
+      "detail": "alpha 0.061..0.195; border fully transparent"
+    },
+    {
+      "name": "feet_anchor [latchwing_A]",
+      "pass": true,
+      "detail": "non-death bottom row 116..116; top 21..43"
+    },
+    {
+      "name": "visible_corpse [latchwing_A]",
+      "pass": true,
+      "detail": "final corpse bbox (14, 84, 114, 119), alpha 0.093"
+    },
+    {
+      "name": "state_contrast [latchwing_A]",
+      "pass": true,
+      "detail": "hurt and attack poses differ strongly from idle and warning"
+    },
+    {
+      "name": "atlas_geometry [latchwing_B]",
+      "pass": true,
+      "detail": "(512, 768) RGBA"
+    },
+    {
+      "name": "warning_aperture [latchwing_B]",
+      "pass": true,
+      "detail": "warning silhouette 122px wide vs idle 96px"
+    },
+    {
+      "name": "frame_motion [latchwing_B]",
+      "pass": true,
+      "detail": "min consecutive frame difference 1054 px, max 2515 px"
+    },
+    {
+      "name": "transparent_padding [latchwing_B]",
+      "pass": true,
+      "detail": "alpha 0.061..0.200; border fully transparent"
+    },
+    {
+      "name": "feet_anchor [latchwing_B]",
+      "pass": true,
+      "detail": "non-death bottom row 116..116; top 21..43"
+    },
+    {
+      "name": "visible_corpse [latchwing_B]",
+      "pass": true,
+      "detail": "final corpse bbox (14, 84, 114, 119), alpha 0.093"
+    },
+    {
+      "name": "state_contrast [latchwing_B]",
+      "pass": true,
+      "detail": "hurt and attack poses differ strongly from idle and warning"
+    },
+    {
+      "name": "variant_silhouettes [latchwing]",
+      "pass": true,
+      "detail": "variants differ in 1540 pixels at idle frame 0"
+    },
+    {
+      "name": "atlas_geometry [relay_choir_A]",
+      "pass": true,
+      "detail": "(512, 768) RGBA"
+    },
+    {
+      "name": "frame_motion [relay_choir_A]",
+      "pass": true,
+      "detail": "min consecutive frame difference 2247 px, max 4032 px"
+    },
+    {
+      "name": "transparent_padding [relay_choir_A]",
+      "pass": true,
+      "detail": "alpha 0.088..0.311; border fully transparent"
+    },
+    {
+      "name": "feet_anchor [relay_choir_A]",
+      "pass": true,
+      "detail": "non-death bottom row 118..118; top 20..29"
+    },
+    {
+      "name": "visible_corpse [relay_choir_A]",
+      "pass": true,
+      "detail": "final corpse bbox (18, 92, 103, 118), alpha 0.088"
+    },
+    {
+      "name": "state_contrast [relay_choir_A]",
+      "pass": true,
+      "detail": "hurt and attack poses differ strongly from idle and warning"
+    },
+    {
+      "name": "atlas_geometry [relay_choir_B]",
+      "pass": true,
+      "detail": "(512, 768) RGBA"
+    },
+    {
+      "name": "frame_motion [relay_choir_B]",
+      "pass": true,
+      "detail": "min consecutive frame difference 944 px, max 3744 px"
+    },
+    {
+      "name": "transparent_padding [relay_choir_B]",
+      "pass": true,
+      "detail": "alpha 0.088..0.349; border fully transparent"
+    },
+    {
+      "name": "feet_anchor [relay_choir_B]",
+      "pass": true,
+      "detail": "non-death bottom row 118..118; top 20..29"
+    },
+    {
+      "name": "visible_corpse [relay_choir_B]",
+      "pass": true,
+      "detail": "final corpse bbox (18, 92, 103, 118), alpha 0.088"
+    },
+    {
+      "name": "state_contrast [relay_choir_B]",
+      "pass": true,
+      "detail": "hurt and attack poses differ strongly from idle and warning"
+    },
+    {
+      "name": "variant_silhouettes [relay_choir]",
+      "pass": true,
+      "detail": "variants differ in 4812 pixels at idle frame 0"
+    },
+    {
+      "name": "family_distinct",
+      "pass": true,
+      "detail": "latchwing/relay-choir idle mask IoU 0.26"
+    },
+    {
+      "name": "wall [NWALL01]",
+      "pass": true,
+      "detail": "(128, 128) RGB; wrap col 0.00 row 0.00 vs inner 25.00/24.33"
+    },
+    {
+      "name": "wall_2x2 [NWALL01]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "wall_relief [NWALL01]",
+      "pass": true,
+      "detail": "43 colours"
+    },
+    {
+      "name": "wall [NWALL02]",
+      "pass": true,
+      "detail": "(128, 128) RGB; wrap col 0.00 row 0.00 vs inner 34.67/36.67"
+    },
+    {
+      "name": "wall_2x2 [NWALL02]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "wall_relief [NWALL02]",
+      "pass": true,
+      "detail": "31 colours"
+    },
+    {
+      "name": "wall [NWALL03]",
+      "pass": true,
+      "detail": "(128, 128) RGB; wrap col 0.00 row 0.00 vs inner 22.00/33.33"
+    },
+    {
+      "name": "wall_2x2 [NWALL03]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "wall_relief [NWALL03]",
+      "pass": true,
+      "detail": "43 colours"
+    },
+    {
+      "name": "wall [NWALL04]",
+      "pass": true,
+      "detail": "(128, 128) RGB; wrap col 0.00 row 0.00 vs inner 14.00/37.33"
+    },
+    {
+      "name": "wall_2x2 [NWALL04]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "wall_relief [NWALL04]",
+      "pass": true,
+      "detail": "62 colours"
+    },
+    {
+      "name": "wall [NWALL05]",
+      "pass": true,
+      "detail": "(128, 128) RGB; wrap col 0.00 row 0.00 vs inner 31.33/37.33"
+    },
+    {
+      "name": "wall_2x2 [NWALL05]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "wall_relief [NWALL05]",
+      "pass": true,
+      "detail": "35 colours"
+    },
+    {
+      "name": "wall [NWALL06]",
+      "pass": true,
+      "detail": "(128, 128) RGB; wrap col 0.00 row 0.00 vs inner 6.00/65.33"
+    },
+    {
+      "name": "wall_2x2 [NWALL06]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "wall_relief [NWALL06]",
+      "pass": true,
+      "detail": "33 colours"
+    },
+    {
+      "name": "flat [NFLAT01]",
+      "pass": true,
+      "detail": "(64, 64) RGB; wrap col 10.24 row 4.22 vs inner 19.00/13.00"
+    },
+    {
+      "name": "flat_2x2 [NFLAT01]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "flat [NFLAT02]",
+      "pass": true,
+      "detail": "(64, 64) RGB; wrap col 27.27 row 29.99 vs inner 49.33/49.33"
+    },
+    {
+      "name": "flat_2x2 [NFLAT02]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "flat [NFLAT03]",
+      "pass": true,
+      "detail": "(64, 64) RGB; wrap col 26.53 row 26.39 vs inner 21.00/21.00"
+    },
+    {
+      "name": "flat_2x2 [NFLAT03]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "flat [NFLAT04]",
+      "pass": true,
+      "detail": "(64, 64) RGB; wrap col 12.39 row 10.67 vs inner 70.67/70.67"
+    },
+    {
+      "name": "flat_2x2 [NFLAT04]",
+      "pass": true,
+      "detail": "2x2 sheet is the identical tile repeated"
+    },
+    {
+      "name": "prop [service_lamp]",
+      "pass": true,
+      "detail": "(96, 128) RGBA; alpha 0.343; bbox (13, 14, 83, 126)"
+    },
+    {
+      "name": "prop [cable_shrine]",
+      "pass": true,
+      "detail": "(96, 128) RGBA; alpha 0.270; bbox (14, 16, 82, 126)"
+    },
+    {
+      "name": "prop [directory_sign]",
+      "pass": true,
+      "detail": "(96, 128) RGBA; alpha 0.527; bbox (8, 8, 88, 126)"
+    },
+    {
+      "name": "deterministic_art",
+      "pass": true,
+      "detail": "30 assets; two builds are byte-identical"
+    }
+  ],
+  "summary": {
+    "total": 59,
+    "passed": 59,
+    "failed": 0
+  },
+  "asset_hashes": {
+    "creatures/latchwing_A.png": "d766566d098a1f1a6e220c195c5ebe403dc096e25d90af8486a744d0a5f6c24f",
+    "creatures/latchwing_B.png": "fd305b7da2b18b5d74ee3e172c832a4f4a8f2a28cb28c2b200198f012c1fd208",
+    "creatures/relay_choir_A.png": "7e3100426b50ff45e1df5640785bcbfd63d78d1baa422ee0fe58dd6fa61607d7",
+    "creatures/relay_choir_B.png": "e4244ab4252c83119b455a5c866a608829ecc6b9d183eb8b52098e18a4c4570a",
+    "flats/NFLAT01.png": "d0b7a53fc0d4e22facf36006e8f73f0cc3f7570487229e8f862cd9d40398eaec",
+    "flats/NFLAT02.png": "c5c39a0d2817a680df926cf439088181f035476ac9aaf2102ef6366def35ff8d",
+    "flats/NFLAT03.png": "b36d10af21e93ba19ed2a96cf400b699d795a847e8c729cfbb44e9abd36bb50c",
+    "flats/NFLAT04.png": "8405f7e8676a021de9bee704cb1f8f9f0cded17fd2dee2d381c11106c1f6a107",
+    "props/cable_shrine.png": "9a151f4e231d24f13ea9da163c803299cbd72df5d107d8ec565c031581f7fdc5",
+    "props/directory_sign.png": "9c75b68cb86d00123162724ef7676fc44f9c37100170f31414856b9e62efa003",
+    "props/service_lamp.png": "ccb36a640eea8675ec155f25e44e94726472d17b21ad2ef5cdf9c6bc38c8fdd0",
+    "sheets/NFLAT01_2x2.png": "a5a4b8fe14edf3ebf0a952c26e3327144273fafbd19e5012f9d4d63ffe81cc47",
+    "sheets/NFLAT02_2x2.png": "d30517c371f4ab119b71480d1694d75ab3ead62ec387cd5a78e2964319a96918",
+    "sheets/NFLAT03_2x2.png": "19f61327b23a81697a5a6bc05eb5972bb361f619575e65a0cb2fadc70e3abc0c",
+    "sheets/NFLAT04_2x2.png": "4e714e3552a99bbd21d89376f3fea72bbe39bc85e06cfe496328f40896d7fd2c",
+    "sheets/NWALL01_2x2.png": "8ff7720cded48325d38f04a51064f2c74fc3cc09637a742426c23d8ef0b2f02e",
+    "sheets/NWALL02_2x2.png": "e5b5502194687fdf869b42cf9ede3d4d2695ffa6c430b59c578a0504168df9af",
+    "sheets/NWALL03_2x2.png": "1dc7ec7d351f7296bb3d84330d6e8cacb9b76ebd30af62ee63a5171d91fe9b43",
+    "sheets/NWALL04_2x2.png": "eced11657d19e0d60affc3470af5b3388d451c6b1c4582dd3358a1ce23fb9cee",
+    "sheets/NWALL05_2x2.png": "148a459b9fd43fe14af78f40238ddd394fbb5d5539e86c5464a69aef0de57897",
+    "sheets/NWALL06_2x2.png": "228bb0390e2240cf548a155640c563f88ced949483eefebdad135b66196fa5f7",
+    "walls/NWALL01.png": "21694e4abd84d863f1be521a0fbae73fb2a9134884a4ba1532a0626b736044a7",
+    "walls/NWALL02.png": "18beda807c3b8cf973f62057102b002e674b8cd27acb913994b4b2895c03807b",
+    "walls/NWALL03.png": "bffa6f1dbf63f5af238763bacd62571b61bee31e1d5c05de114f55a866c0be4a",
+    "walls/NWALL04.png": "22919ebdf32a805f0abc879cf9fc4b454d30a9f5731aead51e28ff1cf39858d8",
+    "walls/NWALL05.png": "ea71ad7bb8f3c666df1c90f813a7afe3d6a727f39a873a962fef70de8f5fed5c",
+    "walls/NWALL06.png": "cf090c9217c2988c0ab0dc3516f8cf4cb1415aba06ca30ade61dc11e9ca18c6b"
+  }
+}

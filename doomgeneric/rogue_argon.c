@@ -10,18 +10,19 @@
 #include "rogue_argon.h"
 
 enum { IDLE, HUNT, WARNING, ATTACK, HURT };
-static const char *names[4]={"surveyor","wire_shambler","threshold_mimic","vore_spindle"};
+static const char *names[6]={"surveyor","wire_shambler","threshold_mimic","vore_spindle","latchwing","relay_choir"};
 void A_Chase(mobj_t *actor);
 void P_ExplodeMissile(mobj_t *actor);
 
-static int kind(mobj_t *a) {int k=Rogue_Class(a);return k>=11 && k<=14?k:0;}
+static int kind(mobj_t *a) {int k=Rogue_Class(a);return k>=11 && k<=16?k:0;}
 static fixed_t distance(mobj_t *a,mobj_t *b) {return P_AproxDistance(a->x-b->x,a->y-b->y);}
 static void stop(mobj_t *a) {a->momx=a->momy=a->momz=0;}
 
 int Rogue_ArgonThink(mobj_t *a) {
- if((a->flags&MF_MISSILE) && a->target && kind(a->target)==14 && a->rogue_until>0) {
+ int source=(a->flags&MF_MISSILE) && a->target?kind(a->target):0;
+ if((a->flags&MF_MISSILE) && (source==14 || source==16) && a->rogue_until>0) {
   if(leveltime>=a->rogue_until) {P_ExplodeMissile(a);return 1;}
-  if(a->tracer && a->tracer->health>0 && !(leveltime&3)) {
+  if(source==14 && a->tracer && a->tracer->health>0 && !(leveltime&3)) {
    angle_t exact=R_PointToAngle2(a->x,a->y,a->tracer->x,a->tracer->y);
    angle_t turn=ANG45/8;
    if(exact-a->angle>ANG180) {
@@ -49,11 +50,22 @@ int Rogue_ArgonThink(mobj_t *a) {
   a->rogue_awake=1;a->rogue_phase=HUNT;a->target=p;a->movedir=8;a->movecount=0;
  }
  a->target=p;
- if(k==14) {
+ if(k==14 || k==15) {
   // Hang low enough to remain visible with classic Doom's fixed camera.
-  fixed_t z=a->floorz+24*FRACUNIT;
+  fixed_t z=a->floorz+(k==14?24:16)*FRACUNIT;
   if(z+a->height>a->ceilingz)z=a->ceilingz-a->height;
   a->z=z<a->floorz?a->floorz:z;
+ }
+ if(k==15 && a->rogue_phase==ATTACK) {
+  // A warned, locked-direction dash: real wall collision and one contact hit.
+  if(leveltime>=a->rogue_until) {a->rogue_phase=HUNT;return 1;}
+  if(visible && range<=50*FRACUNIT) {
+   P_DamageMobj(p,a,a,10);a->rogue_phase=HUNT;return 1;
+  }
+  unsigned fine=a->rogue_aim>>ANGLETOFINESHIFT;
+  fixed_t dx=FixedMul(14*FRACUNIT,finecosine[fine]),dy=FixedMul(14*FRACUNIT,finesine[fine]);
+  if(!P_TryMove(a,a->x+dx,a->y+dy))a->rogue_phase=HUNT;
+  return 1;
  }
  if(a->rogue_phase==HURT || a->rogue_phase==ATTACK) {
   if(leveltime<a->rogue_until)return 1;
@@ -69,6 +81,19 @@ int Rogue_ArgonThink(mobj_t *a) {
    if(visible && range<=320*FRACUNIT)P_DamageMobj(p,a,a,8);
   } else if(k==13) {
    if(visible && range<=128*FRACUNIT)P_DamageMobj(p,a,a,12);
+  } else if(k==15) {
+   a->angle=a->rogue_aim;
+   a->rogue_phase=ATTACK;a->rogue_until=leveltime+24;
+   a->rogue_cooldown=leveltime+140;return 1;
+  } else if(k==16) {
+   for(int j=-1;j<=1;j++) {
+    mobj_t *shot=P_SpawnMissile(a,p,MT_TROOPSHOT);
+    if(!shot || !(shot->flags&MF_MISSILE))continue;
+    shot->angle=a->rogue_aim+j*(ANG45/6);
+    unsigned fine=shot->angle>>ANGLETOFINESHIFT;
+    shot->momx=FixedMul(shot->info->speed,finecosine[fine]);
+    shot->momy=FixedMul(shot->info->speed,finesine[fine]);
+   }
   } else {
    mobj_t *shot=P_SpawnMissile(a,p,MT_TROOPSHOT);
    if(shot)shot->tracer=p;
@@ -77,16 +102,16 @@ int Rogue_ArgonThink(mobj_t *a) {
   a->rogue_cooldown=leveltime+(k==13?105:140);
   return 1;
  }
- fixed_t reach=(k==11?1400:k==12?256:k==13?192:1200)*FRACUNIT;
+ fixed_t reach=(k==11?1400:k==12?256:k==13?192:k==15?320:1200)*FRACUNIT;
  if(visible && range<=reach && leveltime>=a->rogue_cooldown) {
-  a->rogue_phase=WARNING;a->rogue_until=leveltime+(k==11?35:k==12?30:k==13?21:35);
+  a->rogue_phase=WARNING;a->rogue_until=leveltime+(k==11?35:k==12?30:k==13?21:k==15?28:35);
   a->rogue_aim=R_PointToAngle2(a->x,a->y,p->x,p->y);
   a->rogue_slope=P_AimLineAttack(a,a->rogue_aim,1536*FRACUNIT);
   a->angle=a->rogue_aim;return 1;
  }
  // The false door remains anchored. The others use Doom's wall-aware chaser;
  // their native melee/missile states are disabled in their private info record.
- if(k!=13 && leveltime%3==0)A_Chase(a);
+ if(k!=13 && k!=16 && leveltime%3==0)A_Chase(a);
  return 1;
 }
 
@@ -110,6 +135,8 @@ void Rogue_ArgonVisual(mobj_t *a) {
   frame=row*4+((leveltime/6)&3);
  }
  int sprite=states[mobjinfo[a->type].spawnstate].sprite;
+ // The Knight shares BOS2 with Calmor; reserve a separate unused sprite bank.
+ if(Rogue_Class(a)==15)sprite=SPR_CYBR;
  if(frame<sprites[sprite].numframes) {a->sprite=sprite;a->frame=frame;}
  // Map-only fixtures may deliberately retain the original small sprite set.
  else {a->sprite=a->state->sprite;a->frame=a->state->frame;}
@@ -123,13 +150,13 @@ void Rogue_ArgonJSON(FILE *out,mobj_t *a) {
 }
 
 void Rogue_ArgonStatus(FILE *out) {
- int counts[4]={0},warning=0,cue=0;
+ int counts[6]={0},warning=0,cue=0;
  if(getenv("DOOM_ROGUE_FLOORS"))for(thinker_t *t=thinkercap.next;t!=&thinkercap;t=t->next) {
   if(t->function.acp1!=(actionf_p1)P_MobjThinker)continue;
   mobj_t *a=(mobj_t*)t;int k=kind(a);if(!k || a->health<=0)continue;
   counts[k-11]++;if(a->rogue_phase==WARNING) {warning++;if(!cue)cue=k;}
  }
- const char *text=cue==11?"SURVEYOR / STEP SIDEWAYS":cue==12?"BALLAST HUSK / FIND COVER":cue==13?"FALSE DOOR / STAND BACK":cue==14?"SPINDLE / SPORE CHARGING":NULL;
- fprintf(out,"{\"surveyor\":%d,\"wire_shambler\":%d,\"threshold_mimic\":%d,\"vore_spindle\":%d,\"warnings\":%d,\"cue\":",counts[0],counts[1],counts[2],counts[3],warning);
+ const char *text=cue==11?"SURVEYOR / STEP SIDEWAYS":cue==12?"BALLAST HUSK / FIND COVER":cue==13?"FALSE DOOR / STAND BACK":cue==14?"SPINDLE / SPORE CHARGING":cue==15?"LATCHWING / SIDESTEP THE DASH":cue==16?"RELAY CHOIR / FIND A GAP":NULL;
+ fprintf(out,"{\"surveyor\":%d,\"wire_shambler\":%d,\"threshold_mimic\":%d,\"vore_spindle\":%d,\"latchwing\":%d,\"relay_choir\":%d,\"warnings\":%d,\"cue\":",counts[0],counts[1],counts[2],counts[3],counts[4],counts[5],warning);
  if(text)fprintf(out,"\"%s\"",text);else fprintf(out,"null");fprintf(out,"}");
 }
