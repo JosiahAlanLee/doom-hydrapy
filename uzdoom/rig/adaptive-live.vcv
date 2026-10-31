@@ -1,0 +1,357 @@
+{
+  "version": "2.6.6",
+  "masterModuleId": 1,
+  "modules": [
+    {
+      "id": 1,
+      "plugin": "Core",
+      "model": "AudioInterface2",
+      "version": "2.6.6",
+      "pos": [
+        0,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 1.4
+        }
+      ],
+      "data": {
+        "audio": {
+          "driver": 4,
+          "deviceName": "Digi 003 Rack Multichannel",
+          "sampleRate": 48000,
+          "blockSize": 2048,
+          "inputOffset": 0,
+          "outputOffset": 0
+        },
+        "dcFilter": true
+      }
+    },
+    {
+      "id": 2,
+      "plugin": "PVXLab",
+      "model": "PVX",
+      "version": "2.0.0",
+      "pos": [
+        8,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 0
+        },
+        {
+          "id": 1,
+          "value": 0.45
+        },
+        {
+          "id": 2,
+          "value": 0.8
+        },
+        {
+          "id": 3,
+          "value": 1
+        },
+        {
+          "id": 4,
+          "value": 0.4
+        },
+        {
+          "id": 5,
+          "value": 0.26
+        },
+        {
+          "id": 6,
+          "value": 0.06
+        },
+        {
+          "id": 7,
+          "value": 0
+        },
+        {
+          "id": 8,
+          "value": 0.015
+        },
+        {
+          "id": 9,
+          "value": 10.89178370321831
+        },
+        {
+          "id": 10,
+          "value": 0.16
+        },
+        {
+          "id": 11,
+          "value": 0.18
+        },
+        {
+          "id": 12,
+          "value": 0.7
+        },
+        {
+          "id": 13,
+          "value": 0
+        },
+        {
+          "id": 14,
+          "value": 0.04
+        },
+        {
+          "id": 15,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 0.55
+        },
+        {
+          "id": 17,
+          "value": 1
+        },
+        {
+          "id": 18,
+          "value": -7.965784284662087
+        },
+        {
+          "id": 19,
+          "value": -2.8365012677171206
+        },
+        {
+          "id": 20,
+          "value": 0.2
+        },
+        {
+          "id": 21,
+          "value": -3.1844245711374275
+        },
+        {
+          "id": 22,
+          "value": -7.965784284662087
+        },
+        {
+          "id": 23,
+          "value": -2.473931188332412
+        },
+        {
+          "id": 24,
+          "value": 0.45
+        },
+        {
+          "id": 25,
+          "value": -3.0588936890535687
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "plugin": "Fundamental",
+      "model": "VCA-1",
+      "version": "2.6.4",
+      "pos": [
+        24,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 1.0
+        },
+        {
+          "id": 1,
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "plugin": "Fundamental",
+      "model": "Sum",
+      "version": "2.6.4",
+      "pos": [
+        32,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 0.6
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "plugin": "SpoonBenderLab",
+      "model": "SpoonBender",
+      "version": "2.2.1",
+      "pos": [
+        52,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 0.75
+        },
+        {
+          "id": 1,
+          "value": 0.18
+        },
+        {
+          "id": 2,
+          "value": -0.4
+        },
+        {
+          "id": 3,
+          "value": 0
+        },
+        {
+          "id": 4,
+          "value": 0.5
+        },
+        {
+          "id": 5,
+          "value": 0.2
+        },
+        {
+          "id": 6,
+          "value": 0
+        },
+        {
+          "id": 7,
+          "value": 0
+        },
+        {
+          "id": 8,
+          "value": 0.03
+        },
+        {
+          "id": 9,
+          "value": 0.65
+        },
+        {
+          "id": 10,
+          "value": 0.7
+        },
+        {
+          "id": 11,
+          "value": 0.65
+        },
+        {
+          "id": 12,
+          "value": 0.72
+        },
+        {
+          "id": 13,
+          "value": 0.08
+        },
+        {
+          "id": 14,
+          "value": 0.5
+        },
+        {
+          "id": 15,
+          "value": 0
+        },
+        {
+          "id": 16,
+          "value": 0.45
+        },
+        {
+          "id": 17,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "plugin": "GorgonBridge",
+      "model": "Gorgon",
+      "version": "2.4.2",
+      "pos": [
+        0,
+        0
+      ],
+      "params": [],
+      "data": {
+        "gate": 0.45,
+        "pitchZero": 60,
+        "outputHigh": 10,
+        "audio": {
+          "driver": -1,
+          "deviceName": "",
+          "sampleRate": 48000,
+          "blockSize": 2048
+        }
+      }
+    }
+  ],
+  "cables": [
+    {
+      "id": 1,
+      "outputModuleId": 6,
+      "outputId": 12,
+      "inputModuleId": 2,
+      "inputId": 0,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 2,
+      "outputModuleId": 6,
+      "outputId": 11,
+      "inputModuleId": 2,
+      "inputId": 1,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 3,
+      "outputModuleId": 6,
+      "outputId": 3,
+      "inputModuleId": 3,
+      "inputId": 0,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 4,
+      "outputModuleId": 2,
+      "outputId": 0,
+      "inputModuleId": 3,
+      "inputId": 1,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 5,
+      "outputModuleId": 3,
+      "outputId": 0,
+      "inputModuleId": 4,
+      "inputId": 0,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 6,
+      "outputModuleId": 4,
+      "outputId": 0,
+      "inputModuleId": 5,
+      "inputId": 0,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 7,
+      "outputModuleId": 5,
+      "outputId": 0,
+      "inputModuleId": 1,
+      "inputId": 0,
+      "color": "#a9bfa8"
+    },
+    {
+      "id": 8,
+      "outputModuleId": 5,
+      "outputId": 1,
+      "inputModuleId": 1,
+      "inputId": 1,
+      "color": "#a9bfa8"
+    }
+  ]
+}

@@ -1,0 +1,594 @@
+{
+  "format": "nullrun-vertical-layouts-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "title": "Null Run tower vertical-layout design tables",
+  "status": "proposal; no engine sectors, collision or navigation have been changed",
+  "conversion": {
+    "metres_to_doom_units": 64,
+    "up": "Z",
+    "native_tile_doom_units": 128,
+    "note": "1 m = 64 Doom units as requested; native map tiles are 128 units."
+  },
+  "global_rules": {
+    "real_height": "Every level has a distinct walkable floor z; towers rise 15 m, 15 m and 18 m.",
+    "stairs": "8 risers of 0.1875 m (12 Doom units) + 1.8 m landing per flight; 3.0 m storey.",
+    "lifts": "Static cage/car/landing proposals only; no moving lift is implemented or claimed.",
+    "fall_recovery": "Every open edge has a returnable catch surface and a stair connection.",
+    "no_cheap_hits": "No enemy is placed in the first 6 native tiles of a spawn; no attack through opaque geometry.",
+    "no_mandatory_jumps": "Required routes use stairs/landings only. Optional gaps are guarded and have alternatives.",
+    "mesh_vs_native": "Native step/headroom limits are separate from mesh collision proxies; Codex owns conversion."
+  },
+  "environments": {
+    "ashbell_foundry": {
+      "id": "ashbell_foundry",
+      "name": "ASHBELL FOUNDRY",
+      "height_m": 15.0,
+      "storey_m": 3.0,
+      "levels": [
+        {
+          "index": 0,
+          "z_m": 0.0,
+          "z_doom_units": 0.0,
+          "name": "F0 casting pit"
+        },
+        {
+          "index": 1,
+          "z_m": 3.0,
+          "z_doom_units": 192.0,
+          "name": "F1 maintenance gantry"
+        },
+        {
+          "index": 2,
+          "z_m": 6.0,
+          "z_doom_units": 384.0,
+          "name": "F2 furnace throat"
+        },
+        {
+          "index": 3,
+          "z_m": 9.0,
+          "z_doom_units": 576.0,
+          "name": "F3 lift landing / bell waist"
+        },
+        {
+          "index": 4,
+          "z_m": 12.0,
+          "z_doom_units": 768.0,
+          "name": "F4 bell shoulder"
+        },
+        {
+          "index": 5,
+          "z_m": 15.0,
+          "z_doom_units": 960.0,
+          "name": "F5 crown gallery / summit"
+        }
+      ],
+      "tower_proof": {
+        "base_floor_z_m": 0.0,
+        "summit_floor_z_m": 15.0,
+        "physical_gain_m": 15.0,
+        "circulation": "two 1.5 m stair flights plus a 1.5 m landing per storey; the chain lift is a second independent route from F0 to F5",
+        "not_faked_by": "no single tall ceiling, no camera tilt, no non-walkable decorative gantry; every named level has a walkable floor"
+      },
+      "landmark": {
+        "name": "The Ninth Bell",
+        "description": "The cracked ninth bell hangs in the central casting shaft between F3 and F5. Its crown gimbal is the F4 sightline; the cage is the F3 landmark. The bell is visible from the F0 pit through an open chain well, but cannot be reached by jumping.",
+        "levels": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "routes": {
+        "lower": "F0 sand pit -> west casting aisle -> furnace chest cover -> two-flight stair to F1. The F0 ceiling is open to the chain well above the sand bed; the player sees the bell but the route is the stair.",
+        "middle": "F1 maintenance gantry -> chain-lift landing -> F2 furnace throat -> stair to F3. The F2 gantry crosses the flue on a 2.0 m bridge with guardrails; the lift cage passes beside it, not through it.",
+        "upper": "F3 lift landing -> F4 crown gimbal gallery -> F5 crown gallery. The last storey is a switchback stair around the bell crown; the summit is a real 15.0 m floor overlooking the whole shaft."
+      },
+      "stair_alternative": {
+        "description": "Every storey has a complete two-flight stair: 8 risers at 0.1875 m (12 Doom units), a 1.8 m landing, then 8 more risers. The stair is never blocked by the lift.",
+        "riser_m": 0.1875,
+        "riser_doom_units": 12,
+        "flight_rise_m": 1.5,
+        "storey_rise_m": 3.0,
+        "clear_width_m": 1.6,
+        "landing_m": [
+          1.8,
+          1.8
+        ],
+        "handrail_height_m": 1.1
+      },
+      "lift_alternative": {
+        "description": "The chain lift is an explicit second route: a static cage mesh proposal plus a chain-and-counterweight landmark. In the first pass it is a fixed platform at each landing, not a moving lift; the stair is the guaranteed route.",
+        "stops": [
+          "F0",
+          "F2",
+          "F3",
+          "F5"
+        ],
+        "cage_size_m": [
+          1.6,
+          1.6,
+          2.2
+        ],
+        "status": "static landmark proposal; moving lift behaviour is unimplemented"
+      },
+      "fall_recovery": {
+        "main_void": "The central casting shaft is open from F1 to F4. A dropped object or player lands on the F0 sand bed, which is a 0.35 m soft mound, not a kill plane.",
+        "catch_surfaces": [
+          "F0 sand bed under the shaft",
+          "F1 chain galleries every 4 m",
+          "F2 flue bridge with guardrails"
+        ],
+        "return": "From the F0 sand bed, the west aisle leads back to the F0 stair in under 20 m. No one-way drop is on the required route.",
+        "damage_note": "Fall damage is engine-owned; this table only guarantees a return floor."
+      },
+      "safe_spawn": {
+        "level": "F0",
+        "z_m": 0.0,
+        "description": "A sealed sand-pit entry behind the furnace chest, with two exits and the bell visible overhead as a bearing.",
+        "enemy_clearance": "at least 6 native 128-unit tiles (12 m at 64 u/m) from the first encounter",
+        "cover": "furnace chest and two casting flasks; no spawn inside the chain well"
+      },
+      "return_path": {
+        "description": "Every level carries the same bearings: wall 07 bell/landmark is on the shaft side, wall 08 lift/cage is on the stair side. From any gallery the stair head is visible within one room length.",
+        "wayfinding": "landmark panels 07/08 plus the lit furnace ceiling flat 04"
+      },
+      "arena_perch_spacing": {
+        "arena_min_m": [
+          8.0,
+          8.0
+        ],
+        "perimeter_clear_m": 1.6,
+        "perch_spacing_m": [
+          3.5,
+          5.0
+        ],
+        "perch_headroom_m": 1.5,
+        "rules": [
+          "no perch directly above a spawn or a required stair head",
+          "every perch has a stair or ramp return, never a jump-only exit",
+          "at least two 1.6 m-wide routes around each arena"
+        ]
+      },
+      "room_over_room": [
+        {
+          "levels": [
+            "F0",
+            "F1"
+          ],
+          "description": "F1 maintenance gantries bridge over the F0 sand pit and furnace aisle."
+        },
+        {
+          "levels": [
+            "F1",
+            "F2"
+          ],
+          "description": "F2 furnace throat sits above the F1 gantry; its flue passes through the floor beside the stair."
+        },
+        {
+          "levels": [
+            "F3",
+            "F4",
+            "F5"
+          ],
+          "description": "The bell shaft is a true three-storey void; F4 and F5 walkable galleries overhang the F3 landing."
+        }
+      ],
+      "first_pass_constraints": {
+        "unavoidable_jumps": false,
+        "max_required_gap_m": 0.0,
+        "precision_platforming_required": false,
+        "unseen_hits": false,
+        "notes": "Required routes are stairs and a static lift landing. Optional chain galleries may have 1.6 m gaps, but each has a guardrail and a stair alternative. No enemy is placed in the first 6 tiles of the spawn."
+      },
+      "native_constraints": {
+        "max_step_doom_units": 16,
+        "max_step_m": 0.25,
+        "min_headroom_doom_units": 96,
+        "min_headroom_m": 1.5,
+        "player_clearance_doom_units": 96,
+        "player_clearance_m": 1.5,
+        "player_clearance_note": "minimum headroom used by the reviewed threshold checks; nominal player body height remains engine-owned",
+        "tile_doom_units": 128,
+        "tile_m_at_64u_per_m": 2.0,
+        "storey_doom_units": 192,
+        "notes": "Native step and headroom figures come from the reviewed threshold checks; engine collision remains Codex-owned."
+      },
+      "mesh_constraints": {
+        "stair_component": "shared_stair_flight: 8 x 12-unit risers = 96 units (1.5 m)",
+        "landing_component": "shared_stair_landing: deck at 1.5 m, 1.8 m square",
+        "guardrail_component": "shared_guardrail: 1.1 m high, 2.0 m module",
+        "required_collision": [
+          "stair steps as walkable step surfaces",
+          "landing deck as walkable platform",
+          "guardrails as 1.1 m barriers",
+          "bell/cage as overhead and shell proxies"
+        ],
+        "notes": "Mesh collision is a proposal; Codex must convert to native sectors or source-port collision."
+      }
+    },
+    "boneglass_conservatory": {
+      "id": "boneglass_conservatory",
+      "name": "BONEGLASS CONSERVATORY",
+      "height_m": 15.0,
+      "storey_m": 3.0,
+      "levels": [
+        {
+          "index": 0,
+          "z_m": 0.0,
+          "z_doom_units": 0.0,
+          "name": "F0 peat floor"
+        },
+        {
+          "index": 1,
+          "z_m": 3.0,
+          "z_doom_units": 192.0,
+          "name": "F1 nursery beds"
+        },
+        {
+          "index": 2,
+          "z_m": 6.0,
+          "z_doom_units": 384.0,
+          "name": "F2 watering gantry"
+        },
+        {
+          "index": 3,
+          "z_m": 9.0,
+          "z_doom_units": 576.0,
+          "name": "F3 root cage"
+        },
+        {
+          "index": 4,
+          "z_m": 12.0,
+          "z_doom_units": 768.0,
+          "name": "F4 canopy walk"
+        },
+        {
+          "index": 5,
+          "z_m": 15.0,
+          "z_doom_units": 960.0,
+          "name": "F5 lantern roof / summit"
+        }
+      ],
+      "tower_proof": {
+        "base_floor_z_m": 0.0,
+        "summit_floor_z_m": 15.0,
+        "physical_gain_m": 15.0,
+        "circulation": "a spiral root stair from F0 to F5 plus a counterweight gantry from F1 to F4; the two routes are independent after F1",
+        "not_faked_by": "the glasshouse atrium is a real multi-storey void; every named level has a walkable bed, walk or gallery"
+      },
+      "landmark": {
+        "name": "The Root Cage",
+        "description": "The empty root cage hangs through the atrium from the F4 canopy to the F3 landing, suspended over a black void. The descending canopy above it is the F4-F5 ceiling; the growth lamps are the safe bearings.",
+        "levels": [
+          3,
+          4,
+          5
+        ]
+      },
+      "routes": {
+        "lower": "F0 peat floor -> dry gravel aisle -> growth chamber cover -> root stair to F1. The F0 ceiling is the open nursery floor above; beds are visible through root gaps, but the route is the stair.",
+        "middle": "F1 nursery beds -> watering gantry arch -> F2 gantry walk -> root stair to F3. The F2 gantry crosses over the beds on a 2.0 m bridge with rails.",
+        "upper": "F3 root cage landing -> F4 canopy walk -> F5 lantern roof. The last flight is a switchback through hanging roots; the summit is a real 15.0 m glasshouse lantern floor."
+      },
+      "stair_alternative": {
+        "description": "A continuous root-wrapped spiral stair uses the same 8-riser flights and 1.8 m landings; the root texture is cosmetic over the shared stair geometry.",
+        "riser_m": 0.1875,
+        "riser_doom_units": 12,
+        "flight_rise_m": 1.5,
+        "storey_rise_m": 3.0,
+        "clear_width_m": 1.6,
+        "landing_m": [
+          1.8,
+          1.8
+        ],
+        "handrail_height_m": 1.1
+      },
+      "lift_alternative": {
+        "description": "A counterweighted watering gantry platform links F1, F2 and F4. It is a slow open platform, not a jump; the stair remains the guaranteed route. Delivered as a static landing proposal; moving platform behaviour is unimplemented.",
+        "stops": [
+          "F1",
+          "F2",
+          "F4"
+        ],
+        "cage_size_m": [
+          1.8,
+          1.8,
+          2.0
+        ],
+        "status": "static landmark proposal; moving platform behaviour is unimplemented"
+      },
+      "fall_recovery": {
+        "main_void": "The glasshouse atrium is open from F1 to F4. Soft peat beds at F0 and planter shelves at F1/F2 catch a fall.",
+        "catch_surfaces": [
+          "F0 peat beds (0.4 m deep)",
+          "F1 planter shelves every 3 m",
+          "F2 watering gantry with rails"
+        ],
+        "return": "F0 peat beds connect to the root stair within 18 m; no one-way drop is required to progress.",
+        "damage_note": "Fall damage is engine-owned; every fall lands on a returnable floor."
+      },
+      "safe_spawn": {
+        "level": "F0",
+        "z_m": 0.0,
+        "description": "A dry gravel entry between two peat beds, under the first planter shelf, with the root stair visible to the left and a growth chamber as cover.",
+        "enemy_clearance": "at least 6 native tiles (12 m at 64 u/m) from the first encounter",
+        "cover": "two growth chambers and a root cage planter; no spawn under the cage"
+      },
+      "return_path": {
+        "description": "The pale growth lamps and the descending root curtain are visible from every level. Wall 07 (root cage) faces the atrium; wall 08 (canopy) faces the stair. The stair head is always within one room.",
+        "wayfinding": "landmark panels 07/08 and the pale glow of flat 04"
+      },
+      "arena_perch_spacing": {
+        "arena_min_m": [
+          7.0,
+          7.0
+        ],
+        "perimeter_clear_m": 1.6,
+        "perch_spacing_m": [
+          3.0,
+          4.5
+        ],
+        "perch_headroom_m": 1.5,
+        "rules": [
+          "no perch directly over the root cage void or a spawn",
+          "every perch has a planter-shelf or stair return",
+          "growth chambers provide cover but never block the only route"
+        ]
+      },
+      "room_over_room": [
+        {
+          "levels": [
+            "F0",
+            "F1"
+          ],
+          "description": "F1 nursery beds sit over the F0 peat floor; roots and glass panels show the room above."
+        },
+        {
+          "levels": [
+            "F1",
+            "F2"
+          ],
+          "description": "The F2 watering gantry crosses over the F1 beds; roses and drip lines hang into the room below."
+        },
+        {
+          "levels": [
+            "F3",
+            "F4",
+            "F5"
+          ],
+          "description": "The root cage void is a three-storey open volume; the F4 canopy walk and F5 lantern roof overhang it."
+        }
+      ],
+      "first_pass_constraints": {
+        "unavoidable_jumps": false,
+        "max_required_gap_m": 0.0,
+        "precision_platforming_required": false,
+        "unseen_hits": false,
+        "notes": "Required routes are the root stair and the static gantry landing. Planter shelves are optional, guarded and have stair returns. Nothing attacks through the opaque glass of a growth chamber."
+      },
+      "native_constraints": {
+        "max_step_doom_units": 16,
+        "max_step_m": 0.25,
+        "min_headroom_doom_units": 96,
+        "min_headroom_m": 1.5,
+        "player_clearance_doom_units": 96,
+        "player_clearance_m": 1.5,
+        "player_clearance_note": "minimum headroom used by the reviewed threshold checks; nominal player body height remains engine-owned",
+        "tile_doom_units": 128,
+        "tile_m_at_64u_per_m": 2.0,
+        "storey_doom_units": 192,
+        "notes": "Native step and headroom figures come from the reviewed threshold checks; engine collision remains Codex-owned."
+      },
+      "mesh_constraints": {
+        "stair_component": "shared_stair_flight: 8 x 12-unit risers = 96 units (1.5 m)",
+        "landing_component": "shared_stair_landing: deck at 1.5 m, 1.8 m square",
+        "guardrail_component": "shared_guardrail: 1.1 m high, 2.0 m module",
+        "required_collision": [
+          "root stair as walkable steps",
+          "gantry beam as overhead clearance",
+          "planter and cage as solid proxies",
+          "growth chambers as solid cover"
+        ],
+        "notes": "Mesh collision is a proposal; Codex must convert to native sectors or source-port collision."
+      }
+    },
+    "skyhotel_service_well": {
+      "id": "skyhotel_service_well",
+      "name": "SKYHOTEL SERVICE WELL",
+      "height_m": 18.0,
+      "storey_m": 3.0,
+      "levels": [
+        {
+          "index": 0,
+          "z_m": 0.0,
+          "z_doom_units": 0.0,
+          "name": "B1 laundry / service basement"
+        },
+        {
+          "index": 1,
+          "z_m": 3.0,
+          "z_doom_units": 192.0,
+          "name": "F1 linen service"
+        },
+        {
+          "index": 2,
+          "z_m": 6.0,
+          "z_doom_units": 384.0,
+          "name": "F2 service well"
+        },
+        {
+          "index": 3,
+          "z_m": 9.0,
+          "z_doom_units": 576.0,
+          "name": "F3 first guest balcony"
+        },
+        {
+          "index": 4,
+          "z_m": 12.0,
+          "z_doom_units": 768.0,
+          "name": "F4 second guest balcony"
+        },
+        {
+          "index": 5,
+          "z_m": 15.0,
+          "z_doom_units": 960.0,
+          "name": "F5 third guest balcony"
+        },
+        {
+          "index": 6,
+          "z_m": 18.0,
+          "z_doom_units": 1152.0,
+          "name": "F6 observation deck / summit"
+        }
+      ],
+      "tower_proof": {
+        "base_floor_z_m": 0.0,
+        "summit_floor_z_m": 18.0,
+        "physical_gain_m": 18.0,
+        "circulation": "a fire stair from B1 to F6 plus a service lift from B1 to F6; both are independent. Guest balconies are stacked at real 3.0 m floor pitches around the atrium void.",
+        "not_faked_by": "no tall painted atrium; the service well is an open shaft with walkable balconies at each level and real room-over-room floors"
+      },
+      "landmark": {
+        "name": "The 33rd Floor Lift",
+        "description": "The brass service lift opens on an amber gap at F2 and F3, with an impossible indicator mark. The F3 landing faces the atrium cutaway; the F6 observation deck looks down the whole 18 m well.",
+        "levels": [
+          2,
+          3,
+          6
+        ]
+      },
+      "routes": {
+        "lower": "B1 laundry -> service corridor -> dumbwaiter winch cover -> fire stair to F1. The laundry net and linen chute shelves are visible below the open service well but the route is the stair.",
+        "middle": "F1 linen service -> F2 service well -> service lift landing -> F3 first guest balcony. The F2 landing is a real floor around the open well, with guardrails on every unrailed edge.",
+        "upper": "F3 -> F4 -> F5 guest balconies are staggered around the atrium; the fire stair switchbacks at the service core and reaches F6. The observation deck is a real 18.0 m floor with a guarded view down the well."
+      },
+      "stair_alternative": {
+        "description": "A fire stair with the same two-flight rhythm runs the full height. Its landings are offset around the service core, so it reads as a different spatial experience from the straight foundry stair.",
+        "riser_m": 0.1875,
+        "riser_doom_units": 12,
+        "flight_rise_m": 1.5,
+        "storey_rise_m": 3.0,
+        "clear_width_m": 1.6,
+        "landing_m": [
+          1.8,
+          1.8
+        ],
+        "handrail_height_m": 1.1
+      },
+      "lift_alternative": {
+        "description": "The service lift is an explicit second route from B1 to F6. The delivered mesh is a static car/shaft proposal; the moving car and call logic are unimplemented, so the fire stair is guaranteed.",
+        "stops": [
+          "B1",
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5",
+          "F6"
+        ],
+        "cage_size_m": [
+          2.0,
+          2.0,
+          2.4
+        ],
+        "status": "static landmark proposal; moving lift behaviour is unimplemented"
+      },
+      "fall_recovery": {
+        "main_void": "The service atrium is open from F1 to F6. Guest balconies are set back 2.0 m from the void edge and have 1.1 m guardrails.",
+        "catch_surfaces": [
+          "B1 laundry net at 0.5 m depth",
+          "F1 linen shelves every 2.5 m",
+          "F2 service-well roof over the dumbwaiter"
+        ],
+        "return": "The B1 laundry net connects to the fire stair within 22 m; no required route uses an unguarded drop.",
+        "damage_note": "Fall damage is engine-owned; every fall lands on a returnable surface."
+      },
+      "safe_spawn": {
+        "level": "B1",
+        "z_m": 0.0,
+        "description": "A laundry entry behind a linen cart, with the fire stair visible through a service door and the lift indicator as a second bearing.",
+        "enemy_clearance": "at least 6 native tiles (12 m at 64 u/m) from the first encounter",
+        "cover": "linen carts and the dumbwaiter winch; no spawn inside the lift car"
+      },
+      "return_path": {
+        "description": "Amber floor ticks and the repeated room-number paddle mark the fire stair on every balcony. Wall 07 (lift) faces the service core; wall 08 (atrium) faces the void. The stair is never more than one balcony bay away.",
+        "wayfinding": "landmark panels 07/08 and the amber lit ceiling flat 04"
+      },
+      "arena_perch_spacing": {
+        "arena_min_m": [
+          9.0,
+          7.0
+        ],
+        "perimeter_clear_m": 1.6,
+        "perch_spacing_m": [
+          3.0,
+          4.0
+        ],
+        "perch_headroom_m": 1.5,
+        "rules": [
+          "no perch over the open atrium or directly above a spawn",
+          "every balcony perch has a stair or lift landing return",
+          "guardrails on every unrailed edge; no jump-only shortcut"
+        ]
+      },
+      "room_over_room": [
+        {
+          "levels": [
+            "B1",
+            "F1"
+          ],
+          "description": "F1 linen service rooms sit directly over B1 laundry and the chute shelves."
+        },
+        {
+          "levels": [
+            "F1",
+            "F2"
+          ],
+          "description": "F2 service-well roof covers the F1 linen store while the atrium opens beside it."
+        },
+        {
+          "levels": [
+            "F3",
+            "F4",
+            "F5"
+          ],
+          "description": "Staggered guest balconies overhang one another around the void, each a real 3.0 m floor pitch; F6 observation deck caps the well."
+        }
+      ],
+      "first_pass_constraints": {
+        "unavoidable_jumps": false,
+        "max_required_gap_m": 0.0,
+        "precision_platforming_required": false,
+        "unseen_hits": false,
+        "notes": "Required routes are the fire stair and the static lift landings. Balcony gaps are optional and guarded. No enemy fires through the opaque rain windows; all attack lanes are visible before entry."
+      },
+      "native_constraints": {
+        "max_step_doom_units": 16,
+        "max_step_m": 0.25,
+        "min_headroom_doom_units": 96,
+        "min_headroom_m": 1.5,
+        "player_clearance_doom_units": 96,
+        "player_clearance_m": 1.5,
+        "player_clearance_note": "minimum headroom used by the reviewed threshold checks; nominal player body height remains engine-owned",
+        "tile_doom_units": 128,
+        "tile_m_at_64u_per_m": 2.0,
+        "storey_doom_units": 192,
+        "notes": "Native step and headroom figures come from the reviewed threshold checks; engine collision remains Codex-owned."
+      },
+      "mesh_constraints": {
+        "stair_component": "shared_stair_flight: 8 x 12-unit risers = 96 units (1.5 m)",
+        "landing_component": "shared_stair_landing: deck at 1.5 m, 1.8 m square",
+        "guardrail_component": "shared_guardrail: 1.1 m high, 2.0 m module",
+        "required_collision": [
+          "fire stair as walkable steps",
+          "balcony floor at 0.16 m above level",
+          "guardrails as 1.1 m barriers",
+          "lift car shell and dumbwaiter as solid proxies"
+        ],
+        "notes": "Mesh collision is a proposal; Codex must convert to native sectors or source-port collision."
+      }
+    }
+  }
+}

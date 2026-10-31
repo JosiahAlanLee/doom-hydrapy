@@ -1,0 +1,1770 @@
+{
+  "format": "nullrun-tower-checks-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "passed": 39,
+  "failed": 0,
+  "total": 39,
+  "failed_ids": [],
+  "seconds": 6.77,
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python generate.py --out . --seed 20261031",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python checks.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python make_manifest.py",
+    "PYTHONDONTWRITEBYTECODE=1 /home/echevarian/miniconda3/envs/hydrapy/bin/python checks.py"
+  ],
+  "visual_review": "The 15 contact sheets were viewed locally with the image viewer in this run; this is not a native-engine render. Codex must still perform the native 640x400 and palette check.",
+  "results": [
+    {
+      "id": "art_count_45",
+      "pass": true,
+      "detail": "45 art PNGs; missing=[]; extra=[]",
+      "count": 45,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "id": "mob_atlas_count_12",
+      "pass": true,
+      "detail": "12 mob atlases; expected 12",
+      "count": 12
+    },
+    {
+      "id": "mesh_obj_count_12",
+      "pass": true,
+      "detail": "12 OBJ meshes; expected 12",
+      "count": 12
+    },
+    {
+      "id": "sheet_count_15",
+      "pass": true,
+      "detail": "15 contact sheets; expected 15",
+      "count": 15
+    },
+    {
+      "id": "metadata_present",
+      "pass": true,
+      "detail": "missing metadata: []",
+      "missing": []
+    },
+    {
+      "id": "bounded_output_size",
+      "pass": true,
+      "detail": "6.96 MB output (< 50 MB)",
+      "bytes": 6956812
+    },
+    {
+      "id": "image_dimensions_modes",
+      "pass": true,
+      "detail": "walls 128x128 RGB, flats 64x64 RGB, props 96x128 RGBA",
+      "images": 45
+    },
+    {
+      "id": "atlas_dimensions_modes",
+      "pass": true,
+      "detail": "all 12 atlases are 512x768 RGBA",
+      "atlases": 12
+    },
+    {
+      "id": "sheet_modes_sizes",
+      "pass": true,
+      "detail": "15 sheets are RGB and at least 400x400",
+      "sheets": 15
+    },
+    {
+      "id": "seams_exact",
+      "pass": true,
+      "detail": "opposite edge rows and columns match exactly for 36 walls/flats",
+      "seams": [
+        {
+          "file": "art/ashbell_foundry/walls/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/05.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/06.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/07.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/walls/08.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/flats/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/flats/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/flats/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/ashbell_foundry/flats/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/05.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/06.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/07.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/walls/08.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/flats/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/flats/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/flats/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/boneglass_conservatory/flats/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/05.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/06.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/07.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/walls/08.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/flats/01.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/flats/02.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/flats/03.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        },
+        {
+          "file": "art/skyhotel_service_well/flats/04.png",
+          "top_bottom_equal": true,
+          "left_right_equal": true
+        }
+      ]
+    },
+    {
+      "id": "seams_documented",
+      "pass": true,
+      "detail": "environments.json documents wall/flat/prop seam behaviour"
+    },
+    {
+      "id": "props_alpha_bounds_anchor",
+      "pass": true,
+      "detail": "all 9 props are bottom-anchored RGBA cut-outs with 3 px margins and no backdrop",
+      "problems": []
+    },
+    {
+      "id": "assets_nonblank_contrast",
+      "pass": true,
+      "detail": "45 art PNGs are nonblank with a minimum colour and contrast floor",
+      "problems": []
+    },
+    {
+      "id": "assets_unique",
+      "pass": true,
+      "detail": "45/45 unique art PNG hashes",
+      "unique": 45
+    },
+    {
+      "id": "atlases_unique",
+      "pass": true,
+      "detail": "12/12 unique atlas hashes"
+    },
+    {
+      "id": "palette_separation_grey_proxy",
+      "pass": true,
+      "detail": "set mean RGB separation > 25 and wall structure IoU mean <= 0.55/max <= 0.80",
+      "pairs": [
+        {
+          "pair": [
+            "ashbell_foundry",
+            "boneglass_conservatory"
+          ],
+          "mean_rgb_distance": 149.39
+        },
+        {
+          "pair": [
+            "ashbell_foundry",
+            "skyhotel_service_well"
+          ],
+          "mean_rgb_distance": 34.3
+        },
+        {
+          "pair": [
+            "boneglass_conservatory",
+            "skyhotel_service_well"
+          ],
+          "mean_rgb_distance": 120.03
+        }
+      ],
+      "structure": [
+        {
+          "pair": [
+            "ashbell_foundry",
+            "boneglass_conservatory"
+          ],
+          "wall_structure_iou_mean": 0.218,
+          "max": 0.299
+        },
+        {
+          "pair": [
+            "ashbell_foundry",
+            "skyhotel_service_well"
+          ],
+          "wall_structure_iou_mean": 0.159,
+          "max": 0.204
+        },
+        {
+          "pair": [
+            "boneglass_conservatory",
+            "skyhotel_service_well"
+          ],
+          "wall_structure_iou_mean": 0.177,
+          "max": 0.205
+        }
+      ]
+    },
+    {
+      "id": "inter_set_structure",
+      "pass": true,
+      "detail": "wall 0.185/0.196; flat 0.213/0.235; prop 0.378/0.395",
+      "wall_mean": 0.185,
+      "wall_max": 0.196,
+      "flat_mean": 0.213,
+      "flat_max": 0.235,
+      "prop_mean": 0.378,
+      "prop_max": 0.395
+    },
+    {
+      "id": "atlas_layout_24_padding_anchor",
+      "pass": true,
+      "detail": "288 cells: 24 per atlas, >=3 px padding, exact y=120 floor anchor, crisp alpha",
+      "problems": []
+    },
+    {
+      "id": "atlas_frames_unique_animated",
+      "pass": true,
+      "detail": "all 24 cells unique; every consecutive pair changes >=100 px; minimum 153",
+      "min_changed_pixels": 153,
+      "unique_cells": {
+        "mobs/ashbell_foundry/latchwing_A.png": 24,
+        "mobs/ashbell_foundry/latchwing_B.png": 24,
+        "mobs/ashbell_foundry/relay_choir_A.png": 24,
+        "mobs/ashbell_foundry/relay_choir_B.png": 24,
+        "mobs/boneglass_conservatory/latchwing_A.png": 24,
+        "mobs/boneglass_conservatory/latchwing_B.png": 24,
+        "mobs/boneglass_conservatory/relay_choir_A.png": 24,
+        "mobs/boneglass_conservatory/relay_choir_B.png": 24,
+        "mobs/skyhotel_service_well/latchwing_A.png": 24,
+        "mobs/skyhotel_service_well/latchwing_B.png": 24,
+        "mobs/skyhotel_service_well/relay_choir_A.png": 24,
+        "mobs/skyhotel_service_well/relay_choir_B.png": 24
+      }
+    },
+    {
+      "id": "atlas_frame23_corpse",
+      "pass": true,
+      "detail": "all 12 frame-23 cells contain a visible corpse",
+      "corpse": {
+        "mobs/ashbell_foundry/latchwing_A.png": {
+          "bbox": [
+            4,
+            94,
+            122,
+            120
+          ],
+          "coverage": 0.114
+        },
+        "mobs/ashbell_foundry/latchwing_B.png": {
+          "bbox": [
+            4,
+            94,
+            122,
+            120
+          ],
+          "coverage": 0.114
+        },
+        "mobs/ashbell_foundry/relay_choir_A.png": {
+          "bbox": [
+            22,
+            97,
+            98,
+            120
+          ],
+          "coverage": 0.08
+        },
+        "mobs/ashbell_foundry/relay_choir_B.png": {
+          "bbox": [
+            22,
+            97,
+            98,
+            120
+          ],
+          "coverage": 0.08
+        },
+        "mobs/boneglass_conservatory/latchwing_A.png": {
+          "bbox": [
+            20,
+            102,
+            108,
+            120
+          ],
+          "coverage": 0.081
+        },
+        "mobs/boneglass_conservatory/latchwing_B.png": {
+          "bbox": [
+            20,
+            102,
+            108,
+            120
+          ],
+          "coverage": 0.081
+        },
+        "mobs/boneglass_conservatory/relay_choir_A.png": {
+          "bbox": [
+            18,
+            98,
+            100,
+            120
+          ],
+          "coverage": 0.089
+        },
+        "mobs/boneglass_conservatory/relay_choir_B.png": {
+          "bbox": [
+            18,
+            98,
+            100,
+            120
+          ],
+          "coverage": 0.089
+        },
+        "mobs/skyhotel_service_well/latchwing_A.png": {
+          "bbox": [
+            24,
+            96,
+            112,
+            120
+          ],
+          "coverage": 0.103
+        },
+        "mobs/skyhotel_service_well/latchwing_B.png": {
+          "bbox": [
+            24,
+            96,
+            112,
+            120
+          ],
+          "coverage": 0.103
+        },
+        "mobs/skyhotel_service_well/relay_choir_A.png": {
+          "bbox": [
+            22,
+            90,
+            98,
+            120
+          ],
+          "coverage": 0.083
+        },
+        "mobs/skyhotel_service_well/relay_choir_B.png": {
+          "bbox": [
+            22,
+            90,
+            98,
+            120
+          ],
+          "coverage": 0.083
+        }
+      }
+    },
+    {
+      "id": "atlas_ab_structural_variants",
+      "pass": true,
+      "detail": "A/B idle silhouettes differ structurally (IoU <= 0.92)",
+      "ab_idle_silhouette_iou": {
+        "ashbell_foundry/latchwing": 0.557,
+        "ashbell_foundry/relay_choir": 0.683,
+        "boneglass_conservatory/latchwing": 0.64,
+        "boneglass_conservatory/relay_choir": 0.661,
+        "skyhotel_service_well/latchwing": 0.764,
+        "skyhotel_service_well/relay_choir": 0.676
+      }
+    },
+    {
+      "id": "atlas_six_identities_distinct",
+      "pass": true,
+      "detail": "all six identities have distinct idle silhouettes (IoU <= 0.80)",
+      "identity_iou": {
+        "ashbell_foundry/latchwing vs ashbell_foundry/relay_choir": 0.327,
+        "ashbell_foundry/latchwing vs boneglass_conservatory/latchwing": 0.198,
+        "ashbell_foundry/latchwing vs boneglass_conservatory/relay_choir": 0.246,
+        "ashbell_foundry/latchwing vs skyhotel_service_well/latchwing": 0.355,
+        "ashbell_foundry/latchwing vs skyhotel_service_well/relay_choir": 0.294,
+        "ashbell_foundry/relay_choir vs boneglass_conservatory/latchwing": 0.346,
+        "ashbell_foundry/relay_choir vs boneglass_conservatory/relay_choir": 0.359,
+        "ashbell_foundry/relay_choir vs skyhotel_service_well/latchwing": 0.491,
+        "ashbell_foundry/relay_choir vs skyhotel_service_well/relay_choir": 0.409,
+        "boneglass_conservatory/latchwing vs boneglass_conservatory/relay_choir": 0.377,
+        "boneglass_conservatory/latchwing vs skyhotel_service_well/latchwing": 0.444,
+        "boneglass_conservatory/latchwing vs skyhotel_service_well/relay_choir": 0.216,
+        "boneglass_conservatory/relay_choir vs skyhotel_service_well/latchwing": 0.338,
+        "boneglass_conservatory/relay_choir vs skyhotel_service_well/relay_choir": 0.257,
+        "skyhotel_service_well/latchwing vs skyhotel_service_well/relay_choir": 0.311
+      }
+    },
+    {
+      "id": "mesh_parse_counts",
+      "pass": true,
+      "detail": "12 OBJ files parse as triangles; face/vertex/UV/normal counts and finite values are valid",
+      "meshes": {
+        "suspended_ninth_bell": {
+          "triangles": 1812,
+          "vertices": 5436,
+          "uvs": 5436,
+          "normals": 5436,
+          "bounds_m": {
+            "min": [
+              -0.647826,
+              -0.647826,
+              1.55
+            ],
+            "max": [
+              0.9,
+              0.647826,
+              3.95
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "chain_lift_cage": {
+          "triangles": 1096,
+          "vertices": 3288,
+          "uvs": 3288,
+          "normals": 3288,
+          "bounds_m": {
+            "min": [
+              -0.84,
+              -0.84,
+              0.0
+            ],
+            "max": [
+              1.12,
+              0.84,
+              4.0
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "casting_furnace": {
+          "triangles": 746,
+          "vertices": 2238,
+          "uvs": 2238,
+          "normals": 2238,
+          "bounds_m": {
+            "min": [
+              -1.2,
+              -0.7,
+              0.0
+            ],
+            "max": [
+              1.76,
+              0.7,
+              3.7
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "root_cage_planter": {
+          "triangles": 1746,
+          "vertices": 5238,
+          "uvs": 5238,
+          "normals": 5238,
+          "bounds_m": {
+            "min": [
+              -0.822038,
+              -0.822038,
+              0.0
+            ],
+            "max": [
+              0.822038,
+              0.822038,
+              3.455201
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "watering_gantry": {
+          "triangles": 788,
+          "vertices": 2364,
+          "uvs": 2364,
+          "normals": 2364,
+          "bounds_m": {
+            "min": [
+              -1.52,
+              -0.22,
+              0.0
+            ],
+            "max": [
+              1.52,
+              0.264127,
+              2.58
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "growth_chamber": {
+          "triangles": 336,
+          "vertices": 1008,
+          "uvs": 1008,
+          "normals": 1008,
+          "bounds_m": {
+            "min": [
+              -0.7,
+              -0.53,
+              0.0
+            ],
+            "max": [
+              0.7,
+              0.4,
+              2.3
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "service_lift_car": {
+          "triangles": 188,
+          "vertices": 564,
+          "uvs": 564,
+          "normals": 564,
+          "bounds_m": {
+            "min": [
+              -1.0,
+              -1.015,
+              0.0
+            ],
+            "max": [
+              1.0,
+              1.0,
+              2.62
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "dumbwaiter_winch_head": {
+          "triangles": 580,
+          "vertices": 1740,
+          "uvs": 1740,
+          "normals": 1740,
+          "bounds_m": {
+            "min": [
+              -0.75,
+              -0.36,
+              0.0
+            ],
+            "max": [
+              0.75,
+              0.48,
+              2.25
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "balcony_bay": {
+          "triangles": 252,
+          "vertices": 756,
+          "uvs": 756,
+          "normals": 756,
+          "bounds_m": {
+            "min": [
+              -1.5,
+              -0.62,
+              0.0
+            ],
+            "max": [
+              1.5,
+              0.6,
+              3.0
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "stair_flight": {
+          "triangles": 228,
+          "vertices": 684,
+          "uvs": 684,
+          "normals": 684,
+          "bounds_m": {
+            "min": [
+              -0.895,
+              -0.002998,
+              0.0
+            ],
+            "max": [
+              0.895,
+              2.44,
+              1.5
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          }
+        },
+        "stair_landing": {
+          "triangles": 96,
+          "vertices": 288,
+          "uvs": 288,
+          "normals": 288,
+          "bounds_m": {
+            "min": [
+              -0.9,
+              -0.9,
+              0.0
+            ],
+            "max": [
+              0.9,
+              0.9,
+              1.55
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.46956,
+              0.93956
+            ]
+          }
+        },
+        "guardrail": {
+          "triangles": 108,
+          "vertices": 324,
+          "uvs": 324,
+          "normals": 324,
+          "bounds_m": {
+            "min": [
+              -0.05,
+              -0.1,
+              0.0
+            ],
+            "max": [
+              2.05,
+              0.1,
+              1.12
+            ]
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.46956
+            ]
+          }
+        }
+      },
+      "problems": [],
+      "finite_problems": []
+    },
+    {
+      "id": "mesh_bounds_triangles_honest",
+      "pass": true,
+      "detail": "mesh-derived bounds match props3d.json and every mesh is <5000 triangles",
+      "problems": []
+    },
+    {
+      "id": "mesh_texture_references",
+      "pass": true,
+      "detail": "every OBJ has an MTL with map_Kd and an adjacent 256x256 RGB PNG",
+      "problems": []
+    },
+    {
+      "id": "mesh_collision_metadata",
+      "pass": true,
+      "detail": "all 12 entries have finite footprint/z proxies, notes and stair/guardrail limits",
+      "problems": []
+    },
+    {
+      "id": "layouts_schema_and_tower_proof",
+      "pass": true,
+      "detail": "3 environments; 6-7 levels; real 15/15/18 m height; routes, stairs, lifts, recovery, spawn, return, spacing and room-over-room present",
+      "problems": []
+    },
+    {
+      "id": "layouts_native_vs_mesh_constraints",
+      "pass": true,
+      "detail": "native step 16 u / headroom 96 u are kept separate from mesh 12-unit risers",
+      "problems": []
+    },
+    {
+      "id": "music_profiles_valid",
+      "pass": true,
+      "detail": "3 profiles pass the mirrored host schema validator",
+      "profiles": [
+        "ashbell_foundry",
+        "boneglass_conservatory",
+        "skyhotel_service_well"
+      ]
+    },
+    {
+      "id": "music_host_schema_accepts",
+      "pass": true,
+      "detail": "host validate_profile accepted all 3 proposals",
+      "host_path": "/home/echevarian/dev/shared/codex/nullrun-hires-20261031/music_package/nullrun_music/profiles.py"
+    },
+    {
+      "id": "music_no_rendered_audio",
+      "pass": true,
+      "detail": "no rendered audio files exist; profiles are written proposals only",
+      "audio": []
+    },
+    {
+      "id": "music_proposal_status",
+      "pass": true,
+      "detail": "music_proposals.json states proposal-only, not rendered/auditioned"
+    },
+    {
+      "id": "environments_schema",
+      "pass": true,
+      "detail": "nullrun-environment-kit-1 with 3 sets, 8 wall roles, 4 flat roles and 3 prop slots",
+      "problems": []
+    },
+    {
+      "id": "encounters_schema",
+      "pass": true,
+      "detail": "6 identities, A/B atlases, tells/counterplay and unimplemented vertical proposals",
+      "problems": []
+    },
+    {
+      "id": "props3d_schema",
+      "pass": true,
+      "detail": "Z-up metres, 1 m=64 Doom units, 9 environment + 3 shared entries, no engine-load claim",
+      "problems": []
+    },
+    {
+      "id": "reproducible_two_runs",
+      "pass": true,
+      "detail": "two fresh folders are byte-identical (120 files; 2.0s + 1.9s)",
+      "files": 120,
+      "seconds": 3.85
+    },
+    {
+      "id": "matches_committed_output",
+      "pass": true,
+      "detail": "fresh generation matches committed generated files (120 files)",
+      "missing": []
+    },
+    {
+      "id": "seed_sensitivity",
+      "pass": true,
+      "detail": "seed+1 changes 45/45 art, 12/12 atlases, 12/12 textures; OBJ/MTL geometry is intentionally stable",
+      "art": [
+        45,
+        45
+      ],
+      "mobs": [
+        12,
+        12
+      ],
+      "textures": [
+        12,
+        12
+      ],
+      "seconds": 1.88
+    },
+    {
+      "id": "manifest_integrity",
+      "pass": true,
+      "detail": "manifest hashes 119 generated files and 9 source modules",
+      "problems": [],
+      "doc": {
+        "format": "nullrun-tower-manifest-1",
+        "source_seed": 20261031,
+        "license": "GPL-2.0-or-later",
+        "algorithm": "sha256",
+        "scope": "Generated content: metadata, bitmap art, mob atlases, 3D OBJ/MTL/textures, sheets and documents, relative to the output root. Excludes manifest.json, checks.json, VALIDATION.md and temporary folders. Source modules are hashed separately so a fresh output folder produces the same manifest.",
+        "seeds": {
+          "art": 20261031,
+          "mobs": 20261031,
+          "props3d": 20261031,
+          "layouts": 20261031,
+          "music": 20261031,
+          "derivation": "sha256-based asset_seed(seed, set, kind, index); no Python hash()"
+        },
+        "file_count": 119,
+        "total_bytes": 6517421,
+        "artifact_bundle_sha256": "79eaf9ec2115c2565f3a8913c166d64d873fcf12794c0cbd4d4632a345314c8c",
+        "source_count": 9,
+        "source_bundle_sha256": "9e08354ddff2aceddd592af5512453bc677f4ad0d3df468fb049082fb77a368b",
+        "files": [
+          {
+            "path": "CREDITS.md",
+            "sha256": "5cb6351e4f465952e23469b4c09430fb03a6fc46b3efc0c46c9a2c4e9dcec6f8",
+            "bytes": 870
+          },
+          {
+            "path": "LAYOUTS.md",
+            "sha256": "1bf845f708403a2ba66381a5b80f6138179b1c468a927e5603f9d19530c40682",
+            "bytes": 10888
+          },
+          {
+            "path": "README.md",
+            "sha256": "81eb7d6f1be9f82f3af5df252dc47201baad336751a09c7c2edfa673eeb7a1ee",
+            "bytes": 7944
+          },
+          {
+            "path": "art/ashbell_foundry/flats/01.png",
+            "sha256": "09f12502dc9bb6c1d8644818b4f6e3cdbdb846786586cb7eba94ef6437287434",
+            "bytes": 3776
+          },
+          {
+            "path": "art/ashbell_foundry/flats/02.png",
+            "sha256": "8c89c2eeb4c109ab5a89ad98bf1f49d5679d9696bb0f21f45eaa14b2577e9e0e",
+            "bytes": 4835
+          },
+          {
+            "path": "art/ashbell_foundry/flats/03.png",
+            "sha256": "b55bc7d963a9d9e1c34791cbdda9b36f6a1a0a27c18edfa556e8e89c36d57f90",
+            "bytes": 3719
+          },
+          {
+            "path": "art/ashbell_foundry/flats/04.png",
+            "sha256": "02fad9906bd01183820efff2b6a7672cf26f59c13ec863e546ccff869c988f41",
+            "bytes": 1602
+          },
+          {
+            "path": "art/ashbell_foundry/props/cable_shrine.png",
+            "sha256": "8f77318e764cd8fc69bf3e86930d35b922511b3316fc1c55f6ade417ed652cd8",
+            "bytes": 1910
+          },
+          {
+            "path": "art/ashbell_foundry/props/directory_sign.png",
+            "sha256": "634e7edde9bdcd9027753d7d2949e39ea3f6e365c752d979d05b2a41ffbbf387",
+            "bytes": 2002
+          },
+          {
+            "path": "art/ashbell_foundry/props/service_lamp.png",
+            "sha256": "880ceeb3f56bf8839a7d0d7f4d24e45ee8afa0a6c809c2874d17c5a6091de441",
+            "bytes": 1977
+          },
+          {
+            "path": "art/ashbell_foundry/walls/01.png",
+            "sha256": "22988120b64ace3d1e7c6585ba5e83909c68f5ff6e998c1b5bc5b5fdaa85f79c",
+            "bytes": 13354
+          },
+          {
+            "path": "art/ashbell_foundry/walls/02.png",
+            "sha256": "72ed7771376e5f95f7f20d520362e73d70c894d8981f69425ba92037effbfbee",
+            "bytes": 4130
+          },
+          {
+            "path": "art/ashbell_foundry/walls/03.png",
+            "sha256": "9817ec520a5163d20b5bded9e9158d011d9bf41fc43a944abffb0fe973352ec2",
+            "bytes": 9831
+          },
+          {
+            "path": "art/ashbell_foundry/walls/04.png",
+            "sha256": "1fe1d01470b754385ca863cf7793a34dfeafc306ad619e1ff2212856f86d08c4",
+            "bytes": 12601
+          },
+          {
+            "path": "art/ashbell_foundry/walls/05.png",
+            "sha256": "dc8c41c31fdc758743456942bdb582a99e776e0fe7d3491ea72f1db4637e7034",
+            "bytes": 4438
+          },
+          {
+            "path": "art/ashbell_foundry/walls/06.png",
+            "sha256": "f6f65eae73803a8c5386bef461086f044865d03b5008e4202f2bd4792d5b5255",
+            "bytes": 9598
+          },
+          {
+            "path": "art/ashbell_foundry/walls/07.png",
+            "sha256": "0325f9579e2c97b6945da5bf3a71b7d3cf8d2873ee751993fb1c610ed4d77d1a",
+            "bytes": 13865
+          },
+          {
+            "path": "art/ashbell_foundry/walls/08.png",
+            "sha256": "8d0eedcfb094d1d9f11e52e70b01a543ddb576a67e074715fcf1991445bab9e7",
+            "bytes": 6831
+          },
+          {
+            "path": "art/boneglass_conservatory/flats/01.png",
+            "sha256": "61297e9e0d012094d092fab4926f92256b993337ff9f090c2945a6a541ec4bfb",
+            "bytes": 5627
+          },
+          {
+            "path": "art/boneglass_conservatory/flats/02.png",
+            "sha256": "666909c429af7ba83664771abdd3c12d0688d5453506a59469ca064a97c68a7e",
+            "bytes": 5367
+          },
+          {
+            "path": "art/boneglass_conservatory/flats/03.png",
+            "sha256": "b07e462406a1532695d9c78137adea1289a9fc577fe44a813fd1f5cf6b33d9bc",
+            "bytes": 5302
+          },
+          {
+            "path": "art/boneglass_conservatory/flats/04.png",
+            "sha256": "3c1be27b2adf967311748e94d2053145a10c4ccc1e9c27adf1283f5178171aa1",
+            "bytes": 4309
+          },
+          {
+            "path": "art/boneglass_conservatory/props/cable_shrine.png",
+            "sha256": "855d5c46d6c2f3a0fd8d54a129010a92abc9c6df8b01358f5a4b65f81d8c7ce4",
+            "bytes": 2571
+          },
+          {
+            "path": "art/boneglass_conservatory/props/directory_sign.png",
+            "sha256": "6be97a130df0f276001a8903b74e99af9ac036cec9533159a7a4bbe2aa0a5bdc",
+            "bytes": 1995
+          },
+          {
+            "path": "art/boneglass_conservatory/props/service_lamp.png",
+            "sha256": "99fd39fb9931c931e8e7c799f86aa37814fa8b6c81e6164bbd7566335da0e548",
+            "bytes": 2302
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/01.png",
+            "sha256": "479b5a2d8bec745291428d7e62c1a37fe63c63b728eafeaa7d14c505d5055f8b",
+            "bytes": 10686
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/02.png",
+            "sha256": "47882f580f121b9d5ae0b1110fff1653f0510a730e00b07e2672b625aa43b84a",
+            "bytes": 7957
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/03.png",
+            "sha256": "92c70c6302cf7703a544746c861d789b608f4019701b36ddd2303c18d12441fa",
+            "bytes": 12858
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/04.png",
+            "sha256": "b7af39b1392a427c0235820820ea6ac5a1ae317748a4b6811d2281f36a0b1646",
+            "bytes": 11035
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/05.png",
+            "sha256": "d9ab42c7702acdc35d9e0f29360dd160ec2470f72d33c12e26d8b8d313e1423a",
+            "bytes": 6420
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/06.png",
+            "sha256": "1f0091796b60076d8ab2aa0d21402c1511810303089571581a333c18b9ac3cdc",
+            "bytes": 14878
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/07.png",
+            "sha256": "338f32a4dc9acf53b7000e5c3efdaedae60e9025ad5b719828b95cdb0d9d5b2e",
+            "bytes": 14230
+          },
+          {
+            "path": "art/boneglass_conservatory/walls/08.png",
+            "sha256": "3d9d889bf8f9e3ad7b5a45d6a660f6552700e3588414894ac61c852f348bb588",
+            "bytes": 12876
+          },
+          {
+            "path": "art/skyhotel_service_well/flats/01.png",
+            "sha256": "664e0eb8ce4ee97b7c66f59c5d3e5e0ccad27ef4eeda340df5e22682b5a3475c",
+            "bytes": 4271
+          },
+          {
+            "path": "art/skyhotel_service_well/flats/02.png",
+            "sha256": "dd1a1036ab140996e3866b417c29cebe785dd674da9caa4e33e24e41b87bf3f6",
+            "bytes": 4133
+          },
+          {
+            "path": "art/skyhotel_service_well/flats/03.png",
+            "sha256": "4f7e3c44323bd08ec59434286b5a96333fc423c0ec31599369dc5e33a4f929c2",
+            "bytes": 4283
+          },
+          {
+            "path": "art/skyhotel_service_well/flats/04.png",
+            "sha256": "aad1fc8939ba52087cb750b883724c0d03ee06077378f46f0696700c110211bc",
+            "bytes": 4230
+          },
+          {
+            "path": "art/skyhotel_service_well/props/cable_shrine.png",
+            "sha256": "411ea137d9385fe5995f0596b4794c6b38445259c89bdd5ee2c8bfd5df523574",
+            "bytes": 1952
+          },
+          {
+            "path": "art/skyhotel_service_well/props/directory_sign.png",
+            "sha256": "477367b9e23f29cec75489c9274e338a271863b67fa14df6d417601238f22814",
+            "bytes": 1491
+          },
+          {
+            "path": "art/skyhotel_service_well/props/service_lamp.png",
+            "sha256": "c2c99b5f14d65f59f695d7fc508a55e31579df0419318d334ffcd4052ce4a47a",
+            "bytes": 1442
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/01.png",
+            "sha256": "dbe148e95d68899cdad1b3833942cd4bbfc492c2ba4f777393baa47b66ef4835",
+            "bytes": 9541
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/02.png",
+            "sha256": "a9a6898ca419b25120f53e7808d628e37112dbd52776857895406e7c24ec3b72",
+            "bytes": 5607
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/03.png",
+            "sha256": "c7b228fbdcae321dd4b569c088eaa307b87ebe1f9f85832eb78ba459e26c71e0",
+            "bytes": 8134
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/04.png",
+            "sha256": "179abd5463eecc1ff0ee53b4930cf71f64f61c1d21f85d8ec2dccf0a2b893e6d",
+            "bytes": 12496
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/05.png",
+            "sha256": "2b03052cd2c132af6f83f806b73b35ce1f67012cc41bdf69292edd2fcfc6c493",
+            "bytes": 3630
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/06.png",
+            "sha256": "7e814bc898a6914bd1119da54a91574fd01151f85a8d58d105bf188c04feb3a7",
+            "bytes": 7378
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/07.png",
+            "sha256": "0bb917c051814c2164dfdaa862b125e2a483812d70af6fff04f96726a985fbe9",
+            "bytes": 4867
+          },
+          {
+            "path": "art/skyhotel_service_well/walls/08.png",
+            "sha256": "5c3f4aee55deab439de27c70b78ab9606643373b8665da94ad0fdfe42ca623fa",
+            "bytes": 11358
+          },
+          {
+            "path": "encounters.json",
+            "sha256": "44d0dcb3b78babe5deddf287c760c20e3cb47e3847fdd0e47992b4d9d52be4b1",
+            "bytes": 14326
+          },
+          {
+            "path": "environments.json",
+            "sha256": "fc97d09e78920c702b1c93346fdbfa6be6c37433896a0a01dbb806dcd63ee8e6",
+            "bytes": 15012
+          },
+          {
+            "path": "mobs/ashbell_foundry/latchwing_A.png",
+            "sha256": "f791d4e6faa3f5334ada402dbe113fb4656f01a2ae57cd617ae971eaf2290953",
+            "bytes": 30397
+          },
+          {
+            "path": "mobs/ashbell_foundry/latchwing_B.png",
+            "sha256": "0a3757d07eef5d86c3e1536939a94be8c1e5b5587cd0d576ba4826f59786e18e",
+            "bytes": 35177
+          },
+          {
+            "path": "mobs/ashbell_foundry/relay_choir_A.png",
+            "sha256": "4fc534fa9947adc13dfaba5f68e71100af2d8f306a75cd926ada6121f4d48753",
+            "bytes": 20737
+          },
+          {
+            "path": "mobs/ashbell_foundry/relay_choir_B.png",
+            "sha256": "9dc552cac7d558d9d4665d41f61641fad5cffd97a660426313754d19005fa6e9",
+            "bytes": 20597
+          },
+          {
+            "path": "mobs/boneglass_conservatory/latchwing_A.png",
+            "sha256": "4a3617cc50c373548a574df926fdd281a8658202dc3543daf9ba8b5e66b28ddc",
+            "bytes": 27835
+          },
+          {
+            "path": "mobs/boneglass_conservatory/latchwing_B.png",
+            "sha256": "b23d5e6cba1da32ef6afebde16afdf235ebe4400f33cd30cb42f6786a273ffe4",
+            "bytes": 33059
+          },
+          {
+            "path": "mobs/boneglass_conservatory/relay_choir_A.png",
+            "sha256": "7af7e9a744ea7a0ba3fde6a14f7aa32e58fd5c4b01e150d1879b6c1a11607758",
+            "bytes": 21366
+          },
+          {
+            "path": "mobs/boneglass_conservatory/relay_choir_B.png",
+            "sha256": "b02b174ee538f0d9a6a092e05400f586082f4d346bfc352091625bb1127773e1",
+            "bytes": 22708
+          },
+          {
+            "path": "mobs/skyhotel_service_well/latchwing_A.png",
+            "sha256": "ac25f75583dd287a1e2638c3c5d0b2bb689ec82015606dd2ceb57cdf18ad509c",
+            "bytes": 18013
+          },
+          {
+            "path": "mobs/skyhotel_service_well/latchwing_B.png",
+            "sha256": "fe253af2a534eec6d40049e0cbfadcde051f601b52bc5813035a5f084f38fbb0",
+            "bytes": 18327
+          },
+          {
+            "path": "mobs/skyhotel_service_well/relay_choir_A.png",
+            "sha256": "c0b8ad5a9bcba156dfc2c155a0bbe26398834ab04bb415d4ba83c9472d56e726",
+            "bytes": 23354
+          },
+          {
+            "path": "mobs/skyhotel_service_well/relay_choir_B.png",
+            "sha256": "1f1475de876bdfa3857ea34df799fc14b132c3c451548e6046517b49ab56e0c8",
+            "bytes": 24105
+          },
+          {
+            "path": "music_profiles/ashbell_foundry.json",
+            "sha256": "f1b2d0ecfa01fae17b5a39aab26de041009bf8819361c6170e16c42bc263d7f6",
+            "bytes": 4206
+          },
+          {
+            "path": "music_profiles/boneglass_conservatory.json",
+            "sha256": "b25408703e7e8ee769a47bc933e8d52f6a750b7a0e60050c9fe58d15d7443602",
+            "bytes": 4128
+          },
+          {
+            "path": "music_profiles/skyhotel_service_well.json",
+            "sha256": "1c3fc3cd73929a8192df720f06f4ea4aeb912396695799d18b5f3c4bd9838564",
+            "bytes": 4265
+          },
+          {
+            "path": "music_proposals.json",
+            "sha256": "7529d2cb6012dc94af0b417943ea83f9ffb1964950df31aaaa1e7dac0cf5c7ba",
+            "bytes": 1420
+          },
+          {
+            "path": "props3d.json",
+            "sha256": "e5e96f28a845fcaff6752e7a2e1f231b3922d53ea8f61351546a631a5c6c0b33",
+            "bytes": 40021
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_casting_furnace.mtl",
+            "sha256": "b9c43015bd3f34c58ddebce6bf65e20de9ef797fc34e6e9a8d63a920b5e3bdfc",
+            "bytes": 600
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_casting_furnace.obj",
+            "sha256": "ac1ea2d8a423952de3758f70ac8b67be4c83f9cbae5e21bbdf9ba43e3e2eac39",
+            "bytes": 215996
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_casting_furnace.png",
+            "sha256": "6b74336311cc4b075cd3a7385ec8cc3d5b153e7de5008cb092ddbc251bb9e13e",
+            "bytes": 72380
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_chain_lift_cage.mtl",
+            "sha256": "8254ac043df92fa5aca871d6522608e36e96b0d77db192b6742710c87fd41b70",
+            "bytes": 604
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_chain_lift_cage.obj",
+            "sha256": "5fe650e2ecb1ddd38a43d7cc5e3e96ab024b80658914e6ccf74c4285c11ed3e3",
+            "bytes": 318305
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_chain_lift_cage.png",
+            "sha256": "ead423fd45ae2d070182162f93dfea19c1603ff5801746ec9505cef222d6042b",
+            "bytes": 72383
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_suspended_ninth_bell.mtl",
+            "sha256": "53898a3f373e97035032a2c4647380045a15b8f17d7fa4c2f2232fa208757b76",
+            "bytes": 627
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_suspended_ninth_bell.obj",
+            "sha256": "1b9e98feb2a1f40035b77b2a597cc6e23f7904af868911cdde907212887d2b10",
+            "bytes": 529253
+          },
+          {
+            "path": "props3d/ashbell_foundry/ashbell_suspended_ninth_bell.png",
+            "sha256": "40eba09c7649e210a498d28794ba8523b003dd1df930d54165bf00b7a7adb1ea",
+            "bytes": 75345
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_growth_chamber.mtl",
+            "sha256": "9d8828b04be49bd22a9dc4b3ea5b2bfa7448ad9d12e1aa34e2561e6015b95ca2",
+            "bytes": 607
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_growth_chamber.obj",
+            "sha256": "eb72ccc3a81185baa141659325d8890d4621a4c85a3b312f6a8c2d2edae75cf6",
+            "bytes": 95615
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_growth_chamber.png",
+            "sha256": "712601e45ee83df1065ef80d67a7b9ced67fcb58cbb2c578cca4d43244939287",
+            "bytes": 77133
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_root_cage_planter.mtl",
+            "sha256": "456df3c643fe453a9b4107726bf5b2a2989ec4334101a99db36ed106f20cece2",
+            "bytes": 617
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_root_cage_planter.obj",
+            "sha256": "98e105bb72a34193e29f3d6f2e883c948ea2e0e624fca9e2f0ca793aaf654453",
+            "bytes": 508954
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_root_cage_planter.png",
+            "sha256": "fdd6f24589e33fa31a4a0b2436fde6b6e15614b08ad3e79ef33bb959797205f4",
+            "bytes": 75956
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_watering_gantry.mtl",
+            "sha256": "8186d8bc0ba87bfca6c32066fa21fe4d64cf9b9f7129eefd6906992b460ebb4e",
+            "bytes": 614
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_watering_gantry.obj",
+            "sha256": "a2edb29685bb42d3986b640c90f554b3b38cc1f2be6656037112ed74a057bbeb",
+            "bytes": 227783
+          },
+          {
+            "path": "props3d/boneglass_conservatory/boneglass_watering_gantry.png",
+            "sha256": "71e9157e354fc2b637fd57997f8ea3fced4049a3677703eb1f07dcd937a1a2dd",
+            "bytes": 85478
+          },
+          {
+            "path": "props3d/shared/shared_guardrail.mtl",
+            "sha256": "987194f11711a920a70481fe3e201c8cd20165fd5273bd530c15968fdb00098f",
+            "bytes": 318
+          },
+          {
+            "path": "props3d/shared/shared_guardrail.obj",
+            "sha256": "a6fa36a2e5fda98a13564f4fb4b50c0b8a33f5796a4b70febade501b62c717fd",
+            "bytes": 30219
+          },
+          {
+            "path": "props3d/shared/shared_guardrail.png",
+            "sha256": "b5480d045807d81dc7465730d8093f978298fdb2d33d00ba5e908ad0843a9ad0",
+            "bytes": 50253
+          },
+          {
+            "path": "props3d/shared/shared_stair_flight.mtl",
+            "sha256": "15c129ff99b2a7865bf34557cee3f10294721b1d652a1769196ee4a5f3d2e9c1",
+            "bytes": 454
+          },
+          {
+            "path": "props3d/shared/shared_stair_flight.obj",
+            "sha256": "5d8ccd0d17f53325972cd31ad3ab4d85a9e52906704ea734354b8e44c2ecc178",
+            "bytes": 63995
+          },
+          {
+            "path": "props3d/shared/shared_stair_flight.png",
+            "sha256": "e8b7186655d103d4b3d0c8f21fba473d363fe31651a94fde6cd7a0b7e062a110",
+            "bytes": 76145
+          },
+          {
+            "path": "props3d/shared/shared_stair_landing.mtl",
+            "sha256": "a3c34066e59054dd885adf8014e758a17a2b5e983c5bb90793237feeeb416556",
+            "bytes": 458
+          },
+          {
+            "path": "props3d/shared/shared_stair_landing.obj",
+            "sha256": "8436477da1b19fcce03309c51c1c2724d24723ec215241fd2d1685142dee8505",
+            "bytes": 26997
+          },
+          {
+            "path": "props3d/shared/shared_stair_landing.png",
+            "sha256": "50f3d08b128d30fe6f3282a855d373fdef45b4f04d2cd53468d77402d53e3370",
+            "bytes": 75862
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_balcony_bay.mtl",
+            "sha256": "eccd9e40ac339f04fed1def634cb9c1f393c6a9937b602e2182a560226898659",
+            "bytes": 590
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_balcony_bay.obj",
+            "sha256": "b15b2e1b932e9ba046f9d0c6d57a8ab312a99310347549d6312ebbd9a277d1f2",
+            "bytes": 71031
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_balcony_bay.png",
+            "sha256": "78c6cb35326dd4c21292b1ab21e35d3af9371e490112995d61a9924ebc79181d",
+            "bytes": 71961
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_dumbwaiter_winch_head.mtl",
+            "sha256": "9285d35a0b044cc02da50a5494d9da663491655ae41f7ad25c7b057e4c70f235",
+            "bytes": 636
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_dumbwaiter_winch_head.obj",
+            "sha256": "d5da399edd3fe4205695520710caef647c943333f50b4b35dcc3eb69d7330878",
+            "bytes": 166058
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_dumbwaiter_winch_head.png",
+            "sha256": "606aad2d306b29bf4da5122b6e9c4fea6573a8e9a1c1f8ee7f8f3c2348a114e7",
+            "bytes": 71909
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_service_lift_car.mtl",
+            "sha256": "a36f844027850302db913e8d465e40df3ada4d10154291f6656a474c939dcb5e",
+            "bytes": 612
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_service_lift_car.obj",
+            "sha256": "ca8722a57140747072b0ccf325d0a76a4e792cd21630c3a6df6bd139bc555829",
+            "bytes": 53167
+          },
+          {
+            "path": "props3d/skyhotel_service_well/skyhotel_service_lift_car.png",
+            "sha256": "fd76cca878c6cb7e53ea1ebbe94a9ec04ae220b9e281591877d6cfa11782dff3",
+            "bytes": 68772
+          },
+          {
+            "path": "sheets/ashbell_foundry-3d.png",
+            "sha256": "23de306f6ab21ba9e34b70fd44c72b802d6690798476a15c9a4c568e475557f8",
+            "bytes": 77456
+          },
+          {
+            "path": "sheets/ashbell_foundry-kit.png",
+            "sha256": "2c29bac4124d20ec3f1ecfb887458798bca696c2c9d8124c64bf574865164a3c",
+            "bytes": 200799
+          },
+          {
+            "path": "sheets/ashbell_foundry-mobs.png",
+            "sha256": "d842172f97242f30a1dcf978898d8994f7d138aa49240095c355523949476a93",
+            "bytes": 265795
+          },
+          {
+            "path": "sheets/ashbell_foundry-tiling.png",
+            "sha256": "dc14dc77fbca5c5af45b22dda9bab5639f0255e6cdd8bab4d98c36e06b7159f2",
+            "bytes": 256597
+          },
+          {
+            "path": "sheets/boneglass_conservatory-3d.png",
+            "sha256": "88ca3b4b4bf014e63b177f6f29634d7799bb9e254c6f7f7236b316ce2ae6b5cf",
+            "bytes": 73296
+          },
+          {
+            "path": "sheets/boneglass_conservatory-kit.png",
+            "sha256": "152b623c00ba3754e8e53e910ab60b303d9b3f8c2e1c744e4034a57d13a053a1",
+            "bytes": 234496
+          },
+          {
+            "path": "sheets/boneglass_conservatory-mobs.png",
+            "sha256": "4a3a2c7d9d10caa2527294becc028dd201d46b8b7b32a1bc73ff352a3dac974f",
+            "bytes": 238375
+          },
+          {
+            "path": "sheets/boneglass_conservatory-tiling.png",
+            "sha256": "b894bf2507304b5c72bfae41d96a6766e0ede43610959a2e73bdaa5a3b583696",
+            "bytes": 315973
+          },
+          {
+            "path": "sheets/overview.png",
+            "sha256": "fa494ee1cfcc0b0ee320187f59132d2625ac066804278aaa3fffb6a44f67bb16",
+            "bytes": 206923
+          },
+          {
+            "path": "sheets/props3d-overview.png",
+            "sha256": "b87b7a52cbb909b5aa099000c97b3e8af74f62bdba7dd1df64afe5a7206b367e",
+            "bytes": 35688
+          },
+          {
+            "path": "sheets/shared-3d.png",
+            "sha256": "f69aa1e854c233cad1b27cc72f7d9ae4c24b88bb005c4119cd7c0cf18f9c9856",
+            "bytes": 35617
+          },
+          {
+            "path": "sheets/skyhotel_service_well-3d.png",
+            "sha256": "02da9ab835d3398b2dac2972ff6acd20af609a9d157190edd2cd871a8a329d58",
+            "bytes": 41280
+          },
+          {
+            "path": "sheets/skyhotel_service_well-kit.png",
+            "sha256": "b8bff891035160bd740f355305a0289fa68827e8f639e6f6b1d727d0e5204f5c",
+            "bytes": 191821
+          },
+          {
+            "path": "sheets/skyhotel_service_well-mobs.png",
+            "sha256": "303b8d87de43fbf138f0edc97f5e1b908c558f6e1ab3ed97cffc71bb0ea7f7c8",
+            "bytes": 199890
+          },
+          {
+            "path": "sheets/skyhotel_service_well-tiling.png",
+            "sha256": "fccb7c36161f3f0295d619af05a630cce61feffb4262d5b5cc2fe4a5ba09551b",
+            "bytes": 235022
+          },
+          {
+            "path": "vertical_layouts.json",
+            "sha256": "e5796b70c477c3bea2d91a4cc8cd21fff32b0d5d46038012e0370b4f75313ffe",
+            "bytes": 24256
+          }
+        ],
+        "sources": [
+          {
+            "path": "generate.py",
+            "sha256": "26cb67544ab6f10dfb2c5471d508b627a9f6320269ce6758f939572e71b7d106",
+            "bytes": 28621
+          },
+          {
+            "path": "kit_common.py",
+            "sha256": "aa6886b8370bf0f204162ca98c03a6caee04a5b1add1a6e33c6481d76e2ac7ce",
+            "bytes": 23253
+          },
+          {
+            "path": "kit_art.py",
+            "sha256": "60727168e790af47db3d63123047a044dbd802e84e13bc13d66499a18d2451a7",
+            "bytes": 113195
+          },
+          {
+            "path": "kit_mobs.py",
+            "sha256": "f30a3c00039cc30f43481fd29bf4bf09ebd9179cd7478f7e2ff6590b63b1367a",
+            "bytes": 41118
+          },
+          {
+            "path": "kit_3d.py",
+            "sha256": "6bd201d6a02a380c366dae7e36847b5cea7b96b078314be87fc9f62259c299f8",
+            "bytes": 54338
+          },
+          {
+            "path": "kit_layouts.py",
+            "sha256": "e038410f07b681c626790a82d51170b88c3dc14ce42e6c17e87c758527e083a0",
+            "bytes": 28376
+          },
+          {
+            "path": "kit_music.py",
+            "sha256": "82444873854dc9d2a8520b99b91976e8b6d35548b519c588cc8b79465959cd5a",
+            "bytes": 15057
+          },
+          {
+            "path": "make_manifest.py",
+            "sha256": "873f0d2c92ce77f1fd26b744b25da447ca90bcf991096fabb9df15794f81b8cb",
+            "bytes": 1040
+          },
+          {
+            "path": "checks.py",
+            "sha256": "662079a93b4cedae6c96f782d3f7fb1d614d04d23c013846035db6e11efc1d3a",
+            "bytes": 43971
+          }
+        ]
+      }
+    }
+  ],
+  "metrics": {
+    "palette_separation": {
+      "means": {
+        "ashbell_foundry": [
+          50.5,
+          45.2,
+          40.4
+        ],
+        "boneglass_conservatory": [
+          137.2,
+          134.6,
+          122.9
+        ],
+        "skyhotel_service_well": [
+          57.7,
+          62.6,
+          69.1
+        ]
+      },
+      "pairs": [
+        {
+          "pair": [
+            "ashbell_foundry",
+            "boneglass_conservatory"
+          ],
+          "mean_rgb_distance": 149.39
+        },
+        {
+          "pair": [
+            "ashbell_foundry",
+            "skyhotel_service_well"
+          ],
+          "mean_rgb_distance": 34.3
+        },
+        {
+          "pair": [
+            "boneglass_conservatory",
+            "skyhotel_service_well"
+          ],
+          "mean_rgb_distance": 120.03
+        }
+      ],
+      "structure": [
+        {
+          "pair": [
+            "ashbell_foundry",
+            "boneglass_conservatory"
+          ],
+          "wall_structure_iou_mean": 0.218,
+          "max": 0.299
+        },
+        {
+          "pair": [
+            "ashbell_foundry",
+            "skyhotel_service_well"
+          ],
+          "wall_structure_iou_mean": 0.159,
+          "max": 0.204
+        },
+        {
+          "pair": [
+            "boneglass_conservatory",
+            "skyhotel_service_well"
+          ],
+          "wall_structure_iou_mean": 0.177,
+          "max": 0.205
+        }
+      ],
+      "note": "Freedoom PLAYPAL is not present in this folder; this is a mean-RGB + high-pass structure proxy. Codex must perform the real palette conversion."
+    },
+    "inter_set_structure": {
+      "wall_mean": 0.185,
+      "wall_max": 0.196,
+      "flat_mean": 0.213,
+      "flat_max": 0.235,
+      "prop_mean": 0.378,
+      "prop_max": 0.395
+    },
+    "atlas_animation": {
+      "min_consecutive_changed_pixels": 153,
+      "unique_cells": {
+        "mobs/ashbell_foundry/latchwing_A.png": 24,
+        "mobs/ashbell_foundry/latchwing_B.png": 24,
+        "mobs/ashbell_foundry/relay_choir_A.png": 24,
+        "mobs/ashbell_foundry/relay_choir_B.png": 24,
+        "mobs/boneglass_conservatory/latchwing_A.png": 24,
+        "mobs/boneglass_conservatory/latchwing_B.png": 24,
+        "mobs/boneglass_conservatory/relay_choir_A.png": 24,
+        "mobs/boneglass_conservatory/relay_choir_B.png": 24,
+        "mobs/skyhotel_service_well/latchwing_A.png": 24,
+        "mobs/skyhotel_service_well/latchwing_B.png": 24,
+        "mobs/skyhotel_service_well/relay_choir_A.png": 24,
+        "mobs/skyhotel_service_well/relay_choir_B.png": 24
+      }
+    },
+    "seed_sensitivity": {
+      "art": [
+        45,
+        45
+      ],
+      "mobs": [
+        12,
+        12
+      ],
+      "textures": [
+        12,
+        12
+      ],
+      "seconds": 1.88
+    }
+  },
+  "limitations": [
+    "Structural checks only; not artistic or native-render acceptance.",
+    "Freedoom PLAYPAL is not in this folder; palette separation uses a mean-RGB/high-pass proxy.",
+    "Music profiles are schema proposals; no audio was rendered or auditioned.",
+    "Vertical mob AI and moving lifts are proposals only and are not implemented.",
+    "Visual review was performed on the generated contact sheets; Codex must still render in the native engine."
+  ]
+}

@@ -1,5 +1,7 @@
 *.o
 *.obj
+!assets/tower/props3d/**/*.obj
+._*
 *.exe
 *.DS_Store
 *.log

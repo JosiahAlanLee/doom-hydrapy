@@ -1,0 +1,77 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+"""Single-controller UZDoom campaign; gameplay authority stays in ZScript."""
+from pathlib import Path
+import json,os,secrets,threading,time
+from .build import build
+from .engine import Engine,KEYS
+
+class Game:
+    def __init__(self,wad,run_dir,*,initial_mode='campaign',identity=True):
+        self.wad=Path(wad);self.root=Path(run_dir);self.root.mkdir(parents=True,exist_ok=True)
+        self.lock=threading.RLock();self.owner=None;self.paused=True;self.held=set();self.last_input=0
+        self.revision=0;self.error=None;self.state={};self.frame_seq=0;self.engine=None;self.stop_event=threading.Event()
+        self.new_run(int(os.environ.get('NULLRUN_SEED','20261031')))
+        self.thread=threading.Thread(target=self.loop,daemon=True,name='uzdoom-campaign');self.thread.start()
+    def new_run(self,seed,mode='campaign'):
+        if mode!='campaign':raise ValueError('This player runs the tower campaign')
+        with self.lock:
+            folder=self.root/f'run-{time.time_ns()}-{seed}'
+            manifest=build(seed,self.wad,folder,os.environ.get('NULLRUN_ENVIRONMENT') or None)
+            candidate=Engine(os.environ['UZDOOM_BINARY'],os.environ['UZDOOM_BRIDGE'],self.wad,folder/'nullrun.pk3',folder/'engine',sound=os.environ.get('UZDOOM_SOUND')=='1')
+            if candidate.latest.get('error'):candidate.close();raise RuntimeError(candidate.latest['error'])
+            previous=self.engine;self.release();self.engine=candidate;self.manifest=manifest
+            self.paused=True;self.owner=None;self.revision+=1;self.error=None;self.render()
+            if previous:previous.close()
+    def release(self):
+        if self.engine:
+            for code in self.held:self.engine.key(code,False)
+        self.held=set()
+    def acquire(self):
+        with self.lock:
+            if self.state.get('vending',{}).get('menu_open'):raise ValueError('Close the machine first')
+            if self.owner:raise ValueError('Another controller has this run')
+            self.owner=secrets.token_urlsafe(24);self.last_input=time.monotonic();self.paused=False;self.engine.pause(False);return self.owner
+    def input(self,owner,keys,paused=False,turn=0,look=0):
+        if not isinstance(keys,list) or len(keys)>32 or any(k not in KEYS for k in keys):raise ValueError('Unknown controls')
+        if any(type(n) is not int or not -4096<=n<=4096 for n in (turn,look)):raise ValueError('Invalid mouse movement')
+        with self.lock:
+            if not owner or self.owner!=owner:raise ValueError('Click Play to take controls')
+            self.last_input=time.monotonic();self.paused=bool(paused or self.state.get('vending',{}).get('menu_open') or self.state.get('dead') or self.state.get('won'))
+            want={KEYS[k] for k in keys} if not self.paused else set()
+            for code in self.held-want:self.engine.key(code,False)
+            for code in want-self.held:self.engine.key(code,True)
+            self.held=want;self.engine.pause(self.paused)
+            if self.paused:self.owner=None
+            elif turn or look:self.engine.move(turn,look)
+    def purchase(self,vendor,slot,revision):
+        with self.lock:
+            if revision!=self.revision or not self.paused:raise ValueError('Open this run’s machine first')
+            result=self.engine.buy(vendor,slot);self.render();return result
+    def close_shop(self):
+        with self.lock:self.engine.command('VCLOSE');self.engine.wait(lambda:not self.engine.latest.get('vending',{}).get('menu_open'));self.render()
+    def render(self):
+        # Keep the native contiguous RGBA layout. Converting to RGB here and
+        # back to RGBA in FrameSource costs several full-frame copies.
+        self.state=self.engine.state();self.rgb=self.engine.frame();self.frame_seq=self.engine.frame_seq
+    def snapshot(self):
+        with self.lock:
+            entry=self.manifest['floors'][min(7,max(1,self.state.get('map',1)))-1]
+            current=next((b for b in entry.get('bosses',[]) if b['name']==(self.state.get('boss') or {}).get('name')),None)
+            return dict(self.state,seed=self.manifest['seed'],floor_name=entry['name'],floors=7,mode='campaign',identity='threshold',
+                        environment=self.manifest['environment'],boss_rule=current.get('game_rule') if current else None,
+                        paused=self.paused,revision=self.revision,frame=self.frame_seq,error=self.error or self.state.get('error'))
+    def loop(self):
+        while not self.stop_event.wait(1/60):
+            with self.lock:
+                try:
+                    if self.engine.proc.poll() is not None:raise RuntimeError('The UZDoom process exited; inspect its engine.log')
+                    self.render()
+                    if not self.paused and (time.monotonic()-self.last_input>1 or self.state.get('dead') or self.state.get('won') or self.state.get('vending',{}).get('menu_open')):
+                        self.release();self.engine.pause(True);self.paused=True;self.owner=None
+                except Exception as exc:self.error=str(exc);self.release();self.paused=True;self.owner=None;self.engine.pause(True)
+    def close(self):
+        self.stop_event.set()
+        if getattr(self,'thread',None):self.thread.join(timeout=10)
+        with self.lock:
+            self.release()
+            if self.engine:self.engine.close();self.engine=None
