@@ -1,0 +1,266 @@
+{
+  "id": "switchyard_chapel",
+  "title": "Switchyard Chapel",
+  "env_id": "switchyard_chapel",
+  "tempo": 128,
+  "key": 2,
+  "scale": "dorian",
+  "bars_per_loop": 4,
+  "lanes": {
+    "names": [
+      "relay",
+      "ceramic",
+      "cable bass",
+      "counterline",
+      "fluted",
+      "sting"
+    ],
+    "roles": {
+      "0": "low percussion (relay thunk)",
+      "1": "high percussion (ceramic ticks)",
+      "2": "bass (forward cable)",
+      "3": "lead/counterline (FM angular)",
+      "4": "pad/flute (ivory)",
+      "5": "sting voice (reserved)"
+    }
+  },
+  "register": {
+    "bass": [
+      34,
+      46
+    ],
+    "lead": [
+      57,
+      75
+    ],
+    "pad": [
+      50,
+      62
+    ],
+    "perc_low": 38,
+    "perc_high": 81
+  },
+  "harmony": [
+    0,
+    3,
+    5,
+    4
+  ],
+  "motif": {
+    "pulses": [
+      [
+        7,
+        -3,
+        5,
+        -2
+      ],
+      [
+        3,
+        7,
+        -4
+      ],
+      [
+        -5,
+        7,
+        -3,
+        1
+      ],
+      [
+        7,
+        -7,
+        4
+      ]
+    ],
+    "spans": [
+      2,
+      6
+    ],
+    "density": 0.55
+  },
+  "rhythms": {
+    "exploration": {
+      "perc_low": "X......x.x......",
+      "perc_high": ".x.x.x..x.x..x..",
+      "bass": "x..x.x..x..x.x..",
+      "motif_rows": [
+        1,
+        4,
+        7,
+        11,
+        14
+      ],
+      "pad_rows": [
+        3
+      ]
+    },
+    "threat": {
+      "perc_low": "X......x.x..x...",
+      "perc_high": ".x.xx...x.x.xx..",
+      "bass": "x.x.x..x..x.x...",
+      "motif_rows": [
+        0,
+        3,
+        6,
+        9,
+        12
+      ],
+      "pad_rows": [
+        3
+      ]
+    },
+    "combat": {
+      "perc_low": "X.x.X.x.X.x.X.x.",
+      "perc_high": "x.x.xxx.x.x.xxx.",
+      "bass": "x.xx..x.x.x.x.xx",
+      "motif_rows": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "pad_rows": []
+    },
+    "quiet": {
+      "perc_low": "X.............x.",
+      "perc_high": ".x..............",
+      "bass": "x..x............",
+      "motif_rows": [
+        5,
+        13
+      ],
+      "pad_rows": [
+        3
+      ]
+    },
+    "boss_sealed": {
+      "perc_low": "X..x..x.X..x..x.",
+      "perc_high": ".xx.x.x..xx.x.x.",
+      "bass": "x.x.x..x..x.x..x",
+      "motif_rows": [
+        2,
+        5,
+        9,
+        12
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "boss_exposed": {
+      "perc_low": "X.xx.X.xx.X.xx.X",
+      "perc_high": "x.xxx.xx.x.xxx.x",
+      "bass": "x.xxx.x..x.xxx.x",
+      "motif_rows": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "pad_rows": []
+    },
+    "boss_one_down": {
+      "perc_low": "X..x............",
+      "perc_high": ".x..x...........",
+      "bass": "x..x..x.........",
+      "motif_rows": [
+        3,
+        11
+      ],
+      "pad_rows": [
+        0
+      ]
+    }
+  },
+  "transition": {
+    "victory": {
+      "bars": 4,
+      "degrees": [
+        0,
+        3,
+        5,
+        7
+      ],
+      "contour": "rise"
+    },
+    "death": {
+      "bars": 4,
+      "degrees": [
+        5,
+        3,
+        1,
+        0
+      ],
+      "contour": "sink"
+    },
+    "bridge": {
+      "bars": 2,
+      "degrees": [
+        0,
+        3
+      ],
+      "contour": "relay"
+    }
+  },
+  "stings": {
+    "enemy": {
+      "notes": [
+        38,
+        63
+      ],
+      "gate": 2,
+      "vel": 116
+    },
+    "damage": {
+      "notes": [
+        40,
+        43
+      ],
+      "gate": 2,
+      "vel": 122
+    },
+    "secret": {
+      "notes": [
+        77
+      ],
+      "gate": 1,
+      "vel": 92
+    },
+    "boss": {
+      "notes": [
+        42,
+        47,
+        54
+      ],
+      "gate": 4,
+      "vel": 118
+    },
+    "victory": {
+      "notes": [
+        45,
+        52,
+        59,
+        66
+      ],
+      "gate": 5,
+      "vel": 114
+    }
+  },
+  "duck": {
+    "mask": [
+      2,
+      3,
+      4
+    ],
+    "beats": 2
+  },
+  "ghost_prob": 25,
+  "notes": "Ceramic relay/cable forest, fluted ivory/rust/charcoal/amber: syncopated electro/FM machinery, bass-forward urgency, angular call/response. 128 BPM."
+}

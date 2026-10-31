@@ -37,7 +37,7 @@ class NativeGame(Game):
 
 
 class Desktop:
-    def __init__(self,root,wad,port=8773,campaign_only=True,autostart=True,*,defer=False,initial_mode='campaign'):
+    def __init__(self,root,wad,port=8773,campaign_only=True,autostart=True,*,defer=False,initial_mode='campaign',game_factory=None):
         self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True)
         self.campaign_only=bool(campaign_only);self.autostart=bool(autostart);self.pending_start=self.autostart
         if self.campaign_only and initial_mode!='campaign':raise ValueError('This player runs the seven-tier campaign')
@@ -63,7 +63,7 @@ class Desktop:
         self.token=secrets.token_urlsafe(32);self.port=port
         self.font=font(11);self.titlefont=font(22);self.show_credits=False
         try:
-            self.game=NativeGame(wad,self.root/'runs',initial_mode=initial_mode)
+            self.game=(game_factory or NativeGame)(wad,self.root/'runs',initial_mode=initial_mode)
             with self.game.lock:
                 self.game.engine.command(f'STROBE_VIEW {int(self.flicker)}')
                 self.game.render()

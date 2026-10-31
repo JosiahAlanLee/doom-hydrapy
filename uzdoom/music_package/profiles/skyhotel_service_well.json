@@ -1,0 +1,265 @@
+{
+  "id": "skyhotel_service_well",
+  "title": "Skyhotel Service Well",
+  "env_id": "skyhotel_service_well",
+  "tempo": 100,
+  "key": 7,
+  "scale": "dorian",
+  "bars_per_loop": 8,
+  "lanes": {
+    "names": [
+      "rain",
+      "bell",
+      "bass",
+      "lift",
+      "pad",
+      "sting"
+    ],
+    "roles": {
+      "0": "low percussion",
+      "1": "high percussion",
+      "2": "bass",
+      "3": "lead / counterline",
+      "4": "pad / drone",
+      "5": "sting voice (reserved)"
+    }
+  },
+  "register": {
+    "bass": [
+      33,
+      45
+    ],
+    "lead": [
+      58,
+      76
+    ],
+    "pad": [
+      45,
+      57
+    ],
+    "perc_low": 38,
+    "perc_high": 82
+  },
+  "harmony": [
+    0,
+    0,
+    5,
+    5,
+    3,
+    3,
+    4,
+    4
+  ],
+  "motif": {
+    "pulses": [
+      [
+        1,
+        -2,
+        3
+      ],
+      [
+        -3,
+        1,
+        -1
+      ],
+      [
+        2,
+        2,
+        -4
+      ],
+      [
+        -1,
+        4,
+        -2
+      ]
+    ],
+    "spans": [
+      2,
+      6
+    ],
+    "density": 0.38
+  },
+  "rhythms": {
+    "exploration": {
+      "perc_low": "X.......x.......",
+      "perc_high": "..x...x...x...x.",
+      "bass": "x.......x.......",
+      "motif_rows": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "threat": {
+      "perc_low": "X...x...x.......",
+      "perc_high": ".x..x...x..x..x.",
+      "bass": "x.......x...x...",
+      "motif_rows": [
+        1,
+        5,
+        9,
+        13
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "combat": {
+      "perc_low": "X..x.X..x.X..x..",
+      "perc_high": "x.x.x.x.x.x.x.x.",
+      "bass": "x..x..x..x..x...",
+      "motif_rows": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "pad_rows": []
+    },
+    "quiet": {
+      "perc_low": "X...............",
+      "perc_high": "......x.........",
+      "bass": "x.......x.......",
+      "motif_rows": [
+        4,
+        12
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "boss_sealed": {
+      "perc_low": "X...x...X...x...",
+      "perc_high": ".x.x...x.x...x.x",
+      "bass": "x...x...x...x...",
+      "motif_rows": [
+        1,
+        5,
+        9,
+        13
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "boss_exposed": {
+      "perc_low": "X.x.X.x.X.x.X.x.",
+      "perc_high": "x.x.x.x.x.x.x.x.",
+      "bass": "x.x.x.x.x.x.x.x.",
+      "motif_rows": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "pad_rows": []
+    },
+    "boss_one_down": {
+      "perc_low": "X...x..........x",
+      "perc_high": ".x......x.......",
+      "bass": "x.....x.....x...",
+      "motif_rows": [
+        3,
+        11
+      ],
+      "pad_rows": [
+        0
+      ]
+    }
+  },
+  "transition": {
+    "victory": {
+      "bars": 4,
+      "degrees": [
+        0,
+        4,
+        5,
+        7
+      ],
+      "contour": "lift-rise"
+    },
+    "death": {
+      "bars": 4,
+      "degrees": [
+        5,
+        3,
+        2,
+        0
+      ],
+      "contour": "floor-sink"
+    },
+    "bridge": {
+      "bars": 2,
+      "degrees": [
+        0,
+        5
+      ],
+      "contour": "rain-tick"
+    }
+  },
+  "stings": {
+    "enemy": {
+      "notes": [
+        62,
+        65
+      ],
+      "gate": 2,
+      "vel": 96
+    },
+    "damage": {
+      "notes": [
+        38
+      ],
+      "gate": 3,
+      "vel": 110
+    },
+    "secret": {
+      "notes": [
+        74,
+        81
+      ],
+      "gate": 2,
+      "vel": 86
+    },
+    "boss": {
+      "notes": [
+        50,
+        53,
+        57
+      ],
+      "gate": 4,
+      "vel": 106
+    },
+    "victory": {
+      "notes": [
+        55,
+        62,
+        67
+      ],
+      "gate": 5,
+      "vel": 102
+    }
+  },
+  "duck": {
+    "mask": [
+      2,
+      3,
+      4
+    ],
+    "beats": 2
+  },
+  "ghost_prob": 18,
+  "notes": "Proposal, not rendered or auditioned. 100 BPM rainy dorian service hotel: rain ticks and lift-bell high percussion, a walking bass, muted brass lead and a low room drone. Threat raises the lift-bell pattern; combat keeps the tempo but removes the pad. 8-bar loops; 2-4 bar transitions; one-bar call-bell stings. Dirty amber, not bright."
+}

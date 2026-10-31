@@ -1,0 +1,38 @@
+{
+  "format": "nullrun-music-profile-proposals-1",
+  "license": "GPL-2.0-or-later",
+  "status": "PROPOSAL ONLY: written profiles, not rendered, not auditioned, not loaded",
+  "host_schema": "mirrors nullrun_music/profiles.py validate_profile; host PROFILE_NAMES currently lists only the three reviewed sets, so Codex must add these env IDs before the existing composer can load them",
+  "profiles": [
+    {
+      "id": "ashbell_foundry",
+      "path": "music_profiles/ashbell_foundry.json",
+      "tempo": 88,
+      "key": 2,
+      "scale": "phrygian",
+      "bars_per_loop": 8,
+      "status": "proposal; not rendered or auditioned",
+      "host_change_required": "add env ID to PROFILE_NAMES in nullrun_music/profiles.py"
+    },
+    {
+      "id": "boneglass_conservatory",
+      "path": "music_profiles/boneglass_conservatory.json",
+      "tempo": 66,
+      "key": 0,
+      "scale": "locrian",
+      "bars_per_loop": 8,
+      "status": "proposal; not rendered or auditioned",
+      "host_change_required": "add env ID to PROFILE_NAMES in nullrun_music/profiles.py"
+    },
+    {
+      "id": "skyhotel_service_well",
+      "path": "music_profiles/skyhotel_service_well.json",
+      "tempo": 100,
+      "key": 7,
+      "scale": "dorian",
+      "bars_per_loop": 8,
+      "status": "proposal; not rendered or auditioned",
+      "host_change_required": "add env ID to PROFILE_NAMES in nullrun_music/profiles.py"
+    }
+  ]
+}
