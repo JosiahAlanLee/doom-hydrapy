@@ -24,7 +24,7 @@ _replacement_lock=threading.RLock()
 class NativeGame(Game):
     def __init__(self,wad,run_dir,*,initial_mode='campaign',identity=True):
         self.initial_mode=initial_mode
-        super().__init__(wad,run_dir,identity=identity)
+        super().__init__(wad,run_dir,identity=identity,render_scale=2)
 
     def new_run(self,seed,mode=None):
         return super().new_run(seed,mode or self.initial_mode)

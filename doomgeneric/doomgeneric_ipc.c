@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #define _POSIX_C_SOURCE 200809L
 #include "doomgeneric.h"
+#include "i_video.h"
 #include "doomtype.h"
 #include "doomstat.h"
 #include "g_game.h"
@@ -55,7 +56,8 @@ static void state(void) {
  fprintf(reply,",\"motion\":{\"z\":%.4f,\"momx\":%.4f,\"momy\":%.4f,\"momz\":%.4f,\"view_z\":%.4f,\"reaction_time\":%d}",
  p->mo?p->mo->z/65536.0:0.0,p->mo?p->mo->momx/65536.0:0.0,p->mo?p->mo->momy/65536.0:0.0,
  p->mo?p->mo->momz/65536.0:0.0,p->viewz/65536.0,p->mo?p->mo->reactiontime:0);
- fprintf(reply,"}\n");fflush(reply);
+ fprintf(reply,",\"video\":{\"native_width\":%d,\"native_height\":%d,\"output_width\":%d,\"output_height\":%d}}\n",
+ SCREENWIDTH,SCREENHEIGHT,DOOMGENERIC_RESX,DOOMGENERIC_RESY);fflush(reply);
 }
 static uint64_t now(void) {struct timespec t; clock_gettime(CLOCK_MONOTONIC,&t); return t.tv_sec*1000ULL+t.tv_nsec/1000000;}
 void DG_Init(void) {

@@ -24,8 +24,20 @@
 
 // Screen width and height.
 
-#define SCREENWIDTH  320
-#define SCREENHEIGHT 200
+// Keep map/weapon coordinates in Doom units. The native campaign can render
+// twice as many world samples without changing those coordinates or its clock.
+#ifndef DOOM_RENDER_SCALE
+#define DOOM_RENDER_SCALE 1
+#endif
+#if DOOM_RENDER_SCALE == 1
+#define DOOM_RENDER_SHIFT 0
+#elif DOOM_RENDER_SCALE == 2
+#define DOOM_RENDER_SHIFT 1
+#else
+#error "DOOM_RENDER_SCALE must be 1 or 2"
+#endif
+#define SCREENWIDTH  (320 * DOOM_RENDER_SCALE)
+#define SCREENHEIGHT (200 * DOOM_RENDER_SCALE)
 
 // Screen width used for "squash" scale functions
 

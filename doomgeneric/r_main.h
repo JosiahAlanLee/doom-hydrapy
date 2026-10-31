@@ -62,7 +62,7 @@ extern int		loopcount;
 #define LIGHTSEGSHIFT	         4
 
 #define MAXLIGHTSCALE		48
-#define LIGHTSCALESHIFT		12
+#define LIGHTSCALESHIFT		(12 + DOOM_RENDER_SHIFT)
 #define MAXLIGHTZ	       128
 #define LIGHTZSHIFT		20
 

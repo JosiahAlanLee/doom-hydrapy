@@ -295,7 +295,7 @@ R_CheckPlane
     }
 
     for (x=intrl ; x<= intrh ; x++)
-	if (pl->top[x] != 0xff)
+	if (pl->top[x] != PLANE_UNSET)
 	    break;
 
     if (x > intrh)
@@ -435,8 +435,8 @@ void R_DrawPlanes (void)
 
 	planezlight = zlight[light];
 
-	pl->top[pl->maxx+1] = 0xff;
-	pl->top[pl->minx-1] = 0xff;
+	pl->top[pl->maxx+1] = PLANE_UNSET;
+	pl->top[pl->minx-1] = PLANE_UNSET;
 		
 	stop = pl->maxx + 1;
 
