@@ -7,6 +7,7 @@
 #include "rogue_ai.h"
 #include "rogue_boss.h"
 #include "rogue_creature.h"
+#include "rogue_arch.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -39,6 +40,10 @@ static void state(void) {
  leveltime,gametic,gamestate,p->playerstate==PST_DEAD?"true":"false",
  rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");
  Rogue_BossJSON(reply);fprintf(reply,",\"creatures\":");Rogue_CreatureStatus(reply);
+ fprintf(reply,",\"architecture\":");Rogue_ArchJSON(reply);
+ fprintf(reply,",\"motion\":{\"z\":%.4f,\"momx\":%.4f,\"momy\":%.4f,\"momz\":%.4f,\"view_z\":%.4f,\"reaction_time\":%d}",
+ p->mo?p->mo->z/65536.0:0.0,p->mo?p->mo->momx/65536.0:0.0,p->mo?p->mo->momy/65536.0:0.0,
+ p->mo?p->mo->momz/65536.0:0.0,p->viewz/65536.0,p->mo?p->mo->reactiontime:0);
  fprintf(reply,"}\n");fflush(reply);
 }
 static uint64_t now(void) {struct timespec t; clock_gettime(CLOCK_MONOTONIC,&t); return t.tv_sec*1000ULL+t.tv_nsec/1000000;}

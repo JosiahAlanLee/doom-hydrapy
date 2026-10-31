@@ -310,10 +310,14 @@ def map_lumps(floor,custom_seals=False):
             profile=floor.profiles.get((x,y),{})
             z=profile.get('floor',0)
             tile_flat=profile.get('flat',flat)
+            tile_ceiling=profile.get('ceiling',ceiling)
+            if not custom_seals:
+                if tile_flat=='RARCHFL':tile_flat=flat
+                if tile_ceiling=='RARCHCL':tile_ceiling=ceiling
             if custom_seals and floor.boss and (x,y)==tuple(floor.boss['binding_cell']):tile_flat='RSEAL'+str(floor.boss['class'])
             if custom_seals and profile.get('tag')==778:tile_flat='RSEAL10B'
             sectors.append(struct.pack('<hh8s8shhh',z,z+profile.get('height',128+32*(floor.number%2)) if opened else z,
-                                       name8('FLOOR0_1' if exit_tile else tile_flat),name8(profile.get('ceiling',ceiling)),
+                                       name8('FLOOR0_1' if exit_tile else tile_flat),name8(tile_ceiling),
                                        255 if exit_tile else profile.get('light',light),0,profile.get('tag',0)))
     # BLOCKMAP: add each line to both sides of a block boundary, including
     # endpoints. Offsets are 16-bit WORD indices, not byte offsets.
@@ -365,10 +369,12 @@ def creature_study(seed,kind):
 
 
 def campaign(seed, output, assets=None, practice=None):
+    from rogue.architecture import STUDIES,study,metadata,flats
     output=Path(output)
     floors=[generate(seed,i) for i in range(1,FLOORS+1)]
     if practice:
-        if practice in CREATURES:f=creature_study(seed,practice)
+        if practice in STUDIES:f=study(seed,practice)
+        elif practice in CREATURES:f=creature_study(seed,practice)
         elif practice in BOSSES:f=generate(seed,3,boss_kind=practice)
         else:raise ValueError('Unknown encounter study')
     if practice in BOSSES:
@@ -387,9 +393,14 @@ def campaign(seed, output, assets=None, practice=None):
         f.variants=[v for v in f.variants if v['kind']==practice]
     if practice:floors=[f]
     lumps=[lump for f in floors for lump in map_lumps(f,custom_seals=bool(assets))]
+    if practice in STUDIES:lumps.append(metadata(floors[0]))
     if assets:
         from rogue.creatures import sprite_lumps, FAMILIES
-        lumps.extend(sprite_lumps(assets,seed))
+        bank=sprite_lumps(assets,seed)
+        if practice in STUDIES:
+            at=next(i for i,(name,_) in enumerate(bank) if name=='F_END')
+            bank[at:at]=flats(assets)
+        lumps.extend(bank)
     data=bytearray(); directory=[]
     for name,payload in lumps:
         directory.append(struct.pack('<II8s',12+len(data),len(payload),name8(name)))
