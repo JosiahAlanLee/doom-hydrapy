@@ -816,6 +816,7 @@ P_SetupLevel
 
     bodyqueslot = 0;
     deathmatch_p = deathmatchstarts;
+    Rogue_BossLoad();
     P_LoadThings (lumpnum+ML_THINGS);
     
     // if deathmatch, randomly spawn the active players

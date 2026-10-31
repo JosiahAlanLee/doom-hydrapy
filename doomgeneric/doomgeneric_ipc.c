@@ -10,6 +10,7 @@
 #include "rogue_argon.h"
 #include "rogue_arch.h"
 #include "rogue_strobe.h"
+#include "d_event.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -26,10 +27,15 @@ static FILE *reply;
 static struct {int down; unsigned char key;} queue[1024];
 static unsigned head, tail;
 static int rogue_floors;
+static int pending_turn;
 static void tick(void) {
+ if(pending_turn) {
+  event_t event={ev_mouse,0,pending_turn,0,0};
+  D_PostEvent(&event);pending_turn=0;
+ }
  doomgeneric_Tick();
  Rogue_BossTick();
- // Five floors avoid commercial Doom's MAP06/11 narrative finale hooks.
+ // Generated campaigns continue through MAP06 without the commercial finale.
  // G_DoWorldDone retains the player's inventory and health normally.
  if(rogue_floors && gamestate==GS_INTERMISSION && gamemap<rogue_floors)
   G_WorldDone();
@@ -41,7 +47,8 @@ static void state(void) {
  p->mo ? p->mo->x/65536.0 : 0.0,p->mo ? p->mo->y/65536.0 : 0.0,p->mo ? p->mo->angle*(360.0/4294967296.0) : 0.0,
  leveltime,gametic,gamestate,p->playerstate==PST_DEAD?"true":"false",
  rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");
- Rogue_BossJSON(reply);fprintf(reply,",\"creatures\":");Rogue_CreatureStatus(reply);
+ Rogue_BossJSON(reply);fprintf(reply,",\"bosses\":");Rogue_BossesJSON(reply);
+ fprintf(reply,",\"creatures\":");Rogue_CreatureStatus(reply);
  fprintf(reply,",\"argon\":");Rogue_ArgonStatus(reply);
  fprintf(reply,",\"architecture\":");Rogue_ArchJSON(reply);
  fprintf(reply,",\"strobe\":");Rogue_StrobeJSON(reply);
@@ -80,7 +87,7 @@ int main(int argc,char **argv){
  reply=fdopen(dup(STDOUT_FILENO),"w");dup2(STDERR_FILENO,STDOUT_FILENO);
  DG_ExternalClock=getenv("DOOM_LOCKED")!=NULL;
  const char *rogue=getenv("DOOM_ROGUE_FLOORS");
- if(rogue) {rogue_floors=atoi(rogue);if(rogue_floors<1 || rogue_floors>5)return 2;}
+ if(rogue) {rogue_floors=atoi(rogue);if(rogue_floors<1 || rogue_floors>7)return 2;}
  if(DG_ExternalClock)singletics=true;
  doomgeneric_Create(argc,argv);
  fprintf(reply,"READY %d %llu\n",gametic,(unsigned long long)frames);fflush(reply);
@@ -90,10 +97,15 @@ int main(int argc,char **argv){
    if(select(1,&fds,NULL,NULL,&timeout)==0){tick();continue;}
   }
   if(!fgets(line,sizeof(line),stdin))break;
-  unsigned n,k;int down;
+  unsigned n,k;int down,turn;
   if(sscanf(line,"STEP %u",&n)==1 && n<=35000){
    for(unsigned i=0;i<n;i++){virtual_ms=1000+(++clock_tics)*1000/35;tick();}
   } else if(sscanf(line,"KEY %d %u",&down,&k)==2 && k<=255 && head-tail<1024){queue[head%1024].down=!!down;queue[head++%1024].key=k;}
+  else if(sscanf(line,"TURN %d",&turn)==1 && turn>=-4096 && turn<=4096){
+   pending_turn+=turn;
+   if(pending_turn>4096)pending_turn=4096;
+   if(pending_turn< -4096)pending_turn= -4096;
+  }
   else if(!strcmp(line,"STROBE_VIEW 0\n"))Rogue_StrobeView(0);
   else if(!strcmp(line,"STROBE_VIEW 1\n"))Rogue_StrobeView(1);
   else if(sscanf(line,"STROBE_SYNC %u",&n)==1 && n<2100)Rogue_StrobeSync(n);

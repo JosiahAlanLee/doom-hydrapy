@@ -3,6 +3,7 @@
 from functools import lru_cache
 from pathlib import Path
 import struct
+import random
 import numpy as np
 from PIL import Image
 
@@ -54,9 +55,49 @@ def wall_lumps(assets):
     result.append(('TEXTURE1',struct.pack('<I',n+6)+struct.pack('<'+'I'*(n+6),*new_offsets)+data))
     return result
 
+def opening_bosses(floor,seed,props):
+    """Adapt the kit to the campaign without altering its authored geometry.
+
+    The original eight encounters and prop coordinates stay intact. Bindings
+    occupy free tiles on the authored route; no alcoves or sectors are carved.
+    """
+    from rogue.bosses import tier_encounters
+    from rogue.inhabitants import options
+    used={(t[0]//128,t[1]//128) for t in floor.things}|{cell for _,cell,_ in props}|{floor.start,floor.exit}
+    rng=random.Random(seed^0xF0A501)
+    route=floor.route
+    def choose(index):
+        candidates=[(abs(i-index),i,p) for i,p in enumerate(route) if p not in used
+                    and floor.profiles[p]['height']>=128 and not floor.profiles[p].get('special')
+                    and not floor.profiles[p].get('tag')
+                    and abs(p[0]-floor.start[0])+abs(p[1]-floor.start[1])>=8]
+        if not candidates:raise ValueError('No free opening encounter tile')
+        _,i,p=min(candidates);used.add(p);return i,p
+    floor.bosses=[]
+    for index,b in enumerate(tier_encounters(floor.number)):
+        at,cell=choose(len(route)//2 if index==0 else len(route)-6)
+        _,ring=choose(at-4)
+        tag=777+index*2
+        floor.profiles[ring].update(tag=tag,light=255,flat='FLOOR4_6')
+        b.update(cell=cell,binding_cell=ring,seal_tag=tag,intake=b['source_id'])
+        floor.bosses.append(b)
+        roll=rng.randrange(16);x,y=cell[0]*128+64,cell[1]*128+64
+        floor.things.append((x,y,rng.randrange(4)*90,b['type'],options(b['archetype'],roll)))
+        floor.variants.append({'kind':b['kind'],'roll':roll,'x':x,'y':y})
+        nearby=sorted((p for p in floor.cells-used if abs(p[0]-ring[0])+abs(p[1]-ring[1])<=2
+                       and not floor.profiles[p].get('special')),key=lambda p:(abs(p[0]-ring[0])+abs(p[1]-ring[1]),p))
+        if len(nearby)<4:raise ValueError('No free opening encounter supplies')
+        for p,kind in zip(nearby,[2049,2012,2049,2012]):
+            used.add(p);floor.things.append((p[0]*128+64,p[1]*128+64,0,kind,7))
+    floor.boss=floor.bosses[0]
+    floor.architecture['campaign_encounters']='Two Foras handoffs added on free authored-route tiles; original kit encounters retained.'
+
+
 def apply_identity(floors,seed):
     from rogue.threshold_opening import generate,PROPS as PLACEMENTS
+    from rogue.maps import distances
     first=generate(seed)
+    opening_bosses(first,seed,PLACEMENTS)
     first.architecture['props']=[]
     occupied={(t[0]//128,t[1]//128) for t in first.things}|{first.start,first.exit}
     for name,(x,y),angle in PLACEMENTS:
@@ -85,14 +126,24 @@ def apply_identity(floors,seed):
         for profile in f.profiles.values():
             profile.update(wall=wall,flat=flat,ceiling=ceiling)
         occupied={(t[0]//128,t[1]//128) for t in f.things}
-        if f.boss:occupied.add(tuple(f.boss['binding_cell']))
+        for boss in f.bosses:
+            occupied.add(tuple(boss['binding_cell']))
+            if 'secondary_cell' in boss:occupied.add(tuple(boss['secondary_cell']))
         candidates=[p for p in sorted(f.cells) if p not in occupied and p not in f.route
                     and f.profiles.get(p,{}).get('height',0)>=160 and not f.profiles.get(p,{}).get('tag')
                     and abs(p[0]-f.start[0])+abs(p[1]-f.start[1])>=3]
         f.architecture['props']=[]
         for name in PROPS:
             if not candidates:break
-            x,y=candidates.pop(len(candidates)//2);type_id,_=PROPS[name]
+            # A prop can close an off-route branch or surround a free tile.
+            # Check accumulated solid placements, not just the authored route.
+            blocked={tuple(p['cell']) for p in f.architecture['props']}
+            middle=len(candidates)//2
+            for at in sorted(range(len(candidates)),key=lambda i:(abs(i-middle),i)):
+                cell=candidates[at];remaining=f.cells-blocked-{cell}
+                if len(distances(remaining,f.start))==len(remaining):break
+            else:continue
+            x,y=candidates.pop(at);type_id,_=PROPS[name]
             f.things.append((x*128+64,y*128+64,0,type_id,7))
             f.architecture['props'].append({'name':name,'cell':[x,y],'type':type_id,'solid':True})
     return floors

@@ -15,11 +15,11 @@ import json
 import math
 import random
 import struct
-from rogue.bosses import BOSSES
+from rogue.bosses import BOSSES, OFFICES, tier_encounters, is_boss_thing
 from rogue.inhabitants import CREATURES, NEW_CREATURES, options
 
 TILE = 128
-FLOORS = 5
+FLOORS = 7
 SIZE = 33
 ENEMY_TYPES={3004,3001,3002,9,3005}|{b['type'] for b in (CREATURES|BOSSES).values()}
 THEMES = [
@@ -28,6 +28,8 @@ THEMES = [
     ('STATIC / 03', 'STONE2', 'FLAT5_4', 'CEIL5_1', 176),
     ('FOUNDRY / 04', 'METAL2', 'FLOOR4_8', 'CEIL5_1', 144),
     ('NULL / 05', 'STONE3', 'FLAT5_4', 'CEIL3_5', 128),
+    ('BRIDGE / 06', 'METAL2', 'FLOOR0_1', 'CEIL5_1', 128),
+    ('ABYSS / 07', 'STONE3', 'FLAT5_4', 'CEIL5_1', 112),
 ]
 
 
@@ -45,6 +47,7 @@ class Floor:
     profiles: dict = field(default_factory=dict)
     variants: list = field(default_factory=list)
     boss: dict | None = None
+    bosses: list = field(default_factory=list)
 
 
 def distances(cells, start):
@@ -62,8 +65,8 @@ def distances(cells, start):
 def generate(seed, number, boss_kind=None):
     if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 0xffffffff:
         raise ValueError('seed must be an unsigned 32-bit integer')
-    if not 1 <= number <= FLOORS:
-        raise ValueError('floor must be 1..5')
+    if type(number) is not int or not 1 <= number <= FLOORS:
+        raise ValueError('floor must be 1..7')
     rng = random.Random((seed << 8) | number)
     cells, rooms, shapes = set(), [], []
     profiles = {}
@@ -155,10 +158,13 @@ def generate(seed, number, boss_kind=None):
         route.append(parents[route[-1]])
     route.reverse()
     from rogue.bosses import encounter
-    boss=encounter(seed,number,kind=boss_kind)
+    bosses=([encounter(boss_kind)] if boss_kind else tier_encounters(number))
     reserved=set()
-    if boss:
-        boss_cell=route[-5];anchor=route[-9];binding_cell=anchor
+    for index,boss in enumerate(bosses):
+        # Two separated encounters along the descent. Bindings belong to one
+        # actor each, even when both actors share the same combat family.
+        position=len(route)-5 if len(bosses)==1 or index else max(8,len(route)//2-3)
+        boss_cell=route[position];anchor=route[position-4];binding_cell=anchor
         # Prefer a two-cell, L-shaped side alcove. Its walls give the player
         # cover while performing the binding, especially Calmor's stillness.
         found=False
@@ -172,14 +178,17 @@ def generate(seed, number, boss_kind=None):
                 for p in [a,b]:profiles[p]={**profiles[anchor],'height':112,'shape':'binding-alcove','light':224}
                 cells.update([a,b]);binding_cell=b;found=True;break
             if found:break
-        profiles[binding_cell]={**profiles[binding_cell],'tag':777,'light':255,'flat':'FLOOR4_6'}
-        boss={**boss,'cell':boss_cell,'binding_cell':binding_cell,'intake':boss['source_id']}
-        if boss['kind']=='jurisiel':
-            secondary_cell=a if found else route[-8]
-            profiles[secondary_cell]={**profiles[secondary_cell],'tag':778,'light':255,'flat':'FLOOR4_6'}
+        tag=777+index*2
+        profiles[binding_cell]={**profiles[binding_cell],'tag':tag,'light':255,'flat':'FLOOR4_6'}
+        boss={**boss,'cell':boss_cell,'binding_cell':binding_cell,'intake':boss['source_id'],
+              'seal_tag':tag,'archetype':boss.get('archetype',boss['kind'])}
+        if boss['class']==10:
+            secondary_cell=a if found else route[position-3]
+            profiles[secondary_cell]={**profiles[secondary_cell],'tag':tag+1,'light':255,'flat':'FLOOR4_6'}
             boss['secondary_cell']=secondary_cell
-        reserved={p for p in cells if min(abs(p[0]-boss_cell[0])+abs(p[1]-boss_cell[1]),
-                                          abs(p[0]-binding_cell[0])+abs(p[1]-binding_cell[1]))<=2}
+        bosses[index]=boss
+        reserved|={p for p in cells if min(abs(p[0]-boss_cell[0])+abs(p[1]-boss_cell[1]),
+                                         abs(p[0]-binding_cell[0])+abs(p[1]-binding_cell[1]))<=2}
     occupied = {start, exit_cell}|reserved
     things = []
     def item(cell, kind, angle=0):
@@ -204,7 +213,8 @@ def generate(seed, number, boss_kind=None):
         enemy_kinds += [3005]
     # Put the new creatures on the actual route, with a safe start and spacing.
     schedule=[['surveyor','wire_shambler'],['threshold_mimic','vore_spindle'],
-              ['surveyor','threshold_mimic'],['wire_shambler','vore_spindle'],list(NEW_CREATURES)][number-1]
+              ['surveyor','threshold_mimic'],['wire_shambler','vore_spindle'],
+              list(NEW_CREATURES),list(NEW_CREATURES),list(NEW_CREATURES)][number-1]
     new_cells=[];distant_set=set(distant)
     for name in schedule:
         choices=[p for p in route if p in distant_set and p not in occupied
@@ -237,18 +247,24 @@ def generate(seed, number, boss_kind=None):
         for p in remaining[12+number:]:
             if item(p,2002):
                 break
-    if boss:
+    for boss in bosses:
         p=boss['cell'];variant=boss['class'];roll=rng.randrange(16)
-        things.append((p[0]*TILE+64,p[1]*TILE+64,rng.randrange(4)*90,boss['type'],options(boss['kind'],roll)))
+        things.append((p[0]*TILE+64,p[1]*TILE+64,rng.randrange(4)*90,boss['type'],options(boss['archetype'],roll)))
         variants.append({'kind':boss['kind'],'roll':roll,'x':p[0]*TILE+64,'y':p[1]*TILE+64})
         # Supply the fight without requiring a lucky weapon/ammo roll.
-        for p in sorted(reserved-{boss['cell'],boss['binding_cell'],exit_cell,start})[:3]:
+        used={tuple(b['cell']) for b in bosses}|{tuple(b['binding_cell']) for b in bosses}|{start,exit_cell}
+        used|={tuple(b['secondary_cell']) for b in bosses if 'secondary_cell' in b}
+        used|={(t[0]//TILE,t[1]//TILE) for t in things}
+        nearby=sorted((p for p in reserved-used if abs(p[0]-boss['cell'][0])+abs(p[1]-boss['cell'][1])<=2),
+                      key=lambda p:(abs(p[0]-boss['cell'][0])+abs(p[1]-boss['cell'][1]),p))
+        for p in nearby[:3]:
             things.append((p[0]*TILE+64,p[1]*TILE+64,0,2049 if len(things)%2 else 2012,7))
+            occupied.add(p)
     direction = route[1][0]-start[0], route[1][1]-start[1]
     angle = {(1,0):0,(0,1):90,(-1,0):180,(0,-1):270}[direction]
     things.insert(0,(start[0]*TILE+64,start[1]*TILE+64,angle,1,7))
     return Floor(number,cells,rooms,start,exit_cell,route,things,THEMES[number-1],
-                 {'rooms':[{'shape':s,'bounds':r} for r,s in zip(rooms,shapes)],'max_step':16},profiles,variants,boss)
+                 {'rooms':[{'shape':s,'bounds':r} for r,s in zip(rooms,shapes)],'max_step':16},profiles,variants,bosses[0],bosses)
 
 
 def name8(s):
@@ -328,8 +344,10 @@ def map_lumps(floor,custom_seals=False):
             if not custom_seals:
                 if tile_flat=='RARCHFL':tile_flat=flat
                 if tile_ceiling=='RARCHCL':tile_ceiling=ceiling
-            if custom_seals and floor.boss and (x,y)==tuple(floor.boss['binding_cell']):tile_flat='RSEAL'+str(floor.boss['class'])
-            if custom_seals and profile.get('tag')==778:tile_flat='RSEAL10B'
+            if custom_seals:
+                for boss in floor.bosses:
+                    if (x,y)==tuple(boss['binding_cell']):tile_flat='RSEAL'+str(boss['class'])
+                    if (x,y)==tuple(boss.get('secondary_cell',(-1,-1))):tile_flat='RSEAL10B'
             sectors.append(struct.pack('<hh8s8shhh',z,z+profile.get('height',128+32*(floor.number%2)) if opened else z,
                                        name8(('NFLAT04' if floor.architecture.get('identity') else 'FLOOR0_1') if exit_tile else tile_flat),name8(tile_ceiling),
                                        255 if exit_tile else profile.get('light',light),profile.get('special',0),profile.get('tag',0)))
@@ -386,11 +404,7 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
     from rogue.architecture import STUDIES,study,metadata,flats
     from rogue.strobe import STROBES,study as strobe_study,metadata as strobe_metadata
     output=Path(output)
-    floors=[generate(seed,i) for i in range(1,FLOORS+1)]
-    if identity and not practice:
-        if not assets:raise ValueError('Threshold identity requires the supplied Freedoom assets')
-        from rogue.threshold_assets import apply_identity
-        floors=apply_identity(floors,seed)
+    floors=[]
     if practice:
         if practice in STROBES:f=strobe_study(seed)
         elif practice in STUDIES:f=study(seed,practice)
@@ -409,10 +423,17 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
         # Isolate the boss instead of importing a floor's ordinary encounters
         # into a supposed practice fight. Campaign encounters are unchanged.
         f.things=[(x,y,angle,1,7)]+[t for t in f.things if t[3]!=1 and
-                 (t[3] not in ENEMY_TYPES or t[3]==f.boss['type'])]+[(x,y,0,2001,7),(x,y,0,2049,7),(x,y,0,2049,7),(x,y,0,2019,7)]
+                 (t[3] not in ENEMY_TYPES or (is_boss_thing(t) and t[3]==f.boss['type']))]+[(x,y,0,2001,7),(x,y,0,2049,7),(x,y,0,2049,7),(x,y,0,2019,7)]
         f.variants=[v for v in f.variants if v['kind']==practice]
     if practice:floors=[f]
+    else:floors=[generate(seed,i) for i in range(1,FLOORS+1)]
+    if identity and not practice:
+        if not assets:raise ValueError('Threshold identity requires the supplied Freedoom assets')
+        from rogue.threshold_assets import apply_identity
+        floors=apply_identity(floors,seed)
     lumps=[lump for f in floors for lump in map_lumps(f,custom_seals=bool(assets))]
+    from rogue.bosses import metadata as boss_metadata
+    lumps.append(boss_metadata(floors))
     if practice in STUDIES:lumps.append(metadata(floors[0]))
     if practice in STROBES:lumps.append(strobe_metadata(floors[0]))
     if assets:
@@ -432,7 +453,9 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
     wad=struct.pack('<4sII',b'PWAD',len(lumps),12+len(data))+data+b''.join(directory)
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_bytes(wad)
-    manifest={'format':'doom-rogue-4','seed':seed,'mode':practice or 'campaign','identity':'threshold' if identity else 'classic','floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
+    manifest={'format':'doom-rogue-6','seed':seed,'mode':practice or 'campaign',
+              'identity':'threshold' if identity and not practice else 'classic',
+              'floors':[], 'sha256':hashlib.sha256(wad).hexdigest()}
     if assets:
         manifest['sprite_assets']={'sha256':hashlib.sha256(Path(assets).read_bytes()).hexdigest(),
                                    'source':'Freedoom IWAD supplied by the operator',
@@ -444,6 +467,7 @@ def campaign(seed, output, assets=None, practice=None, identity=False):
                                   'route':f.route,'monsters':sum(t[3] in ENEMY_TYPES for t in f.things),
                                   'architecture':f.architecture,'variants':f.variants,
                                   'boss':f.boss,
+                                  'bosses':f.bosses,'office':None if practice else OFFICES[f.number-1],
                                   'cells':sorted(f.cells)})
     return manifest
 

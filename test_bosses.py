@@ -6,8 +6,8 @@ import os
 import tempfile
 import unittest
 
-from rogue.bosses import BOSSES,encounter
-from rogue.maps import generate,campaign,distances
+from rogue.bosses import BOSSES, DEMONS, OFFICES, TIER_PAIRS, metadata, is_boss_thing
+from rogue.maps import FLOORS,generate,campaign,distances
 from rogue.inhabitants import options
 from test_rogue import fixture_wad
 
@@ -48,26 +48,34 @@ def arena(path,kind,on_seal=True):
 
 
 class BossMaps(unittest.TestCase):
-    def test_seeded_order_and_reachable_bindings(self):
-        orders=set()
+    def test_seven_offices_have_fourteen_distinct_book_demons(self):
+        self.assertEqual(FLOORS,7)
+        self.assertEqual([o['name'] for o in OFFICES],['FORAS','VASSAGO','GREMORY','BUNE','OROBAS','PAIMON','BAEL'])
+        keys=[key for pair in TIER_PAIRS for key in pair]
+        self.assertEqual(len(keys),14);self.assertEqual(len(set(keys)),14)
+        self.assertTrue(set(BOSSES)<=set(keys))
+        for office,pair in enumerate(TIER_PAIRS):
+            self.assertEqual(len(pair),2)
+            self.assertEqual(len({DEMONS[k]['archetype'] for k in pair}),2)
+            for key in pair:
+                d=DEMONS[key]
+                self.assertIn(office,[d['source_office'],d['target_office']])
+                self.assertTrue(d['source_actual_effect']);self.assertTrue(d['binding'])
+
+    def test_both_bindings_are_reachable_independent_and_seeded(self):
         for seed in range(16):
-            order=tuple(encounter(seed,n)['kind'] for n in [3,5]);orders.add(order)
-            self.assertEqual(len(set(order)),2)
-            self.assertTrue(set(order)<=set(BOSSES))
-            self.assertIsNone(encounter(seed,1))
-            for number in [3,5]:
-                f=generate(seed,number);b=f.boss
-                self.assertIn(tuple(b['binding_cell']),distances(f.cells,f.start))
-                self.assertEqual(f.profiles[tuple(b['binding_cell'])]['tag'],777)
-                self.assertEqual(sum(any(t[3]==entry['type'] and ((t[4]>>8)&7)==entry.get('flag',entry['class'])
-                                         for entry in BOSSES.values()) for t in f.things),1)
-                if b['kind']=='jurisiel':
-                    self.assertIn(tuple(b['secondary_cell']),distances(f.cells,f.start))
-                    self.assertEqual(f.profiles[tuple(b['secondary_cell'])]['tag'],778)
-                self.assertTrue(b['source_actual_effect'])
-                self.assertEqual(f.boss,generate(seed,number).boss)
-        self.assertGreaterEqual(len(orders),4)
-        self.assertEqual(set().union(*(set(order) for order in orders)),set(BOSSES))
+            for number in range(1,FLOORS+1):
+                f=generate(seed,number)
+                self.assertEqual(tuple(b['kind'] for b in f.bosses),TIER_PAIRS[number-1])
+                self.assertEqual(f.bosses,generate(seed,number).bosses)
+                self.assertNotEqual(f.bosses[0]['cell'],f.bosses[1]['cell'])
+                self.assertEqual(sum(is_boss_thing(t) for t in f.things),2)
+                for b in f.bosses:
+                    self.assertIn(b['binding_cell'],distances(f.cells,f.start))
+                    self.assertEqual(f.profiles[b['binding_cell']]['tag'],b['seal_tag'])
+                    if b['class']==10:
+                        self.assertIn(b['secondary_cell'],distances(f.cells,f.start))
+                        self.assertEqual(f.profiles[b['secondary_cell']]['tag'],b['seal_tag']+1)
 
     def test_practice_modes_start_on_the_seal(self):
         with tempfile.TemporaryDirectory() as t:
@@ -83,6 +91,51 @@ class BossMaps(unittest.TestCase):
 
 @unittest.skipUnless(os.environ.get('FREEDOOM_WAD'),'Set FREEDOOM_WAD')
 class BossEngine(unittest.TestCase):
+    def test_generated_native_pairs_use_book_names_and_separate_seals(self):
+        with tempfile.TemporaryDirectory() as t:
+            for number in range(1,FLOORS+1):
+                f=generate(42,number);f.number=1
+                path=Path(t)/'pair.wad';fixture_wad(path,[f],extra_lumps=[metadata([f])])
+                with self.engine(path) as d:
+                    pair=d.state()['bosses']
+                    self.assertEqual([b['name'] for b in pair],[b['name'] for b in f.bosses])
+                    self.assertTrue(all(b['has_seal'] and b['phase']=='sealed' for b in pair))
+                    self.assertNotEqual((pair[0]['seal_x'],pair[0]['seal_y']),(pair[1]['seal_x'],pair[1]['seal_y']))
+
+    def test_two_same_family_demons_bind_independently_and_both_lock_exit(self):
+        with tempfile.TemporaryDirectory() as t:
+            f=generate(42,1);f.cells={(x,y) for x in range(1,14) for y in range(1,7)}
+            f.profiles={p:{'floor':0,'height':192,'light':224} for p in f.cells}
+            f.profiles[(2,2)]['tag']=777;f.profiles[(3,2)]['tag']=779
+            f.start=(2,2);f.exit=(4,2)
+            f.bosses=[{**DEMONS['repetiel'],'cell':(8,2),'seal_tag':777},
+                      {**DEMONS['promissor'],'cell':(11,2),'seal_tag':779}]
+            f.things=[(320,320,0,1,7),(1088,320,0,3003,options('repetiel')),
+                      (1472,320,0,3003,options('repetiel')),
+                      (320,320,0,2006,7),(320,320,0,2022,7)]+[(320,320,0,17,7)]*8
+            path=Path(t)/'two.wad';fixture_wad(path,[f],extra_lumps=[metadata([f])])
+            with self.engine(path) as d:
+                pulse(d,0xad,1);d.advance(35);pulse(d,0xa2);pulse(d,0xa2)
+                self.assertEqual([b['phase'] for b in d.state()['bosses']],['exposed','sealed'])
+                def defeat(index):
+                    d.key(0xa3,True)
+                    try:
+                        for _ in range(12):
+                            d.advance(20)
+                            if d.state()['bosses'][index]['phase']=='bound':break
+                        else:self.fail('Exposed demon did not take real weapon damage')
+                    finally:d.key(0xa3,False)
+                defeat(0)
+                self.assertEqual([b['phase'] for b in d.state()['bosses']],['bound','sealed'])
+                walk_x(d,640);self.assertFalse(d.state()['won'])
+                # Backward momentum coasts after key-up; aim inside the ring,
+                # rather than at the edge of its sector after settling.
+                walk_x(d,480);self.assertTrue(d.state()['bosses'][1]['on_seal'])
+                pulse(d,0xa2);pulse(d,0xa2)
+                self.assertEqual([b['phase'] for b in d.state()['bosses']],['bound','exposed'])
+                defeat(1);walk_x(d,640);d.advance(4)
+                self.assertTrue(d.state()['won'])
+
     def test_echo_direction_and_calmor_panic_burst(self):
         with tempfile.TemporaryDirectory() as t:
             for kind in ['repetiel','calmor']:

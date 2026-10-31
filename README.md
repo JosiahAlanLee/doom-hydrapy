@@ -6,18 +6,21 @@ was unavailable. See LICENSE, README.TXT and README.upstream.md for upstream cre
 Game assets are from [Freedoom 0.13.0](https://github.com/freedoom/freedoom/releases/tag/v0.13.0),
 BSD licensed. No commercial WAD or original Doom music is included.
 
-**Playable generative mode:** [Null Run](ROGUELIKE.md) builds five seeded
-floors with enemies/supplies, inventory carryover and one-life runs. The current
-[worlds/creatures iteration](WORLDS.md) adds ribbed halls, ring chambers, terraces,
-four procedurally drawn monster families and Argon's green-vector view. A local
-browser provides WASD/arrow/fire/use controls, pause/retry/new seed and optional
-GL treatments. Run `python -m rogue.server --wad /path/to/freedoom2.wad` after
+**Playable generative mode:** [Null Run](SEVEN_TIERS.md) descends through seven
+seeded office tiers with two book demons per tier, inventory carryover and one
+life. Four shared binding/combat families support the fourteen allocated demons.
+The [integrated Threshold edition](THRESHOLD_INTEGRATION.md) preserves its custom
+GUI, authored opening, environmental art, and Latchwing/Relay Choir encounters.
+The [native campaign](ARGON_CAMPAIGN.md) includes all four Argon enemies, captured
+mouse turn/fire/use, retry/new seed and lightweight Rack ambience. Use
+`rogue/campaign_live.py` in HydraPy Studio. The [browser preview](ROGUELIKE.md)
+is available with `python -m rogue.server --wad /path/to/freedoom2.wad` after
 building the engine. The timed performance/capture path below remains separate.
 
 [The Gloamwood iteration](GLOAMWOOD.md) adds a watched/crawling Hollow, Stone
 ReDead's telegraphed shriek and escapable grip, two more book demons, and
-individual encounter studies. Campaigns choose two of four demons for their
-boss floors. These use new art rather than imported Minecraft assets.
+individual encounter studies. These use original procedural art. The current
+campaign allocation extends the four book encounters across all seven tiers.
 
 [Book-boss encounters](BOSSES.md) add Repetiel and Calmor on seeded campaign
 floors, with distinct binding rules, shield windows and native attacks. Choose a
@@ -76,7 +79,8 @@ Launch with DOOM_FRAME=/private/path and DOOM_LOCKED=1 for external tics.
 stdout is reserved for protocol; engine messages go to stderr. READY/OK replies
 contain absolute game tic and frame counter. Initialization consumes two game tics;
 the client records that as its origin. STEP N advances N tics (0..35000), KEY D K
-queues pressed/released byte key codes, QUIT exits. Commands are acknowledged.
+queues pressed/released byte key codes, TURN D queues bounded relative mouse
+turn (-4096..4096) for one tic, QUIT exits. Commands are acknowledged.
 The 1024-event input queue preserves event order. The free-running engine steps
 between commands. The external clock uses rational 35 Hz time and single-tic engine
 mode. Wall-clock transition wipes are skipped in locked mode.

@@ -39,7 +39,7 @@ async function newRun(random){
   const currentOwner=owner;setPlaying(false);keys.clear();
   try{
     const state=await post('new',{seed,owner:currentOwner,mode:$('run-mode').value});owner=null;lastState=state;$('seed').value=seed;
-    overlay('A NEW ARRANGEMENT','The night shift begins.',state.mode==='campaign'?'Five floors. Your supplies follow you down.':state.study_rule||'Find the marked ring. Open the passage.','ENTER THE RUN ↗');
+    overlay('A NEW ARRANGEMENT','The night shift begins.',state.mode==='campaign'?'Seven tiers. Two demons hold each exit.':state.study_rule||'Find the marked ring. Open the passage.','ENTER THE RUN ↗');
     notice('Run generated. Click Enter the Run when you’re ready.');
   }catch(e){notice(e.message);}
   finally{busy=false;$('new').disabled=$('retry').disabled=$('play').disabled=false;}
@@ -63,24 +63,26 @@ setInterval(send,120);
 async function stateLoop(){
   try{
     const r=await fetch('/api/state');if(!r.ok)throw new Error('Server unavailable.');lastState=await r.json();
-    const s=lastState;$('connection').textContent=s.error?'RUN PAUSED':'CONNECTED';
+    const s=lastState;$('connection').textContent=s.error?'ENGINE ERROR':'ENGINE ONLINE';
     if(seenRevision!==s.revision){seenRevision=s.revision;$('run-mode').value=s.mode;$('seed').value=s.seed;}
-    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS / ONE LIFE':'ONE PASSAGE / ONE LIFE';
-    $('floor').textContent=s.floor_name;$('run-id').textContent='SEED '+s.seed;
+    $('run-length').textContent=s.mode==='campaign'?'SEVEN TIERS / ONE LIFE':s.study_family==='architecture'?'ARCHITECTURE STUDY. WATCH YOUR WAY BACK.':s.study_rule?'GLOAMWOOD STUDY. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
+    $('floor').textContent=(s.office?s.office.name+' / ':'')+s.floor_name;$('run-id').textContent='SEED '+s.seed;
     $('health').innerHTML=Number(s.health)+'<span>%</span>';$('armor').innerHTML=Number(s.armor)+'<span>%</span>';
     $('kills').innerHTML=Number(s.kills)+'<span>/ '+Number(s.total_kills)+'</span>';
     $('mode').textContent=s.dead?'RUN ENDED':s.won?'CLEARED':s.paused?'PAUSED':'EXPLORING';
-    $('status').textContent=s.dead?'The dungeon keeps what it takes.':s.won?'All five floors cleared.':s.paused?'Waiting for the next step.':'Floor '+s.map+' of '+s.floors+' · '+Math.floor(s.level_tics/35)+' seconds';
+    $('status').textContent=s.dead?'The dungeon keeps what it takes.':s.won?'All seven tiers cleared.':s.paused?'Waiting for the next step.':'Tier '+s.map+' of '+s.floors+' · '+Math.floor(s.level_tics/35)+' seconds';
     if(s.won&&s.mode!=='campaign')$('status').textContent='You found the way out. Study complete.';
     const b=s.boss;$('boss-panel').hidden=!b;
     if(b){
+      const pair=s.bosses||[b],exitOpen=pair.every(d=>d.phase==='bound');
+      $('boss-roster').textContent=pair.map(d=>d.name+' / '+d.phase.toUpperCase()).join(' · ');
       $('boss-panel').dataset.phase=b.phase;$('boss-name').textContent=b.name;
-      $('boss-phase').textContent=b.phase==='bound'?'BOUND / EXIT OPEN':b.phase==='exposed'?'EXPOSED / '+(b.open_ticks/35).toFixed(1)+'s':'SEALED / BINDING REQUIRED';
+      $('boss-phase').textContent=b.phase==='bound'?(exitOpen?'BOUND / EXIT OPEN':'BOUND / OTHER DEMON REMAINS'):b.phase==='exposed'?'EXPOSED / '+(b.open_ticks/35).toFixed(1)+'s':'SEALED / BINDING REQUIRED';
       $('boss-health').textContent=b.health+' / '+b.max_health+' HEALTH';$('boss-hp').max=b.max_health;$('boss-hp').value=b.health;
       const maximum=b.class===6?70:2;
       $('boss-binding').max=maximum;$('boss-binding').value=b.phase==='exposed'?maximum:b.class===5?b.stamps:b.class===6?b.still_ticks:b.class===9?Number(b.proof):b.gate_stage;
-      $('boss-progress').textContent=b.phase==='bound'?'EXIT UNLOCKED':b.phase==='exposed'?'STRIKE NOW':b.class===5?'INTAKE 01 / '+b.stamps+' OF 2':b.class===6?'QUIET / '+Math.round(b.still_ticks/70*100)+'%':b.class===9?(b.proof?'PROOF RECORDED / RETURN TO RING':'PROOF REQUIRED / HIT THE SHIELD'):(b.gate_stage?'A ACCEPTED / CROSS INTO B':'ENTER THE AMBER A RING');
-      $('boss-rule').textContent=b.phase==='bound'?'The exit will now let you pass.':b.phase==='exposed'?'The seal is open. Hurt the demon before it closes.':(b.on_seal?'ON THE RING. ':'FIND THE GLOWING RING. ')+s.boss_rule;
+      $('boss-progress').textContent=b.phase==='bound'?(exitOpen?'EXIT UNLOCKED':'OTHER DEMON REMAINS'):b.phase==='exposed'?'STRIKE NOW':b.class===5?'PRESENTATIONS / '+b.stamps+' OF 2':b.class===6?'QUIET / '+Math.round(b.still_ticks/70*100)+'%':b.class===9?(b.proof?'PROOF RECORDED / RETURN TO RING':'PROOF REQUIRED / HIT THE SHIELD'):(b.gate_stage?'A ACCEPTED / CROSS INTO B':'ENTER THE AMBER A RING');
+      $('boss-rule').textContent=b.phase==='bound'?(exitOpen?'The exit will now let you pass.':'Bind and defeat the other demon to open the exit.'):b.phase==='exposed'?'The seal is open. Hurt the demon before it closes.':(b.on_seal?'ON THE RING. ':'FIND THE GLOWING RING. ')+s.boss_rule;
     }
     const c=s.creatures||{},gripped=c.effect==='grip',warning=c.shriek_warning>0;
     $('creature-panel').hidden=!(s.study_family==='creature'||c.watched||c.hunting||c.effect||warning);

@@ -15,7 +15,7 @@ from rogue.desktop import Desktop
 class DesktopControls(TestCase):
     def control(self,root):
         d=Desktop.__new__(Desktop)
-        d.root=Path(root);d.mode=1;d.flicker=True;d.view_lock=threading.Lock()
+        d.root=Path(root);d.mode=1;d.flicker=True;d.mouse_sensitivity=3.;d.view_lock=threading.Lock()
         d.clear_frames=0;d.input_source='physical';d.owner='native-player'
         d.game=SimpleNamespace(paused=False,lock=threading.RLock(),engine=SimpleNamespace(command=Mock()))
         return d
@@ -26,7 +26,7 @@ class DesktopControls(TestCase):
             d.action({'action':'filter','mode':0},automated=True)
             self.assertEqual((d.mode,d.owner,d.input_source),(0,'native-player','physical'))
             self.assertFalse(d.game.paused)
-            self.assertEqual(json.loads((Path(root)/'view-settings.json').read_text()),{'mode':0,'flicker':True})
+            self.assertEqual(json.loads((Path(root)/'view-settings.json').read_text()),{'mode':0,'flicker':True,'mouse_sensitivity':3.})
 
     def test_remote_control_cannot_interrupt_native_player(self):
         with TemporaryDirectory() as root:
@@ -40,7 +40,7 @@ class DesktopControls(TestCase):
             d=self.control(root);d.loading=False;d.campaign_only=True
             d.pause=Mock()
             for mode in ['strobe','memory','pillar','corridor','surveyor','hollow']:
-                with self.assertRaisesRegex(ValueError,'five-floor campaign'):d.new(mode)
+                with self.assertRaisesRegex(ValueError,'seven-tier campaign'):d.new(mode)
             d.pause.assert_not_called()
             self.assertEqual(d.owner,'native-player')
 

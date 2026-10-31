@@ -33,13 +33,24 @@ def decorate(image,state):
     text(d,(12,5),'NULL RUN',AMBER)
     text(d,(80,5),' / '+state.get('floor_name','THRESHOLD'),INK)
     direction=['E','NE','N','NW','W','SW','S','SE'][round(float(state.get('angle',0))/45)%8]
-    text(d,(540,5),f"{state.get('map',1):02}/{state.get('floors',5):02}  {direction}",MUTED)
+    text(d,(540,5),f"{state.get('map',1):02}/{state.get('floors',7):02}  {direction}",MUTED)
     cue=(state.get('argon') or {}).get('cue')
     if cue:
         width=round(d.textlength(cue,font=font()))
         x=max(10,(640-width)//2)
         d.rectangle((x-8,30,x+width+8,49),fill=(44,34,24))
         text(d,(x,34),cue,AMBER)
+    pair=state.get('bosses') or []
+    if pair and not state.get('paused',False):
+        d.rectangle((8,54,631,86),fill=PANEL)
+        text(d,(14,57),' / '.join(b['name']+' '+b['phase'].upper() for b in pair),MUTED)
+        current=state.get('boss') or {}
+        rules={5:'Ring: tap F twice; release between taps.',6:'Ring: stay still without firing for 2s.',
+               9:'Shoot its shield, then ring + F.',10:'Cross its amber A ring, then its cyan B ring.'}
+        if current.get('phase')=='bound':
+            hint='BOTH BOUND / EXIT OPEN' if all(b['phase']=='bound' for b in pair) else 'THE OTHER DEMON STILL HOLDS THE EXIT'
+        else:hint=current.get('name','')+' / '+rules.get(current.get('class'),'')+'  [8s opening]'
+        text(d,(14,72),hint,AMBER)
     # Four tiny marks preserve an unobstructed centre instead of a large reticle.
     for a,b in [((315,194),(317,194)),((323,194),(325,194)),((320,189),(320,191)),((320,197),(320,199))]:
         d.line((a,b),fill=(180,188,178))
@@ -66,7 +77,7 @@ CREDIT_LINES=[
     ('TYPEFACE','DEPARTURE MONO / HELENA ZHANG / SIL OFL 1.1'),
 ]
 
-def overlay(image,state,credits=False,error=None,loading=False):
+def overlay(image,state,credits=False,error=None,loading=False,mouse_sensitivity=3.):
     d=ImageDraw.Draw(image)
     d.rectangle((28,48,611,337),fill=PANEL,outline=LINE,width=1)
     d.line((28,48,132,48),fill=AMBER,width=3)
@@ -83,7 +94,8 @@ def overlay(image,state,credits=False,error=None,loading=False):
     if loading:subtitle='ARRANGING THE NEXT RUN...'
     if error:subtitle='RUN PAUSED / '+str(error)[:56]
     text(d,(46,67),title,INK,22);text(d,(46,105),subtitle,AMBER)
-    for i,line in enumerate(['WASD move / arrows or Q-E turn','SPACE or CTRL fire / F use','SHIFT run / TAB map / 1-7 weapons',
-                             'ENTER resume / ESC pause','R retry / N new seed / C credits']):
+    if state.get('bosses'):text(d,(46,126),' + '.join(b['name'] for b in state['bosses'])+' / BOTH MUST FALL',MUTED)
+    for i,line in enumerate(['WASD move / MOUSE or arrows turn','CLICK or SPACE fire / RIGHT CLICK or F use','SHIFT run / TAB map / 1-7 weapons',
+                             'ENTER or CLICK resume / ESC releases + pauses','R retry / N new seed / C credits',f'[ / ] mouse sensitivity {mouse_sensitivity:g}']):
         text(d,(46,149+i*28),line,INK if i<3 else MUTED)
     return image

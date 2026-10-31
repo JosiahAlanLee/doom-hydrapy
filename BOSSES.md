@@ -10,11 +10,13 @@ operating manual. It is an adaptation, not a claim that the book describes comba
 
 ## Campaign and practice
 
-Two different demons appear per five-floor campaign, on floors three and five. A seed-driven
-shuffle selects them from the four-demon bank, which repeats for the same seed. Health varies within
-bounded ranges. Each encounter gets a reachable binding tile, preferably inside
-a two-cell side alcove for cover, plus nearby supplies. The exit stays locked
-while the boss is alive; binding opens a damage window, not an immediate victory.
+The [seven-tier campaign](SEVEN_TIERS.md) allocates two handoff demons to each
+of the book's office regions. The fourteen identities currently share the four
+native combat and sprite families documented here. Each actor has its own
+reachable binding ring, preferably in a side alcove, and nearby supplies. Both
+demons must be defeated before a tier's exit opens. Binding exposes one demon
+for eight seconds; it does not end the fight. The allocation is fixed, while
+map layout, placement and bounded health variations follow the run seed.
 
 In the browser, choose a **NEXT RUN** binding study and press **RETRY** or **NEW
 RUN** to start beside that demon's ring. A study contains only that boss, with a

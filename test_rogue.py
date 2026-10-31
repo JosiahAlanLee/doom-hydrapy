@@ -17,12 +17,13 @@ import unittest
 from rogue.maps import FLOORS, SIZE, TILE, campaign, distances, generate, map_lumps
 
 
-def fixture_wad(path,floors,player_only=False):
+def fixture_wad(path,floors,player_only=False,extra_lumps=()):
     lumps=[]
     for f in floors:
         for name,data in map_lumps(f):
             if name=='THINGS' and player_only:data=struct.pack('<5h',*f.things[0])
             lumps.append((name,data))
+    lumps.extend(extra_lumps)
     raw=bytearray();directory=[]
     for name,data in lumps:
         directory.append(struct.pack('<II8s',12+len(raw),len(data),name.encode().ljust(8,b'\0')))
@@ -34,7 +35,7 @@ class MapTests(unittest.TestCase):
     def test_architecture_and_native_variant_flags(self):
         for seed in [0,42,20261030,4294967295]:
             kinds=set()
-            for number in range(1,6):
+            for number in range(1,FLOORS+1):
                 f=generate(seed,number)
                 shapes={r['shape'] for r in f.architecture['rooms']}
                 self.assertTrue({'nave','ring','ribs','cross'}<=shapes)
@@ -216,7 +217,7 @@ class EngineTests(unittest.TestCase):
                 d.key(KEYS['Space'],True);d.advance(20);d.key(KEYS['Space'],False);d.advance(2)
                 self.assertLess(d.state()['ammo'][0],before['ammo'][0])
 
-    def test_walk_all_five_floors_and_win(self):
+    def test_walk_all_seven_tiers_through_map06_and_win(self):
         """Walk generated routes with native keys: no teleport/debug commands.
 
         Remove encounter/pickup THINGS only for this geometry fixture. Combat
