@@ -20,6 +20,7 @@
 
 #include "z_zone.h"
 #include "p_local.h"
+#include "rogue_arch.h"
 
 #include "doomstat.h"
 
@@ -145,6 +146,7 @@ void P_Ticker (void)
     P_RunThinkers ();
     P_UpdateSpecials ();
     P_RespawnSpecials ();
+    Rogue_ArchTick();
 
     // for par times
     leveltime++;	

@@ -28,6 +28,7 @@ OBJS += $(addprefix $(OBJDIR)/, $(SRC_DOOM))
 OBJS += $(OBJDIR)/rogue_ai.o
 OBJS += $(OBJDIR)/rogue_boss.o
 OBJS += $(OBJDIR)/rogue_creature.o
+OBJS += $(OBJDIR)/rogue_arch.o
 
 all:	 $(OUTPUT)
 
@@ -48,6 +49,7 @@ $(OBJS): | $(OBJDIR)
 $(OBJS): rogue_ai.h
 $(OBJS): rogue_boss.h
 $(OBJS): rogue_creature.h p_mobj.h
+$(OBJS): rogue_arch.h
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)

@@ -64,7 +64,7 @@ async function stateLoop(){
     const r=await fetch('/api/state');if(!r.ok)throw new Error('Server unavailable.');lastState=await r.json();
     const s=lastState;$('connection').textContent=s.error?'ENGINE ERROR':'ENGINE ONLINE';
     if(seenRevision!==s.revision){seenRevision=s.revision;$('run-mode').value=s.mode;$('seed').value=s.seed;}
-    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS. TWO OF FOUR BOOK DEMONS. ONE LIFE.':s.study_rule?'GLOAMWOOD STUDY. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
+    $('run-length').textContent=s.mode==='campaign'?'FIVE FLOORS. TWO OF FOUR BOOK DEMONS. ONE LIFE.':s.study_family==='architecture'?'ARCHITECTURE STUDY. WATCH YOUR WAY BACK.':s.study_rule?'GLOAMWOOD STUDY. ONE LIFE.':'BINDING STUDY. ONE LIFE.';
     $('floor').textContent=s.floor_name;$('run-id').textContent='SEED '+s.seed;
     $('health').innerHTML=Number(s.health)+'<span>%</span>';$('armor').innerHTML=Number(s.armor)+'<span>%</span>';
     $('kills').innerHTML=Number(s.kills)+'<span>/ '+Number(s.total_kills)+'</span>';
@@ -82,7 +82,7 @@ async function stateLoop(){
       $('boss-rule').textContent=b.phase==='bound'?'The exit will now let you pass.':b.phase==='exposed'?'The seal is open. Hurt the demon before it closes.':(b.on_seal?'ON THE RING. ':'FIND THE GLOWING RING. ')+s.boss_rule;
     }
     const c=s.creatures||{},gripped=c.effect==='grip',warning=c.shriek_warning>0;
-    $('creature-panel').hidden=!(s.study_rule||c.watched||c.hunting||c.effect||warning);
+    $('creature-panel').hidden=!(s.study_family==='creature'||c.watched||c.hunting||c.effect||warning);
     $('creature-panel').dataset.danger=gripped||warning?'yes':'no';
     $('grip-escape').hidden=!gripped;$('grip-escape').value=c.escape_ticks||0;
     $('creature-name').textContent=gripped?'BREAK THE GRIP':c.effect==='shriek'?'STONE REDEAD / SHRIEK':warning?'STONE REDEAD / TAKE COVER':c.hunting?'THE HOLLOW / MOVING':c.watched?'THE HOLLOW / WATCHED':s.mode==='redead'?'STONE REDEAD':'THE HOLLOW';

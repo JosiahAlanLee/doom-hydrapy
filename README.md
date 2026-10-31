@@ -136,3 +136,8 @@ quiet game-only tail. Studio keyboard and game-event signals remain future work.
 
 See poly/README.md for the sequencer ABI, private JACK namespace and buffer setup.
 No host repository was changed and this work was not pushed by Codex.
+
+## Architectural studies
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the silent corridor seam, five-corner
+pillar loop and unseen passage mutations. Choose a study under Next Run, then Retry.
