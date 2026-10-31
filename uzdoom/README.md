@@ -30,12 +30,15 @@ encounter area after a long chase and drop shells and a medikit when defeated.
 | Proof | Hit its shield once, then use F on its seal. Holding F while entering works. |
 | Passage | Enter amber A, then cyan B. |
 
-The two HUD cards show health, damage mode and opening time. The highlighted card
-owns the current hint and progress meter; standing on a seal takes priority over
-aim direction. The guidance points toward that boss's next seal. World markers
-identify F, A and B seals and change when opened or completed. An overhead badge
-confirms shield impacts. Other enemies and projectiles remain dangerous during a
-binding attempt.
+One compact health card appears for a nearby visible boss, an active seal or a
+recent nearby attack/hit. It clears after combat, defeat or leaving the encounter;
+there is no permanent pair of cards during exploration. Seal entry briefly shows
+an unfamiliar ritual tip; successful binding teaches that family for the run.
+Active ritual progress stays visible in one narrow strip above the bottom HUD.
+Proof and A-seal acknowledgements last three seconds; exposure needs only the
+health card's timer. Standing on a seal takes priority over aim direction. World
+markers identify F, A and B seals; overhead badges flash only on hits/opening.
+Other enemies and projectiles remain dangerous during a binding attempt.
 
 ## Requirements and launch
 
@@ -65,6 +68,7 @@ Set these environment variables before running the supervisor:
 | `NULLRUN_PORT` | Loopback control port, default 8774. |
 | `NULLRUN_SEED` | Optional unsigned 32-bit seed, default 20261031. |
 | `NULLRUN_ENVIRONMENT` | Optional one of the six IDs in `build.PACKS`. |
+| `NULLRUN_CUE_SHADERS` | Set to `1` to enable the reviewed event effects on first launch; saved F4 preference takes priority. |
 
 Copy `rig/initial-score.json` and `rig/adaptive-live.vcv` into
 `$NULLRUN_ROOT/music/` before first launch. Preserve an existing rig. The supplied
@@ -90,7 +94,20 @@ The game starts paused. Click/Enter resumes; Escape releases controls and pauses
 WASD moves, mouse looks on both axes, click/Ctrl fires, Space jumps, F/right click
 uses, Shift runs, Tab maps, and 1–7 select weapons. R retries the seed; N creates
 another. F2 selects steady/irregular annex lighting. F3 cycles RAW, PHOSPHOR,
-ASCII and PRINT. RAW is the default; HUD and aim marks remain unfiltered.
+ASCII and PRINT. RAW is the default. F4 toggles the event effects and returns the
+world to its base picture. When event effects are enabled, F3 immediately returns
+to RAW; further F3 presses cycle the other filters. The F4 preference is saved.
+HUD and aim marks remain unfiltered.
+
+Event effects are brief native cues: peripheral stillness during a Quiet seal's
+one-second charge and restrained Surveyor warning brackets/edge accents. The
+center20% of both screen dimensions remains unchanged. Warning cues require a
+living nearby Surveyor with actual line of sight; simultaneous warnings use the
+most urgent countdown, reducing Quiet intensity while an attack is pending.
+Pause, menus, death, victory, disabled effects and native telemetry older than
+250ms clear them. Only current native state is used, so old effects do not queue
+across floors or seeds. Texture operators and the live renderer share
+`presentation.world_effects`; the HUD is layered afterward.
 
 One controller owns the game. Ordinary stop refuses while the physical player is
 active. Restarting music preserves the game. Do not use `stop --force` without
@@ -108,6 +125,7 @@ python -m uzdoom.build --assets /path/freedoom2.wad --seed 1233599628 --output /
 python -m uzdoom.tests.native --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/native-check
 python -m uzdoom.tests.boss_encounter --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/boss-check
 python -m uzdoom.tests.architecture --help
+python -m unittest uzdoom.tests.test_cues
 ```
 
 On 2026-10-31, all 21 native checks passed after the boss revision, including all

@@ -8,8 +8,7 @@ from hydrapy import FrameSource,Fn,src,scene,render,o0
 from hydrapy.live import register_hook
 import hydrapy.live as resources
 from uzdoom.desktop import start
-
-import legible_ops
+from uzdoom.presentation import world_effects
 
 STUDIO=dict(title='NULL RUN / TOWER')
 game=start(Path(os.environ['NULLRUN_ROOT']),os.environ['FREEDOOM_WAD'],port=int(os.environ.get('NULLRUN_PORT','8774')),resources=resources)
@@ -29,9 +28,7 @@ def hud(t):
 
 source=src(FrameSource(world));instruments=src(FrameSource(hud))
 # The CPU mask remains sharp after world treatment. No default green filter.
-treated=source.blend(source.ruttetra(100,.12,1.1,.25).color(.4,1,.8),Fn(lambda c:float(game.mode==1)))
-treated=treated.blend(source.doomLegibleAscii(240),Fn(lambda c:float(game.mode==2)))
-treated=treated.blend(source.doomLegiblePrint(),Fn(lambda c:float(game.mode==3)))
+treated=world_effects(source,lambda:game.mode,lambda t:game.snapshot(t)['cues'])
 scene('tower')(lambda:treated.layer(instruments))
 render(o0)
 register_hook(lambda ctx,renderer:game.tick(ctx,renderer))

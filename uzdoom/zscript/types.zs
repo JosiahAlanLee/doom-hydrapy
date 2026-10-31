@@ -13,7 +13,7 @@ class NRDoor : Object {
 }
 class NRBoss : Object {
  NRMonster Mob; int Kind,MaxHP,OpenUntil,Stamps,Still,LastStamp,Blocked,Attacks,Echoes,EchoDue,GateStage,LastSector,LastBurst;
- bool LastUse,Proof,Returning; Vector3 Seal,Other,LastPoint,Home; double EchoAngle,EchoPitch,ArenaRadius; String Title;
+ bool LastUse,Proof,Returning,Visible; Vector3 Seal,Other,LastPoint,Home; double EchoAngle,EchoPitch,ArenaRadius,PlayerDistance; String Title;
  Actor HomeActor; int StaggerUntil,LastHitUntil,OpenCount;
  clearscope bool Bound() {return !Mob || Mob.health<=0;}
  clearscope bool Exposed() {return !Bound() && level.time<OpenUntil;}
@@ -35,8 +35,8 @@ class NRBoss : Object {
   return GateStage?(OnRing(p,true)?"B REACHED / SHIELD OPENING":"A REGISTERED / ENTER ITS CYAN B SEAL"):"ENTER ITS AMBER A SEAL, THEN CYAN B";
  }
  clearscope String JSON(Actor p) {
-  return String.Format("{\"name\":\"%s\",\"class\":%d,\"health\":%d,\"max_health\":%d,\"phase\":\"%s\",\"on_seal\":%s,\"on_secondary_seal\":%s,\"has_seal\":true,\"stamps\":%d,\"still_ticks\":%d,\"open_ticks\":%d,\"echoes\":%d,\"blocked_hits\":%d,\"seal_x\":%.2f,\"seal_y\":%.2f,\"seal_z\":%.2f,\"proof\":%s,\"gate_stage\":%d,\"seal_b_x\":%.2f,\"seal_b_y\":%.2f,\"seal_b_z\":%.2f,\"attacks\":%d,\"last_burst\":%d,\"hint\":\"%s\",\"shield_damage_percent\":60,\"exposed_damage_percent\":150,\"charge_ticks\":35,\"open_count\":%d,\"last_hit_ticks\":%d,\"returning\":%s}",
-   Title,Kind,Bound()?0:Mob.health,MaxHP,Phase(),OnRing(p)?"true":"false",OnRing(p,true)?"true":"false",Stamps,Still,Exposed()?OpenUntil-level.time:0,Echoes,Blocked,Seal.X,Seal.Y,Seal.Z,Proof?"true":"false",GateStage,Other.X,Other.Y,Other.Z,Attacks,LastBurst,Hint(p),OpenCount,max(0,LastHitUntil-level.time),Returning?"true":"false");
+  return String.Format("{\"name\":\"%s\",\"class\":%d,\"health\":%d,\"max_health\":%d,\"phase\":\"%s\",\"on_seal\":%s,\"on_secondary_seal\":%s,\"has_seal\":true,\"stamps\":%d,\"still_ticks\":%d,\"open_ticks\":%d,\"echoes\":%d,\"blocked_hits\":%d,\"seal_x\":%.2f,\"seal_y\":%.2f,\"seal_z\":%.2f,\"proof\":%s,\"gate_stage\":%d,\"seal_b_x\":%.2f,\"seal_b_y\":%.2f,\"seal_b_z\":%.2f,\"attacks\":%d,\"last_burst\":%d,\"hint\":\"%s\",\"shield_damage_percent\":60,\"exposed_damage_percent\":150,\"charge_ticks\":35,\"open_count\":%d,\"last_hit_ticks\":%d,\"returning\":%s,\"visible\":%s,\"distance\":%.2f}",
+   Title,Kind,Bound()?0:Mob.health,MaxHP,Phase(),OnRing(p)?"true":"false",OnRing(p,true)?"true":"false",Stamps,Still,Exposed()?OpenUntil-level.time:0,Echoes,Blocked,Seal.X,Seal.Y,Seal.Z,Proof?"true":"false",GateStage,Other.X,Other.Y,Other.Z,Attacks,LastBurst,Hint(p),OpenCount,max(0,LastHitUntil-level.time),Returning?"true":"false",Visible?"true":"false",PlayerDistance);
  }
 }
 class NRBossHome : Actor {
@@ -54,11 +54,12 @@ class NRSealMarker : Actor {
 }
 class NRBossBadge : Actor {
  int BossIndex;
- Default {Radius 1; Height 16; Scale .7; +NOGRAVITY +NOBLOCKMAP}
+ Default {Radius 1; Height 16; Scale .7; RenderStyle "Translucent"; +NOGRAVITY +NOBLOCKMAP}
  States {Spawn: NSHB A -1 Bright; Stop;}
  override void Tick() {
   Super.Tick();let h=NRDirector.Get();if(!h || BossIndex>=h.Bosses.Size()) {Destroy();return;}
   let b=h.Bosses[BossIndex];if(b.Bound()) {Destroy();return;}
+  Alpha=level.time<b.LastHitUntil || level.time<b.StaggerUntil?1.:0.;
   SetOrigin(b.Mob.Pos+(0,0,b.Mob.Height+12),false);frame=b.Exposed()?1:level.time<b.LastHitUntil?2:0;
  }
 }

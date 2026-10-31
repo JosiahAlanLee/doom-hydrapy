@@ -122,7 +122,10 @@ class NRDirector : StaticEventHandler {
  }
  void BossTick(Actor p,bool use) {
   for(int i=0;i<Bosses.Size();i++) {
-   let b=Bosses[i];if(b.Bound())continue;
+   let b=Bosses[i];if(b.Bound()) {b.Visible=false;continue;}
+   b.PlayerDistance=p.Distance2D(b.Mob);
+   double look=-atan2(b.Mob.Pos.Z+b.Mob.Height*.5-(p.Pos.Z+p.Height*.75),max(1.,b.PlayerDistance));
+   b.Visible=b.PlayerDistance<=1536 && abs(Delta(p.Angle,atan2(b.Mob.Pos.Y-p.Pos.Y,b.Mob.Pos.X-p.Pos.X)))<=50 && abs(p.Pitch-look)<=40 && p.CheckSight(b.Mob);
    if(b.EchoDue && level.time>=b.EchoDue) {
     b.Mob.AimYaw=b.EchoAngle;b.Mob.AimPitch=b.EchoPitch;b.Mob.Shot(p,'BaronBall',0,true);b.EchoDue=0;b.Echoes++;
    }

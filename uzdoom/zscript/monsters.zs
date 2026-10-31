@@ -2,7 +2,7 @@
 // Native encounters with forgiving shield rules and physical 3D navigation.
 class NRMonster : Actor {
  int Kind,Roll,BossIndex,MaxHP,Phase,EndsAt,Cooldown,AttackCount,DeadAt,NextMelee;
- bool Awake,Frozen; double AimYaw,AimPitch; Vector3 LastPoint;
+ bool Awake,Frozen,PlayerSight; double AimYaw,AimPitch; Vector3 LastPoint;
  Default {Radius 20; Height 72; Health 100; Mass 100; MaxStepHeight 24; Scale .65;
   +SOLID +SHOOTABLE +ISMONSTER +COUNTKILL +CANPASS}
  States {Spawn: TNT1 A -1; Stop; Death: TNT1 A -1; Stop;}
@@ -110,6 +110,7 @@ class NRMonster : Actor {
   h.Fold(self,LastPoint);LastPoint=Pos;StopXY();
   if(!p || p.health<=0) {Visual();return;}
   double range=Distance2D(p);bool sight=range<=1536 && CheckSight(p);
+  PlayerSight=sight;
   target=p;
   if(BossIndex>=0 && BossIndex<h.Bosses.Size()) {
    let b=h.Bosses[BossIndex];double homeDistance=(Pos.XY-b.Home.XY).Length();
@@ -190,6 +191,6 @@ class NRMonster : Actor {
   if(visible || Awake)h.Navigate(self,p,Phase==2?4.:1.3);
  }
  clearscope String JSON() {
-  return String.Format("{\"class\":%d,\"health\":%d,\"max_health\":%d,\"x\":%.4f,\"y\":%.4f,\"z\":%.4f,\"angle\":%.4f,\"awake\":%s,\"frozen\":%s,\"phase\":%d,\"attack_count\":%d,\"warning_ticks\":%d,\"boss_index\":%d}",Kind,health,MaxHP,Pos.X,Pos.Y,Pos.Z,Angle,Awake?"true":"false",Frozen?"true":"false",Phase,AttackCount,Phase==2?max(0,EndsAt-level.time):0,BossIndex);
+  return String.Format("{\"class\":%d,\"health\":%d,\"max_health\":%d,\"x\":%.4f,\"y\":%.4f,\"z\":%.4f,\"angle\":%.4f,\"awake\":%s,\"frozen\":%s,\"phase\":%d,\"attack_count\":%d,\"warning_ticks\":%d,\"boss_index\":%d,\"sight\":%s}",Kind,health,MaxHP,Pos.X,Pos.Y,Pos.Z,Angle,Awake?"true":"false",Frozen?"true":"false",Phase,AttackCount,Phase==2?max(0,EndsAt-level.time):0,BossIndex,PlayerSight?"true":"false");
  }
 }
