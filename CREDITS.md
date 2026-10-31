@@ -12,6 +12,7 @@ Creative direction, world/bestiary collaboration and the project: Josiah Alan-Le
 ## New work and collaboration
 
 - Argon: the original Null Run monster concepts and procedural sketches, including Surveyor, Wire Shambler/Ballast Husk, Threshold Mimic and Vore Spindle. Original inputs, derivative render sources and GPL notices are in assets/argon/.
+- Argon gameplay-optics proposal: adapted into the optional native Surveyor countdown operator by Codex. The unchanged GPL source, hash, implementation boundaries and verification are recorded in SURVEYOR_OPTICS.md and assets/argon/provenance/Gameplay-Optics-original.py.
 - DeepSeek-assisted procedural content: the Threshold opening floor, environment kit, Latchwing and Relay Choir art, and the paired original tracker composition. The preserved generator, per-file manifest and review record identify the actual delivered content and any later Codex repairs.
 - Codex: native enemy adaptation, controls, map/art integration, interface, validation, performance checks and rendering coordination.
 - Claude: earlier engine, creative-tooling and render-machine collaboration. Task handoffs and the Git history retain individual changes.
