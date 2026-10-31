@@ -39,7 +39,8 @@ intact. Integration changes are confined to runtime adapters and game code.
 
 The supplied 120-second score remains data. This integration does not render,
 audition or deploy it, and does not change the existing Rack ambience preset.
-The Argon optics proposal has not been integrated.
+The standard campaign patch remains RAW. A later [opt-in Surveyor optics
+adapter](SURVEYOR_OPTICS.md) is available separately for rendering-PC integration.
 
 ## Verification
 

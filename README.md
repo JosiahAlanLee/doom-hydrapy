@@ -22,6 +22,9 @@ ReDead's telegraphed shriek and escapable grip, two more book demons, and
 individual encounter studies. These use original procedural art. The current
 campaign allocation extends the four book encounters across all seven tiers.
 
+[Surveyor optics](SURVEYOR_OPTICS.md) provides an opt-in HydraPy operator driven
+by the native warning countdown, with exact RAW/HUD preservation and no rear radar.
+
 [Book-boss encounters](BOSSES.md) add Repetiel and Calmor on seeded campaign
 floors, with distinct binding rules, shield windows and native attacks. Choose a
 binding study in the browser to practice either encounter directly.
