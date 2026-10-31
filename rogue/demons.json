@@ -1,0 +1,172 @@
+{
+  "title": "Pseudomonarchia Escalationum",
+  "author": "Josiah Alan-Lee",
+  "edition": "Third divergent grimoire / First impression / 16 October 2026 | prose revision, 21 October 2026",
+  "source": "https://github.com/JosiahAlanLee/Codex-Intervallorum/blob/cbd7012714197c638931b500922936727efdf64f/books/03_escalationum/manuscript/catalogue.json",
+  "source_blob_sha": "92ec24d820a154bd18f022d3bb1fcf8d7f087cec",
+  "offices": [
+    {
+      "id": 0,
+      "name": "FORAS",
+      "office": "Service Desk Analyst"
+    },
+    {
+      "id": 1,
+      "name": "VASSAGO",
+      "office": "Tier 2 Escalation Lead"
+    },
+    {
+      "id": 2,
+      "name": "GREMORY",
+      "office": "Customer Success Manager"
+    },
+    {
+      "id": 3,
+      "name": "BUNE",
+      "office": "Account Executive"
+    },
+    {
+      "id": 4,
+      "name": "OROBAS",
+      "office": "Deputy Department Head"
+    },
+    {
+      "id": 5,
+      "name": "PAIMON",
+      "office": "VP of Operations"
+    },
+    {
+      "id": 6,
+      "name": "BAEL",
+      "office": "Chief Technology Officer"
+    }
+  ],
+  "handoffs": [
+    {
+      "id": "01",
+      "source": 0,
+      "target": 1,
+      "name": "REPETIEL",
+      "appearance": "A mouth at either end of a clean speaking tube.",
+      "binding": "The original number, re-entered by hand.",
+      "actual_effect": "Spent six minutes obtaining facts already attached; ordered the first test again."
+    },
+    {
+      "id": "04",
+      "source": 0,
+      "target": 4,
+      "name": "SCRIPTORAX",
+      "appearance": "A cloak made of numbered strips, each cut from a different sleeve.",
+      "binding": "A knowledge-transfer checklist signed by the person being replaced.",
+      "actual_effect": "Converted the operator's warning into a step that the replacement could execute but could not interpret."
+    },
+    {
+      "id": "12",
+      "source": 1,
+      "target": 2,
+      "name": "CALMOR",
+      "appearance": "A bell padded on the inside.",
+      "binding": "A revised account without expressions of urgency.",
+      "actual_effect": "Returned the escalation for tone while its technical evidence remained unread."
+    },
+    {
+      "id": "14",
+      "source": 1,
+      "target": 4,
+      "name": "REDACTH",
+      "appearance": "A black veil with spaces for initials.",
+      "binding": "A permissible extract, an NDA, and a second request for the omitted context.",
+      "actual_effect": "Removed the shared identifier that showed four failures had one cause."
+    },
+    {
+      "id": "15",
+      "source": 1,
+      "target": 5,
+      "name": "CHORAZ",
+      "appearance": "Sixteen small trumpets attached to one empty helmet.",
+      "binding": "Attendance on the coordination bridge.",
+      "actual_effect": "Occupied the repairer with status requests until the reserved repair interval closed."
+    },
+    {
+      "id": "16",
+      "source": 1,
+      "target": 6,
+      "name": "PROBATOR",
+      "appearance": "A magnifying glass trained upon its own handle.",
+      "binding": "Proof that the proposed action cannot produce any further incident.",
+      "actual_effect": "Required proof obtainable only after the repair; withheld permission to repair."
+    },
+    {
+      "id": "23",
+      "source": 2,
+      "target": 3,
+      "name": "PROMISSOR",
+      "appearance": "A ribbon stretched across a hole in the floor.",
+      "binding": "A renewal conversation before the recovery conversation.",
+      "actual_effect": "Exchanged a present defect for a future service commitment."
+    },
+    {
+      "id": "24",
+      "source": 2,
+      "target": 4,
+      "name": "CONSENTH",
+      "appearance": "A coat with enough pockets for every unanswered invitation.",
+      "binding": "A complete attendance record.",
+      "actual_effect": "Mistook consultation for authorization; sent the unapproved work forward as agreed."
+    },
+    {
+      "id": "26",
+      "source": 2,
+      "target": 6,
+      "name": "VELAROTH",
+      "appearance": "A sheet folded until only its heading remaineth.",
+      "binding": "A one-line summary without subordinate clauses.",
+      "actual_effect": "Removed the dependency that made the proposed deadline impossible."
+    },
+    {
+      "id": "34",
+      "source": 3,
+      "target": 4,
+      "name": "JURISIEL",
+      "appearance": "A door carried sideways through another door.",
+      "binding": "A signed scope statement from the owner whose identity is disputed.",
+      "actual_effect": "Routed a physical failure between service definitions until neither queue retained it."
+    },
+    {
+      "id": "35",
+      "source": 3,
+      "target": 5,
+      "name": "MARGOR",
+      "appearance": "A purse drawn on the outside of a sealed purse.",
+      "binding": "Two cost centres agreeing to own one expense.",
+      "actual_effect": "Held the replacement part while departments disputed the charge."
+    },
+    {
+      "id": "45",
+      "source": 4,
+      "target": 5,
+      "name": "ABSENTIEL",
+      "appearance": "A row of spare keys cut from the same sheet of paper.",
+      "binding": "A waiver approved by the authority named in the waiver.",
+      "actual_effect": "Presented five dependent routes as five independent safeguards."
+    },
+    {
+      "id": "46",
+      "source": 4,
+      "target": 6,
+      "name": "EXCEPTOR",
+      "appearance": "A stamp reading APPROVED upon a form asking for a stamp.",
+      "binding": "Prior authorization to seek emergency authorization.",
+      "actual_effect": "Made the emergency route wait for the same unavailable executive."
+    },
+    {
+      "id": "56",
+      "source": 5,
+      "target": 6,
+      "name": "POSTHUM",
+      "appearance": "A small chair wheeled in after the meeting hath ended.",
+      "binding": "Minutes circulated without objection after the deadline.",
+      "actual_effect": "Recorded retrospective support for the repair and prospective blame for its lateness."
+    }
+  ]
+}

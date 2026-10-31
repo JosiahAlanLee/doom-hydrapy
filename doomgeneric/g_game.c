@@ -1501,6 +1501,13 @@ void G_WorldDone (void)
     if (secretexit) 
 	players[consoleplayer].didsecret = true; 
 
+#ifdef DOOM_ROGUE
+    // The IPC backend validates this opt-in before starting a generated run.
+    // Keep ordinary Doom's MAP06 finale, but let our seven-tier run descend.
+    if (getenv("DOOM_ROGUE_FLOORS"))
+        return;
+#endif
+
     if ( gamemode == commercial )
     {
 	switch (gamemap)

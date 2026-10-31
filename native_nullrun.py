@@ -5,6 +5,7 @@ import os
 import numpy as np
 from hydrapy import *
 from hydrapy.live import register_hook
+import hydrapy.live as live_resources
 from rogue.desktop import start
 from rogue.audio import optical_lead
 import rogue.strobe_ops
@@ -13,7 +14,8 @@ ROOT = Path(os.environ['NULLRUN_ROOT'])
 STUDIO = dict(title='NULL RUN / Fluorescent Hollow / HydraPy + VCV')
 set_bpm(120)
 carrier = optical_lead()
-game = start(ROOT, os.environ['FREEDOOM_WAD'])
+game = start(ROOT, os.environ['FREEDOOM_WAD'],campaign_only=False,autostart=False,
+             initial_mode='strobe',resources=live_resources)
 beat = tracker.beat()
 music = Audio(jack='rack_return', sr=48000, bins=4, smooth=.6, scale=1, cutoff=0)
 

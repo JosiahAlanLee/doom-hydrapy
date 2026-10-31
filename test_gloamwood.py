@@ -36,7 +36,7 @@ def turn_to(d,angle):
 class GloamMaps(unittest.TestCase):
     def test_sparse_encounters_and_signed_options(self):
         for seed in [0,42,20261030,4294967295]:
-            for number in range(1,6):
+            for number in range(1,8):
                 f=generate(seed,number)
                 for kind in ['hollow']+(['redead'] if number>=2 else []):
                     things=[t for t in f.things if t[3]==CREATURES[kind]['type']]

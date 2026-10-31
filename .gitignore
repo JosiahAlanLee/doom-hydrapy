@@ -12,6 +12,7 @@ Build/
 doomgeneric.map
 
 doomgeneric/build/
+doomgeneric/build-ipc/
 doomgeneric/doom-ipc
 doomgeneric/doom-ipc.map
 runtime/*

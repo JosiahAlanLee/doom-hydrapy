@@ -1,8 +1,8 @@
 # Null Run: a playable generative Doom campaign
 
-Five original seeded floors, one life. Connected rooms and corridors, increasing
+Seven original seeded tiers, one life. Connected rooms and corridors, increasing
 encounters, supplies, a bright exit tile, and inventory/health carried between
-floors. Clearing floor five wins. Death ends the run; Retry rebuilds the same
+floors. Clearing tier seven wins. Death ends the run; Retry rebuilds the same
 seed and New Run chooses a different one.
 
 This is a first playable prototype, with the real Doom combat simulation and
@@ -48,7 +48,9 @@ is the recommended fire button.
 Cross any edge into the bright exit tile to descend. The tile is a normal Doom
 walk-over exit special. New maps retain the Doom player's health, ammunition
 and acquired weapons. The starting room has a shotgun and supplies; enemies
-are kept away from the initial spawn. Encounters ramp over five floors. There
+are kept away from the initial spawn. Encounters ramp over seven tiers. There
+are two book demons per tier; both must be bound and defeated to open its exit. See
+[SEVEN_TIERS.md](SEVEN_TIERS.md) for the allocation and shared encounter families. There
 are no perk drafts, persistent unlocks, shops or save slots in this first build.
 
 There is one controller at a time. Inputs are full held-key snapshots, not
@@ -77,8 +79,8 @@ Original maps use only Freedoom's existing texture/flat/thing identifiers.
 arguments remain compatible. The engine's additive `STATE` command returns
 JSON health, ammo, map, position, kills and terminal status. In roguelike mode
 only, intermissions advance immediately through `G_WorldDone`, retaining
-inventory; the fifth exit is exposed as victory. Five floors avoid Doom II's
-MAP06 narrative-finale path. Outside this mode, intermissions are unchanged.
+inventory; the seventh exit is exposed as victory. The opt-in campaign skips Doom II's
+MAP06 narrative finale so the descent continues to tier seven. Outside this mode, intermissions are unchanged.
 
 The input backend now drains releases as well as presses in a single tic.
 The server maps physical browser key codes to existing Doom key IDs: upstream
@@ -99,8 +101,8 @@ FREEDOOM_WAD=/path/to/freedoom2.wad python test_ipc.py
 
 Tests cover connected/varied seeds, spawn safety, BSP tile classification,
 deterministic WAD bytes, movement/fire/releases, lost-heartbeat pause, real
-enemy-caused death and no respawn, request/controller validation, all five
-floors and victory. The all-floor traversal fixture removes monsters/pickups
+enemy-caused death and no respawn, request/controller validation, all seven
+tiers and victory. The all-floor traversal fixture removes monsters/pickups
 so geometry is tested independently of combat; it walks with real keys and
 confirms ammunition survives descents. The death fixture uses real enemies
 in an exposed arena. Neither uses teleport or health-setting commands.

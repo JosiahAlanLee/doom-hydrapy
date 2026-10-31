@@ -28,7 +28,8 @@ ROOT=Path(__file__).resolve().parent
 # physical positions, independent of the user's character-key layout.
 KEYS={'KeyW':0xad,'KeyS':0xaf,'KeyA':0xa0,'KeyD':0xa1,
       'ArrowUp':0xad,'ArrowDown':0xaf,'ArrowLeft':0xac,'ArrowRight':0xae,
-      'KeyQ':0xac,'KeyE':0xae,'Space':0xa3,'ControlLeft':0xa3,
+      'KeyQ':0xac,'KeyE':0xae,'Space':0xa3,'ControlLeft':0xa3,'ControlRight':0xa3,
+      'MouseFire':0xa3,'MouseUse':0xa2,
       'KeyF':0xa2,'ShiftLeft':0xb6,'ShiftRight':0xb6,'Tab':9,
       **{f'Digit{i}':ord(str(i)) for i in range(1,8)}}
 
@@ -36,10 +37,11 @@ KEYS={'KeyW':0xad,'KeyS':0xaf,'KeyA':0xa0,'KeyD':0xa1,
 class Game:
     def __init__(self,wad,run_dir,seed=20261030,identity=False):
         self.wad=Path(wad).resolve()
-        self.run_dir=Path(run_dir).resolve();self.run_dir.mkdir(parents=True,exist_ok=True)
         self.identity=bool(identity)
+        self.run_dir=Path(run_dir).resolve();self.run_dir.mkdir(parents=True,exist_ok=True)
         self.lock=threading.RLock();self.engine=None;self.stop_event=threading.Event()
         self.owner=None;self.last_input=0;self.held=set();self.paused=True
+        self.turn_pending=0
         self.revision=0;self.error=None;self.jpeg=b'';self.state={};self.frame_seq=0
         self.new_run(seed)
         self.thread=threading.Thread(target=self.loop,daemon=True,name='doom-run')
@@ -50,20 +52,23 @@ class Game:
             raise ValueError('Seed must be a whole number from 0 to 4294967295.')
         if mode not in ['campaign',*BOSSES,*CREATURES,*STUDIES,*STROBES]:raise ValueError('Unknown run mode.')
         with self.lock:
-            self.release()
-            if self.engine:self.engine.close();self.engine=None
-            self.revision+=1;self.error=None;self.paused=True;self.owner=None
             folder=self.run_dir/f'run-{time.time_ns()}-{seed}'
             folder.mkdir()
-            self.manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode,identity=self.identity)
-            (folder/'manifest.json').write_text(json.dumps(self.manifest,indent=2)+'\n')
-            self.engine=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(self.manifest['floors']),clean_hud=True)
+            manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode,identity=self.identity)
+            (folder/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+            candidate=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(manifest['floors']),
+                           clean_hud=self.identity and mode=='campaign')
+            self.release()
+            if self.engine:self.engine.close()
+            self.engine=candidate;self.manifest=manifest
+            self.revision+=1;self.error=None;self.paused=True;self.owner=None
             self.frame_seq=0;self.render()
 
     def release(self):
         if self.engine:
             for key in sorted(self.held):self.engine.key(key,False)
         self.held=set()
+        self.turn_pending=0
 
     def acquire(self):
         with self.lock:
@@ -73,9 +78,11 @@ class Game:
             self.paused=False
             return self.owner
 
-    def input(self,owner,keys,paused=False):
-        if not isinstance(keys,list) or len(keys)>24 or any(not isinstance(k,str) or k not in KEYS for k in keys):
+    def input(self,owner,keys,paused=False,turn=0):
+        if not isinstance(keys,list) or len(keys)>32 or any(not isinstance(k,str) or k not in KEYS for k in keys):
             raise ValueError('Unknown controls.')
+        if type(turn) is not int or not -4096<=turn<=4096:
+            raise ValueError('Invalid mouse movement.')
         with self.lock:
             if not owner or owner!=self.owner:raise ValueError('Click Play to take the controls.')
             self.last_input=time.monotonic()
@@ -87,16 +94,24 @@ class Game:
             for k in sorted(self.held-requested):self.engine.key(k,False)
             for k in sorted(requested-self.held):self.engine.key(k,True)
             self.held=requested
-            if paused:self.owner=None
+            if paused:self.owner=None;self.turn_pending=0
+            elif not self.state.get('dead') and not self.state.get('won'):
+                self.turn_pending=max(-4096,min(4096,self.turn_pending+turn))
 
     def snapshot(self):
         with self.lock:
             floor=min(max(self.state.get('map',1),1),len(self.manifest['floors']))
-            return {**self.state,'seed':self.manifest['seed'],'floor_name':self.manifest['floors'][floor-1]['name'],
+            entry=self.manifest['floors'][floor-1]
+            encounters=entry.get('bosses') or ([entry['boss']] if entry['boss'] else [])
+            selected=(self.state.get('boss') or {}).get('name')
+            current=next((b for b in encounters if b['name']==selected),None)
+            return {**self.state,'seed':self.manifest['seed'],'floor_name':entry['name'],
+                    'office':entry.get('office'),
+                    'identity':self.manifest.get('identity','classic'),
                     'floors':len(self.manifest['floors']),'mode':self.manifest['mode'],
                     'study_rule':(CREATURES|STUDIES|STROBES).get(self.manifest['mode'],{}).get('rule'),
                     'study_family':'architecture' if self.manifest['mode'] in STUDIES else 'creature' if self.manifest['mode'] in CREATURES|STROBES else None,
-                    'boss_rule':self.manifest['floors'][floor-1]['boss']['game_rule'] if self.manifest['floors'][floor-1]['boss'] else None,
+                    'boss_rule':current['game_rule'] if current else None,
                     'paused':self.paused,'revision':self.revision,
                     'frame':self.frame_seq,'error':self.error}
 
@@ -104,8 +119,10 @@ class Game:
         self.state=self.engine.state()
         # frame(0) is safe while using advance() directly: target stays zero.
         rgb=self.engine.frame(0)[:,:,:3]
-        from rogue.hud import decorate
-        image=decorate(Image.fromarray(rgb),self.snapshot())
+        image=Image.fromarray(rgb)
+        if self.engine.clean_hud:
+            from rogue.hud import decorate
+            image=decorate(image,self.snapshot())
         output=io.BytesIO();image.save(output,format='JPEG',quality=88,subsampling=0)
         self.jpeg=output.getvalue();self.frame_seq+=1
 
@@ -117,6 +134,7 @@ class Game:
                     if not self.paused and time.monotonic()-self.last_input>1.0:
                         self.release();self.paused=True;self.owner=None
                     if not self.paused and not self.state.get('dead') and not self.state.get('won'):
+                        if self.turn_pending:self.engine.turn(self.turn_pending);self.turn_pending=0
                         self.engine.advance(1);self.render()
                         if self.state.get('dead') or self.state.get('won'):
                             self.release();self.paused=True;self.owner=None
@@ -184,7 +202,7 @@ def handler(game,token,port):
                 path=urlsplit(self.path).path
                 if path=='/api/control':result={'owner':game.acquire()}
                 elif path=='/api/input':
-                    game.input(data.get('owner'),data.get('keys',[]),data.get('paused',False));result={'ok':True}
+                    game.input(data.get('owner'),data.get('keys',[]),data.get('paused',False),data.get('turn',0));result={'ok':True}
                 elif path=='/api/new':
                     with game.lock:
                         if game.owner and data.get('owner')!=game.owner:raise ValueError('Another tab has the controls.')

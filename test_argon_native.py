@@ -11,10 +11,10 @@ from test_gloamwood import room
 
 
 class ArgonCampaign(unittest.TestCase):
-    def test_all_four_families_are_reachable_in_five_floors(self):
+    def test_all_four_families_are_reachable_in_seven_tiers(self):
         for seed in [0,42,20261030,4294967295]:
             found=set()
-            for number in range(1,6):
+            for number in range(1,8):
                 floor=generate(seed,number);reachable=distances(floor.cells,floor.start)
                 for kind,entry in NEW_CREATURES.items():
                     for t in floor.things:

@@ -13,12 +13,15 @@ class Doom:
         self.pwad = str(Path(pwad).resolve()) if pwad else None
         self.rogue_floors = rogue_floors
         self.clean_hud = bool(clean_hud)
-        if rogue_floors is not None and (not isinstance(rogue_floors, int) or not 1 <= rogue_floors <= 5):
-            raise ValueError('rogue_floors must be 1..5')
+        if rogue_floors is not None and (type(rogue_floors) is not int or not 1 <= rogue_floors <= 7):
+            raise ValueError('rogue_floors must be 1..7')
         (Path(__file__).parent/'runtime').mkdir(exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(prefix='doom-', dir=Path(__file__).parent/'runtime')
-        self.start()
+        try:self.start()
+        except BaseException:
+            self.stop();self.tmp.cleanup();raise
     def start(self):
+        self._stopped=False
         env = dict(os.environ, DOOM_FRAME=self.tmp.name+'/frame')
         env.pop('DOOM_ROGUE_FLOORS', None)
         if self.rogue_floors: env['DOOM_ROGUE_FLOORS']=str(self.rogue_floors)
@@ -48,6 +51,10 @@ class Doom:
     def command(self, text):
         self.proc.stdin.write(text+'\n');self.proc.stdin.flush();self._read()
     def key(self, code, down): self.command(f'KEY {int(down)} {code}')
+    def turn(self, units):
+        if type(units) is not int or not -4096<=units<=4096:
+            raise ValueError('TURN range -4096..4096')
+        self.command(f'TURN {units}')
     def state(self):
         self.proc.stdin.write('STATE\n');self.proc.stdin.flush()
         if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine STATE timeout')
@@ -86,12 +93,22 @@ class Doom:
         rgba=bgra[:,:,[2,1,0,3]].copy();rgba[:,:,3]=255
         return rgba
     def stop(self):
-        if hasattr(self,'mem'): self.mem.close();self.fd.close()
-        if self.proc.poll() is None:
-            self.proc.stdin.write('QUIT\n');self.proc.stdin.flush()
-            try: self.proc.wait(timeout=3)
-            except subprocess.TimeoutExpired: self.proc.kill();self.proc.wait()
-        self.proc.stdin.close();self.proc.stdout.close();self.log.close()
+        if getattr(self,'_stopped',False):return
+        self._stopped=True
+        for name in ('mem','fd'):
+            item=getattr(self,name,None)
+            if item is not None and not item.closed:item.close()
+        proc=getattr(self,'proc',None)
+        if proc is not None:
+            if proc.poll() is None:
+                try:proc.stdin.write('QUIT\n');proc.stdin.flush()
+                except (OSError,ValueError):pass
+                try:proc.wait(timeout=3)
+                except subprocess.TimeoutExpired:proc.kill();proc.wait()
+            for stream in (proc.stdin,proc.stdout):
+                if stream is not None and not stream.closed:stream.close()
+        log=getattr(self,'log',None)
+        if log is not None and not log.closed:log.close()
     def close(self): self.stop();self.tmp.cleanup()
     def __enter__(self): return self
     def __exit__(self,*exc): self.close()

@@ -12,6 +12,10 @@ Music requires a separately configured Gorgon tracker score and Rack patch.
 The patch reads the named JACK input `rack_return`; connect a Rack mix output
 there for the optional treatment modulation. RAW bypasses that treatment.
 
+For the playable campaign with lightweight independent ambience, use
+`rogue/campaign_live.py` and [ARGON_CAMPAIGN.md](ARGON_CAMPAIGN.md).
+The seven-tier demon allocation is in [SEVEN_TIERS.md](SEVEN_TIERS.md).
+
 The Afterimage ByteBus formant lead also needs the optical waveform registered
 by `rogue.audio.optical_lead()`. It runs the original score-pitched Harmonograph
 as an audio source without drawing it over the game. Omitting that source leaves
@@ -27,13 +31,16 @@ Tracker `loop=false` selects the full chain; `loop=true` repeats one pattern.
 | --- | --- |
 | Enter / Escape | Play / pause |
 | WASD | Move and strafe |
+| Mouse | Turn while playing; captured by this window |
 | Arrows or Q/E | Turn |
 | Space or Ctrl / F | Fire / use |
+| Left / right click | Fire / use; first left click resumes without firing |
+| [ / ] | Decrease / increase saved mouse sensitivity |
 | Shift / Tab / 1–7 | Run / map / weapons |
 | R / N | Retry the seed / choose another seed |
 | F2 | Steady lighting view; illumination rules remain active |
 | F3 | RAW, phosphor vector, ASCII, four-tone print |
-| F4 / F5 | Fluorescent Hollow / five-floor campaign |
+| F4 / F5 | Fluorescent Hollow / seven-tier campaign |
 | F6 / F7 / F8 | Changing passages / five-corner pillar / corridor fold |
 
 Losing window focus releases held controls and pauses a physical player.
@@ -66,7 +73,7 @@ The native engine's game sound remains disabled; music comes from Rack.
 Build with `make -C doomgeneric -f Makefile.ipc -j8`, set FREEDOOM_WAD, then run:
 
 ```
-python -m unittest test_rogue test_bosses test_gloamwood test_architecture test_strobe test_desktop_controls
+python -m unittest test_rogue test_bosses test_gloamwood test_architecture test_strobe test_desktop_controls test_argon_native test_native_playability
 ```
 
 Tests cover authoritative light/gaze behavior, exact muzzle-flash length, dry
