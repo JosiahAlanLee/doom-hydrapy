@@ -34,9 +34,10 @@ KEYS={'KeyW':0xad,'KeyS':0xaf,'KeyA':0xa0,'KeyD':0xa1,
 
 
 class Game:
-    def __init__(self,wad,run_dir,seed=20261030):
+    def __init__(self,wad,run_dir,seed=20261030,identity=False):
         self.wad=Path(wad).resolve()
         self.run_dir=Path(run_dir).resolve();self.run_dir.mkdir(parents=True,exist_ok=True)
+        self.identity=bool(identity)
         self.lock=threading.RLock();self.engine=None;self.stop_event=threading.Event()
         self.owner=None;self.last_input=0;self.held=set();self.paused=True
         self.revision=0;self.error=None;self.jpeg=b'';self.state={};self.frame_seq=0
@@ -54,9 +55,9 @@ class Game:
             self.revision+=1;self.error=None;self.paused=True;self.owner=None
             folder=self.run_dir/f'run-{time.time_ns()}-{seed}'
             folder.mkdir()
-            self.manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode)
+            self.manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode,identity=self.identity)
             (folder/'manifest.json').write_text(json.dumps(self.manifest,indent=2)+'\n')
-            self.engine=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(self.manifest['floors']))
+            self.engine=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(self.manifest['floors']),clean_hud=True)
             self.frame_seq=0;self.render()
 
     def release(self):
@@ -103,7 +104,8 @@ class Game:
         self.state=self.engine.state()
         # frame(0) is safe while using advance() directly: target stays zero.
         rgb=self.engine.frame(0)[:,:,:3]
-        image=Image.fromarray(rgb)
+        from rogue.hud import decorate
+        image=decorate(Image.fromarray(rgb),self.snapshot())
         output=io.BytesIO();image.save(output,format='JPEG',quality=88,subsampling=0)
         self.jpeg=output.getvalue();self.frame_seq+=1
 
@@ -160,6 +162,10 @@ def handler(game,token,port):
                 return self.respond(html.encode(),'text/html; charset=utf-8')
             if path in ['/app.js','/style.css']:
                 return self.respond((ROOT/path[1:]).read_bytes(),'text/javascript' if path.endswith('.js') else 'text/css')
+            if path=='/font.woff2':
+                return self.respond((ROOT.parent/'assets/fonts/DepartureMono-Regular.woff2').read_bytes(),'font/woff2')
+            if path=='/credits':
+                return self.respond((ROOT.parent/'CREDITS.md').read_bytes(),'text/plain; charset=utf-8')
             if path=='/api/state':return self.respond(game.snapshot())
             if path=='/api/frame':
                 with game.lock:data=game.jpeg
@@ -197,7 +203,7 @@ def main():
     p.add_argument('--run-dir',type=Path,default=Path(__file__).resolve().parents[1]/'runtime/rogue')
     args=p.parse_args()
     if not args.wad.is_file():p.error('Freedoom 2 IWAD file does not exist')
-    game=Game(args.wad,args.run_dir,args.seed)
+    game=Game(args.wad,args.run_dir,args.seed,identity=True)
     server=ThreadingHTTPServer(('127.0.0.1',args.port),handler(game,secrets.token_urlsafe(32),args.port))
     print(f'Doom / Null Run: http://127.0.0.1:{args.port}',flush=True)
     try:server.serve_forever()

@@ -1,0 +1,238 @@
+{
+  "score": "score.json",
+  "checker": "check_score.py",
+  "score_sha256": "4585084d135754d79cef3eace708af7655ef3c643b90de2e24835044b9ca45de",
+  "score_bytes": 120648,
+  "passed": true,
+  "checks": [
+    {
+      "name": "hydrapy.tracker_v3.validate",
+      "pass": true,
+      "detail": "score accepted by the supplied validator"
+    },
+    {
+      "name": "timeline",
+      "pass": true,
+      "detail": "1152 rows, 552960 ticks, 120.000000 s; timeline cycle 552960"
+    },
+    {
+      "name": "pattern_geometry",
+      "pass": true,
+      "detail": "nine 8-bar patterns, rate 1, 16 rows/bar, unlooped chain 0-8"
+    },
+    {
+      "name": "acts_exact",
+      "pass": true,
+      "detail": "three 24-bar / 40.000 s acts at 0/40/80 s, fade 0"
+    },
+    {
+      "name": "sounds",
+      "pass": true,
+      "detail": "defaults 16/17/22/0/0/0, no sound parameters"
+    },
+    {
+      "name": "no_conditionals_or_locks",
+      "pass": true,
+      "detail": "no probability, fill, machine or parameter locks; every note is explicit"
+    },
+    {
+      "name": "monophonic_lanes",
+      "pass": true,
+      "detail": "lane events {0: 409, 1: 142, 2: 646, 3: 383, 4: 520, 5: 34}; no overlapping gates, including chained pattern ends"
+    },
+    {
+      "name": "pitch_register",
+      "pass": true,
+      "detail": "lead 57..81, bass 38..53"
+    },
+    {
+      "name": "d_minor_phrygian",
+      "pass": true,
+      "detail": "written pitch classes stay in D minor plus Eb; lead uses b2 and b6"
+    },
+    {
+      "name": "two_rhythmic_gestures",
+      "pass": true,
+      "detail": "gesture A (0,3,6,8,11,14) in 38 bars; gesture B (0,6,10 half-time) in 12"
+    },
+    {
+      "name": "dynamics",
+      "pass": true,
+      "detail": "velocity 34..120, 49 levels; lengths 1.00..8.0"
+    },
+    {
+      "name": "rests",
+      "pass": true,
+      "detail": "empty-row share per lane 0.64/0.88/0.44/0.67/0.55/0.97; melodic max gaps 16/16, sparse lane 6 70 rows"
+    },
+    {
+      "name": "no_extended_silence",
+      "pass": true,
+      "detail": "max all-lane onset gap 8 rows = 0.833 s"
+    },
+    {
+      "name": "loopable_finite_end",
+      "pass": true,
+      "detail": "last onset pattern row 120; final bar starts on bass D-2 and lead D-4; 223 events in the 8-bar pattern"
+    },
+    {
+      "name": "three_developed_acts",
+      "pass": true,
+      "detail": "act event counts [682, 824, 628]; return is substantial but not a copy of act 1"
+    },
+    {
+      "name": "score_file_matches",
+      "pass": true,
+      "detail": "score.json equals a fresh build plus its trailing newline"
+    },
+    {
+      "name": "deterministic",
+      "pass": true,
+      "detail": "two builds are byte-identical, sha256 4585084d135754d79cef3eace708af7655ef3c643b90de2e24835044b9ca45de"
+    }
+  ],
+  "timeline": {
+    "bpm": 144,
+    "key": 2,
+    "bars": 72,
+    "rows": 1152,
+    "ticks": 552960,
+    "seconds": 120.0,
+    "row_seconds": 0.10416666666666667,
+    "loop": false,
+    "patterns": 9
+  },
+  "acts": [
+    {
+      "name": "threshold-foyer",
+      "start_bar": 0,
+      "bars": 24,
+      "start_seconds": 0.0,
+      "patterns": [
+        0,
+        1,
+        2
+      ],
+      "events": 682
+    },
+    {
+      "name": "works-descent",
+      "start_bar": 24,
+      "bars": 24,
+      "start_seconds": 40.0,
+      "patterns": [
+        3,
+        4,
+        5
+      ],
+      "events": 824
+    },
+    {
+      "name": "return-escape",
+      "start_bar": 48,
+      "bars": 24,
+      "start_seconds": 80.0,
+      "patterns": [
+        6,
+        7,
+        8
+      ],
+      "events": 628
+    }
+  ],
+  "lanes": {
+    "kick": {
+      "events": 409,
+      "max_onset_gap_rows": 16,
+      "rest_fraction": 0.645
+    },
+    "snare": {
+      "events": 142,
+      "max_onset_gap_rows": 68,
+      "rest_fraction": 0.8767
+    },
+    "hat": {
+      "events": 646,
+      "max_onset_gap_rows": 16,
+      "rest_fraction": 0.4392
+    },
+    "riff/lead": {
+      "events": 383,
+      "max_onset_gap_rows": 16,
+      "rest_fraction": 0.6675
+    },
+    "bass": {
+      "events": 520,
+      "max_onset_gap_rows": 16,
+      "rest_fraction": 0.5486
+    },
+    "ambient/counterline": {
+      "events": 34,
+      "max_onset_gap_rows": 70,
+      "rest_fraction": 0.9705
+    }
+  },
+  "pitch": {
+    "lead": {
+      "min": 57,
+      "max": 81,
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "count": 383
+    },
+    "bass": {
+      "min": 38,
+      "max": 53,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "count": 520
+    },
+    "counterline": {
+      "min": 69,
+      "max": 89,
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        9,
+        10
+      ],
+      "count": 34
+    }
+  },
+  "gestures": {
+    "A_syncopated_bars": 38,
+    "B_half_time_bars": 12
+  },
+  "velocity": {
+    "min": 34,
+    "max": 120,
+    "levels": 49
+  },
+  "silence": {
+    "max_gap_rows": 8,
+    "max_gap_seconds": 0.833333,
+    "tail_rows": 8
+  },
+  "determinism": {
+    "two_builds_identical": true,
+    "sha256": "4585084d135754d79cef3eace708af7655ef3c643b90de2e24835044b9ca45de"
+  }
+}

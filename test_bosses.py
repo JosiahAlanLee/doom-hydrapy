@@ -59,7 +59,8 @@ class BossMaps(unittest.TestCase):
                 f=generate(seed,number);b=f.boss
                 self.assertIn(tuple(b['binding_cell']),distances(f.cells,f.start))
                 self.assertEqual(f.profiles[tuple(b['binding_cell'])]['tag'],777)
-                self.assertEqual(sum(t[3] in [b['type'] for b in BOSSES.values()] for t in f.things),1)
+                self.assertEqual(sum(any(t[3]==entry['type'] and ((t[4]>>8)&7)==entry.get('flag',entry['class'])
+                                         for entry in BOSSES.values()) for t in f.things),1)
                 if b['kind']=='jurisiel':
                     self.assertIn(tuple(b['secondary_cell']),distances(f.cells,f.start))
                     self.assertEqual(f.profiles[tuple(b['secondary_cell'])]['tag'],778)

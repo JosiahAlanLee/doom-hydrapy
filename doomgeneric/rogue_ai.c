@@ -25,6 +25,8 @@ int Rogue_Class(mobj_t *actor) {
   case MT_WOLFSS:return 12;
   case MT_VILE:return 13;
   case MT_SKULL:return 14;
+  case MT_KNIGHT:return 15;
+  case MT_PAIN:return 16;
   default:return 0;
  }
 }
@@ -33,16 +35,16 @@ static int roll(mobj_t *actor) {return (actor->spawnpoint.options >> 11) & 15;}
 
 void Rogue_Apply(mobj_t *actor, mapthing_t *thing) {
  int v=variant(actor), r=(thing->options>>11)&15;
- if(v>=11 && v<=14) {
+ if(v>=11 && v<=16) {
   mobjinfo_t *info=Z_Malloc(sizeof(*info),PU_LEVEL,0);
   *info=*actor->info;actor->info=info;
   actor->flags|=MF_COUNTKILL;
   actor->flags&=~(MF_SHADOW|MF_SKULLFLY|MF_FLOAT|MF_NOGRAVITY);
-  if(v==14)actor->flags|=MF_FLOAT|MF_NOGRAVITY;
-  info->spawnhealth=(v==11?85:v==12?110:v==13?90:65)+r;
-  info->speed=v==11?3:v==12?6:v==13?0:3;
-  info->height=(v==13?96:80)*FRACUNIT;
-  info->radius=(v==13?28:20)*FRACUNIT;
+  if(v==14 || v==15)actor->flags|=MF_FLOAT|MF_NOGRAVITY;
+  info->spawnhealth=(v==11?85:v==12?110:v==13?90:v==14?65:v==15?70:105)+r;
+  info->speed=v==11?3:v==12?6:v==13?0:v==15?6:v==16?0:3;
+  info->height=(v==13 || v==16?96:80)*FRACUNIT;
+  info->radius=(v==13?28:v==15?18:v==16?24:20)*FRACUNIT;
   info->missilestate=info->meleestate=S_NULL;
   info->deathstate=S_POSS_DIE1;info->xdeathstate=S_POSS_DIE1;info->painstate=S_POSS_PAIN;
   actor->radius=info->radius;actor->height=info->height;actor->health=info->spawnhealth;
@@ -92,10 +94,10 @@ int Rogue_Damage(mobj_t *actor,int damage) {
 
 void Rogue_Projectile(mobj_t *source,mobj_t *missile) {
  int v=variant(source),r=source?roll(source):0;
- if(v==14) {
-  static mobjinfo_t spore;static int ready;
-  if(!ready) {spore=mobjinfo[MT_TROOPSHOT];spore.damage=3;spore.speed=10*FRACUNIT;ready=1;}
-  missile->info=&spore;missile->rogue_until=leveltime+5*TICRATE;return;
+ if(v==14 || v==16) {
+  static mobjinfo_t spore[2];static int ready[2];int n=v==14?0:1;
+  if(!ready[n]) {spore[n]=mobjinfo[MT_TROOPSHOT];spore[n].damage=v==14?3:2;spore[n].speed=(v==14?10:8)*FRACUNIT;ready[n]=1;}
+  missile->info=&spore[n];missile->rogue_until=leveltime+(v==14?5:6)*TICRATE;return;
  }
  if(v<1 || v>10)return;
  // Fixed-size per-type/variant caches avoid allocating on every projectile.

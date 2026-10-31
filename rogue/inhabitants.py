@@ -22,6 +22,10 @@ NEW_CREATURES = {
                        'family':'VILE', 'rule':'The false door stays put. Stand back when the seam opens.'},
     'vore_spindle': {'name':'VORE SPINDLE', 'class':14, 'flag':7, 'type':3006,
                     'family':'SKUL', 'rule':'Watch its pods charge. Keep moving and put a wall between you and the spore.'},
+    'latchwing': {'name':'LATCHWING', 'class':15, 'flag':7, 'type':69,
+                 'family':'CYBR', 'rule':'Its aperture opens before a straight dash. Step sideways or put a wall in its path.'},
+    'relay_choir': {'name':'RELAY CHOIR', 'class':16, 'flag':7, 'type':71,
+                   'family':'PAIN', 'rule':'The amber chambers charge a slow three-spore fan. Find a gap or take cover.'},
 }
 CREATURES.update(NEW_CREATURES)
 
