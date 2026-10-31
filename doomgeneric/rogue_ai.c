@@ -8,6 +8,7 @@
 #include "rogue_ai.h"
 #include "rogue_boss.h"
 #include "rogue_creature.h"
+#include "rogue_argon.h"
 
 int Rogue_Class(mobj_t *actor) {
  if(!actor || !getenv("DOOM_ROGUE_FLOORS"))return 0;
@@ -20,6 +21,10 @@ int Rogue_Class(mobj_t *actor) {
   case MT_CHAINGUY:return 8;
   case MT_FATSO:return 9;
   case MT_BABY:return 10;
+  case MT_SHOTGUY:return 11;
+  case MT_WOLFSS:return 12;
+  case MT_VILE:return 13;
+  case MT_SKULL:return 14;
   default:return 0;
  }
 }
@@ -28,6 +33,21 @@ static int roll(mobj_t *actor) {return (actor->spawnpoint.options >> 11) & 15;}
 
 void Rogue_Apply(mobj_t *actor, mapthing_t *thing) {
  int v=variant(actor), r=(thing->options>>11)&15;
+ if(v>=11 && v<=14) {
+  mobjinfo_t *info=Z_Malloc(sizeof(*info),PU_LEVEL,0);
+  *info=*actor->info;actor->info=info;
+  actor->flags|=MF_COUNTKILL;
+  actor->flags&=~(MF_SHADOW|MF_SKULLFLY|MF_FLOAT|MF_NOGRAVITY);
+  if(v==14)actor->flags|=MF_FLOAT|MF_NOGRAVITY;
+  info->spawnhealth=(v==11?85:v==12?110:v==13?90:65)+r;
+  info->speed=v==11?3:v==12?6:v==13?0:3;
+  info->height=(v==13?96:80)*FRACUNIT;
+  info->radius=(v==13?28:20)*FRACUNIT;
+  info->missilestate=info->meleestate=S_NULL;
+  info->deathstate=S_POSS_DIE1;info->xdeathstate=S_POSS_DIE1;info->painstate=S_POSS_PAIN;
+  actor->radius=info->radius;actor->height=info->height;actor->health=info->spawnhealth;
+  Rogue_Visual(actor);return;
+ }
  // An ordinary WAD, pickup or unsupported actor never receives modifiers.
  if(v<1 || v>10 || !(actor->flags&MF_COUNTKILL))return;
  mobjinfo_t *info=Z_Malloc(sizeof(*info),PU_LEVEL,0);
@@ -60,6 +80,7 @@ void Rogue_Visual(mobj_t *actor) {
    actor->frame=((leveltime/4+roll(actor))&1)|FF_FULLBRIGHT;
  }
  Rogue_CreatureVisual(actor);
+ Rogue_ArgonVisual(actor);
 }
 
 int Rogue_Damage(mobj_t *actor,int damage) {
@@ -71,6 +92,11 @@ int Rogue_Damage(mobj_t *actor,int damage) {
 
 void Rogue_Projectile(mobj_t *source,mobj_t *missile) {
  int v=variant(source),r=source?roll(source):0;
+ if(v==14) {
+  static mobjinfo_t spore;static int ready;
+  if(!ready) {spore=mobjinfo[MT_TROOPSHOT];spore.damage=3;spore.speed=10*FRACUNIT;ready=1;}
+  missile->info=&spore;missile->rogue_until=leveltime+5*TICRATE;return;
+ }
  if(v<1 || v>10)return;
  // Fixed-size per-type/variant caches avoid allocating on every projectile.
  static mobjinfo_t cache[NUMMOBJTYPES][10][16];
@@ -106,7 +132,7 @@ void Rogue_Report(FILE *out) {
   if(count++)fprintf(out,",");
   fprintf(out,"{\"class\":%d,\"roll\":%d,\"type\":%d,\"health\":%d,\"spawnhealth\":%d,\"speed\":%d,\"base_speed\":%d,\"height\":%d,\"shadow\":%s,\"luminous\":%s,\"x\":%d,\"y\":%d,\"missile\":%s,\"source_class\":%d,\"angle\":%.3f",
    variant(m),roll(m),m->info->doomednum,m->health,m->info->spawnhealth,m->info->speed,mobjinfo[m->type].speed,m->height/FRACUNIT,m->flags&MF_SHADOW?"true":"false",m->frame&FF_FULLBRIGHT?"true":"false",m->x/FRACUNIT,m->y/FRACUNIT,m->flags&MF_MISSILE?"true":"false",m->flags&MF_MISSILE?variant(m->target):0,m->angle*(360.0/4294967296.0));
-  Rogue_CreatureJSON(out,m);fprintf(out,"}");
+  Rogue_CreatureJSON(out,m);Rogue_ArgonJSON(out,m);fprintf(out,"}");
  }
  fprintf(out,"]\n");fflush(out);
 }

@@ -9,6 +9,7 @@
 #include "rogue_ai.h"
 #include "rogue_creature.h"
 #include "rogue_strobe.h"
+#include "rogue_argon.h"
 
 enum { SHAMBLE, WARNING, LUNGE, GRIP, STAGGER };
 static mobj_t *holder;
@@ -148,6 +149,7 @@ void Rogue_CreatureVisual(mobj_t *actor) {
 }
 
 void Rogue_CreatureHurt(mobj_t *actor) {
+ Rogue_ArgonHurt(actor);
  int kind=Rogue_Class(actor);
  if(kind==7)actor->rogue_awake=1;
  if(kind==8) {

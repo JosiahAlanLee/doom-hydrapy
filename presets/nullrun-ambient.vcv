@@ -1,0 +1,299 @@
+{
+  "version": "2.6.6",
+  "masterModuleId": 1,
+  "modules": [
+    {
+      "id": 1,
+      "plugin": "Core",
+      "model": "AudioInterface2",
+      "version": "2.6.6",
+      "pos": [
+        0,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 1.4
+        }
+      ],
+      "data": {
+        "audio": {
+          "driver": 4,
+          "deviceName": "Digi 003 Rack Multichannel",
+          "sampleRate": 48000,
+          "blockSize": 2048,
+          "inputOffset": 0,
+          "outputOffset": 0
+        },
+        "dcFilter": true
+      }
+    },
+    {
+      "id": 2,
+      "plugin": "PVXLab",
+      "model": "PVX",
+      "version": "2.0.0",
+      "pos": [
+        8,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 0
+        },
+        {
+          "id": 1,
+          "value": 0.5
+        },
+        {
+          "id": 2,
+          "value": 0.65
+        },
+        {
+          "id": 3,
+          "value": 0
+        },
+        {
+          "id": 4,
+          "value": 0.5
+        },
+        {
+          "id": 5,
+          "value": 0.35
+        },
+        {
+          "id": 6,
+          "value": -0.04
+        },
+        {
+          "id": 7,
+          "value": 0
+        },
+        {
+          "id": 8,
+          "value": 0
+        },
+        {
+          "id": 9,
+          "value": 8.714245517666123
+        },
+        {
+          "id": 10,
+          "value": 0.1
+        },
+        {
+          "id": 11,
+          "value": 0
+        },
+        {
+          "id": 12,
+          "value": 0.2
+        },
+        {
+          "id": 13,
+          "value": 0
+        },
+        {
+          "id": 14,
+          "value": 0
+        },
+        {
+          "id": 15,
+          "value": 1
+        },
+        {
+          "id": 16,
+          "value": 0.35
+        },
+        {
+          "id": 17,
+          "value": 2
+        },
+        {
+          "id": 18,
+          "value": 1.3785116232537298
+        },
+        {
+          "id": 19,
+          "value": 2.0
+        },
+        {
+          "id": 20,
+          "value": 0.6
+        },
+        {
+          "id": 21,
+          "value": 2.321928094887362
+        },
+        {
+          "id": 22,
+          "value": 1.8073549220576042
+        },
+        {
+          "id": 23,
+          "value": 2.169925001442312
+        },
+        {
+          "id": 24,
+          "value": 0.75
+        },
+        {
+          "id": 25,
+          "value": 2.584962500721156
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "plugin": "Fundamental",
+      "model": "LFO",
+      "version": "2.6.4",
+      "pos": [
+        40,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 1
+        },
+        {
+          "id": 1,
+          "value": 0
+        },
+        {
+          "id": 2,
+          "value": -4
+        },
+        {
+          "id": 3,
+          "value": 0
+        },
+        {
+          "id": 5,
+          "value": 0.5
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "plugin": "SpoonBenderLab",
+      "model": "SpoonBender",
+      "version": "2.2.1",
+      "pos": [
+        52,
+        0
+      ],
+      "params": [
+        {
+          "id": 0,
+          "value": 0.75
+        },
+        {
+          "id": 1,
+          "value": 0.18
+        },
+        {
+          "id": 2,
+          "value": -0.4
+        },
+        {
+          "id": 3,
+          "value": 0
+        },
+        {
+          "id": 4,
+          "value": 0.5
+        },
+        {
+          "id": 5,
+          "value": 0.2
+        },
+        {
+          "id": 6,
+          "value": 0
+        },
+        {
+          "id": 7,
+          "value": 0
+        },
+        {
+          "id": 8,
+          "value": 0.03
+        },
+        {
+          "id": 9,
+          "value": 0.65
+        },
+        {
+          "id": 10,
+          "value": 0.7
+        },
+        {
+          "id": 11,
+          "value": 0.65
+        },
+        {
+          "id": 12,
+          "value": 0.72
+        },
+        {
+          "id": 13,
+          "value": 0.08
+        },
+        {
+          "id": 14,
+          "value": 0.5
+        },
+        {
+          "id": 15,
+          "value": 0
+        },
+        {
+          "id": 16,
+          "value": 0.45
+        },
+        {
+          "id": 17,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "cables": [
+    {
+      "id": 1,
+      "outputModuleId": 3,
+      "outputId": 3,
+      "inputModuleId": 2,
+      "inputId": 1,
+      "color": "#73978e"
+    },
+    {
+      "id": 2,
+      "outputModuleId": 2,
+      "outputId": 0,
+      "inputModuleId": 4,
+      "inputId": 0,
+      "color": "#73978e"
+    },
+    {
+      "id": 3,
+      "outputModuleId": 4,
+      "outputId": 0,
+      "inputModuleId": 1,
+      "inputId": 0,
+      "color": "#73978e"
+    },
+    {
+      "id": 4,
+      "outputModuleId": 4,
+      "outputId": 1,
+      "inputModuleId": 1,
+      "inputId": 1,
+      "color": "#73978e"
+    }
+  ]
+}

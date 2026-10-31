@@ -15,7 +15,8 @@ import numpy as np
 from PIL import Image,ImageDraw
 
 FAMILIES={'POSS':'skitter','SARG':'bastion','TROO':'cantor','HEAD':'shiver','BOSS':'repetiel','BOS2':'calmor',
-          'SKEL':'hollow','CPOS':'redead','FATT':'probator','BSPI':'jurisiel'}
+          'SKEL':'hollow','CPOS':'redead','FATT':'probator','BSPI':'jurisiel',
+          'SPOS':'surveyor','SSWV':'wire_shambler','VILE':'threshold_mimic','SKUL':'vore_spindle'}
 
 
 def wad_lumps(path):
@@ -32,6 +33,9 @@ def wad_lumps(path):
 
 
 def creature(kind,seed,frame):
+    if kind in ['surveyor','wire_shambler','threshold_mimic','vore_spindle']:
+        from rogue.argon_art import draw
+        return draw(kind,seed,frame)
     if kind in ['hollow','redead','probator','jurisiel']:
         from rogue.gloam_art import draw
         return draw(kind,seed,frame)

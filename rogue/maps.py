@@ -16,7 +16,7 @@ import math
 import random
 import struct
 from rogue.bosses import BOSSES
-from rogue.inhabitants import CREATURES, options
+from rogue.inhabitants import CREATURES, NEW_CREATURES, options
 
 TILE = 128
 FLOORS = 5
@@ -202,7 +202,20 @@ def generate(seed, number, boss_kind=None):
     enemy_kinds = [3004,3004,3001,3001] + ([3002] if number >= 2 else [])
     if number >= 4:
         enemy_kinds += [3005]
-    for p in distant[:5+number*3]:
+    # Put the new creatures on the actual route, with a safe start and spacing.
+    schedule=[['surveyor','wire_shambler'],['threshold_mimic','vore_spindle'],
+              ['surveyor','threshold_mimic'],['wire_shambler','vore_spindle'],list(NEW_CREATURES)][number-1]
+    new_cells=[];distant_set=set(distant)
+    for name in schedule:
+        choices=[p for p in route if p in distant_set and p not in occupied
+                 and all(abs(p[0]-q[0])+abs(p[1]-q[1])>=3 for q in new_cells)]
+        if not choices:
+            choices=[p for p in distant if p not in occupied]
+        if choices:
+            p=choices[0]
+            if item(p,NEW_CREATURES[name]['type'],rng.randrange(4)*90):new_cells.append(p)
+    legacy=[p for p in distant if p not in occupied]
+    for p in legacy[:max(0,5+number*3-len(new_cells))]:
         item(p,rng.choice(enemy_kinds),rng.randrange(4)*90)
     # Sparse Gloamwood encounters; keep the start, exits and boss alcoves clear.
     for name in ['hollow']+(['redead'] if number>=2 else []):
@@ -210,7 +223,8 @@ def generate(seed, number, boss_kind=None):
             if p not in occupied and abs(p[0]-start[0])+abs(p[1]-start[1])>=10:
                 if item(p,CREATURES[name]['type'],rng.randrange(4)*90):break
     variants=[]
-    classes={3004:(1,'skitter'),3002:(2,'bastion'),3001:(3,'cantor'),3005:(4,'shiver'),66:(7,'hollow'),65:(7,'redead')}
+    classes={3004:(1,'skitter'),3002:(2,'bastion'),3001:(3,'cantor'),3005:(4,'shiver'),66:(7,'hollow'),65:(7,'redead'),
+             **{b['type']:(7,name) for name,b in NEW_CREATURES.items()}}
     for i,t in enumerate(things):
         if t[3] in classes:
             variant,name=classes[t[3]];roll=rng.randrange(16)

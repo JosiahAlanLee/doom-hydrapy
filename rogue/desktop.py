@@ -14,12 +14,13 @@ import time
 
 from PIL import Image,ImageDraw,ImageFont
 from rogue.server import Game,KEYS
+from rogue.inhabitants import CREATURES
 
 _current=None
 
 
 class NativeGame(Game):
-    def new_run(self,seed,mode='strobe'):
+    def new_run(self,seed,mode='campaign'):
         return super().new_run(seed,mode)
 
     def render(self):
@@ -30,14 +31,16 @@ class NativeGame(Game):
 
 
 class Desktop:
-    def __init__(self,root,wad,port=8773):
+    def __init__(self,root,wad,port=8773,campaign_only=True,autostart=True):
         self.root=Path(root);self.root.mkdir(parents=True,exist_ok=True)
+        self.campaign_only=bool(campaign_only);self.autostart=bool(autostart);self.pending_start=self.autostart
         self.game=NativeGame(wad,self.root/'runs')
         self.owner=None;self.keys=set();self.input_source=None;self.api_until=0
         try:preferences=json.loads((self.root/'view-settings.json').read_text())
         except (OSError,ValueError):preferences={}
         mode=preferences.get('mode',0)
         self.mode=mode if type(mode) is int and 0<=mode<=3 else 0
+        if self.campaign_only:self.mode=0
         self.view_lock=threading.Lock()
         self.flicker=preferences.get('flicker',True) is not False;self.loading=False;self.closed=False
         self.window=None;self.focused=False;self.need_sync=False;self.clear_frames=4
@@ -102,8 +105,10 @@ class Desktop:
 
     def new(self,mode=None,random_seed=False):
         if self.loading:return
-        self.pause();mode=mode or self.game.manifest['mode']
-        if mode not in ['strobe','campaign','memory','pillar','corridor']:raise ValueError('Unknown native study')
+        mode=mode or self.game.manifest['mode']
+        if self.campaign_only and mode!='campaign':raise ValueError('This player runs the five-floor campaign')
+        if mode not in ['strobe','campaign','memory','pillar','corridor',*CREATURES]:raise ValueError('Unknown run mode')
+        self.pause()
         seed=secrets.randbits(32) if random_seed else self.game.manifest['seed']
         self.loading=True
         def build():
@@ -112,7 +117,9 @@ class Desktop:
                 with self.game.lock:self.game.engine.command(f'STROBE_VIEW {int(self.flicker)}')
                 self.clear_frames=4
             except Exception as e:self.game.error=str(e)
-            finally:self.loading=False
+            finally:
+                self.loading=False
+                if self.autostart and not self.game.error:self.pending_start=True
         self.builder=threading.Thread(target=build,daemon=True,name='nullrun-new-study');self.builder.start()
 
     def action(self,data,automated=False):
@@ -165,8 +172,9 @@ class Desktop:
         x11.XSetWMHints.argtypes=[C.c_void_p,C.c_ulong,C.POINTER(Hints)]
         x11.XFlush.argtypes=[C.c_void_p]
         x11.XSetWMHints(display,xwindow,C.byref(Hints(flags=3,input=1,initial_state=1)));x11.XFlush(display)
-        glfw.set_window_title(window,'NULL RUN / HydraPy + VCV / 4090')
+        glfw.set_window_title(window,'NULL RUN' if self.campaign_only else 'NULL RUN / HydraPy + VCV / 4090')
         glfw.set_window_attrib(window,glfw.FOCUS_ON_SHOW,glfw.TRUE)
+        if self.autostart:glfw.focus_window(window)
         keymap={glfw.KEY_W:'KeyW',glfw.KEY_A:'KeyA',glfw.KEY_S:'KeyS',glfw.KEY_D:'KeyD',
                 glfw.KEY_Q:'KeyQ',glfw.KEY_E:'KeyE',glfw.KEY_LEFT:'ArrowLeft',glfw.KEY_RIGHT:'ArrowRight',
                 glfw.KEY_UP:'ArrowUp',glfw.KEY_DOWN:'ArrowDown',glfw.KEY_SPACE:'Space',
@@ -184,15 +192,25 @@ class Desktop:
             elif k in [glfw.KEY_ESCAPE,glfw.KEY_F1]:self.pause()
             elif k==glfw.KEY_R:self.new()
             elif k==glfw.KEY_N:self.new(random_seed=True)
-            elif k==glfw.KEY_F2:self.action({'action':'flicker','enabled':not self.flicker})
-            elif k==glfw.KEY_F3:self.action({'action':'filter','mode':(self.mode+1)%4})
-            elif k in [glfw.KEY_F4,glfw.KEY_F5,glfw.KEY_F6,glfw.KEY_F7,glfw.KEY_F8]:
+            elif not self.campaign_only and k==glfw.KEY_F2:self.action({'action':'flicker','enabled':not self.flicker})
+            elif not self.campaign_only and k==glfw.KEY_F3:self.action({'action':'filter','mode':(self.mode+1)%4})
+            elif not self.campaign_only and k in [glfw.KEY_F4,glfw.KEY_F5,glfw.KEY_F6,glfw.KEY_F7,glfw.KEY_F8]:
                 self.new(['strobe','campaign','memory','pillar','corridor'][k-glfw.KEY_F4])
         def focus(_window,focused):
             self.focused=bool(focused)
             if not focused and self.input_source=='physical':self.pause()
         self._key_callback=key;self._focus_callback=focus
         glfw.set_key_callback(window,key);glfw.set_window_focus_callback(window,focus)
+        def close_window(_window):
+            self.pause()
+            (self.root/'quit.request').write_text('Window closed\n')
+        self._close_callback=close_window
+        previous_close=glfw.set_window_close_callback(window,close_window)
+        if previous_close:
+            def close_with_previous(w):
+                close_window(w);previous_close(w)
+            self._close_callback=close_with_previous
+            glfw.set_window_close_callback(window,close_with_previous)
         self.focused=bool(glfw.get_window_attrib(window,glfw.FOCUSED));self.bound=True
 
     def snapshot(self,t):
@@ -218,6 +236,21 @@ class Desktop:
 
     def draw_screen(self,rgb,state,st,paused):
         im=Image.fromarray(rgb);draw=ImageDraw.Draw(im)
+        if self.campaign_only:
+            header=state.get('argon',{}).get('cue') or (state.get('floor_name','NULL RUN')+f"   |   FLOOR {state.get('map',1)} / {state.get('floors',5)}")
+            draw.rectangle((0,0,640,24),fill=(10,12,12));draw.text((9,5),header,font=self.font,fill=(226,222,205))
+            if paused or state.get('dead') or state.get('won'):
+                draw.rectangle((34,65,606,326),fill=(12,15,16),outline=(163,157,133),width=2)
+                title='NULL RUN / FIVE FLOORS'
+                prompt='ENTER resume / ESC pause'
+                if self.loading:prompt='ARRANGING THE NEXT RUN...'
+                elif state.get('dead'):title='THE RUN ENDS HERE';prompt='R retries this seed / N starts a new run'
+                elif state.get('won'):title='YOU FOUND THE WAY OUT';prompt='R retries this seed / N starts a new run'
+                draw.text((54,83),title,font=self.titlefont,fill=(231,223,198))
+                lines=[prompt,'WASD move / arrows or Q-E turn','SPACE or CTRL fire / F use','SHIFT run / TAB map / 1-7 weapons','R retry / N new seed']
+                if self.game.error:lines[0]='ERROR: '+self.game.error[:72]
+                for i,line in enumerate(lines):draw.text((54,139+i*30),line,font=self.font,fill=(201,201,188))
+            return im
         phase='FLASH / PINNED' if st.get('muzzle') else 'LIT / WATCH IT' if st.get('lit') else 'LAMP FAILURE / IT MOVES'
         if not st.get('active'):phase=state.get('floor_name','NULL RUN')
         draw.rectangle((0,0,640,24),fill=(9,14,12));draw.text((9,5),phase+'   |   '+['RAW','PHOSPHOR','ASCII','PRINT'][self.mode]+(' / STEADY' if not self.flicker else ''),font=self.font,fill=(204,228,177))
@@ -243,6 +276,8 @@ class Desktop:
         self.bind();renderer.settle=1e9
         self.gpu=renderer.ctx.info.get('GL_RENDERER','')
         now=time.monotonic();self.frames.append(now)
+        if getattr(self,'pending_start',False) and self.focused and not self.loading:
+            self.pending_start=False;self.resume()
         if self.owner:
             if self.game.paused or (self.input_source=='api' and now>self.api_until) or (self.input_source=='physical' and not self.focused):self.pause()
             elif not self.loading:
@@ -273,7 +308,7 @@ class Desktop:
         self.game.close()
 
 
-def start(root,wad,port=8773):
+def start(root,wad,port=8773,campaign_only=True,autostart=True):
     global _current
     if _current is not None:_current.close()
-    _current=Desktop(root,wad,port);return _current
+    _current=Desktop(root,wad,port,campaign_only,autostart);return _current

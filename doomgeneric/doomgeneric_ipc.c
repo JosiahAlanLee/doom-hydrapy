@@ -7,6 +7,7 @@
 #include "rogue_ai.h"
 #include "rogue_boss.h"
 #include "rogue_creature.h"
+#include "rogue_argon.h"
 #include "rogue_arch.h"
 #include "rogue_strobe.h"
 #include <stdio.h>
@@ -41,6 +42,7 @@ static void state(void) {
  leveltime,gametic,gamestate,p->playerstate==PST_DEAD?"true":"false",
  rogue_floors && gamestate==GS_INTERMISSION && gamemap>=rogue_floors?"true":"false");
  Rogue_BossJSON(reply);fprintf(reply,",\"creatures\":");Rogue_CreatureStatus(reply);
+ fprintf(reply,",\"argon\":");Rogue_ArgonStatus(reply);
  fprintf(reply,",\"architecture\":");Rogue_ArchJSON(reply);
  fprintf(reply,",\"strobe\":");Rogue_StrobeJSON(reply);
  fprintf(reply,",\"motion\":{\"z\":%.4f,\"momx\":%.4f,\"momy\":%.4f,\"momz\":%.4f,\"view_z\":%.4f,\"reaction_time\":%d}",
