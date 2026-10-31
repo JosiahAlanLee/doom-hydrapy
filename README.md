@@ -42,6 +42,19 @@ export FREEDOOM_WAD=/absolute/path/to/freedoom2.wad
 python test_ipc.py
 ```
 
+The build produces two separate executables. `doom-ipc` retains the classic
+320×200 world raster enlarged to the 640×400 frame; `doom-ipc-2x` renders the
+native campaign world at a true 640×400. The native player selects the latter,
+with the same HUD layout, field of view, 35 Hz simulation and 640×400 FrameSource.
+This adds four times as many world samples rather than enlarging existing pixels.
+Sprites and wall textures retain their authored pixel-art resolution.
+
+Direct clients can select `Doom(..., clean_hud=True, render_scale=2)`. The doubled
+renderer requires the clean HUD; classic demo/operator and study clients keep
+their existing default. Run `python test_resolution.py` with FREEDOOM_WAD set to
+check added raster detail, gameplay parity and native retry. STATE includes
+`video.native_width/native_height` and `video.output_width/output_height`.
+
 Requires Linux little-endian x86-64, GCC, make, Python and NumPy. The optional
 plugin needs HydraPy's FrameSource/add_op API and its GL renderer. No install step
 or changes to HydraPy are required; put this repository on PYTHONPATH.

@@ -15,6 +15,9 @@ doomgeneric/build/
 doomgeneric/build-ipc/
 doomgeneric/doom-ipc
 doomgeneric/doom-ipc.map
+doomgeneric/build-ipc-2x/
+doomgeneric/doom-ipc-2x
+doomgeneric/doom-ipc-2x.map
 runtime/*
 __pycache__/
 

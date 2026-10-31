@@ -420,6 +420,15 @@ typedef struct
 //
 // Now what is a visplane, anyway?
 // 
+// A 400-row view needs more than the original eight-bit plane coordinates.
+#if DOOM_RENDER_SCALE == 2
+typedef uint16_t planecoord_t;
+#define PLANE_UNSET UINT16_MAX
+#else
+typedef byte planecoord_t;
+#define PLANE_UNSET UINT8_MAX
+#endif
+
 typedef struct
 {
   fixed_t		height;
@@ -430,15 +439,13 @@ typedef struct
   
   // leave pads for [minx-1]/[maxx+1]
   
-  byte		pad1;
-  // Here lies the rub for all
-  //  dynamic resize/change of resolution.
-  byte		top[SCREENWIDTH];
-  byte		pad2;
-  byte		pad3;
+  planecoord_t	pad1;
+  planecoord_t	top[SCREENWIDTH];
+  planecoord_t	pad2;
+  planecoord_t	pad3;
   // See above.
-  byte		bottom[SCREENWIDTH];
-  byte		pad4;
+  planecoord_t	bottom[SCREENWIDTH];
+  planecoord_t	pad4;
 
 } visplane_t;
 

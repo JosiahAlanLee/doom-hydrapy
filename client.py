@@ -6,7 +6,12 @@ import numpy as np
 
 class Doom:
     def __init__(self, wad, demo='demo1', locked=True, loop_seconds=None,
-                 pwad=None, rogue_floors=None, clean_hud=False):
+                 pwad=None, rogue_floors=None, clean_hud=False, render_scale=1):
+        if type(render_scale) is not int or render_scale not in (1,2):
+            raise ValueError('render_scale must be 1 or 2')
+        if render_scale==2 and not clean_hud:
+            raise ValueError('The 640x400 renderer requires the native clean HUD')
+        self.render_scale=render_scale
         if loop_seconds is not None and (not np.isfinite(loop_seconds) or loop_seconds<=0): raise ValueError("positive loop duration required")
         self.loop_seconds=loop_seconds
         self.wad, self.demo, self.locked = str(Path(wad).resolve()), demo, locked
@@ -31,7 +36,10 @@ class Doom:
             Path(self.tmp.name+'/doom.cfg').write_text('screenblocks 11\n')
         if self.locked: env['DOOM_LOCKED']='1'
         else: env.pop('DOOM_LOCKED',None)
-        args=[str(Path(__file__).parent/'doomgeneric/doom-ipc'), '-iwad',self.wad, '-config',self.tmp.name+'/doom.cfg']
+        executable=Path(__file__).parent/'doomgeneric'/('doom-ipc-2x' if self.render_scale==2 else 'doom-ipc')
+        if not executable.is_file():
+            raise FileNotFoundError(f'{executable.name} is missing; build with make -C doomgeneric -f Makefile.ipc')
+        args=[str(executable), '-iwad',self.wad, '-config',self.tmp.name+'/doom.cfg']
         if self.pwad: args += ['-file', self.pwad]
         if self.demo: args += ['-playdemo',self.demo]
         else: args += ['-warp','1','-skill','3']

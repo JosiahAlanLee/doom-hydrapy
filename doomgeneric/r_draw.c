@@ -42,7 +42,7 @@
 #define MAXHEIGHT			832
 
 // status bar height at bottom of screen
-#define SBARHEIGHT		32
+#define SBARHEIGHT		(32 * DOOM_RENDER_SCALE)
 
 //
 // All drawing to the view buffer is accomplished in this file.

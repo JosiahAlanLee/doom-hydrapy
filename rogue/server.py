@@ -35,7 +35,10 @@ KEYS={'KeyW':0xad,'KeyS':0xaf,'KeyA':0xa0,'KeyD':0xa1,
 
 
 class Game:
-    def __init__(self,wad,run_dir,seed=20261030,identity=False):
+    def __init__(self,wad,run_dir,seed=20261030,identity=False,*,render_scale=1):
+        if type(render_scale) is not int or render_scale not in (1,2):
+            raise ValueError('render_scale must be 1 or 2')
+        self.render_scale=render_scale
         self.wad=Path(wad).resolve()
         self.identity=bool(identity)
         self.run_dir=Path(run_dir).resolve();self.run_dir.mkdir(parents=True,exist_ok=True)
@@ -56,8 +59,9 @@ class Game:
             folder.mkdir()
             manifest=campaign(seed,folder/'dungeon.wad',assets=self.wad,practice=None if mode=='campaign' else mode,identity=self.identity)
             (folder/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+            clean_hud=self.identity and mode=='campaign'
             candidate=Doom(self.wad,demo=None,locked=True,pwad=folder/'dungeon.wad',rogue_floors=len(manifest['floors']),
-                           clean_hud=self.identity and mode=='campaign')
+                           clean_hud=clean_hud,render_scale=self.render_scale if clean_hud else 1)
             self.release()
             if self.engine:self.engine.close()
             self.engine=candidate;self.manifest=manifest

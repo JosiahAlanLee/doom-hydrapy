@@ -4,6 +4,20 @@ The native player now starts a seven-tier campaign in RAW view, with two book de
 
 The campaign window exposes no encounter-study or visual-treatment selectors. Internal study maps and the browser preview remain available for development. A loopback test controller cannot interrupt an active physical player, and the campaign rejects study mode changes before releasing controls. Closing the native window writes `NULLRUN_ROOT/quit.request` so an owning supervisor can shut down its audio as well.
 
+## Native resolution
+
+The native campaign renders a true 640×400 world, twice the width and height of
+the original 320×200 Doom raster. The presentation canvas stays 640×400, keeping
+the existing HUD, crosshair, filter sampling and mouse sensitivity. Four times as
+many world samples resolve finer wall edges and floor detail. Original pixel-art
+textures and sprites remain unchanged. The simulation still runs at 35 Hz.
+
+`make -C doomgeneric -f Makefile.ipc` builds both `doom-ipc` and `doom-ipc-2x` with
+separate object directories. The native campaign selects `doom-ipc-2x`; classic
+demo/operator and study clients retain the original renderer. The doubled binary
+supports the native clean HUD, rather than scaling Doom's legacy menu graphics.
+STATE reports both native and output dimensions in its `video` object.
+
 ## Four Argon families
 
 | Family | Native encounter |
