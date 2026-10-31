@@ -34,6 +34,10 @@ Neither HydraPy nor Gorgon was changed. The engine communicates through stdin/st
 and a private mmap file; no engine library is loaded into either host. This layout
 implements the requested boundary; it is not a legal determination about plugin licensing.
 
+The [experimental 3D tower](modern_tower/README.md) provides a separate UZDoom
+geometry/camera test with solid stacked walkways and native up/down looking. It
+does not replace the playable campaign or its custom enemy/music integration.
+
 ## Build and test
 
 ```
