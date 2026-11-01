@@ -2,8 +2,8 @@
 import base64,copy,json,os,shutil,sys
 from pathlib import Path
 import numpy as np
-REPO=Path(__file__).resolve().parent;ROOT=REPO.parent/'doom-hydrapy-20261030'
-OLD=ROOT.parent/'gorgon-r3b-20261030'
+REPO=Path(__file__).resolve().parent;ROOT=Path(os.environ.get('DOOM_TAKE_ROOT',str(REPO.parent/'doom-hydrapy-20261030')))
+OLD=REPO.parent/'gorgon-r3b-20261030'
 sys.path.insert(0,str(OLD/'runtime'))
 from hydrapy.tracker_v3 import validate,empty_pattern
 
@@ -12,18 +12,24 @@ def generate(smoke=False):
     schedule=json.loads((ROOT/'poly/schedule.json').read_text())
     if smoke:
         ev=[]
+        offs={e[6]:e for e in schedule['events'] if e[1]==0}
         for i,tr in enumerate(schedule['tracks']):
-            start=tr['start'];stop=start+3;active={}
-            for e in schedule['events']:
-                if not start<=e[0]<stop:continue
-                e=copy.copy(e);e[0]=e[0]-start+i*3
-                ev.append(e)
-                if e[1]==1:active[e[6]]=e
-                elif e[1]==0:active.pop(e[6],None)
-            for e in active.values():ev.append([i*3+3-.03,0,e[2],e[3],0,0,e[6]])
+            start=tr['start'];stop=start+3
+            for original in schedule['events']:
+                if not start<=original[0]<stop:continue
+                if original[1] in (2,3):
+                    event=copy.copy(original);event[0]=event[0]-start+i*3;ev.append(event)
+                elif original[1]==1:
+                    # Quiet guard between excerpts; never truncate a late attack before it starts.
+                    if original[0]>=stop-.031:continue
+                    end=min(offs[original[6]][0],stop-.030)
+                    if end<=original[0]:continue
+                    event=copy.copy(original);event[0]=event[0]-start+i*3;ev.append(event)
+                    off=copy.copy(offs[original[6]]);off[0]=end-start+i*3;ev.append(off)
         schedule['events']=sorted(ev,key=lambda e:(e[0],e[1]));(ROOT/'poly/smoke-schedule.json').write_text(json.dumps(schedule))
     score=json.loads((OLD/'score.json').read_text());score.update(bpm=120,loop=False,pattern=0,chain=[0,1,2,3,4],seed=20261030,sound=False,patterns=[None]*128,mutes=[True]*6)
-    for i,name in enumerate(['doom-terminal','doom-print','doom-scan','doom-feedback']):
+    names=['doom-melt','doom-disk','doom-vector','doom-relief'] if os.environ.get('DOOM_INDUSTRIAL')=='1' else ['doom-terminal','doom-print','doom-scan','doom-feedback']
+    for i,name in enumerate(names):
         p=empty_pattern(i);rows=6 if smoke else 120;p.update(name=name,rate=.25,bar=rows if smoke else 30,bars=1 if smoke else 4)
         p['lanes']=[dict(len=rows,cells=[None]*rows,transforms=[]) for _ in range(6)];p['scenes']=[dict(r=0,name=name,fade=0)];p['keys']['z']=[dict(r=0,v=(i*(3 if smoke else 60))/240),dict(r=rows-1,v=(i*(3 if smoke else 60)+(rows-1)*.5)/240)];p['easing']['z']='linear';score['patterns'][i]=p
     tail=empty_pattern(4);tail["keys"]["z"]=[dict(r=0,v=(12 if smoke else 240)/240)];score["patterns"][4]=tail
@@ -49,7 +55,11 @@ def generate(smoke=False):
     noise=rng.normal(0,1,len(t));samples.append(noise*.5*np.exp(-t*28))
     for route in schedule['routes']:
         idx=route['index'];mid=100+idx;inst=route['instrument'];data={};params=[]
-        if inst=='CZish':
+        if inst=='PVX':
+            config=json.loads((ROOT/'pvx-routing.json').read_text())
+            plugin=config['plugin'];audioport=config['audio'];pitchport=config['pitch'];gateport=config['gate']
+            params=[dict(id=int(k),value=v) for k,v in config.get('params',{}).get(str(route['channel']),{}).items()]
+        elif inst=='CZish':
             plugin='CZishLab';params=[dict(id=k,value=v) for k,v in [(0,(idx%3)),(5,.7),(8,0),(4,160)]];audioport=2;pitchport=0;gateport=1
             # schema omitted intentionally: installed plugin migrates legacy envelope times.
         elif inst=='Vastish':
@@ -61,9 +71,10 @@ def generate(smoke=False):
             pcm=np.clip(samples[route['family']]*20000,-32767,32767).astype('<i2')
             data=dict(schema=1,rate=sr,name='Doom substitute family '+str(route['family']),pcm16le=base64.b64encode(pcm.tobytes()).decode(),engineMode=0,filterMode=2,gated=False,linearLevel=True,declick=True)
             params=[dict(id=6,value=.7)]
-        modules.append(dict(id=mid,plugin=plugin,model=inst,pos=[idx*40,380],params=params,data=data))
+        modules.append(dict(id=mid,plugin=plugin,model=config['model'] if inst=='PVX' else inst,pos=[idx*40,380],params=params,data=data))
         cable(2,idx*3,mid,pitchport);cable(2,idx*3+1,mid,gateport)
         if inst=='Vastish':cable(2,idx*3+2,mid,2)
+        if inst=='PVX' and config.get('velocity') is not None:cable(2,idx*3+2,mid,config['velocity'])
         if inst=='OtisSampler':cable(2,idx*3+2,mid,8)
         cable(2,idx*3+1,2,2+idx) # physical gate return for edge audit
         cable(mid,audioport,2,34+idx)

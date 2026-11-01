@@ -175,3 +175,17 @@ pillar loop and unseen passage mutations. Choose a study under Next Run, then Re
 ## Native desktop play
 
 [Native play](NATIVE-PLAY.md) adds the fluorescent Hollow study, direct picture-window controls and a reference Studio patch for live HydraPy/VCV use. RAW is the default; F3 cycles the optional GPU treatments.
+
+## Original industrial take (PVX)
+
+The optional `DOOM_INDUSTRIAL=1` path keeps the four original tracker-v3
+scores, PVX routing and score-driven melt, disk, vector and relief scenes.
+Set `DOOM_TAKE_ROOT` to a separate prepared industrial workspace and
+`PVX_PLUGIN_DIR` to the reviewed PVX plugin build, then run
+`python setup_take.py --smoke` and `bash run_capture.sh smoke`.
+The Freedoom polyphonic take above remains the default, with the legible
+terminal and print operators. Both paths share the stream's RUN-time clock
+anchor; CZish and PVX returns receive per-note velocity scaling.
+Industrial finalization preserves opening attacks through video padding,
+removes DC, corrects clock drift and includes a two-second effect tail.
+`DOOM_JACK_SERVER` can select a private test server; the default is unchanged.
