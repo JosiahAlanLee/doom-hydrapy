@@ -1,0 +1,9 @@
+# Null Run round 2 -- cistern-fossil
+newmtl cistern-fossil_mat
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.040000 0.040000 0.040000
+Ns 4.000000
+d 1.000000
+illum 1
+map_Kd cistern-fossil_atlas.png

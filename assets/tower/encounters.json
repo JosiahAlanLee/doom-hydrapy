@@ -1,0 +1,175 @@
+{
+  "format": "nullrun-environment-mobs-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "title": "Null Run tower signature mobs: six original identities",
+  "behavior_families": {
+    "latchwing": "Existing class 15 CYBR family: telegraphed locked-direction dash. The design art uses it unchanged.",
+    "relay_choir": "Existing class 16 PAIN family: anchored telegraphed slow three-projectile fan. The design art uses it unchanged."
+  },
+  "notes": [
+    "ART ONLY. Six new identities use the two existing behavior family identifiers; no new AI, actor IDs, frame mapping, projectiles or mechanics are introduced.",
+    "A and B are two structural variants of the same identity and behavior family; they are not recolours.",
+    "Every atlas is 512x768 RGBA: four columns x six rows of 128x128 cells, rows idle/walk/warn/attack/hurt/death, frame 23 a corpse.",
+    "Proposed vertical behaviour is marked unimplemented in each identity; Codex owns behavior, frame mapping, collision and visual validation.",
+    "The 128 px atlas and y=120 floor anchor follow the reviewed native mob-kit convention."
+  ],
+  "sets": {
+    "ashbell_foundry": {
+      "latchwing": {
+        "id": "chain_hound",
+        "name": "CHAIN HOUND",
+        "description": "A low cast-iron bell hound: a banded drum body carried on four chain-link legs with hook feet, a bell-shaped muzzle with a loose clapper, and a counterweight tail. It reads first as foundry debris, then as an animal when the chain legs take a step.",
+        "variant_a": "Four chain legs, one bell muzzle, a short counterweight tail and a mane of five hanging links.",
+        "variant_b": "Six chain legs, a split two-cup muzzle, a longer tail with two counterweights and a heavier bronze brow.",
+        "tells": "The chain legs coil and shorten while the clapper draws back and the muzzle cup glows furnace orange. The whole body lowers before the dash.",
+        "counterplay": "The dash is locked to the direction of the lowered muzzle. Sidestep or break line of sight; do not back away in the same lane. Its flank is open during the coil.",
+        "behavior_family": "latchwing",
+        "warning_notes": "The chain legs coil and shorten while the clapper draws back and the muzzle cup glows furnace orange. The whole body lowers before the dash.",
+        "limits": "Existing latchwing family only: latchwing class 15 CYBR telegraphed locked-direction dash, or relay_choir class 16 PAIN anchored slow three-projectile fan. No new AI, actor ID or mechanics. Codex owns behavior, labels and native frame mapping.",
+        "atlas": "mobs/ashbell_foundry/latchwing_A.png",
+        "atlas_a": "mobs/ashbell_foundry/latchwing_A.png",
+        "atlas_b": "mobs/ashbell_foundry/latchwing_B.png",
+        "vertical_behavior_proposal": {
+          "status": "PROPOSED, NOT IMPLEMENTED",
+          "proposal": "Proposed only, not implemented: drop from a maintenance balcony to a lower gantry when the quarry is directly below, then require a full recovery pause. It cannot climb chain or ladder geometry and cannot cross a gap wider than one native tile.",
+          "requires": [
+            "new navigation/ledge queries",
+            "new lift state handling where named",
+            "vertical projectile/line-of-fire checks where named",
+            "Codex review before any gameplay claim"
+          ]
+        }
+      },
+      "relay_choir": {
+        "id": "pouring_choir",
+        "name": "POURING CHOIR",
+        "description": "An anchored casting mould that has grown three crucible lips: a stack of soot-black flasks bound in bronze, with a vertical seam, three glowing pour vents and a tapping bar. It swivels on a cast base instead of walking and pours a slow three-part fan.",
+        "variant_a": "Tall three-flask stack with lips at three heights and a narrow base.",
+        "variant_b": "Wide cauldron body with three lips around one rim and a heavy counterweighted tapping arm.",
+        "tells": "The three vents brighten in sequence, the tapping bar lifts and three molten beads form on the lips before they extend outward.",
+        "counterplay": "It is anchored and turns slowly. Strafe around cover rather than retreating down its lane; the fan is slow enough to walk out of at middle range. Do not stand under a lip while it is bright.",
+        "behavior_family": "relay_choir",
+        "warning_notes": "The three vents brighten in sequence, the tapping bar lifts and three molten beads form on the lips before they extend outward.",
+        "limits": "Existing relay_choir family only: latchwing class 15 CYBR telegraphed locked-direction dash, or relay_choir class 16 PAIN anchored slow three-projectile fan. No new AI, actor ID or mechanics. Codex owns behavior, labels and native frame mapping.",
+        "atlas": "mobs/ashbell_foundry/relay_choir_A.png",
+        "atlas_a": "mobs/ashbell_foundry/relay_choir_A.png",
+        "atlas_b": "mobs/ashbell_foundry/relay_choir_B.png",
+        "vertical_behavior_proposal": {
+          "status": "PROPOSED, NOT IMPLEMENTED",
+          "proposal": "Proposed only, not implemented: its three pour streams could arc to one lower balcony and one upper rail, but that requires new projectile pitch and line-of-fire checks. Keep it floor-anchored in the first pass.",
+          "requires": [
+            "new navigation/ledge queries",
+            "new lift state handling where named",
+            "vertical projectile/line-of-fire checks where named",
+            "Codex review before any gameplay claim"
+          ]
+        }
+      }
+    },
+    "boneglass_conservatory": {
+      "latchwing": {
+        "id": "root_stilt",
+        "name": "ROOT STILT",
+        "description": "A tall, thin nursery silhouette on two bone-white root stilts. Its torso is a cage of pale ribs around a dark hollow; its head is a drooping fungal bell with a vertical slit, and its arms are loose root tendrils. It moves with a slow, deliberate step that is worse than a run.",
+        "variant_a": "Two long stilts, a narrow rib cage and one drooping bell head.",
+        "variant_b": "Three stilts, a wider split bell head and a skirt of short root tendrils around the hollow torso.",
+        "tells": "Both stilts lock straight and the rib cage flares; the head slit opens to a dark vertical line and the tendril arms go still. The step is telegraphed by a forward lean that holds for four frames.",
+        "counterplay": "The stride is a locked-direction lunge. Step out of the lane and use a growth chamber or root cage as cover; its turning is poor.",
+        "behavior_family": "latchwing",
+        "warning_notes": "Both stilts lock straight and the rib cage flares; the head slit opens to a dark vertical line and the tendril arms go still. The step is telegraphed by a forward lean that holds for four frames.",
+        "limits": "Existing latchwing family only: latchwing class 15 CYBR telegraphed locked-direction dash, or relay_choir class 16 PAIN anchored slow three-projectile fan. No new AI, actor ID or mechanics. Codex owns behavior, labels and native frame mapping.",
+        "atlas": "mobs/boneglass_conservatory/latchwing_A.png",
+        "atlas_a": "mobs/boneglass_conservatory/latchwing_A.png",
+        "atlas_b": "mobs/boneglass_conservatory/latchwing_B.png",
+        "vertical_behavior_proposal": {
+          "status": "PROPOSED, NOT IMPLEMENTED",
+          "proposal": "Proposed only, not implemented: step down one storey of planter shelves and refuse drops above two storeys. It cannot climb polished glass or jump gaps. Requires new ledge query and landing checks.",
+          "requires": [
+            "new navigation/ledge queries",
+            "new lift state handling where named",
+            "vertical projectile/line-of-fire checks where named",
+            "Codex review before any gameplay claim"
+          ]
+        }
+      },
+      "relay_choir": {
+        "id": "hollow_nurse",
+        "name": "HOLLOW NURSE",
+        "description": "A rooted hanging pod cluster around a pale vertical stalk. Three fungal bells hang from the crown, and the central bell carries a blank, almost-human face-shaped hollow. It does not walk; it turns in its root socket and breathes a slow three-part spore fan.",
+        "variant_a": "Three separate hanging bells around a narrow blank central pod.",
+        "variant_b": "One broad central bell with two smaller side pods and a curtain of root tendrils over the face hollow.",
+        "tells": "The three bells inflate, their slits open and a pale glow rises inside the central hollow; loose spores gather at the rims.",
+        "counterplay": "Anchored and slow to reorient. Fight from an angle, use a pillar to break the fan, and leave before the bells fully inflate if possible.",
+        "behavior_family": "relay_choir",
+        "warning_notes": "The three bells inflate, their slits open and a pale glow rises inside the central hollow; loose spores gather at the rims.",
+        "limits": "Existing relay_choir family only: latchwing class 15 CYBR telegraphed locked-direction dash, or relay_choir class 16 PAIN anchored slow three-projectile fan. No new AI, actor ID or mechanics. Codex owns behavior, labels and native frame mapping.",
+        "atlas": "mobs/boneglass_conservatory/relay_choir_A.png",
+        "atlas_a": "mobs/boneglass_conservatory/relay_choir_A.png",
+        "atlas_b": "mobs/boneglass_conservatory/relay_choir_B.png",
+        "vertical_behavior_proposal": {
+          "status": "PROPOSED, NOT IMPLEMENTED",
+          "proposal": "Proposed only, not implemented: the spore fan could drift downward through a floor opening. That needs volumetric projectile handling; the first pass keeps the fan on one level.",
+          "requires": [
+            "new navigation/ledge queries",
+            "new lift state handling where named",
+            "vertical projectile/line-of-fire checks where named",
+            "Codex review before any gameplay claim"
+          ]
+        }
+      }
+    },
+    "skyhotel_service_well": {
+      "latchwing": {
+        "id": "night_porter",
+        "name": "NIGHT PORTER",
+        "description": "A tall bellhop silhouette assembled from hotel service: a long maroon coat split into two stiff coat-tail legs, a brass-buttoned torso, a suitcase forearm and a peaked cap pulled over a blank face. It stands too upright and leans in only when it has decided.",
+        "variant_a": "One suitcase forearm, two coat-tail legs and a straight peaked cap.",
+        "variant_b": "Two cases at different heights, a longer split coat and a tilted cap with a brass bell badge.",
+        "tells": "The cap tilts, the suitcase seam opens on a dark gap and the coat tails lock together. Amber light gathers under the case before the lunge.",
+        "counterplay": "The porter commits to a straight service-corridor dash. Sidestep through a door bay or around a luggage winch; it cannot turn mid-run.",
+        "behavior_family": "latchwing",
+        "warning_notes": "The cap tilts, the suitcase seam opens on a dark gap and the coat tails lock together. Amber light gathers under the case before the lunge.",
+        "limits": "Existing latchwing family only: latchwing class 15 CYBR telegraphed locked-direction dash, or relay_choir class 16 PAIN anchored slow three-projectile fan. No new AI, actor ID or mechanics. Codex owns behavior, labels and native frame mapping.",
+        "atlas": "mobs/skyhotel_service_well/latchwing_A.png",
+        "atlas_a": "mobs/skyhotel_service_well/latchwing_A.png",
+        "atlas_b": "mobs/skyhotel_service_well/latchwing_B.png",
+        "vertical_behavior_proposal": {
+          "status": "PROPOSED, NOT IMPLEMENTED",
+          "proposal": "Proposed only, not implemented: use the service lift as a same-shaft chase, waiting for the car instead of teleporting. It cannot climb the outside of the lift or cross the atrium void. New lift-state AI and navigation links would be required.",
+          "requires": [
+            "new navigation/ledge queries",
+            "new lift state handling where named",
+            "vertical projectile/line-of-fire checks where named",
+            "Codex review before any gameplay claim"
+          ]
+        }
+      },
+      "relay_choir": {
+        "id": "call_bell_choir",
+        "name": "CALL-BELL CHOIR",
+        "description": "An anchored luggage trolley fused with three brass call bells and a tall room-number paddle. Amber bulbs sit under the bells; the trolley shudders and rings a slow three-part fan of resonance instead of moving. The wheels twitch but never roll.",
+        "variant_a": "Low luggage cart with three bells in a row and one upright paddle.",
+        "variant_b": "Tall stacked luggage with three bells at different heights and a bent, split paddle.",
+        "tells": "One bell after another rises on its stalk, the three amber bulbs brighten and the paddle turns to face the player before the fan.",
+        "counterplay": "Anchored, slow to track and blocked by the central shaft corner. Break the line of the three bells, then close from the side.",
+        "behavior_family": "relay_choir",
+        "warning_notes": "One bell after another rises on its stalk, the three amber bulbs brighten and the paddle turns to face the player before the fan.",
+        "limits": "Existing relay_choir family only: latchwing class 15 CYBR telegraphed locked-direction dash, or relay_choir class 16 PAIN anchored slow three-projectile fan. No new AI, actor ID or mechanics. Codex owns behavior, labels and native frame mapping.",
+        "atlas": "mobs/skyhotel_service_well/relay_choir_A.png",
+        "atlas_a": "mobs/skyhotel_service_well/relay_choir_A.png",
+        "atlas_b": "mobs/skyhotel_service_well/relay_choir_B.png",
+        "vertical_behavior_proposal": {
+          "status": "PROPOSED, NOT IMPLEMENTED",
+          "proposal": "Proposed only, not implemented: the resonance fan could pass through a balcony opening to a lower landing. That needs vertical hit tests; the first pass keeps it on one level.",
+          "requires": [
+            "new navigation/ledge queries",
+            "new lift state handling where named",
+            "vertical projectile/line-of-fire checks where named",
+            "Codex review before any gameplay claim"
+          ]
+        }
+      }
+    }
+  }
+}

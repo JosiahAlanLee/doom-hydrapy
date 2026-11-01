@@ -1,0 +1,73 @@
+# Null Run — book demons as seeded encounters
+
+Repetiel, Calmor, Probator and Jurisiel are adapted from Josiah Alan-Lee's *Pseudomonarchia
+Escalationum*. The source is the [Book III catalogue at the inspected commit](https://github.com/JosiahAlanLee/Codex-Intervallorum/blob/b789e03f30034bc8403f8a40aaf83842885aaad5/books/03_escalationum/manuscript/catalogue.json).
+Their forms and bindings supply the themes; the combat rules below are new game
+interpretations. No book artwork or apparatus drawing implementation is copied.
+`rogue/bosses.py` retains a summary of each entry's critical actual effect with
+the appearance and binding, rather than turning the catalogue into an unqualified
+operating manual. It is an adaptation, not a claim that the book describes combat.
+
+## Campaign and practice
+
+The [seven-tier campaign](SEVEN_TIERS.md) allocates two handoff demons to each
+of the book's office regions. The fourteen identities currently share the four
+native combat and sprite families documented here. Each actor has its own
+reachable binding ring, preferably in a side alcove, and nearby supplies. Both
+demons must be defeated before a tier's exit opens. Binding exposes one demon
+for eight seconds; it does not end the fight. The allocation is fixed, while
+map layout, placement and bounded health variations follow the run seed.
+
+In the browser, choose a **NEXT RUN** binding study and press **RETRY** or **NEW
+RUN** to start beside that demon's ring. A study contains only that boss, with a
+shotgun, shells and armor at the start; take a step to pick up the supplies. It
+uses the same native boss mechanics, then ends at the ordinary exit. Studies
+are separate from a campaign save and reset inventory like any new run.
+
+| Demon | Book motif | Game binding | Custom attack |
+| --- | --- | --- | --- |
+| Repetiel | Two mouths on a return tube; repeated intake | On the marked ring, press F, release, then press F again. Holding F counts once. | A shot followed 18 tics later by an echo retaining its original direction and vertical velocity |
+| Calmor | A softly lined bell demanding a calmer account | Stay on the ring without moving or firing for two seconds. Movement, knockback or attack input interrupts the charge. | One aimed shot while the player is quiet; a three-shot spread while the player is firing |
+| Probator | A magnifying glass examining its own handle, demanding impossible proof | Hit its sealed shield, then tap F on the ring to acknowledge that proof | Two closely spaced fireballs |
+| Jurisiel | A sideways doorway carried through another doorway, disputing scope | Enter the amber A ring, then cross the cyan B ring | Two diverging fireballs |
+
+Each completed binding exposes the boss for eight seconds of simulation time.
+Pausing the browser game also pauses that window. When it closes, repeat the
+binding. The HUD shows name, health, shield phase, binding progress and remaining
+exposure time. Original generated pixel sprites distinguish the return tube and
+lined bell; native seal flats mark the ritual locations. These are billboard
+sprites and modified Doom archetype state machines, not new 3D creature models.
+
+## Native boundaries
+
+Classes 5/6 and the extended classes 9/10 use marked THING options. `rogue_boss.c` owns one encounter context per
+level, reset before level memory is freed. It validates a tagged seal sector,
+observes native use/attack/movement, gates incoming boss damage and level exits,
+and schedules Repetiel's echo. A malformed external PWAD without a seal leaves
+the boss damageable instead of trapping the player. Campaign generation places
+exactly one marked boss on each encounter floor.
+
+Boss state is additive JSON in `STATE`. There is no API to set health, teleport,
+force a binding or grant victory. Native damage tests use actual weapons and
+explicit test-only BFG/invulnerability pickups; production studies give shotgun
+gear. Ordinary maps outside roguelike mode retain their original monster and
+exit behavior. The full sprite and flat namespaces preserve unchanged Freedoom
+assets, while adding original boss art/seals. Asset hashes remain in manifests;
+keep Freedoom's license and credits with distributed WADs.
+
+## Validation and limits
+
+`FREEDOOM_WAD=/path/to/freedoom2.wad python -m unittest -v test_rogue test_bosses test_gloamwood`
+checks the base game plus seed selection, reachable bindings, isolated studies,
+holding/repeating use, stillness and attack resets, vulnerability expiry, real
+shield impacts, weapon-caused defeat, exit locks/releases, exact echo direction,
+Calmor's panic spread and ordinary-map isolation. Existing `test_ipc.py` covers
+the deterministic demo path. Test fixtures are not combat-balance signoff.
+
+Audio, mouse look, perks and save/resume remain future work. New Gloamwood
+interpretations are described in [GLOAMWOOD.md](GLOAMWOOD.md); its original
+geometry/textures are unavailable and have not been ported.
+DeepSeek's separate modular art kit was generated from a generic brief, then
+reproduced and visually reviewed independently. Its 24 combinations and four
+pose studies are not integrated into these encounters. Book/game source and
+Minecraft files were not included in that API job.

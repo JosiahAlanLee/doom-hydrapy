@@ -1,0 +1,52 @@
+{
+  "title": "After Hours Pavilion - low-CPU six-lane patch plan",
+  "status": "plan only: no Rack patch was built, loaded, auditioned or rendered",
+  "owner": "Codex integrates and may revoice; parameter ranges below are suggestions, not loaded values",
+  "score": "score.json",
+  "principles": [
+    "One poly PVX carries the displaced bell/reed lead and sparse counterline; one mono PVX carries the gentle bass.",
+    "Percussion is a few soft oscillator/noise/envelope/VCA supports; the quiet middle stays quiet.",
+    "One restrained clean Spoon Bender may provide a small dark room.",
+    "No firmware emulation, no giant voice bank, no GPU/audio/image sampling prerequisite and no DC pulses."
+  ],
+  "lanes": [
+    {"lane": 1, "name": "kick", "score_machine": 16, "plan": "Soft off-beat thump; some expected downbeats are intentionally absent."},
+    {"lane": 2, "name": "snare", "score_machine": 17, "plan": "Soft rim/brush noise on displaced beats; no backbeat grid."},
+    {"lane": 3, "name": "hat/texture", "score_machine": 22, "plan": "Sparse short ticks; absent in the quiet middle."},
+    {"lane": 4, "name": "lead", "score_machine": 0, "plan": "Displaced bell/reed PVX phrase with long rests and a soft attack."},
+    {"lane": 5, "name": "bass", "score_machine": 0, "plan": "Gentle mechanical mono bass, short repeated notes."},
+    {"lane": 6, "name": "counterline/atmosphere", "score_machine": 0, "plan": "Sparse high counterline, optional small Spoon Bender return."}
+  ],
+  "voices": {
+    "PVX_lead": {"lanes": [4, 6], "role": "bell/reed lead and counterline", "cpu_note": "One instance, no bell sample bank."},
+    "PVX_bass": {"lanes": [5], "role": "gentle mono bass", "cpu_note": "One instance, low register."},
+    "percussion": {"lanes": [1, 2, 3], "role": "soft oscillator/noise/envelope/VCA supports", "cpu_note": "Small and algorithmic; no sampled lounge kit."},
+    "space": {"lanes": [6], "role": "optional small dark Spoon Bender", "cpu_note": "Low mix; quiet middle stays dry if preferred."}
+  },
+  "routing_intent": [
+    "Lanes 4 and 6 to one poly PVX; lane 5 to one mono PVX.",
+    "Lanes 1-3 to the soft percussion supports.",
+    "Lane 6 may take a small Spoon Bender send; no global wash or heavy modulation.",
+    "No sidechain network and no external sequencer."
+  ],
+  "revoicing_suggestions": {
+    "PVX_lead": {"attack_ms": "5-20", "release_ms": "300-900", "cutoff_hz": "1500-3500", "detune_cents": "2-6", "note": "Bell/reed colour, soft and slightly unstable; do not turn it into a bright solo."},
+    "PVX_bass": {"attack_ms": "10-30", "release_ms": "150-400", "cutoff_hz": "150-400", "note": "Gentle and mechanical; keep note lengths short."},
+    "percussion": {"decay_ms": "50-180", "note": "Soft and sparse; the quiet middle deliberately has no hats or backbeat."},
+    "space": {"decay_s": "0.6-1.4", "mix_percent": "10-20", "note": "Small dark room; reduce or bypass in the quiet middle."}
+  },
+  "gorgon_bridge": "Gorgon poly pitch12/gates11/velocity3 are the real bridge outputs from the score. Suggested velocity goes to a VCA, not to PVX input2.",
+  "pvx_input2": "PVX input2 is external AUDIO, not velocity. Any velocity suggestion in this plan belongs on a VCA.",
+  "limits": [
+    "No firmware emulation.",
+    "No giant voice banks.",
+    "No GPU/audio/image sampling prerequisites.",
+    "No DC pulses.",
+    "No patch was loaded or auditioned here."
+  ],
+  "codex_discretion": [
+    "All machine numbers are neutral score slots and may be replaced.",
+    "Parameter ranges are starting suggestions only; Codex owns the real patch and audio review.",
+    "The quiet middle may bypass the Spoon Bender entirely."
+  ]
+}

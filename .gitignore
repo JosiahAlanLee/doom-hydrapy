@@ -1,5 +1,9 @@
 *.o
 *.obj
+!assets/tower/props3d/**/*.obj
+!assets/actors3d/**/*.obj
+!assets/installations/**/*.obj
+._*
 *.exe
 *.DS_Store
 *.log
@@ -12,11 +16,17 @@ Build/
 doomgeneric.map
 
 doomgeneric/build/
+doomgeneric/build-ipc/
 doomgeneric/doom-ipc
 doomgeneric/doom-ipc.map
+doomgeneric/build-ipc-2x/
+doomgeneric/doom-ipc-2x
+doomgeneric/doom-ipc-2x.map
 runtime/*
 __pycache__/
 
 poly/build/
 poly/dist/
 *.so
+
+analysis-legible/

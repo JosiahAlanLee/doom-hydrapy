@@ -6,10 +6,41 @@ was unavailable. See LICENSE, README.TXT and README.upstream.md for upstream cre
 Game assets are from [Freedoom 0.13.0](https://github.com/freedoom/freedoom/releases/tag/v0.13.0),
 BSD licensed. No commercial WAD or original Doom music is included.
 
+**Playable generative mode:** [Null Run](SEVEN_TIERS.md) descends through seven
+seeded office tiers with two book demons per tier, inventory carryover and one
+life. Four shared binding/combat families support the fourteen allocated demons.
+The [integrated Threshold edition](THRESHOLD_INTEGRATION.md) preserves its custom
+GUI, authored opening, environmental art, and Latchwing/Relay Choir encounters.
+The [native campaign](ARGON_CAMPAIGN.md) includes all four Argon enemies, captured
+mouse turn/fire/use, retry/new seed and lightweight Rack ambience. Use
+`rogue/campaign_live.py` in HydraPy Studio. The [browser preview](ROGUELIKE.md)
+is available with `python -m rogue.server --wad /path/to/freedoom2.wad` after
+building the engine. The timed performance/capture path below remains separate.
+
+[UPKEEP vending machines](VENDING.md) add a native run economy: earn scrap from
+kills and caches, then choose one seeded upgrade per floor. Purchases carry
+through the run, with a paused choice menu and fresh upgrades on retry/new seed.
+
+[The Gloamwood iteration](GLOAMWOOD.md) adds a watched/crawling Hollow, Stone
+ReDead's telegraphed shriek and escapable grip, two more book demons, and
+individual encounter studies. These use original procedural art. The current
+campaign allocation extends the four book encounters across all seven tiers.
+
+[Surveyor optics](SURVEYOR_OPTICS.md) provides an opt-in HydraPy operator driven
+by the native warning countdown, with exact RAW/HUD preservation and no rear radar.
+
+[Book-boss encounters](BOSSES.md) add Repetiel and Calmor on seeded campaign
+floors, with distinct binding rules, shield windows and native attacks. Choose a
+binding study in the browser to practice either encounter directly.
+
 Everything here, including the optional plugin, stays in this standalone GPL repo.
 Neither HydraPy nor Gorgon was changed. The engine communicates through stdin/stdout
 and a private mmap file; no engine library is loaded into either host. This layout
 implements the requested boundary; it is not a legal determination about plugin licensing.
+
+The [experimental 3D tower](modern_tower/README.md) provides a separate UZDoom
+geometry/camera test with solid stacked walkways and native up/down looking. It
+does not replace the playable campaign or its custom enemy/music integration.
 
 ## Build and test
 
@@ -18,6 +49,19 @@ make -C doomgeneric -f Makefile.ipc -j8
 export FREEDOOM_WAD=/absolute/path/to/freedoom2.wad
 python test_ipc.py
 ```
+
+The build produces two separate executables. `doom-ipc` retains the classic
+320×200 world raster enlarged to the 640×400 frame; `doom-ipc-2x` renders the
+native campaign world at a true 640×400. The native player selects the latter,
+with the same HUD layout, field of view, 35 Hz simulation and 640×400 FrameSource.
+This adds four times as many world samples rather than enlarging existing pixels.
+Sprites and wall textures retain their authored pixel-art resolution.
+
+Direct clients can select `Doom(..., clean_hud=True, render_scale=2)`. The doubled
+renderer requires the clean HUD; classic demo/operator and study clients keep
+their existing default. Run `python test_resolution.py` with FREEDOOM_WAD set to
+check added raster detail, gameplay parity and native retry. STATE includes
+`video.native_width/native_height` and `video.output_width/output_height`.
 
 Requires Linux little-endian x86-64, GCC, make, Python and NumPy. The optional
 plugin needs HydraPy's FrameSource/add_op API and its GL renderer. No install step
@@ -36,8 +80,9 @@ engine.close()
 Coordinates sample texel centres for crisp default filtering. Four build(ctx) scenes
 are under scenes/, with an optional bitmap ASCII texture operator registered via
 HydraPy.add_op. Scene source time is renderer seconds, 35 game tics per second.
-For a tracker beat clock use seconds = beat * 60 / bpm at the transport origin;
-transport integration and live Rack capture have NOT been completed.
+For this demo adapter, use seconds = beat * 60 / bpm at the transport origin.
+The separate native-play patch and live VCV integration are described in
+[NATIVE-PLAY.md](NATIVE-PLAY.md).
 
 `Doom(..., demo=None)` starts a playable level; `key(code, down)` queues input.
 `LaneKeys.update(fire, pitch, move, use)` maps held tracker signals to fire,
@@ -58,7 +103,8 @@ Launch with DOOM_FRAME=/private/path and DOOM_LOCKED=1 for external tics.
 stdout is reserved for protocol; engine messages go to stderr. READY/OK replies
 contain absolute game tic and frame counter. Initialization consumes two game tics;
 the client records that as its origin. STEP N advances N tics (0..35000), KEY D K
-queues pressed/released byte key codes, QUIT exits. Commands are acknowledged.
+queues pressed/released byte key codes, TURN D queues bounded relative mouse
+turn (-4096..4096) for one tic, QUIT exits. Commands are acknowledged.
 The 1024-event input queue preserves event order. The free-running engine steps
 between commands. The external clock uses rational 35 Hz time and single-tic engine
 mode. Wall-clock transition wipes are skipped in locked mode.
@@ -115,7 +161,31 @@ The synths are documented substitutes, not General MIDI replicas. Per-instance
 voice retirement one second after note-off bounds substitute release tails;
 it does not shorten held MIDI notes or drop attacks. Mod wheel maps to restrained
 5 Hz pitch vibrato. The music finishes at 226.6 s, followed by effect decay and a
-quiet game-only tail. Studio keyboard and game-event signals remain future work.
+quiet game-only tail. This timed take does not map live keyboard/game events
+into its score; native play uses its own window controller.
 
 See poly/README.md for the sequencer ABI, private JACK namespace and buffer setup.
-No host repository was changed and this work was not pushed by Codex.
+No host repository was changed; the optional integration stays in this standalone repository.
+
+## Architectural studies
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the silent corridor seam, five-corner
+pillar loop and unseen passage mutations. Choose a study under Next Run, then Retry.
+
+## Native desktop play
+
+[Native play](NATIVE-PLAY.md) adds the fluorescent Hollow study, direct picture-window controls and a reference Studio patch for live HydraPy/VCV use. RAW is the default; F3 cycles the optional GPU treatments.
+
+## Original industrial take (PVX)
+
+The optional `DOOM_INDUSTRIAL=1` path keeps the four original tracker-v3
+scores, PVX routing and score-driven melt, disk, vector and relief scenes.
+Set `DOOM_TAKE_ROOT` to a separate prepared industrial workspace and
+`PVX_PLUGIN_DIR` to the reviewed PVX plugin build, then run
+`python setup_take.py --smoke` and `bash run_capture.sh smoke`.
+The Freedoom polyphonic take above remains the default, with the legible
+terminal and print operators. Both paths share the stream's RUN-time clock
+anchor; CZish and PVX returns receive per-note velocity scaling.
+Industrial finalization preserves opening attacks through video padding,
+removes DC, corrects clock drift and includes a two-second effect tail.
+`DOOM_JACK_SERVER` can select a private test server; the default is unchanged.

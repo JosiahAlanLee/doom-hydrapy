@@ -15,7 +15,7 @@ class CompileTests(unittest.TestCase):
         # 4 repetitions *16 quarter notes /64 BPM =60 seconds.
         return d
     def test_evaluated_repeats_overlap_and_conditions(self):
-        with tempfile.TemporaryDirectory(dir=ROOT/'doom-hydrapy/runtime') as tmp:
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parent/'runtime') as tmp:
             path=Path(tmp)/'score.json';score=self.score()
             score['patterns'][0]['lanes'][0]['cells'][1]['cond']={'kind':'first'}
             path.write_text(json.dumps(score));d=compile_scores([path]*4,Path(tmp)/'compiled')
@@ -26,7 +26,7 @@ class CompileTests(unittest.TestCase):
             self.assertTrue(all(r['voices']==2 for r in d['routes']))
             self.assertEqual([t['start'] for t in d['tracks']],[0,60,120,180])
     def test_stutters_and_drum_families(self):
-        with tempfile.TemporaryDirectory(dir=ROOT/'doom-hydrapy/runtime') as tmp:
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parent/'runtime') as tmp:
             path=Path(tmp)/'score.json';score=self.score()
             score['patterns'][0]['lanes'][1]['transforms']=[{'kind':'ply','n':2}]
             drums=score['patterns'][0]['lanes'][4]['cells']
@@ -35,7 +35,7 @@ class CompileTests(unittest.TestCase):
             self.assertEqual(d['source_notes'],56)
             self.assertEqual({r['family'] for r in d['routes'] if r['channel']==4},{0,1})
     def test_reject_wrong_duration(self):
-        with tempfile.TemporaryDirectory(dir=ROOT/'doom-hydrapy/runtime') as tmp:
+        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parent/'runtime') as tmp:
             path=Path(tmp)/'score.json';score=self.score();score['bpm']=120
             path.write_text(json.dumps(score))
             with self.assertRaisesRegex(ValueError,'one-minute'):compile_scores([path],Path(tmp)/'compiled')

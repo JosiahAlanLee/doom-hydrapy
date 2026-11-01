@@ -1,0 +1,266 @@
+{
+  "id": "ashbell_foundry",
+  "title": "Ashbell Foundry",
+  "env_id": "ashbell_foundry",
+  "tempo": 88,
+  "key": 2,
+  "scale": "phrygian",
+  "bars_per_loop": 8,
+  "lanes": {
+    "names": [
+      "anvil",
+      "chain",
+      "pressure",
+      "bell",
+      "furnace",
+      "sting"
+    ],
+    "roles": {
+      "0": "low percussion",
+      "1": "high percussion",
+      "2": "bass",
+      "3": "lead / counterline",
+      "4": "pad / drone",
+      "5": "sting voice (reserved)"
+    }
+  },
+  "register": {
+    "bass": [
+      31,
+      43
+    ],
+    "lead": [
+      55,
+      74
+    ],
+    "pad": [
+      43,
+      55
+    ],
+    "perc_low": 36,
+    "perc_high": 79
+  },
+  "harmony": [
+    0,
+    0,
+    0,
+    3,
+    3,
+    5,
+    5,
+    0
+  ],
+  "motif": {
+    "pulses": [
+      [
+        1,
+        -3,
+        1
+      ],
+      [
+        -2,
+        4,
+        -1,
+        2
+      ],
+      [
+        3,
+        -1,
+        -4
+      ],
+      [
+        1,
+        1,
+        -5
+      ]
+    ],
+    "spans": [
+      3,
+      7
+    ],
+    "density": 0.32
+  },
+  "rhythms": {
+    "exploration": {
+      "perc_low": "X.......x.......",
+      "perc_high": "....x.......x...",
+      "bass": "x.......x.......",
+      "motif_rows": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "threat": {
+      "perc_low": "X.....x.x.......",
+      "perc_high": ".x..x.....x..x..",
+      "bass": "x.......x...x...",
+      "motif_rows": [
+        1,
+        5,
+        9,
+        13
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "combat": {
+      "perc_low": "X..x..X..x..X...",
+      "perc_high": "x.x.x.x.x.x.x.x.",
+      "bass": "x...x...x...x...",
+      "motif_rows": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "pad_rows": []
+    },
+    "quiet": {
+      "perc_low": "X...............",
+      "perc_high": "..x.............",
+      "bass": "x...............",
+      "motif_rows": [
+        4,
+        12
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "boss_sealed": {
+      "perc_low": "X...x...X...x...",
+      "perc_high": ".x.x...x.x...x.x",
+      "bass": "x...x...x...x...",
+      "motif_rows": [
+        1,
+        5,
+        9,
+        13
+      ],
+      "pad_rows": [
+        0
+      ]
+    },
+    "boss_exposed": {
+      "perc_low": "X.x.X.x.X.x.X.x.",
+      "perc_high": "x.x.x.x.x.x.x.x.",
+      "bass": "x.x.x.x.x.x.x.x.",
+      "motif_rows": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "pad_rows": []
+    },
+    "boss_one_down": {
+      "perc_low": "X...x..........x",
+      "perc_high": ".x......x.......",
+      "bass": "x.....x.....x...",
+      "motif_rows": [
+        3,
+        11
+      ],
+      "pad_rows": [
+        0
+      ]
+    }
+  },
+  "transition": {
+    "victory": {
+      "bars": 4,
+      "degrees": [
+        0,
+        3,
+        5,
+        7
+      ],
+      "contour": "rise"
+    },
+    "death": {
+      "bars": 4,
+      "degrees": [
+        5,
+        3,
+        1,
+        0
+      ],
+      "contour": "sink"
+    },
+    "bridge": {
+      "bars": 2,
+      "degrees": [
+        0,
+        3
+      ],
+      "contour": "knock"
+    }
+  },
+  "stings": {
+    "enemy": {
+      "notes": [
+        59,
+        61
+      ],
+      "gate": 2,
+      "vel": 108
+    },
+    "damage": {
+      "notes": [
+        36
+      ],
+      "gate": 3,
+      "vel": 118
+    },
+    "secret": {
+      "notes": [
+        74,
+        82
+      ],
+      "gate": 1,
+      "vel": 90
+    },
+    "boss": {
+      "notes": [
+        47,
+        50,
+        53
+      ],
+      "gate": 4,
+      "vel": 112
+    },
+    "victory": {
+      "notes": [
+        48,
+        55,
+        60
+      ],
+      "gate": 5,
+      "vel": 110
+    }
+  },
+  "duck": {
+    "mask": [
+      2,
+      3,
+      4
+    ],
+    "beats": 2
+  },
+  "ghost_prob": 12,
+  "notes": "Proposal, not rendered or auditioned. Heavy 88 BPM foundry phrygian: anvil/chain low percussion, slow pressure bass, a bronze bell lead and furnace drone. Combat doubles the anvil without raising volume; boss states open the chain layer. 8-bar loops; 2-4 bar transitions; 1-5 row stings."
+}

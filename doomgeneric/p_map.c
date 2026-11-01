@@ -30,6 +30,8 @@
 #include "m_argv.h"
 #include "m_misc.h"
 #include "p_local.h"
+#include "rogue_arch.h"
+#include "rogue_vending.h"
 
 #include "s_sound.h"
 
@@ -470,6 +472,25 @@ P_CheckPosition
 
 
 //
+#ifdef DOOM_ROGUE
+// Collision-checked relocation with no fog, sound, pickup or telefrag side effect.
+boolean P_RogueRelocate(mobj_t *thing,fixed_t x,fixed_t y,fixed_t offset_z)
+{
+    int flags=thing->flags;fixed_t z=thing->z;
+    thing->flags&=~(MF_PICKUP|MF_NOCLIP);
+    thing->z=R_PointInSubsector(x,y)->sector->floorheight+offset_z;
+    boolean fits=P_CheckPosition(thing,x,y);
+    thing->flags=flags;thing->z=z;
+    fixed_t target_z=tmfloorz+offset_z;
+    if(!fits || target_z<tmfloorz || tmceilingz-target_z<thing->height)return false;
+    P_UnsetThingPosition(thing);
+    thing->x=x;thing->y=y;thing->z=target_z;
+    thing->floorz=tmfloorz;thing->ceilingz=tmceilingz;
+    P_SetThingPosition(thing);
+    return true;
+}
+#endif
+
 // P_TryMove
 // Attempt to move to a new position,
 // crossing special lines unless MF_TELEPORT is set.
@@ -1182,6 +1203,7 @@ void P_UseLines (player_t*	player)
     fixed_t	x2;
     fixed_t	y2;
 	
+    if (Rogue_VendingUse(player)) return;
     usething = player->mo;
 		
     angle = player->mo->angle >> ANGLETOFINESHIFT;

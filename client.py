@@ -1,21 +1,46 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 """Pipe-controlled engine; no engine library is loaded into Python."""
 from pathlib import Path
-import mmap, os, select, struct, subprocess, tempfile
+import json, mmap, os, select, struct, subprocess, tempfile
 import numpy as np
 
 class Doom:
-    def __init__(self, wad, demo='demo1', locked=True, loop_seconds=None):
+    def __init__(self, wad, demo='demo1', locked=True, loop_seconds=None,
+                 pwad=None, rogue_floors=None, clean_hud=False, render_scale=1):
+        if type(render_scale) is not int or render_scale not in (1,2):
+            raise ValueError('render_scale must be 1 or 2')
+        if render_scale==2 and not clean_hud:
+            raise ValueError('The 640x400 renderer requires the native clean HUD')
+        self.render_scale=render_scale
         if loop_seconds is not None and (not np.isfinite(loop_seconds) or loop_seconds<=0): raise ValueError("positive loop duration required")
         self.loop_seconds=loop_seconds
         self.wad, self.demo, self.locked = str(Path(wad).resolve()), demo, locked
+        self.pwad = str(Path(pwad).resolve()) if pwad else None
+        self.rogue_floors = rogue_floors
+        self.clean_hud = bool(clean_hud)
+        if rogue_floors is not None and (type(rogue_floors) is not int or not 1 <= rogue_floors <= 7):
+            raise ValueError('rogue_floors must be 1..7')
+        (Path(__file__).parent/'runtime').mkdir(exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(prefix='doom-', dir=Path(__file__).parent/'runtime')
-        self.start()
+        try:self.start()
+        except BaseException:
+            self.stop();self.tmp.cleanup();raise
     def start(self):
+        self._stopped=False
         env = dict(os.environ, DOOM_FRAME=self.tmp.name+'/frame')
+        env.pop('DOOM_ROGUE_FLOORS', None)
+        if self.rogue_floors: env['DOOM_ROGUE_FLOORS']=str(self.rogue_floors)
+        env.pop('DOOM_CLEAN_HUD',None)
+        if self.clean_hud:
+            env['DOOM_CLEAN_HUD']='1'
+            Path(self.tmp.name+'/doom.cfg').write_text('screenblocks 11\n')
         if self.locked: env['DOOM_LOCKED']='1'
         else: env.pop('DOOM_LOCKED',None)
-        args=[str(Path(__file__).parent/'doomgeneric/doom-ipc'), '-iwad',self.wad, '-config',self.tmp.name+'/doom.cfg']
+        executable=Path(__file__).parent/'doomgeneric'/('doom-ipc-2x' if self.render_scale==2 else 'doom-ipc')
+        if not executable.is_file():
+            raise FileNotFoundError(f'{executable.name} is missing; build with make -C doomgeneric -f Makefile.ipc')
+        args=[str(executable), '-iwad',self.wad, '-config',self.tmp.name+'/doom.cfg']
+        if self.pwad: args += ['-file', self.pwad]
         if self.demo: args += ['-playdemo',self.demo]
         else: args += ['-warp','1','-skill','3']
         self.log=open(self.tmp.name+'/engine.log','w')
@@ -26,11 +51,38 @@ class Doom:
     def _read(self, prefix='OK'):
         if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine timeout: '+self.tmp.name+'/engine.log')
         line=self.proc.stdout.readline().strip().split()
-        if not line or line[0]!=prefix: raise RuntimeError('engine failed: '+self.tmp.name+'/engine.log')
+        if not line or line[0]!=prefix:
+            self.log.flush()
+            detail=Path(self.tmp.name+'/engine.log').read_text(errors='replace')[-1200:]
+            raise RuntimeError('engine failed (exit '+str(self.proc.poll())+', response '+str(line)[:160]+'): '+self.tmp.name+'/engine.log\n'+detail)
         self.tic,self.frames=map(int,line[1:])
     def command(self, text):
         self.proc.stdin.write(text+'\n');self.proc.stdin.flush();self._read()
     def key(self, code, down): self.command(f'KEY {int(down)} {code}')
+    def turn(self, units):
+        if type(units) is not int or not -4096<=units<=4096:
+            raise ValueError('TURN range -4096..4096')
+        self.command(f'TURN {units}')
+    def state(self):
+        self.proc.stdin.write('STATE\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine STATE timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('STATE '): raise RuntimeError('invalid engine state response')
+        return json.loads(line[6:])
+    def monsters(self):
+        self.proc.stdin.write('MOBS\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]: raise TimeoutError('engine MOBS timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('MOBS '):raise RuntimeError('invalid monster state response')
+        return json.loads(line[5:])
+    def buy(self, vendor, slot):
+        if type(vendor) is not int or not 1<=vendor<=65535 or type(slot) is not int or not 0<=slot<3:
+            raise ValueError('Invalid machine or offer')
+        self.proc.stdin.write(f'VEND {vendor} {slot}\n');self.proc.stdin.flush()
+        if not select.select([self.proc.stdout],[],[],20)[0]:raise TimeoutError('engine VEND timeout')
+        line=self.proc.stdout.readline()
+        if not line.startswith('VEND '):raise RuntimeError('invalid purchase response')
+        return json.loads(line[5:])
     def advance(self,n):
         if not 0<=n<=35000: raise ValueError('STEP range 0..35000')
         old=self.tic;self.command(f'STEP {n}')
@@ -57,12 +109,22 @@ class Doom:
         rgba=bgra[:,:,[2,1,0,3]].copy();rgba[:,:,3]=255
         return rgba
     def stop(self):
-        if hasattr(self,'mem'): self.mem.close();self.fd.close()
-        if self.proc.poll() is None:
-            self.proc.stdin.write('QUIT\n');self.proc.stdin.flush()
-            try: self.proc.wait(timeout=3)
-            except subprocess.TimeoutExpired: self.proc.kill();self.proc.wait()
-        self.proc.stdin.close();self.proc.stdout.close();self.log.close()
+        if getattr(self,'_stopped',False):return
+        self._stopped=True
+        for name in ('mem','fd'):
+            item=getattr(self,name,None)
+            if item is not None and not item.closed:item.close()
+        proc=getattr(self,'proc',None)
+        if proc is not None:
+            if proc.poll() is None:
+                try:proc.stdin.write('QUIT\n');proc.stdin.flush()
+                except (OSError,ValueError):pass
+                try:proc.wait(timeout=3)
+                except subprocess.TimeoutExpired:proc.kill();proc.wait()
+            for stream in (proc.stdin,proc.stdout):
+                if stream is not None and not stream.closed:stream.close()
+        log=getattr(self,'log',None)
+        if log is not None and not log.closed:log.close()
     def close(self): self.stop();self.tmp.cleanup()
     def __enter__(self): return self
     def __exit__(self,*exc): self.close()

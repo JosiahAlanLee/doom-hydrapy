@@ -1,0 +1,256 @@
+{
+  "agent": "deepseek",
+  "axis": {
+    "forward": "+Y",
+    "handed": "right",
+    "loader_conversion": "parent: (x, z, -y) plus MODELDEF AngleOffset -90; originals stay Z-up",
+    "up": "+Z"
+  },
+  "cpu_only": true,
+  "date": "2026-10-31",
+  "engine_used": false,
+  "environment_overviews": [
+    {
+      "environment": "bent-relay-atrium",
+      "file": "environments/overviews/bent-relay-atrium.png",
+      "renderer": "environments/render_overview.py",
+      "scale_note": "installation concept only; approx. 32 UZDoom units per metre; not an engine screenshot",
+      "source_layout": "../nullrun-open-vertical-worlds-20261031/layouts/bent-relay-atrium.seed17.layout.json"
+    },
+    {
+      "environment": "flooded-resonance-cistern",
+      "file": "environments/overviews/flooded-resonance-cistern.png",
+      "renderer": "environments/render_overview.py",
+      "scale_note": "installation concept only; approx. 32 UZDoom units per metre; not an engine screenshot",
+      "source_layout": "../nullrun-open-vertical-worlds-20261031/layouts/flooded-resonance-cistern.seed17.layout.json"
+    },
+    {
+      "environment": "hanging-boneglass-garden",
+      "file": "environments/overviews/hanging-boneglass-garden.png",
+      "renderer": "environments/render_overview.py",
+      "scale_note": "installation concept only; approx. 32 UZDoom units per metre; not an engine screenshot",
+      "source_layout": "../nullrun-open-vertical-worlds-20261031/layouts/hanging-boneglass-garden.seed17.layout.json"
+    }
+  ],
+  "format": "nullrun-art-round2-manifest-1",
+  "gpu_used": false,
+  "job": "20261031-184925-deepseek-nullrun-art-round2",
+  "mob_contact_sheet": "mobs/contact_sheet.png",
+  "mobs": {
+    "hollow": {
+      "atlas": "mobs/models/hollow/hollow_atlas.png",
+      "combat_timing_preserved": true,
+      "display_name": "Hollow",
+      "neutral_obj": "mobs/models/hollow/hollow_neutral.obj",
+      "pose_manifest": "mobs/models/hollow/hollow_pose_manifest.json",
+      "poses": [
+        "neutral",
+        "locomotion_a",
+        "locomotion_b",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "preview": "mobs/previews/hollow_poses.png",
+      "sha256_atlas": "10171d759f9bd2778dda9a1d5d8f451633fc9c69ddd92117e29fc518f43e952c",
+      "sha256_neutral_obj": "3c681d8e76e4d10b739fc69555fce3f4522ebd2afd1111f4eb11e1fcecfc0fdb",
+      "state_mapping": {
+        "death": "death",
+        "grip_or_fire": "attack",
+        "idle": "neutral",
+        "move_a": "locomotion_a",
+        "move_b": "locomotion_b",
+        "stagger": "hurt",
+        "telegraph": "warning"
+      },
+      "triangles": 436,
+      "vertices": 330
+    },
+    "reded": {
+      "atlas": "mobs/models/reded/reded_atlas.png",
+      "combat_timing_preserved": true,
+      "display_name": "Stone ReDead",
+      "neutral_obj": "mobs/models/reded/reded_neutral.obj",
+      "pose_manifest": "mobs/models/reded/reded_pose_manifest.json",
+      "poses": [
+        "neutral",
+        "locomotion_a",
+        "locomotion_b",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "preview": "mobs/previews/reded_poses.png",
+      "sha256_atlas": "eb0c98f39a47dea8b19f2bd79d2afca2df2ff5701a39421b718fe5c36eca7a02",
+      "sha256_neutral_obj": "b7059a08b23b893b80b7973656c6d77bbdae9eb47a48df74fc541a34ca5b3e2d",
+      "state_mapping": {
+        "death": "death",
+        "grip_or_fire": "attack",
+        "idle": "neutral",
+        "move_a": "locomotion_a",
+        "move_b": "locomotion_b",
+        "stagger": "hurt",
+        "telegraph": "warning"
+      },
+      "triangles": 380,
+      "vertices": 272
+    },
+    "surveyor": {
+      "atlas": "mobs/models/surveyor/surveyor_atlas.png",
+      "combat_timing_preserved": true,
+      "display_name": "Surveyor",
+      "neutral_obj": "mobs/models/surveyor/surveyor_neutral.obj",
+      "pose_manifest": "mobs/models/surveyor/surveyor_pose_manifest.json",
+      "poses": [
+        "neutral",
+        "locomotion_a",
+        "locomotion_b",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "preview": "mobs/previews/surveyor_poses.png",
+      "sha256_atlas": "911f30cc1ee3310a35ccca6b6c1fa122a4c68d43aabbd30b1fa9d4c20581c7d6",
+      "sha256_neutral_obj": "d2e339a08f3d352e0e28c6be513bc3f402f0ce47b5300a40ce7e06b540da3c22",
+      "state_mapping": {
+        "death": "death",
+        "grip_or_fire": "attack",
+        "idle": "neutral",
+        "move_a": "locomotion_a",
+        "move_b": "locomotion_b",
+        "stagger": "hurt",
+        "telegraph": "warning"
+      },
+      "triangles": 456,
+      "vertices": 308
+    },
+    "vore": {
+      "atlas": "mobs/models/vore/vore_atlas.png",
+      "combat_timing_preserved": true,
+      "display_name": "Vore Spindle",
+      "neutral_obj": "mobs/models/vore/vore_neutral.obj",
+      "pose_manifest": "mobs/models/vore/vore_pose_manifest.json",
+      "poses": [
+        "neutral",
+        "locomotion_a",
+        "locomotion_b",
+        "warning",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "preview": "mobs/previews/vore_poses.png",
+      "sha256_atlas": "5aa5685525612e30f89e6aac0b74a125e23ee08d44a18e7003567726cc57379e",
+      "sha256_neutral_obj": "f77227feff3fb503bd58e9a3633d79d289c18a6baed48aa9379bbe5726d7e46a",
+      "state_mapping": {
+        "death": "death",
+        "grip_or_fire": "attack",
+        "idle": "neutral",
+        "move_a": "locomotion_a",
+        "move_b": "locomotion_b",
+        "stagger": "hurt",
+        "telegraph": "warning"
+      },
+      "triangles": 468,
+      "vertices": 352
+    }
+  },
+  "notes": {
+    "previous_batches_preserved": true,
+    "renders": "All images in this round are CPU software-raster previews. No GPU, engine, desktop or audio path was used."
+  },
+  "prop_contact_sheet": "props/contact_sheet.png",
+  "props": {
+    "cistern-fossil": {
+      "anchor_roles": [
+        "landmark",
+        "overlook",
+        "vendor"
+      ],
+      "atlas": "props/models/cistern-fossil/cistern-fossil_atlas.png",
+      "bounds_max": [
+        1.48,
+        1.52,
+        3.13
+      ],
+      "bounds_min": [
+        -1.48,
+        -1.407564,
+        0.0
+      ],
+      "display_name": "Cistern Fossil",
+      "environment": "flooded-resonance-cistern",
+      "height_m": 3.13,
+      "manifest": "props/models/cistern-fossil/cistern-fossil_manifest.json",
+      "mtl": "props/models/cistern-fossil/cistern-fossil.mtl",
+      "obj": "props/models/cistern-fossil/cistern-fossil.obj",
+      "preview": "props/previews/cistern-fossil_views.png",
+      "sha256_atlas": "46858f38ece4857ee20db545898680de651e8ceb9b0e3c86e9e5bc80764d433a",
+      "sha256_obj": "e986299caf9b1afd441edaa8b107cf2b8ffb8bbb5bb3f5c2124eab17963460f5",
+      "triangles": 828,
+      "yaw_deg": 0
+    },
+    "garden-organ": {
+      "anchor_roles": [
+        "landmark",
+        "overlook",
+        "vendor"
+      ],
+      "atlas": "props/models/garden-organ/garden-organ_atlas.png",
+      "bounds_max": [
+        0.882216,
+        2.095859,
+        3.421511
+      ],
+      "bounds_min": [
+        -0.861926,
+        -0.628735,
+        0.0
+      ],
+      "display_name": "Filing Organ",
+      "environment": "hanging-boneglass-garden",
+      "height_m": 3.421511,
+      "manifest": "props/models/garden-organ/garden-organ_manifest.json",
+      "mtl": "props/models/garden-organ/garden-organ.mtl",
+      "obj": "props/models/garden-organ/garden-organ.obj",
+      "preview": "props/previews/garden-organ_views.png",
+      "sha256_atlas": "e44da73e4e6968c2e817b70c5dd5c9a8f96bc615498525fca0329ed2e4b4b85d",
+      "sha256_obj": "adf33dd7e5a628a6d727728861dcde01c9dd118e460ef6062c50931970d9c5a0",
+      "triangles": 835,
+      "yaw_deg": 20
+    },
+    "relay-sextant": {
+      "anchor_roles": [
+        "overlook",
+        "landmark",
+        "vendor"
+      ],
+      "atlas": "props/models/relay-sextant/relay-sextant_atlas.png",
+      "bounds_max": [
+        1.07,
+        0.9,
+        2.573897
+      ],
+      "bounds_min": [
+        -0.7,
+        -0.9,
+        0.0
+      ],
+      "display_name": "Relay Sextant",
+      "environment": "bent-relay-atrium",
+      "height_m": 2.573897,
+      "manifest": "props/models/relay-sextant/relay-sextant_manifest.json",
+      "mtl": "props/models/relay-sextant/relay-sextant.mtl",
+      "obj": "props/models/relay-sextant/relay-sextant.obj",
+      "preview": "props/previews/relay-sextant_views.png",
+      "sha256_atlas": "76fac8dbcc8bee395c1dddb64b281cbca38bca2a245c5624b3acf1dce02e7582",
+      "sha256_obj": "a8dbd8a7fa0649183099c2021e23275644c9e168516658028b6b2a50e0b3f770",
+      "triangles": 612,
+      "yaw_deg": 35
+    }
+  },
+  "uzdoom_native_tested": false
+}

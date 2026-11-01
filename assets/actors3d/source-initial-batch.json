@@ -1,0 +1,722 @@
+[
+  {
+    "file": "absentiel/absentiel.mtl",
+    "sha256": "dd5ae4202d04c54ed559dd850ae6a44b23fb8987c69aaee5e1a077ddc9758bef",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_atlas.png",
+    "sha256": "15d32682ee4d64a77f69358cdeb9495dfd078c7d739f30cf131eb80974d3432c",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_attack.obj",
+    "sha256": "5b2b2ac8a422e85480a2606bc9c78f81be90f19c8e7e3184b98a92b4dee4b3ec",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_death.obj",
+    "sha256": "f7cbd87293e9bb42ed37bf5656d1be898c50396fecf7ab647cae852d161cf2e5",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_hurt.obj",
+    "sha256": "4aa6c4e098de0ae9ca42afe9d0fb017314e2aef945fe561be8d369851309d47a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_move.obj",
+    "sha256": "649ee4c64c693a52c10a47400a059f2948ff6fb7a1e54c0c04794e50356a4d00",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_neutral.obj",
+    "sha256": "da7ccd69ac37a7eb497adfb958c96f3638d35ed7b9bdee22800f6a23145d26c3",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "absentiel/absentiel_warning.obj",
+    "sha256": "ba30c4b905653c3cf59bdd6668028f5cd26039c5e376179836aabba5b2bd1d9d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor.mtl",
+    "sha256": "40b657ec5dca70a521fcf74b94f8060bc478379ac28b77517f46e5eb7634eb1f",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_atlas.png",
+    "sha256": "a3253fcd9b15a9cbef3974494a0ff6254571d32ec0ee8358b799cb12679f669d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_attack.obj",
+    "sha256": "ccae8f7351008107bd22a9afa656e8ffced58ca47f5a67f51d7f3d056efab01e",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_death.obj",
+    "sha256": "de1f435d7dd5f5e693cb7fb8d6834eddd6bb2858f1de3a2f706d2227ba41c972",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_hurt.obj",
+    "sha256": "7e6e58e203e473d51d9df7be3908c9aad56745e9f3d1b836835d51de667e180f",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_move.obj",
+    "sha256": "6f8c36ad65d482b6f9afda5b10ee87bfb984ea50e376bb2c8d3382aabcce99c2",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_neutral.obj",
+    "sha256": "dabb844a61ec47062ea7d2f90896586c8a5f0b69fd2d235796918cc8ea84bb7c",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "calmor/calmor_warning.obj",
+    "sha256": "3fa4d5dc67e9f0c1100d0c2b06e0d9459c45a68a366170998841bbfb77e814fe",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz.mtl",
+    "sha256": "36c3b5686feb36931d9ff7bc63606644a570211ef4322024b54f35ce21f85306",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_atlas.png",
+    "sha256": "57ae21e3ee99eb4d5f084cc9baa0aeaf9f36ef17dcc5cff721a1d4de4ffed1ae",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_attack.obj",
+    "sha256": "aa50457ba4211c5611a88aa8886efb9637480ef6903ccb5290b5d21a467ec242",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_death.obj",
+    "sha256": "1b02a65e063953e78821a5cda3d96a9d6bb7dcc4605ec4502b688c41d82ec8b9",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_hurt.obj",
+    "sha256": "130f388741b2674466bc4e9b95d7cb35662b3cb9071c93bd3520cc2fa8786bf9",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_move.obj",
+    "sha256": "28ec9f0e683c5732fa608446ba3346496817d05cf38dd521b193ab1bba53cfd4",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_neutral.obj",
+    "sha256": "56c495f48a116e90e9149a67cd347690483ceb09da3ca4db0477d42c53c40fad",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "choraz/choraz_warning.obj",
+    "sha256": "c89e7da99b6f82de364d4cf8c7b66ec490b7bebdcd2b299911a68bfa2d74f034",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth.mtl",
+    "sha256": "11dcb4a7c8b3282649eecdb8ed7bd454584715573a5af0076dc8b50541ffb006",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_atlas.png",
+    "sha256": "6b8d4dcb9243e302e689975bfa58519027a63f452788f1f433c439eaee274f14",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_attack.obj",
+    "sha256": "1d287b1fa6878ca29a6da993f7289d36c74fb9dc2388e6965c452e4fe57b348d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_death.obj",
+    "sha256": "83d0c6b94d3cb9e89d449df6b87a446071341c4543bf42f6104c0921288a67fa",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_hurt.obj",
+    "sha256": "8813ccee09de4d57b0a2a7c9a6f0dd38b47ca8691fa71b6f8093056d50c4d032",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_move.obj",
+    "sha256": "09944f36a5db5e134df6ec2347cb1d1ce8fe069687ac99174543a5f528f75ab5",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_neutral.obj",
+    "sha256": "489ea6a0c2626e5614b53271fa8e2100df3ef276d46dc8ca86c0e6d6c43b5b5a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "consenth/consenth_warning.obj",
+    "sha256": "79639a118f93df2cee3210ae9f7f1d8870ea82429f22bb3a743d7834cf97fa84",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor.mtl",
+    "sha256": "c28dede81af200458e1865d024ce2ae4f66151fe4eb09ec71b9ae945db89f68a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_atlas.png",
+    "sha256": "52d0533546890c09b5513bae22530b81bc481d0e559677c76c70592f02f9a8f8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_attack.obj",
+    "sha256": "fedbfd212a1d437c763bacdcf29dce62ef3a905ddbacd7708fe45d2c7b62c9aa",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_death.obj",
+    "sha256": "7ef3f64825290c1d2b3e6b1058b3aa451d2f4f47da56411a7e150f9d6ddbf98e",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_hurt.obj",
+    "sha256": "2d2dd5a1b152269660bbd40ef2ac57e68a667cf01ee5fb707b6444b9bd15b96b",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_move.obj",
+    "sha256": "3b7518d035a1624e08ab293429a572a59b4c82063ab168f72e9e53d82851ccf8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_neutral.obj",
+    "sha256": "b22c99e3ee08c64940d9862cbf4517f464f1d66f6118a3e707241d9e01dd896a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "exceptor/exceptor_warning.obj",
+    "sha256": "2ea91bc6759b13de339ea9b74898f02a7e1f8b966ae91b61dd0394e277cd3ca8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel.mtl",
+    "sha256": "9d1b169ec8b2ba91b88632800dca68f6cfd06c06263cb8e19cdde0a08186e3ba",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_atlas.png",
+    "sha256": "f252455b0d4a0d9564ed0524280af4236233449964329fe7fa0e1f4c4bdedc9d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_attack.obj",
+    "sha256": "2e20894e6f6e99a91d9db57a8b7250a3ef61a51212186ecb995ab2fe4b0c0d06",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_death.obj",
+    "sha256": "81f68d6cc9f5bfa88d37dfe768d2e8589aebcbcdbb6c06d5043843e263c52306",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_hurt.obj",
+    "sha256": "a4f36a727aff20e4729be9855dd677691e701f913cebb1871f4701b75b94ffc8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_move.obj",
+    "sha256": "28bb02a96cdbf9bcd6265be69718435d6ec8ce3fafbe3706688998b23bc4151b",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_neutral.obj",
+    "sha256": "1aec7760a992e59511f59f97891197dc19c28a6a4f904dccd488b58741857ef4",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "jurisiel/jurisiel_warning.obj",
+    "sha256": "71a3fbe29b6d9a121ddbc44225cc54265ebf4ad6f0052e09fc0102c5457a56b4",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor.mtl",
+    "sha256": "5395a30d3e8570ed44a98d2160554890b1d47a0d740accccb3d261f52d9a22f9",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_atlas.png",
+    "sha256": "ec821cb250de43b057594a48e724f3db5544dff11773dcfcbb757b1062909493",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_attack.obj",
+    "sha256": "3765f85b1de5c76249810bd100871d2437e8649ec5f981ab4d1f069b2e499b73",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_death.obj",
+    "sha256": "333b94db807652dd190020edbcbf03f8ce8e91cea1f9a283b7e867c44c3b5449",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_hurt.obj",
+    "sha256": "66520332049a6300170dda85f6b34992b0b080b8a1caa4b943c02610d41dabb8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_move.obj",
+    "sha256": "22af1e1db7dff8931f9c6bc7a9178ce13014ed0328d0fa3133c1c5022a7f84bc",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_neutral.obj",
+    "sha256": "d9b819f553180177d718cd56f320ee59695afc6b8c21c4ac8137b4faba70adae",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "margor/margor_warning.obj",
+    "sha256": "617d350eb7d48af5c6f4a1f922584aee6d471ee3facf7beaed069fc1ff6cd5ed",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum.mtl",
+    "sha256": "44091a4f56bbc1bcf62ef2290a325ab6e42227d9677f24bca92330bf1301038e",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_atlas.png",
+    "sha256": "0cb9c413d1a21911fccecde6962b5c8fe582ad17d8e5d23c13493f96a292af6a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_attack.obj",
+    "sha256": "9a1432b8a759eccfeec9ed16795422302a7825c83c192bc8a0759adfef66f6ba",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_death.obj",
+    "sha256": "4a9b9a04d260549a7c5c23613dbffbece8ad01f483b790fcbef15477cfa741b0",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_hurt.obj",
+    "sha256": "fdb5c3f05679f96fd7e91d438cc1432e14ce6ea4fdcb8a1a02fde44aca98e6ee",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_move.obj",
+    "sha256": "ed2372949779829ad17b771f52397ef6879b068b10c910a98e35647111f704e7",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_neutral.obj",
+    "sha256": "ed98299792792c070d2866fcf912d39c22ff8f05d2f81c4b45fb746ace555123",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "posthum/posthum_warning.obj",
+    "sha256": "d1495fe5cec03d618c3c64ba258f42979189655c15600689dc10b3164f09255d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator.mtl",
+    "sha256": "290893bfb71d58348833e7c3a7f7746d397c5c2f4b07d671aa5cb9c5b5461998",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_atlas.png",
+    "sha256": "e2a248b48815d6bdbf811c03437245d0a441299487d175a185fcdd9202f14df3",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_attack.obj",
+    "sha256": "25327f47d9f0a0290190f9bb8e4e854a4ccf614761a854cd0e20ed90c9bd725a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_death.obj",
+    "sha256": "94cbc19864d6d166524684d230ebfb5147a78f263609aff728c247d08b2ecedc",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_hurt.obj",
+    "sha256": "59ad9d6a88e047867908ef70765a34680dab22bf84dcbaaf6ea8364fe0085e51",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_move.obj",
+    "sha256": "0591effadac60da75590484c4ad8bce79dce06823e6eb2b0126ef13fd4151f7e",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_neutral.obj",
+    "sha256": "c408c05cd220c3b1285c7ae761e4e6f63a60e4d42e9726f10b8a376655bb4b8b",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "probator/probator_warning.obj",
+    "sha256": "d512ba31df090acbe744fb70766c9b5d167bd06e1696bc5df34cdf9c7bee620f",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor.mtl",
+    "sha256": "e4664e9066e6e1c89160105b9fd7ffada18649fd504e3123a2a447c5f23ba839",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_atlas.png",
+    "sha256": "de903b2d200152de4350c8e3d537d0c25992d7c08b66b52b082271c6a57f317d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_attack.obj",
+    "sha256": "e1423ee547c2bea6f92037757f01935cc9b50313d428c44225a81f78a9c213c8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_death.obj",
+    "sha256": "71a90318ae403b65c9a8695a272188a55f1a2ce7ce9d720f62191ff9a3070b87",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_hurt.obj",
+    "sha256": "389e6dc2b01242a172d43e32b4be5cb6c8ceaeb35e662b98359befdcb45262dc",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_move.obj",
+    "sha256": "b5867fb37fb25fd0b11a7bdf105929d5e28af6d9166eb4cfab93896f607b1739",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_neutral.obj",
+    "sha256": "651ed2447aba7dd3244167e551b79f8ffd836575b4b6c5cce4564ccc154e6327",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "promissor/promissor_warning.obj",
+    "sha256": "73fc6de08cdaf3ace569182b207ce856d9e1bbbdb60544bb4ba8c60fc80822c3",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth.mtl",
+    "sha256": "2c591317806190924fe4f8269822e6c971f9776c4ce44d3181b461df4f09ea96",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_atlas.png",
+    "sha256": "3bd3e3b46b83713b6defd7c8c6a385749826bbcc7b6c40325122201819b8fb2d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_attack.obj",
+    "sha256": "ec8ba2de9fab26ee9784063fb3966f7106d1d7201e3e81d34ed396a4bb8bbbf9",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_death.obj",
+    "sha256": "41d4f24d8521a7123dd2d3f79d52d2e0dd69b2fc652972aa5561d6b06dbb48e0",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_hurt.obj",
+    "sha256": "12a454769729ba24246bc2f47152b019d6961bff9c349161f83b1c9d69c6ea23",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_move.obj",
+    "sha256": "67682b97e9486210d0521cd31e411c494a97bac914347c675421671df652fd93",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_neutral.obj",
+    "sha256": "6169e28f27863e0a41160c7689e077e84190ded2405cdf2bacc36da96e9de103",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "redacth/redacth_warning.obj",
+    "sha256": "e653d83087de4badb44df149767095994d42d38dc12038cf45c08997776a16a2",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel.mtl",
+    "sha256": "01913d9fa2a8f06616e1763bd1ade1d3903fac1633d4e53bb963bb62bbbb517d",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_atlas.png",
+    "sha256": "6850eb090513b7cdfd1b63ffe73b4ebb6a4851fcce4cc5a7472f55e8873ffd3a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_attack.obj",
+    "sha256": "5ee7d4ba843c490678df4a492ff44d02772599eeef3a7e5ad1f957f5ad080866",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_death.obj",
+    "sha256": "f7a0bd7dd372909fbb8614a3ec649efd95433484a9d39da2a6fa8c40c855b586",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_hurt.obj",
+    "sha256": "41a655e1fecfde71c850be864fc3ef5474b59c4beb9b6bdda30884d5373e1ec8",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_move.obj",
+    "sha256": "8090d72fcf32571929f34202744d637e56642bac9203c6c0e280565a36a06d99",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_neutral.obj",
+    "sha256": "7efcc9992e87119dd245a62e981f1785a0067391c9e35badd78b70d12c392536",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "repetiel/repetiel_warning.obj",
+    "sha256": "6edf25ceeee06fc18425b127e3f0e010ececd0f49f85ac0508846e1069a8a36a",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax.mtl",
+    "sha256": "39141d94ae0249d5324f72cca9f152b4731799b3c8e61dd5f7b40382909496aa",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_atlas.png",
+    "sha256": "630bca4cef09f42b44eb8ff5c6842cc69452d4de959c6e3b46f8090e96d2828c",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_attack.obj",
+    "sha256": "c81470580e7098bcfc0d64c07ca913d45fe574e05a4db334455c6e3ecb797102",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_death.obj",
+    "sha256": "ce5f729757d78ceafa2047098c381b1b21b8d0928bb911e1f5b6d61a32eee131",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_hurt.obj",
+    "sha256": "6877565b6821e8a4da5ca2286530271385621c7dedbb99c4042964495f0e64ee",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_move.obj",
+    "sha256": "bd138141f0d9711c44b74f096cb3ea7d6d82c9da88fce4ca68cf14889afb5563",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_neutral.obj",
+    "sha256": "5e5b82d3c199cc48a644979c69278f26b68f83df536a094d13589ff4b29721f7",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "scriptorax/scriptorax_warning.obj",
+    "sha256": "9df0beab535c0d191e3290b6f11f0e9793e20ca60e24616bfde82ec913a613d6",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth.mtl",
+    "sha256": "cb5387219fb969d2f35f961ed69f0870916906ca949dfdb30ba8c4cf83537732",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_atlas.png",
+    "sha256": "e13fddcc590986725ed161319e94264f7e64726df2fe8f595e325da6facf8647",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_attack.obj",
+    "sha256": "424727eac808c6049519d983b7a364bf153d83ac23a2a7b19c29087c14389a8b",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_death.obj",
+    "sha256": "a0e764f944024c684946d51a7fbcd41bccbd2309a8d9bb8ed7d6df42bb527d65",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_hurt.obj",
+    "sha256": "640aaed5390583980b4cfdc8fc2cb10242ffc8a80fe61306816f6d555229ca21",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_move.obj",
+    "sha256": "972835350d4b72f2eb666301376183f56c3f9e8bc7568c80f10cb3c19f9be1ba",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_neutral.obj",
+    "sha256": "81b2c0a2069b76af97c52fc28cef69d05d347e48dd74e45a8842f7973e0093cb",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "velaroth/velaroth_warning.obj",
+    "sha256": "8c53597dc282d0fd61595862934509e4a2ab6f74bd6b6258c2f54112b32f595c",
+    "source_batch": "nullrun-humanoid-bosses-20261031"
+  },
+  {
+    "file": "hollow/hollow.mtl",
+    "sha256": "2fe96d0c913ae36d490a06f3e2612d58afc97984747cb4742fbf5636ca95f8d2",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_atlas.png",
+    "sha256": "10fc11d8ff556d825e0123ff157df5f831cd1e70b8122de1edffb2c536bb13e7",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_attack.obj",
+    "sha256": "491373bb38a9fca559334b78ea8346d4b370bee5979b11a58a828b4f2473b25c",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_death.obj",
+    "sha256": "f2ae9137edaf5f2ea211a2271f0a22ec39a806815c64c2df44bb034f73227323",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_hurt.obj",
+    "sha256": "0ac6e8c7a1dff6a00fc12616a67905cd3ce4ddf7ffd1da0ec0c15dbafd781a15",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_locomotion.obj",
+    "sha256": "7ee80518aa4a7ec4cdc9e904fa255dad8217e20633d1d2b7759827c864cc7e6c",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_neutral.obj",
+    "sha256": "61f7adf98b714e29c43c64b1184250e17bf9c8aea6e21c671a152a5e2f22b00b",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "hollow/hollow_warning.obj",
+    "sha256": "4fc53719bbc7d017874dd1327f9c3917fe30a6b0105f7ba384cb3ffe1c4cecc1",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded.mtl",
+    "sha256": "5454f5c9a7dde99043243098f0e8626e0cf1b48bd067d9f328393962f711ddb6",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_atlas.png",
+    "sha256": "eb0c98f39a47dea8b19f2bd79d2afca2df2ff5701a39421b718fe5c36eca7a02",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_attack.obj",
+    "sha256": "adede3749d8adc418f9e0b09143fbc469cead16ab5f0f7ec492246bf3d073b00",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_death.obj",
+    "sha256": "457eeaa1f1b42e5918e793821a0e14f4d8c92e7eb5d663a8fb09266e46e3594a",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_hurt.obj",
+    "sha256": "9d32550e18d0ce75b0d10b600653678b7ccad7756ce3e74436a1522d76446774",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_locomotion.obj",
+    "sha256": "4a68897929dbb04b956abdb6a2227ab7ab3c29d1e20ad063757db8187daf3e25",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_neutral.obj",
+    "sha256": "43a4497f0897d1b4df29296f9b53f323f9f63d7fdedeaff25246d755fff0de4e",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "reded/reded_warning.obj",
+    "sha256": "9a099064f2c79b42a9d5ffedbd6475133fab5f1ec715230291a27dd966ead87b",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor.mtl",
+    "sha256": "07b82dba5c01360c21f39ce03d6e1307e6e9c03633a72667df9f23eb78d729e2",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_atlas.png",
+    "sha256": "911f30cc1ee3310a35ccca6b6c1fa122a4c68d43aabbd30b1fa9d4c20581c7d6",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_attack.obj",
+    "sha256": "c5c273784e611b298c6a4234908b8ba5a9dfb345edc368d239197bc5feec1462",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_death.obj",
+    "sha256": "f0252764a803676cc71a25b8790baaecb9fea36341f4bde8cecec29270a35384",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_hurt.obj",
+    "sha256": "2972323d711384a1b64789276a4bfc43fb31f8546233447909d21d4fb81a5b4a",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_locomotion.obj",
+    "sha256": "30c5f17b67bb98a0c449f93febcd17f8586cc08d5fa8333d282b6d603f6004f6",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_neutral.obj",
+    "sha256": "6b03d3449052e45756cd74f99a6778417a58709cdaf23d8e7802d5965c32f006",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "surveyor/surveyor_warning.obj",
+    "sha256": "5cc6dd4cc2828c808843c72106d59ce3e774cf231d6a455cb9710a2f46e57e33",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore.mtl",
+    "sha256": "16642cdfa4fb8a8c59f2500cce53557b19d1178ae2c4b0d999343faff8b8ac64",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_atlas.png",
+    "sha256": "5aa5685525612e30f89e6aac0b74a125e23ee08d44a18e7003567726cc57379e",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_attack.obj",
+    "sha256": "d3e85cf8fd5388b04f385210420d04fdb2a9b5e2d488b52df3aadaa21a10cfc2",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_death.obj",
+    "sha256": "9f98efc75008736c294fd1bf43547af6f0a1203a4da0d76c25b2112096686688",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_hurt.obj",
+    "sha256": "7ce514caabaf090f708024406599c1598f5368aff84bd90c3714471275a0de2d",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_locomotion.obj",
+    "sha256": "d6ecece7aed63df89cea6149f81cbd8ab31e4877a80908a8056b9ec9a1448631",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_neutral.obj",
+    "sha256": "5cc3a21ccd3d99c34de3126b90cf865b856d246d4256a80d1d09df034a2bbcc8",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  },
+  {
+    "file": "vore/vore_warning.obj",
+    "sha256": "3dfae9113a36043af1d14e6e6b1546fbd98d3758e6a417a70b14145336a1112d",
+    "source_batch": "nullrun-lowpoly-mobs-20261031"
+  }
+]

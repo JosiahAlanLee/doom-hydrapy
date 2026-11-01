@@ -1,0 +1,28 @@
+# original Null Run tower kit materials
+# texture shared_stair_landing.png
+newmtl steel
+Ka 0.08 0.08 0.08
+Kd 0.2902 0.3020 0.3216
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd shared_stair_landing.png
+
+newmtl stone
+Ka 0.08 0.08 0.08
+Kd 0.5569 0.5451 0.5176
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd shared_stair_landing.png
+
+newmtl paint
+Ka 0.08 0.08 0.08
+Kd 0.7882 0.6980 0.4157
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd shared_stair_landing.png

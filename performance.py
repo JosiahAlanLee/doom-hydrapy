@@ -7,6 +7,7 @@ from hydrapy import *
 from hydrapy.live import register_hook
 from client import Doom
 import ascii_op
+import legible_ops
 ROOT=Path(os.environ['DOOM_TAKE_ROOT']);SMOKE=os.environ.get('DOOM_SMOKE')=='1'
 STUDIO=dict(title='Freedoom / Gorgon / polyphonic live take')
 set_bpm(120)
@@ -50,8 +51,8 @@ if os.environ.get('DOOM_INDUSTRIAL')=='1':
     scene('doom-vector')(lambda:source.doomSobelVectorScope(edge_gain=2.2+.9*snare,hazard_glow=1.3+.8*kick,phosphor=.72,scan=200.).blend(src(o0).scale(1.003),.22).contrast(1.16))
     scene('doom-relief')(lambda:source.doomAnaglyphRelief(parallax=.014+.016*kick+.005*Fn1('sin',music_beat*.5),light_depth=.65,horizon=.56,mode=0.).contrast(1.12).saturate(1.15))
 else:
-    scene('doom-terminal')(lambda:source.doomAscii(100).contrast(1.1))
-    scene('doom-print')(lambda:source.brightness(.12).saturate(.3).halftone(5,.65,.75).color(1,.82,.59))
+    scene('doom-terminal')(lambda:source.doomLegibleAscii(240))
+    scene('doom-print')(lambda:source.doomLegiblePrint())
     scene('doom-scan')(lambda:source.ruttetra(100,.12,1.1,.25).color(.4,1,.8))
     scene('doom-feedback')(lambda:source.blend(src(o0).scale(1.006).scrollX(.002),.25).posterize(5,.7).saturate(.6))
 # A 1 Hz white sync square in the top-left corner, paired with an audio gate.

@@ -21,6 +21,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "i_system.h"
 #include "i_video.h"
@@ -1056,6 +1057,10 @@ void ST_Drawer (boolean fullscreen, boolean refresh)
 {
   
     st_statusbaron = (!fullscreen) || automapactive;
+#ifdef DOOM_ROGUE
+    // Palette updates below still run, even when a custom HUD owns the view.
+    if (getenv("DOOM_CLEAN_HUD")) st_statusbaron = false;
+#endif
     st_firsttime = st_firsttime || refresh;
 
     // Do red-/gold-shifts from damage/items

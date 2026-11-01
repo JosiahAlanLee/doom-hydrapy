@@ -23,6 +23,7 @@
 
 #include "doomdef.h" 
 #include "doomkeys.h"
+#include "rogue_boss.h"
 #include "doomstat.h"
 
 #include "deh_main.h"
@@ -1327,6 +1328,7 @@ extern char*	pagename;
  
 void G_ExitLevel (void) 
 { 
+    if (!Rogue_ExitAllowed()) return;
     secretexit = false; 
     gameaction = ga_completed; 
 } 
@@ -1334,6 +1336,7 @@ void G_ExitLevel (void)
 // Here's for the german edition.
 void G_SecretExitLevel (void) 
 { 
+    if (!Rogue_ExitAllowed()) return;
     // IF NO WOLF3D LEVELS, NO SECRET EXIT!
     if ( (gamemode == commercial)
       && (W_CheckNumForName("map31")<0))
@@ -1497,6 +1500,13 @@ void G_WorldDone (void)
 
     if (secretexit) 
 	players[consoleplayer].didsecret = true; 
+
+#ifdef DOOM_ROGUE
+    // The IPC backend validates this opt-in before starting a generated run.
+    // Keep ordinary Doom's MAP06 finale, but let our seven-tier run descend.
+    if (getenv("DOOM_ROGUE_FLOORS"))
+        return;
+#endif
 
     if ( gamemode == commercial )
     {

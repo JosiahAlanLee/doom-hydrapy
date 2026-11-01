@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 root=${DOOM_TAKE_ROOT:-/home/echevarian/dev/shared/codex/doom-hydrapy-20261030}
-repo=/home/echevarian/dev/shared/codex/doom-hydrapy
+repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 previous=/home/echevarian/dev/shared/codex/gorgon-r3b-20261030
 mode=${1:-smoke}
 export PYTHONDONTWRITEBYTECODE=1
@@ -24,4 +24,4 @@ if [[ ${DOOM_INDUSTRIAL:-0} == 1 ]]; then
  export DOOM_DATA_ROOT=/home/echevarian/dev/shared/codex/doom-hydrapy-20261030
  extra_plugins=(--plugin-dir "$PVX_PLUGIN_DIR")
 fi
-/home/echevarian/miniconda3/envs/hydrapy/bin/python -m gorgon --config "$root/$mode-rig.json" render "$root/$mode-score.json" --output "$root/$mode-capture" --jack-server doom_poly_20261030 --seconds "$duration" --warmup 4 --lead-blocks 2 --plugin-dir "$repo/poly" "${extra_plugins[@]}"
+/home/echevarian/miniconda3/envs/hydrapy/bin/python -m gorgon --config "$root/$mode-rig.json" render "$root/$mode-score.json" --output "$root/$mode-capture" --jack-server "${DOOM_JACK_SERVER:-doom_poly_20261030}" --seconds "$duration" --warmup 4 --lead-blocks 2 --plugin-dir "$repo/poly" "${extra_plugins[@]}"

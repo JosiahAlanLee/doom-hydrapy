@@ -1,0 +1,89 @@
+{
+  "title": "Threshold - low-CPU six-lane patch plan",
+  "status": "plan only: no Rack patch was built, loaded, auditioned or rendered",
+  "owner": "Codex integrates and may revoice; this file states intent, not parameter values",
+  "score": "score.json",
+  "principles": [
+    "Two PVX voices carry all pitched material: one lead, one bass.",
+    "Percussion is one compact algorithmic/noise source; Codex may split or combine lanes 1-3.",
+    "One restrained Spoon Bender provides space; no large reverb network.",
+    "No firmware emulation, no large sample/voice banks, no optical waveform prerequisite, no percussive DC pulses."
+  ],
+  "lanes": [
+    {
+      "lane": 1,
+      "name": "kick",
+      "score_default_machine": 16,
+      "plan": "Compact algorithmic kick from the percussion voice; short envelope, no layered sub stack.",
+      "note": "Gesture A is the syncopated 0,3,6,8,11,14 figure; gesture B is the half-time 0,6,10 stomp."
+    },
+    {
+      "lane": 2,
+      "name": "snare",
+      "score_default_machine": 17,
+      "plan": "Noise-based snare/clap from the same percussion voice; one hit at a time.",
+      "note": "Backbeat in gesture A, half-time hit on row 8 in gesture B."
+    },
+    {
+      "lane": 3,
+      "name": "hat",
+      "score_default_machine": 22,
+      "plan": "Short filtered noise hat; Codex may merge it into the percussion voice if the rig prefers.",
+      "note": "8th-note bed in acts 1 and 3, 16th-note drive in the works act."
+    },
+    {
+      "lane": 4,
+      "name": "riff/lead",
+      "score_default_machine": 0,
+      "plan": "One PVX voice, monophonic, mid register; the dry relay-skip riff and the angular descent gesture share it.",
+      "note": "Written range MIDI 57-81; no chords or overlapping gates."
+    },
+    {
+      "lane": 5,
+      "name": "bass",
+      "score_default_machine": 0,
+      "plan": "One PVX voice, monophonic, low register; chunky short notes in gesture A and long weighted notes in gesture B.",
+      "note": "Written range MIDI 38-53; no overlapping gates."
+    },
+    {
+      "lane": 6,
+      "name": "ambient/counterline",
+      "score_default_machine": 0,
+      "plan": "Sparse high counterline through the restrained Spoon Bender return; 34 events in 120 seconds.",
+      "note": "Written range MIDI 69-89; long rests are intentional."
+    }
+  ],
+  "voices": {
+    "PVX_lead": {
+      "lanes": [4],
+      "role": "riff and warning motif",
+      "cpu_note": "One instance, one voice, no unison or voice bank."
+    },
+    "PVX_bass": {
+      "lanes": [5],
+      "role": "chunky bass",
+      "cpu_note": "One instance, one voice, low register."
+    },
+    "percussion": {
+      "lanes": [1, 2, 3],
+      "role": "kick, snare and hat from one small algorithmic/noise source",
+      "cpu_note": "Codex chooses the module and may combine lanes; no sampled drum kit is required."
+    },
+    "space": {
+      "lanes": [6],
+      "role": "one restrained Spoon Bender send for the counterline",
+      "cpu_note": "Restrained settings; the dry lead and bass stay forward."
+    }
+  },
+  "routing_intent": [
+    "Lanes 4 and 5 to separate PVX voices, both dry and forward.",
+    "Lanes 1-3 to the compact percussion source.",
+    "Lane 6 through a modest Spoon Bender return, not a global wash.",
+    "No sidechain network, no multi-tap delay, no external sequencer."
+  ],
+  "codex_discretion": [
+    "All machine numbers in score.json are neutral slots; Codex may keep or replace them.",
+    "Percussion may be combined or revoiced without changing the note data.",
+    "No parameter values are asserted here because no patch was loaded."
+  ]
+}

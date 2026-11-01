@@ -1,0 +1,37 @@
+# original Null Run tower kit materials
+# texture boneglass_growth_chamber.png
+newmtl bone
+Ka 0.08 0.08 0.08
+Kd 0.8941 0.8745 0.8118
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd boneglass_growth_chamber.png
+
+newmtl peat
+Ka 0.08 0.08 0.08
+Kd 0.1294 0.1137 0.0980
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd boneglass_growth_chamber.png
+
+newmtl verdigris
+Ka 0.08 0.08 0.08
+Kd 0.2784 0.3922 0.3529
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd boneglass_growth_chamber.png
+
+newmtl glow
+Ka 0.08 0.08 0.08
+Kd 0.9176 0.9647 0.8471
+Ks 0.18 0.18 0.18
+Ns 24.0
+d 1.0
+illum 2
+map_Kd boneglass_growth_chamber.png

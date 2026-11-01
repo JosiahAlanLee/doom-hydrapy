@@ -486,13 +486,13 @@ fixed_t R_ScaleFromGlobalAngle (angle_t visangle)
     {
 	scale = FixedDiv (num, den);
 
-	if (scale > 64*FRACUNIT)
-	    scale = 64*FRACUNIT;
-	else if (scale < 256)
-	    scale = 256;
+	if (scale > 64*FRACUNIT*DOOM_RENDER_SCALE)
+	    scale = 64*FRACUNIT*DOOM_RENDER_SCALE;
+	else if (scale < 256*DOOM_RENDER_SCALE)
+	    scale = 256*DOOM_RENDER_SCALE;
     }
     else
-	scale = 64*FRACUNIT;
+	scale = 64*FRACUNIT*DOOM_RENDER_SCALE;
 	
     return scale;
 }
@@ -682,8 +682,8 @@ void R_ExecuteSetViewSize (void)
     }
     else
     {
-	scaledviewwidth = setblocks*32;
-	viewheight = (setblocks*168/10)&~7;
+	scaledviewwidth = setblocks*32*DOOM_RENDER_SCALE;
+	viewheight = ((setblocks*168/10)&~7)*DOOM_RENDER_SCALE;
     }
     
     detailshift = setdetail;
@@ -715,8 +715,8 @@ void R_ExecuteSetViewSize (void)
     R_InitTextureMapping ();
     
     // psprite scales
-    pspritescale = FRACUNIT*viewwidth/SCREENWIDTH;
-    pspriteiscale = FRACUNIT*SCREENWIDTH/viewwidth;
+    pspritescale = FRACUNIT*viewwidth/320;
+    pspriteiscale = FRACUNIT*320/viewwidth;
     
     // thing clipping
     for (i=0 ; i<viewwidth ; i++)

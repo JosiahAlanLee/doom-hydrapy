@@ -1,0 +1,52 @@
+{
+  "title": "Switchyard Chapel - low-CPU six-lane patch plan",
+  "status": "plan only: no Rack patch was built, loaded, auditioned or rendered",
+  "owner": "Codex integrates and may revoice; parameter ranges below are suggestions, not loaded values",
+  "score": "score.json",
+  "principles": [
+    "One poly PVX carries lead and counterline; one mono PVX carries the strong bass.",
+    "Percussion is a compact set of oscillator/noise/envelope/VCA supports.",
+    "One restrained clean Spoon Bender may provide a short industrial space.",
+    "No firmware emulation, no large voice bank, no GPU/audio/image sampling prerequisite and no DC pulses."
+  ],
+  "lanes": [
+    {"lane": 1, "name": "kick", "score_machine": 16, "plan": "Tight syncopated kick from a short oscillator/click envelope."},
+    {"lane": 2, "name": "snare", "score_machine": 17, "plan": "Noise snare/clap with a short decay; ghost hits stay quiet."},
+    {"lane": 3, "name": "hat/texture", "score_machine": 22, "plan": "Short filtered noise ticks; 8th or 16th according to the pattern."},
+    {"lane": 4, "name": "lead", "score_machine": 0, "plan": "Bright FM/electro PVX call and response, short envelopes."},
+    {"lane": 5, "name": "bass", "score_machine": 0, "plan": "One mono PVX bass, syncopated and forward but not layered."},
+    {"lane": 6, "name": "counterline/atmosphere", "score_machine": 0, "plan": "Sparse high counterline through the same PVX or a small Spoon Bender return."}
+  ],
+  "voices": {
+    "PVX_lead": {"lanes": [4, 6], "role": "lead and counterline", "cpu_note": "One instance, no unison stack."},
+    "PVX_bass": {"lanes": [5], "role": "mono bass", "cpu_note": "One instance, low register."},
+    "percussion": {"lanes": [1, 2, 3], "role": "tight oscillator/noise/envelope/VCA supports", "cpu_note": "Small and algorithmic; no sampled kit."},
+    "space": {"lanes": [6], "role": "optional short clean Spoon Bender", "cpu_note": "Short return, low mix."}
+  },
+  "routing_intent": [
+    "Lanes 4 and 6 to one poly PVX; lane 5 to one mono PVX.",
+    "Lanes 1-3 to the compact percussion supports.",
+    "Lane 6 may take a short Spoon Bender send; keep the dry bass forward.",
+    "No sidechain network, no multi-tap delay and no external sequencer."
+  ],
+  "revoicing_suggestions": {
+    "PVX_lead": {"attack_ms": "1-8", "release_ms": "80-220", "cutoff_hz": "2500-6000", "fm_ratio": "1.5-3.0", "note": "Bright but not harsh; leave the breakdown exposed."},
+    "PVX_bass": {"attack_ms": "1-10", "release_ms": "80-250", "cutoff_hz": "120-350", "note": "Strong mono figure; avoid a layered sub or distortion stack."},
+    "percussion": {"decay_ms": "30-140", "note": "Tight kick, dry snare and short hats; ghost velocities stay low."},
+    "space": {"decay_s": "0.15-0.45", "mix_percent": "4-12", "note": "Short slap/room only if it helps the call/response."}
+  },
+  "gorgon_bridge": "Gorgon poly pitch12/gates11/velocity3 are the real bridge outputs from the score. Suggested velocity goes to a VCA, not to PVX input2.",
+  "pvx_input2": "PVX input2 is external AUDIO, not velocity. Any velocity suggestion in this plan belongs on a VCA.",
+  "limits": [
+    "No firmware emulation.",
+    "No giant voice banks.",
+    "No GPU/audio/image sampling prerequisites.",
+    "No DC pulses.",
+    "No patch was loaded or auditioned here."
+  ],
+  "codex_discretion": [
+    "All machine numbers are neutral score slots and may be replaced.",
+    "Parameter ranges are starting suggestions only; Codex owns the real patch and audio review.",
+    "The breakdown may use fewer percussion sources without changing the note data."
+  ]
+}

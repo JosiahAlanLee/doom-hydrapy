@@ -182,9 +182,20 @@ void D_Display (void)
     boolean			done;
     boolean			wipe;
     boolean			redrawsbar;
+#ifdef DOOM_ROGUE
+    static boolean clean_view_set = false;
+#endif
 
     if (nodrawers)
     	return;                    // for comparative timing / profiling
+#ifdef DOOM_ROGUE
+    if (getenv("DOOM_CLEAN_HUD") && !clean_view_set)
+    {
+        screenblocks = 11;
+        R_SetViewSize(11, detailLevel);
+        clean_view_set = true;
+    }
+#endif
 		
     redrawsbar = false;
     
@@ -218,12 +229,12 @@ void D_Display (void)
 			break;
 		if (automapactive)
 			AM_Drawer ();
-		if (wipe || (viewheight != 200 && fullscreen) )
+		if (wipe || (viewheight != SCREENHEIGHT && fullscreen) )
 			redrawsbar = true;
 		if (inhelpscreensstate && !inhelpscreens)
 			redrawsbar = true;              // just put away the help screen
-		ST_Drawer (viewheight == 200, redrawsbar );
-		fullscreen = viewheight == 200;
+		ST_Drawer (viewheight == SCREENHEIGHT, redrawsbar );
+		fullscreen = viewheight == SCREENHEIGHT;
 		break;
 
       case GS_INTERMISSION:
@@ -247,6 +258,9 @@ void D_Display (void)
     	R_RenderPlayerView (&players[displayplayer]);
 
     if (gamestate == GS_LEVEL && gametic)
+#ifdef DOOM_ROGUE
+        if (!getenv("DOOM_CLEAN_HUD"))
+#endif
     	HU_Drawer ();
     
     // clean up border stuff
@@ -261,7 +275,7 @@ void D_Display (void)
     }
 
     // see if the border needs to be updated to the screen
-    if (gamestate == GS_LEVEL && !automapactive && scaledviewwidth != 320)
+    if (gamestate == GS_LEVEL && !automapactive && scaledviewwidth != SCREENWIDTH)
     {
 		if (menuactive || menuactivestate || !viewactivestate)
 			borderdrawcount = 3;

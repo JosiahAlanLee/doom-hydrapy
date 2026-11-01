@@ -34,6 +34,8 @@
 // State.
 #include "doomstat.h"
 #include "r_state.h"
+#include "rogue_ai.h"
+#include "rogue_boss.h"
 
 // Data.
 #include "sounds.h"
@@ -800,7 +802,7 @@ void A_PosAttack (mobj_t* actor)
     S_StartSound (actor, sfx_pistol);
     angle += (P_Random()-P_Random())<<20;
     damage = ((P_Random()%5)+1)*3;
-    P_LineAttack (actor, angle, MISSILERANGE, slope, damage);
+    P_LineAttack (actor, angle, MISSILERANGE, slope, Rogue_Damage(actor,damage));
 }
 
 void A_SPosAttack (mobj_t* actor)
@@ -888,7 +890,8 @@ void A_BspiAttack (mobj_t *actor)
     A_FaceTarget (actor);
 
     // launch a missile
-    P_SpawnMissile (actor, actor->target, MT_ARACHPLAZ);
+    if (!Rogue_BossAttack(actor))
+        P_SpawnMissile (actor, actor->target, MT_ARACHPLAZ);
 }
 
 
@@ -907,13 +910,14 @@ void A_TroopAttack (mobj_t* actor)
     {
 	S_StartSound (actor, sfx_claw);
 	damage = (P_Random()%8+1)*3;
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
 	return;
     }
 
     
-    // launch a missile
-    P_SpawnMissile (actor, actor->target, MT_TROOPSHOT);
+    // The generative cantor throws a readable two-shot fan.
+    if (!Rogue_Fan(actor))
+        P_SpawnMissile (actor, actor->target, MT_TROOPSHOT);
 }
 
 
@@ -928,7 +932,7 @@ void A_SargAttack (mobj_t* actor)
     if (P_CheckMeleeRange (actor))
     {
 	damage = ((P_Random()%10)+1)*4;
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
     }
 }
 
@@ -943,7 +947,7 @@ void A_HeadAttack (mobj_t* actor)
     if (P_CheckMeleeRange (actor))
     {
 	damage = (P_Random()%6+1)*10;
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
 	return;
     }
     
@@ -977,7 +981,8 @@ void A_BruisAttack (mobj_t* actor)
     }
     
     // launch a missile
-    P_SpawnMissile (actor, actor->target, MT_BRUISERSHOT);
+    if (!Rogue_BossAttack(actor))
+        P_SpawnMissile (actor, actor->target, MT_BRUISERSHOT);
 }
 
 
@@ -1096,7 +1101,7 @@ void A_SkelFist (mobj_t*	actor)
     {
 	damage = ((P_Random()%10)+1)*6;
 	S_StartSound (actor, sfx_skepch);
-	P_DamageMobj (actor->target, actor, actor, damage);
+	P_DamageMobj (actor->target, actor, actor, Rogue_Damage(actor,damage));
     }
 }
 
@@ -1345,6 +1350,7 @@ void A_FatRaise (mobj_t *actor)
 
 void A_FatAttack1 (mobj_t* actor)
 {
+    if (Rogue_BossAttack(actor)) return;
     mobj_t*	mo;
     mobj_t*     target;
     int		an;
@@ -1365,6 +1371,7 @@ void A_FatAttack1 (mobj_t* actor)
 
 void A_FatAttack2 (mobj_t* actor)
 {
+    if (Rogue_Class(actor)==9) return;
     mobj_t*	mo;
     mobj_t*     target;
     int		an;
@@ -1384,6 +1391,7 @@ void A_FatAttack2 (mobj_t* actor)
 
 void A_FatAttack3 (mobj_t*	actor)
 {
+    if (Rogue_Class(actor)==9) return;
     mobj_t*	mo;
     mobj_t*     target;
     int		an;

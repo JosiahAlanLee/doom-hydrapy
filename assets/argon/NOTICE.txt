@@ -1,0 +1,12 @@
+Argon monster art study — derivative work
+SPDX-License-Identifier: GPL-2.0-or-later
+
+Derived from the user-supplied "Nullrun Monsters.py"
+(SPDX-License-Identifier: GPL-2.0-or-later), the NULLRUN procedural monster
+bestiary and states. The original attachment is preserved untouched at:
+assets/argon/provenance/Argon-original.py
+
+Original concepts and attribution are retained. The four archetypes and their
+identities (Surveyor / Wire Shambler "Ballast Husk" / Threshold Mimic / Vore
+Spindle) remain the original designs. No existing game sprites or models were
+fetched or copied. All geometry in this batch is original procedural art.

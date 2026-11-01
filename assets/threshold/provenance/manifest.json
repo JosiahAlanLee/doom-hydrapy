@@ -1,0 +1,531 @@
+{
+  "kit": "nullrun-threshold-content",
+  "job": "20261030-230205-deepseek-nullrun-threshold-content",
+  "date": "2026-10-30",
+  "author": "DeepSeek (model-assisted), directed by Josiah",
+  "license": "GPL-2.0-or-later",
+  "credits": "CREDITS.md",
+  "seed_scheme": {
+    "opening": "(seed << 8) | number",
+    "art": "fixed per-asset seeds in art.frame_seed and material builders",
+    "score": "0x007A11E5"
+  },
+  "opening": {
+    "interface": "generate(seed, number=1) -> rogue.maps.Floor",
+    "theme": [
+      "THRESHOLD / SERVICE FOYER",
+      "NWALL01",
+      "NFLAT01",
+      "NFLAT03",
+      176
+    ],
+    "start": [
+      5,
+      27
+    ],
+    "exit": [
+      7,
+      6
+    ],
+    "open_cells": 351,
+    "route_cells": 64,
+    "rooms": 8,
+    "loops": [
+      "atrium ring",
+      "foyer two-way",
+      "works two-way",
+      "relay-pump pair"
+    ],
+    "sightlines": [
+      {
+        "name": "atrium-south",
+        "a": [
+          9,
+          21
+        ],
+        "b": [
+          21,
+          21
+        ],
+        "tiles": 13,
+        "clear": true
+      },
+      {
+        "name": "atrium-north",
+        "a": [
+          9,
+          9
+        ],
+        "b": [
+          21,
+          9
+        ],
+        "tiles": 13,
+        "clear": true
+      },
+      {
+        "name": "atrium-west",
+        "a": [
+          9,
+          9
+        ],
+        "b": [
+          9,
+          21
+        ],
+        "tiles": 13,
+        "clear": true
+      },
+      {
+        "name": "atrium-east",
+        "a": [
+          21,
+          9
+        ],
+        "b": [
+          21,
+          21
+        ],
+        "tiles": 13,
+        "clear": true
+      },
+      {
+        "name": "threshold-view",
+        "a": [
+          10,
+          8
+        ],
+        "b": [
+          10,
+          21
+        ],
+        "tiles": 14,
+        "clear": true
+      },
+      {
+        "name": "foyer-gallery",
+        "a": [
+          5,
+          27
+        ],
+        "b": [
+          5,
+          21
+        ],
+        "tiles": 7,
+        "clear": true
+      }
+    ],
+    "max_step": 8,
+    "start_clearance": 6,
+    "secret_design": "The side cache (a two-tile maintenance recess off the pump hall) is an optional resource detour, not a native secret. No sector tag, secret flag or trigger is set; Codex may treat it as ordinary geometry.",
+    "reserved_types": {
+      "latchwing": {
+        "type": 69,
+        "class": 15,
+        "flag": 7
+      },
+      "relay_choir": {
+        "type": 71,
+        "class": 16,
+        "flag": 7
+      }
+    },
+    "thing_types": [
+      1,
+      9,
+      69,
+      71,
+      84,
+      2001,
+      2002,
+      2008,
+      2011,
+      2012,
+      2018
+    ],
+    "props": [
+      {
+        "name": "directory_sign",
+        "cell": [
+          7,
+          25
+        ]
+      },
+      {
+        "name": "service_lamp",
+        "cell": [
+          4,
+          29
+        ]
+      },
+      {
+        "name": "directory_sign",
+        "cell": [
+          9,
+          9
+        ]
+      },
+      {
+        "name": "service_lamp",
+        "cell": [
+          24,
+          20
+        ]
+      },
+      {
+        "name": "cable_shrine",
+        "cell": [
+          30,
+          11
+        ]
+      },
+      {
+        "name": "service_lamp",
+        "cell": [
+          6,
+          5
+        ]
+      }
+    ],
+    "checks": "opening-overview.json / checks.json"
+  },
+  "art": {
+    "families": {
+      "latchwing": [
+        "A",
+        "B"
+      ],
+      "relay_choir": [
+        "A",
+        "B"
+      ]
+    },
+    "states": [
+      "idle",
+      "walk",
+      "warning",
+      "attack",
+      "hurt",
+      "death"
+    ],
+    "frames_per_state": 4,
+    "atlas": [
+      512,
+      768
+    ],
+    "frame": [
+      128,
+      128
+    ],
+    "walls": [
+      "NWALL01",
+      "NWALL02",
+      "NWALL03",
+      "NWALL04",
+      "NWALL05",
+      "NWALL06"
+    ],
+    "wall_size": [
+      128,
+      128
+    ],
+    "flats": [
+      "NFLAT01",
+      "NFLAT02",
+      "NFLAT03",
+      "NFLAT04"
+    ],
+    "flat_size": [
+      64,
+      64
+    ],
+    "props": [
+      "service_lamp",
+      "cable_shrine",
+      "directory_sign"
+    ],
+    "prop_size": [
+      96,
+      128
+    ],
+    "checks": "art-checks.json"
+  },
+  "score": {
+    "bpm": 144,
+    "bars": 72,
+    "rows": 1152,
+    "seconds": 120.0,
+    "patterns": 9,
+    "bars_per_pattern": 8,
+    "rate": 1,
+    "loop": false,
+    "chain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "lanes": [
+      "kick",
+      "snare",
+      "hat",
+      "riff/lead",
+      "bass",
+      "ambient/counterline"
+    ],
+    "sounds": [
+      16,
+      17,
+      22,
+      0,
+      0,
+      0
+    ],
+    "sha256": "4585084d135754d79cef3eace708af7655ef3c643b90de2e24835044b9ca45de",
+    "checks": "score-checks.json",
+    "patch_plan": "patch-plan.json"
+  },
+  "verification": {
+    "checks_json": "checks.json",
+    "passed": true,
+    "verified": [
+      "deterministic floor geometry, connectivity, loops, steps, props and 12-seed checks",
+      "creature atlas dimensions, transparency, anchoring, frame motion, corpses and tile seams",
+      "score validator, exact 120 s timeline, act markers, monophony, pitch policy and gestures",
+      "file presence, hashes, license headers and the absence of fonts/UI"
+    ],
+    "not_verified": [
+      "native Doom gameplay, WAD assembly, native palette readability or enemy behavior",
+      "audio audition, Rack patch load, recording or any video render",
+      "HUD/font replacement, which Codex owns"
+    ]
+  },
+  "files": [
+    {
+      "path": "CREDITS.md",
+      "bytes": 2097,
+      "sha256": "f36202479042a9353c6b33305028bc32c6ed2a1b88bb54e80ef996c5f39488c3"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6263,
+      "sha256": "cf919a7ee24e540c974911aa68430308f52da9124bca99b4a0f8682ba9370634"
+    },
+    {
+      "path": "art/contact_creatures.png",
+      "bytes": 245596,
+      "sha256": "76f7dde63f5c897608821fcff66baef110be3a371523f7252ac2f840a20982b6"
+    },
+    {
+      "path": "art/contact_materials.png",
+      "bytes": 44943,
+      "sha256": "40793ad99df05b71e3882c9252b8ee8574ea9f5802599d7667bff6aadbcf80f0"
+    },
+    {
+      "path": "art/contact_props.png",
+      "bytes": 5456,
+      "sha256": "3908e8da4dcfd6822f21b63e3663f3770cb630002810198474ef73b114948b5a"
+    },
+    {
+      "path": "art/creatures/latchwing_A.png",
+      "bytes": 25896,
+      "sha256": "515c070739ee8d62703b93fbef479c9e18f1797c588f368a3c8930a4502243c4"
+    },
+    {
+      "path": "art/creatures/latchwing_B.png",
+      "bytes": 27650,
+      "sha256": "97eded6c8a2bb8af4c8383bd7cfc68826d6801e7535843b07a3553a04d7e4e46"
+    },
+    {
+      "path": "art/creatures/relay_choir_A.png",
+      "bytes": 29568,
+      "sha256": "6db4e6248375e07e6339832ffa7b02cb8c7442f756acb0a1347cef49c1534d35"
+    },
+    {
+      "path": "art/creatures/relay_choir_B.png",
+      "bytes": 21843,
+      "sha256": "83aeac463fba493ab224df28f434bc32ac97838d1d0f64f420dd1e0db1e2ff58"
+    },
+    {
+      "path": "art/flats/NFLAT01.png",
+      "bytes": 3235,
+      "sha256": "288a6bdc0a569228e20fade32efd8b62fb3d752cb47dcd7092a45f0859fcf762"
+    },
+    {
+      "path": "art/flats/NFLAT02.png",
+      "bytes": 1795,
+      "sha256": "0f7b334cd0c3b1cf9765b8f5f3530f5e6365aab7e1e25548e5386d393c59d913"
+    },
+    {
+      "path": "art/flats/NFLAT03.png",
+      "bytes": 1962,
+      "sha256": "f41f852b01a7bf7d9c4a1ec240cca5f7b966f0081302c1bc3ae51cf9ad08f344"
+    },
+    {
+      "path": "art/flats/NFLAT04.png",
+      "bytes": 1037,
+      "sha256": "130a20ed497e5e0b3b3d3604aa120d3386ce67bec6ecf61bd02d4b8c3d95a3e4"
+    },
+    {
+      "path": "art/props/cable_shrine.png",
+      "bytes": 1290,
+      "sha256": "67865ccc81abb6a223937fe38350ba0638ed8d8feedb4dc728a1fec698a368d4"
+    },
+    {
+      "path": "art/props/directory_sign.png",
+      "bytes": 759,
+      "sha256": "5cb32fe2e424a83cd026a3663139273373ca6bd6b7ee853d7ca50faf6851f7ae"
+    },
+    {
+      "path": "art/props/service_lamp.png",
+      "bytes": 870,
+      "sha256": "9506895bbcc7b737e265cfd10e1c8ca316f54d6619ab2619de817d599c5de70a"
+    },
+    {
+      "path": "art/sheets/NFLAT01_2x2.png",
+      "bytes": 4143,
+      "sha256": "f7b675159470a8cc814ae8bd008ed304eae9f5a0d648ac115f92339f5e45b6b0"
+    },
+    {
+      "path": "art/sheets/NFLAT02_2x2.png",
+      "bytes": 2431,
+      "sha256": "457b6507869434ea6335ef1e11071ecd0ae49bf863aaef7fd4f0b821ea64a897"
+    },
+    {
+      "path": "art/sheets/NFLAT03_2x2.png",
+      "bytes": 2682,
+      "sha256": "d9fbaad4212c4c17b93aa780b921d400195a33ad1415adcce2fa5198034f78ab"
+    },
+    {
+      "path": "art/sheets/NFLAT04_2x2.png",
+      "bytes": 1673,
+      "sha256": "26a58d42d81dda172963063208e2fa06a5bfdde8a0b81c5bf65d05e47333cc0b"
+    },
+    {
+      "path": "art/sheets/NWALL01_2x2.png",
+      "bytes": 10660,
+      "sha256": "93f29fe994f1b48e81717b75c446dd5a0926a5d67b85bb822da54d926858b62c"
+    },
+    {
+      "path": "art/sheets/NWALL02_2x2.png",
+      "bytes": 15410,
+      "sha256": "93f81ef188677c98fdfa1c08ee637da607fd7437ada248f0e75d094fba9cf692"
+    },
+    {
+      "path": "art/sheets/NWALL03_2x2.png",
+      "bytes": 6641,
+      "sha256": "4f2dedd3f417b9fdee837cfa7a860da560f64fd062bf2977a83558db6d99b5ce"
+    },
+    {
+      "path": "art/sheets/NWALL04_2x2.png",
+      "bytes": 14351,
+      "sha256": "563c29a84ac7bbd0811fc68313a6517f7eddfb8e5221dd6195fe57cc6b5f0c99"
+    },
+    {
+      "path": "art/sheets/NWALL05_2x2.png",
+      "bytes": 6494,
+      "sha256": "e353ee1dc8e66e5f7d8f44e6d3fbad198222f9f78a70dc8ace1c586738d4d70d"
+    },
+    {
+      "path": "art/sheets/NWALL06_2x2.png",
+      "bytes": 7916,
+      "sha256": "2fb5e27acf93c9530eed040d1f1a7007cf650654b480b6de1be8de1f023cec53"
+    },
+    {
+      "path": "art/walls/NWALL01.png",
+      "bytes": 4545,
+      "sha256": "8923323d9be42dd5e5d079f61901bd6cc77fe09bcbb57d11b5d151c728b9a2ff"
+    },
+    {
+      "path": "art/walls/NWALL02.png",
+      "bytes": 6737,
+      "sha256": "13b4de4f6b7d6b5d7c1c267c744ba70249a923196cbd70e1d8cf709349664094"
+    },
+    {
+      "path": "art/walls/NWALL03.png",
+      "bytes": 2747,
+      "sha256": "0c246ba64a7d315b9254e45feedce5fbf59847a32c7f789c207a3b9e5b44dc76"
+    },
+    {
+      "path": "art/walls/NWALL04.png",
+      "bytes": 6257,
+      "sha256": "096e61178f40759d5d5986ad379a80b89ccc2a0354699aa92fd5daa5e8b2cecb"
+    },
+    {
+      "path": "art/walls/NWALL05.png",
+      "bytes": 2522,
+      "sha256": "35512b6dbfa89abba0c2ddc5cd5fbe7d7bed8cfce3d7b471131af2b54e9d2caa"
+    },
+    {
+      "path": "art/walls/NWALL06.png",
+      "bytes": 3263,
+      "sha256": "9367c42c55cd8df1a8b125d1096b04468959936384ef203ccb8264f9ca838f48"
+    },
+    {
+      "path": "art-checks.json",
+      "bytes": 10733,
+      "sha256": "56d59fd33100b44078093a2639a19982f90903be21544383557c66b0b275fde8"
+    },
+    {
+      "path": "art.py",
+      "bytes": 42228,
+      "sha256": "acdb898e6d36e85b1d5ce40b1a6778f55c6019d97fdc049bef62571890e119f5"
+    },
+    {
+      "path": "check_all.py",
+      "bytes": 11985,
+      "sha256": "4db9c18e8c30e0d60e6fda4297f2ff362ae51b24f8ed6e353407c27ee19c9fab"
+    },
+    {
+      "path": "check_score.py",
+      "bytes": 9880,
+      "sha256": "1b42e53b1ed384526cecfbf59e687fd5fa220514c2b7dc398b6facee12a257c5"
+    },
+    {
+      "path": "checks.json",
+      "bytes": 3553,
+      "sha256": "f626ac2c2db641b031bea1477a817fb31ec7e88df6b67af07ce795ebc70f3cb9"
+    },
+    {
+      "path": "opening-overview.json",
+      "bytes": 26703,
+      "sha256": "2c7c4ad2aa6c2c6579371e87d9b127c1c50af8fa8e16ac247adebf3e7dde5d5b"
+    },
+    {
+      "path": "opening-overview.png",
+      "bytes": 32613,
+      "sha256": "4c10431bd0b3969b6720fea02ca46ea2806d1f9e189486c63751800f07ea587f"
+    },
+    {
+      "path": "opening.py",
+      "bytes": 29576,
+      "sha256": "7ac145ce53b5d2b289cd2fa6ae3d3b48381432c32abcfc9cf85ec1697597987b"
+    },
+    {
+      "path": "patch-plan.json",
+      "bytes": 3622,
+      "sha256": "200482439e3927b18f2fc9e424c4285c24744aee3ad1b3572c91c15b46433c43"
+    },
+    {
+      "path": "score-checks.json",
+      "bytes": 5216,
+      "sha256": "14fb90e98201af42a037279d65d270361ff026f09add62f33378bffd8ca07d26"
+    },
+    {
+      "path": "score.json",
+      "bytes": 120648,
+      "sha256": "4585084d135754d79cef3eace708af7655ef3c643b90de2e24835044b9ca45de"
+    },
+    {
+      "path": "score.py",
+      "bytes": 14141,
+      "sha256": "70d5a61dca145b807fdd6f158cd1be4b10fa1d6f5251a6475ba293bfe62f50ff"
+    }
+  ]
+}

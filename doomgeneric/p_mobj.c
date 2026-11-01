@@ -32,6 +32,9 @@
 #include "s_sound.h"
 
 #include "doomstat.h"
+#include "rogue_ai.h"
+#include "rogue_creature.h"
+#include "rogue_argon.h"
 
 
 void G_PlayerReborn (int player);
@@ -440,6 +443,8 @@ P_NightmareRespawn (mobj_t* mobj)
 //
 void P_MobjThinker (mobj_t* mobj)
 {
+    if (Rogue_ArgonThink(mobj)) {Rogue_Visual(mobj);return;}
+    if (Rogue_CreatureThink(mobj)) {Rogue_Visual(mobj);return;}
     // momentum movement
     if (mobj->momx
 	|| mobj->momy
@@ -495,7 +500,7 @@ void P_MobjThinker (mobj_t* mobj)
 
 	P_NightmareRespawn (mobj);
     }
-
+    Rogue_Visual(mobj);
 }
 
 
@@ -571,6 +576,7 @@ int		iquetail;
 
 void P_RemoveMobj (mobj_t* mobj)
 {
+    Rogue_CreatureRemove(mobj);
     if ((mobj->flags & MF_SPECIAL)
 	&& !(mobj->flags & MF_DROPPED)
 	&& (mobj->type != MT_INV)
@@ -822,6 +828,7 @@ void P_SpawnMapThing (mapthing_t* mthing)
     
     mobj = P_SpawnMobj (x,y,z, i);
     mobj->spawnpoint = *mthing;
+    Rogue_Apply(mobj,mthing);
 
     if (mobj->tics > 0)
 	mobj->tics = 1 + (P_Random () % mobj->tics);
@@ -964,6 +971,7 @@ P_SpawnMissile
 	S_StartSound (th, th->info->seesound);
 
     th->target = source;	// where it came from
+    Rogue_Projectile(source,th);
     an = R_PointToAngle2 (source->x, source->y, dest->x, dest->y);
 
     // fuzzy player

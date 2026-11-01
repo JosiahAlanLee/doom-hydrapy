@@ -42,7 +42,12 @@ planefunction_t		ceilingfunc;
 //
 
 // Here comes the obnoxious "visplane".
-#define MAXVISPLANES	128
+#ifdef DOOM_ROGUE
+// Sector-based generated surfaces need more planes than the original maps.
+#define MAXVISPLANES 2048
+#else
+#define MAXVISPLANES 128
+#endif
 visplane_t		visplanes[MAXVISPLANES];
 visplane_t*		lastvisplane;
 visplane_t*		floorplane;
@@ -235,7 +240,7 @@ R_FindPlane
     if (check < lastvisplane)
 	return check;
 		
-    if (lastvisplane - visplanes == MAXVISPLANES)
+    if (lastvisplane - visplanes >= MAXVISPLANES)
 	I_Error ("R_FindPlane: no more visplanes");
 		
     lastvisplane++;
@@ -290,7 +295,7 @@ R_CheckPlane
     }
 
     for (x=intrl ; x<= intrh ; x++)
-	if (pl->top[x] != 0xff)
+	if (pl->top[x] != PLANE_UNSET)
 	    break;
 
     if (x > intrh)
@@ -303,6 +308,8 @@ R_CheckPlane
     }
 	
     // make a new visplane
+    if (lastvisplane - visplanes >= MAXVISPLANES)
+        I_Error ("R_CheckPlane: no more visplanes");
     lastvisplane->height = pl->height;
     lastvisplane->picnum = pl->picnum;
     lastvisplane->lightlevel = pl->lightlevel;
@@ -428,8 +435,8 @@ void R_DrawPlanes (void)
 
 	planezlight = zlight[light];
 
-	pl->top[pl->maxx+1] = 0xff;
-	pl->top[pl->minx-1] = 0xff;
+	pl->top[pl->maxx+1] = PLANE_UNSET;
+	pl->top[pl->minx-1] = PLANE_UNSET;
 		
 	stop = pl->maxx + 1;
 

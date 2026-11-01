@@ -1,0 +1,1514 @@
+{
+  "format": "nullrun-tower-props-1",
+  "source_seed": 20261031,
+  "license": "GPL-2.0-or-later",
+  "title": "Null Run tower 3D prop and circulation kit",
+  "coordinate_system": {
+    "up": "Z",
+    "units": "metres",
+    "doom_units_per_metre": 64,
+    "handedness": "right-handed",
+    "obj_units": "metres",
+    "conversion_note": "1 m = 64 Doom units. The native map grid uses 128-unit tiles, i.e. 2 m at this conversion; mesh assets and layout tables use the requested 64 u/m convention."
+  },
+  "texture_note": "Each OBJ has an adjacent 256x256 RGB PNG and an MTL that references it with map_Kd. Materials map to four inset patches in that PNG; UVs stay inside [0,1]. The textures are original procedural art.",
+  "gltf_note": "OBJ+MTL is the delivered interchange format. A glTF exporter was not added, per the brief not to spend the job on a new export framework.",
+  "render_note": "Contact sheets are software orthographic previews (flat-shaded triangles, painter-sorted). They are not engine renders and do not claim lighting, collision or gameplay behaviour.",
+  "shared": [
+    {
+      "id": "stair_flight",
+      "name": "Straight Stair Flight",
+      "role": "shared circulation",
+      "description": "Eight stone/steel steps, 1.5 m total rise, 2.24 m run and 1.6 m clear width, with side stringers and a painted nosing.",
+      "obj": "props3d/shared/shared_stair_flight.obj",
+      "mtl": "props3d/shared/shared_stair_flight.mtl",
+      "texture": "props3d/shared/shared_stair_flight.png",
+      "bounds_m": {
+        "min": [
+          -0.895,
+          -0.002998,
+          0.0
+        ],
+        "max": [
+          0.895,
+          2.44,
+          1.5
+        ],
+        "size": [
+          1.79,
+          2.442998,
+          1.5
+        ]
+      },
+      "bounds_doom_units": {
+        "min": [
+          -57.28,
+          -0.192,
+          0.0
+        ],
+        "max": [
+          57.28,
+          156.16,
+          96.0
+        ],
+        "size": [
+          114.56,
+          156.352,
+          96.0
+        ]
+      },
+      "triangle_count": 228,
+      "vertex_count": 684,
+      "materials": {
+        "stone": {
+          "hex": "#8E8B84",
+          "patch": [
+            0.03,
+            0.03,
+            0.47,
+            0.47
+          ],
+          "style": "brick"
+        },
+        "steel": {
+          "hex": "#4A4D52",
+          "patch": [
+            0.5,
+            0.03,
+            0.94,
+            0.47
+          ],
+          "style": "metal"
+        },
+        "paint": {
+          "hex": "#C9B26A",
+          "patch": [
+            0.03,
+            0.5,
+            0.47,
+            0.94
+          ],
+          "style": "metal"
+        }
+      },
+      "uv_range": {
+        "min": [
+          0.03044,
+          0.03044
+        ],
+        "max": [
+          0.93956,
+          0.93956
+        ]
+      },
+      "texture_size": [
+        256,
+        256
+      ],
+      "collision": {
+        "proxy_type": "steps",
+        "footprint_m": [
+          1.82,
+          2.5
+        ],
+        "z_range_m": [
+          0.0,
+          1.66
+        ],
+        "solid": true,
+        "climbable": true,
+        "step_height_m": 0.1875,
+        "step_height_doom_units": 12,
+        "walkable_surfaces": [
+          {
+            "z_m": 1.5,
+            "area_m": [
+              1.6,
+              0.2
+            ],
+            "note": "top lip only"
+          }
+        ],
+        "notes": "12-unit risers are below the native 16-unit step limit. Two flights plus a landing make one 3.0 m storey. No jump is required."
+      },
+      "readability": {
+        "from_above": "steps, deck or rail line remain distinct in the top preview",
+        "from_below": "support posts and undersides remain distinct in the bottom preview"
+      },
+      "gltf": null,
+      "status": "original source proposal; not loaded into an engine"
+    },
+    {
+      "id": "stair_landing",
+      "name": "Stair Landing",
+      "role": "shared circulation",
+      "description": "A 1.8 m square steel landing at 1.5 m with four support posts and a painted edge curb, sized to join two stair flights.",
+      "obj": "props3d/shared/shared_stair_landing.obj",
+      "mtl": "props3d/shared/shared_stair_landing.mtl",
+      "texture": "props3d/shared/shared_stair_landing.png",
+      "bounds_m": {
+        "min": [
+          -0.9,
+          -0.9,
+          0.0
+        ],
+        "max": [
+          0.9,
+          0.9,
+          1.55
+        ],
+        "size": [
+          1.8,
+          1.8,
+          1.55
+        ]
+      },
+      "bounds_doom_units": {
+        "min": [
+          -57.6,
+          -57.6,
+          0.0
+        ],
+        "max": [
+          57.6,
+          57.6,
+          99.2
+        ],
+        "size": [
+          115.2,
+          115.2,
+          99.2
+        ]
+      },
+      "triangle_count": 96,
+      "vertex_count": 288,
+      "materials": {
+        "steel": {
+          "hex": "#4A4D52",
+          "patch": [
+            0.03,
+            0.03,
+            0.47,
+            0.47
+          ],
+          "style": "metal"
+        },
+        "stone": {
+          "hex": "#8E8B84",
+          "patch": [
+            0.5,
+            0.03,
+            0.94,
+            0.47
+          ],
+          "style": "brick"
+        },
+        "paint": {
+          "hex": "#C9B26A",
+          "patch": [
+            0.03,
+            0.5,
+            0.47,
+            0.94
+          ],
+          "style": "metal"
+        }
+      },
+      "uv_range": {
+        "min": [
+          0.03044,
+          0.03044
+        ],
+        "max": [
+          0.46956,
+          0.93956
+        ]
+      },
+      "texture_size": [
+        256,
+        256
+      ],
+      "collision": {
+        "proxy_type": "platform",
+        "footprint_m": [
+          1.8,
+          1.8
+        ],
+        "z_range_m": [
+          0.0,
+          1.55
+        ],
+        "solid": true,
+        "climbable": true,
+        "walkable_surfaces": [
+          {
+            "z_m": 1.5,
+            "area_m": [
+              1.68,
+              1.68
+            ],
+            "note": "landing deck; guardrail is a separate component"
+          }
+        ],
+        "notes": "Posts occupy four corners; the deck is walkable. Add the guardrail component on open edges."
+      },
+      "readability": {
+        "from_above": "steps, deck or rail line remain distinct in the top preview",
+        "from_below": "support posts and undersides remain distinct in the bottom preview"
+      },
+      "gltf": null,
+      "status": "original source proposal; not loaded into an engine"
+    },
+    {
+      "id": "guardrail",
+      "name": "Guardrail Module",
+      "role": "shared safety component",
+      "description": "A 2.0 m steel rail with three posts, top and mid rails and a kick plate, 1.1 m high.",
+      "obj": "props3d/shared/shared_guardrail.obj",
+      "mtl": "props3d/shared/shared_guardrail.mtl",
+      "texture": "props3d/shared/shared_guardrail.png",
+      "bounds_m": {
+        "min": [
+          -0.05,
+          -0.1,
+          0.0
+        ],
+        "max": [
+          2.05,
+          0.1,
+          1.12
+        ],
+        "size": [
+          2.1,
+          0.2,
+          1.12
+        ]
+      },
+      "bounds_doom_units": {
+        "min": [
+          -3.2,
+          -6.4,
+          0.0
+        ],
+        "max": [
+          131.2,
+          6.4,
+          71.68
+        ],
+        "size": [
+          134.4,
+          12.8,
+          71.68
+        ]
+      },
+      "triangle_count": 108,
+      "vertex_count": 324,
+      "materials": {
+        "steel": {
+          "hex": "#4A4D52",
+          "patch": [
+            0.03,
+            0.03,
+            0.47,
+            0.47
+          ],
+          "style": "metal"
+        },
+        "paint": {
+          "hex": "#C9B26A",
+          "patch": [
+            0.5,
+            0.03,
+            0.94,
+            0.47
+          ],
+          "style": "metal"
+        }
+      },
+      "uv_range": {
+        "min": [
+          0.03044,
+          0.03044
+        ],
+        "max": [
+          0.93956,
+          0.46956
+        ]
+      },
+      "texture_size": [
+        256,
+        256
+      ],
+      "collision": {
+        "proxy_type": "barrier",
+        "footprint_m": [
+          2.1,
+          0.2
+        ],
+        "z_range_m": [
+          0.0,
+          1.12
+        ],
+        "solid": true,
+        "climbable": false,
+        "barrier_height_m": 1.1,
+        "walkable_surfaces": [],
+        "notes": "Use as a blocking line; 1.1 m = 70 Doom units. Do not place it in a required route without a 1.6 m opening."
+      },
+      "readability": {
+        "from_above": "steps, deck or rail line remain distinct in the top preview",
+        "from_below": "support posts and undersides remain distinct in the bottom preview"
+      },
+      "gltf": null,
+      "status": "original source proposal; not loaded into an engine"
+    }
+  ],
+  "sets": {
+    "ashbell_foundry": {
+      "name": "ASHBELL FOUNDRY",
+      "props": [
+        {
+          "id": "suspended_ninth_bell",
+          "name": "Suspended Ninth Bell",
+          "role": "landmark / vertical void",
+          "description": "A cracked cast bell hanging on an eight-link chain with a side counterweight and a glowing clapper. The player can walk beneath it and read its profile from above and below.",
+          "obj": "props3d/ashbell_foundry/ashbell_suspended_ninth_bell.obj",
+          "mtl": "props3d/ashbell_foundry/ashbell_suspended_ninth_bell.mtl",
+          "texture": "props3d/ashbell_foundry/ashbell_suspended_ninth_bell.png",
+          "bounds_m": {
+            "min": [
+              -0.647826,
+              -0.647826,
+              1.55
+            ],
+            "max": [
+              0.9,
+              0.647826,
+              3.95
+            ],
+            "size": [
+              1.547826,
+              1.295652,
+              2.4
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -41.461,
+              -41.461,
+              99.2
+            ],
+            "max": [
+              57.6,
+              41.461,
+              252.8
+            ],
+            "size": [
+              99.061,
+              82.922,
+              153.6
+            ]
+          },
+          "triangle_count": 1812,
+          "vertex_count": 5436,
+          "materials": {
+            "bronze": {
+              "hex": "#A66A2A",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "patina": {
+              "hex": "#3F7F70",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "brick"
+            },
+            "iron": {
+              "hex": "#4A4D52",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "metal"
+            },
+            "ember": {
+              "hex": "#E0662A",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "overhead_cylinder",
+            "footprint_m": [
+              1.55,
+              1.4
+            ],
+            "z_range_m": [
+              1.55,
+              3.95
+            ],
+            "solid": true,
+            "ground_clearance_m": 1.55,
+            "walkable_surfaces": [],
+            "notes": "No ground blocker: the bell, clapper and chain are overhead. 1.53 m = 98 Doom units, just above the native 96-unit headroom floor."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        },
+        {
+          "id": "chain_lift_cage",
+          "name": "Chain Lift Cage",
+          "role": "lift landmark / open shaft",
+          "description": "A barred service cage with a roof lamp, guide rails, overhead chain and a counterweight. The mesh is static: it proposes a vertical landmark and collision shell, not a moving lift.",
+          "obj": "props3d/ashbell_foundry/ashbell_chain_lift_cage.obj",
+          "mtl": "props3d/ashbell_foundry/ashbell_chain_lift_cage.mtl",
+          "texture": "props3d/ashbell_foundry/ashbell_chain_lift_cage.png",
+          "bounds_m": {
+            "min": [
+              -0.84,
+              -0.84,
+              0.0
+            ],
+            "max": [
+              1.12,
+              0.84,
+              4.0
+            ],
+            "size": [
+              1.96,
+              1.68,
+              4.0
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -53.76,
+              -53.76,
+              0.0
+            ],
+            "max": [
+              71.68,
+              53.76,
+              256.0
+            ],
+            "size": [
+              125.44,
+              107.52,
+              256.0
+            ]
+          },
+          "triangle_count": 1096,
+          "vertex_count": 3288,
+          "materials": {
+            "iron": {
+              "hex": "#2B2D31",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "bronze": {
+              "hex": "#A66A2A",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "verdigris": {
+              "hex": "#3F7F70",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "brick"
+            },
+            "lamp": {
+              "hex": "#E0662A",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "box_shell",
+            "footprint_m": [
+              2.24,
+              1.68
+            ],
+            "z_range_m": [
+              0.0,
+              4.0
+            ],
+            "solid": true,
+            "walkable_surfaces": [
+              {
+                "z_m": 0.1,
+                "area_m": [
+                  1.52,
+                  1.52
+                ],
+                "note": "cage floor; use only if Codex adds lift motion"
+              }
+            ],
+            "notes": "Barred shell; no doorway is cut in this pass. The dark +Y face is the least obstructed side and is the intended doorway location. Do not treat this mesh as a working lift."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        },
+        {
+          "id": "casting_furnace",
+          "name": "Casting Furnace Chest",
+          "role": "solid industrial prop",
+          "description": "A black furnace with a firebrick plinth, arched glowing mouth, chimney and a ladle spout. A solid mass with a readable chimney silhouette from above.",
+          "obj": "props3d/ashbell_foundry/ashbell_casting_furnace.obj",
+          "mtl": "props3d/ashbell_foundry/ashbell_casting_furnace.mtl",
+          "texture": "props3d/ashbell_foundry/ashbell_casting_furnace.png",
+          "bounds_m": {
+            "min": [
+              -1.2,
+              -0.7,
+              0.0
+            ],
+            "max": [
+              1.76,
+              0.7,
+              3.7
+            ],
+            "size": [
+              2.96,
+              1.4,
+              3.7
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -76.8,
+              -44.8,
+              0.0
+            ],
+            "max": [
+              112.64,
+              44.8,
+              236.8
+            ],
+            "size": [
+              189.44,
+              89.6,
+              236.8
+            ]
+          },
+          "triangle_count": 746,
+          "vertex_count": 2238,
+          "materials": {
+            "soot": {
+              "hex": "#14161A",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "brick": {
+              "hex": "#B2755D",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "brick"
+            },
+            "bronze": {
+              "hex": "#A66A2A",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "metal"
+            },
+            "glow": {
+              "hex": "#E0662A",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "box",
+            "footprint_m": [
+              2.96,
+              1.4
+            ],
+            "z_range_m": [
+              0.0,
+              3.7
+            ],
+            "solid": true,
+            "walkable_surfaces": [],
+            "notes": "Solid blocker. The mouth is a recessed texture panel, not a passage."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        }
+      ]
+    },
+    "boneglass_conservatory": {
+      "name": "BONEGLASS CONSERVATORY",
+      "props": [
+        {
+          "id": "root_cage_planter",
+          "name": "Root Cage Planter",
+          "role": "landmark / hanging cage",
+          "description": "A root-woven teardrop cage around a black void, hung from five cords above a peat planter with one pale growth inside. Readable as an open cage from above and as a hanging pod from below.",
+          "obj": "props3d/boneglass_conservatory/boneglass_root_cage_planter.obj",
+          "mtl": "props3d/boneglass_conservatory/boneglass_root_cage_planter.mtl",
+          "texture": "props3d/boneglass_conservatory/boneglass_root_cage_planter.png",
+          "bounds_m": {
+            "min": [
+              -0.822038,
+              -0.822038,
+              0.0
+            ],
+            "max": [
+              0.822038,
+              0.822038,
+              3.455201
+            ],
+            "size": [
+              1.644076,
+              1.644076,
+              3.455201
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -52.61,
+              -52.61,
+              0.0
+            ],
+            "max": [
+              52.61,
+              52.61,
+              221.133
+            ],
+            "size": [
+              105.221,
+              105.221,
+              221.133
+            ]
+          },
+          "triangle_count": 1746,
+          "vertex_count": 5238,
+          "materials": {
+            "root": {
+              "hex": "#5B4A39",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "brick"
+            },
+            "bone": {
+              "hex": "#E4DFCF",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "peat": {
+              "hex": "#211D19",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "metal"
+            },
+            "glow": {
+              "hex": "#EAF6D8",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "mixed",
+            "footprint_m": [
+              1.65,
+              1.65
+            ],
+            "z_range_m": [
+              0.0,
+              3.46
+            ],
+            "solid": true,
+            "walkable_surfaces": [],
+            "notes": "The planter is a 1.1 m solid base; the cage is overhead from 1.0 m to 2.9 m with an empty centre. Do not use the cage as a passage or a lift."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        },
+        {
+          "id": "watering_gantry",
+          "name": "Watering Gantry",
+          "role": "arch / overhead route",
+          "description": "A verdigris pipe arch with three watering roses, a tap wheel, a pressure bulb and a hanging hose loop. The clear opening is 2.0 m wide and 2.0 m high.",
+          "obj": "props3d/boneglass_conservatory/boneglass_watering_gantry.obj",
+          "mtl": "props3d/boneglass_conservatory/boneglass_watering_gantry.mtl",
+          "texture": "props3d/boneglass_conservatory/boneglass_watering_gantry.png",
+          "bounds_m": {
+            "min": [
+              -1.52,
+              -0.22,
+              0.0
+            ],
+            "max": [
+              1.52,
+              0.264127,
+              2.58
+            ],
+            "size": [
+              3.04,
+              0.484127,
+              2.58
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -97.28,
+              -14.08,
+              0.0
+            ],
+            "max": [
+              97.28,
+              16.904,
+              165.12
+            ],
+            "size": [
+              194.56,
+              30.984,
+              165.12
+            ]
+          },
+          "triangle_count": 788,
+          "vertex_count": 2364,
+          "materials": {
+            "verdigris": {
+              "hex": "#47645A",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "bone": {
+              "hex": "#E4DFCF",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "brick"
+            },
+            "brass": {
+              "hex": "#8A745B",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "metal"
+            },
+            "water": {
+              "hex": "#EAF6D8",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "posts_plus_beam",
+            "footprint_m": [
+              3.04,
+              0.49
+            ],
+            "z_range_m": [
+              0.0,
+              2.58
+            ],
+            "solid": true,
+            "walkable_surfaces": [
+              {
+                "z_m": 0.0,
+                "area_m": [
+                  2.0,
+                  0.4
+                ],
+                "note": "walk through under the beam; overhead clearance 2.03 m"
+              }
+            ],
+            "notes": "Only the two 0.44 m posts and the top beam block movement. 2.03 m = 130 Doom units clear under the beam."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        },
+        {
+          "id": "growth_chamber",
+          "name": "Growth Chamber Cabinet",
+          "role": "solid laboratory prop",
+          "description": "A bone-framed cabinet with a dark soil bed and three pale sprouts behind a wet glass panel. The glass is opaque geometry in this kit; no transparency or growth animation is claimed.",
+          "obj": "props3d/boneglass_conservatory/boneglass_growth_chamber.obj",
+          "mtl": "props3d/boneglass_conservatory/boneglass_growth_chamber.mtl",
+          "texture": "props3d/boneglass_conservatory/boneglass_growth_chamber.png",
+          "bounds_m": {
+            "min": [
+              -0.7,
+              -0.53,
+              0.0
+            ],
+            "max": [
+              0.7,
+              0.4,
+              2.3
+            ],
+            "size": [
+              1.4,
+              0.93,
+              2.3
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -44.8,
+              -33.92,
+              0.0
+            ],
+            "max": [
+              44.8,
+              25.6,
+              147.2
+            ],
+            "size": [
+              89.6,
+              59.52,
+              147.2
+            ]
+          },
+          "triangle_count": 336,
+          "vertex_count": 1008,
+          "materials": {
+            "bone": {
+              "hex": "#E4DFCF",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "brick"
+            },
+            "peat": {
+              "hex": "#211D19",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "verdigris": {
+              "hex": "#47645A",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "metal"
+            },
+            "glow": {
+              "hex": "#EAF6D8",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "box",
+            "footprint_m": [
+              1.4,
+              0.93
+            ],
+            "z_range_m": [
+              0.0,
+              2.31
+            ],
+            "solid": true,
+            "walkable_surfaces": [],
+            "notes": "Solid blocker. Use as a cover object, not as a window."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        }
+      ]
+    },
+    "skyhotel_service_well": {
+      "name": "SKYHOTEL SERVICE WELL",
+      "props": [
+        {
+          "id": "service_lift_car",
+          "name": "Service Lift Car",
+          "role": "lift landmark",
+          "description": "A brass and maroon service car with an open side, one ajar door panel, amber interior light and a three-tick indicator. Static geometry only.",
+          "obj": "props3d/skyhotel_service_well/skyhotel_service_lift_car.obj",
+          "mtl": "props3d/skyhotel_service_well/skyhotel_service_lift_car.mtl",
+          "texture": "props3d/skyhotel_service_well/skyhotel_service_lift_car.png",
+          "bounds_m": {
+            "min": [
+              -1.0,
+              -1.015,
+              0.0
+            ],
+            "max": [
+              1.0,
+              1.0,
+              2.62
+            ],
+            "size": [
+              2.0,
+              2.015,
+              2.62
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -64.0,
+              -64.96,
+              0.0
+            ],
+            "max": [
+              64.0,
+              64.0,
+              167.68
+            ],
+            "size": [
+              128.0,
+              128.96,
+              167.68
+            ]
+          },
+          "triangle_count": 188,
+          "vertex_count": 564,
+          "materials": {
+            "maroon": {
+              "hex": "#6B3A40",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "cloth"
+            },
+            "brass": {
+              "hex": "#A8834A",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "night": {
+              "hex": "#25313E",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "metal"
+            },
+            "amber": {
+              "hex": "#D99B3F",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "box_shell",
+            "footprint_m": [
+              2.0,
+              2.02
+            ],
+            "z_range_m": [
+              0.0,
+              2.62
+            ],
+            "solid": true,
+            "walkable_surfaces": [
+              {
+                "z_m": 0.12,
+                "area_m": [
+                  1.88,
+                  1.88
+                ],
+                "note": "car floor; codex must add motion and door state"
+              }
+            ],
+            "notes": "Shell with a partial front opening on -Y. This is not a moving lift and has no floor-call logic."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        },
+        {
+          "id": "dumbwaiter_winch_head",
+          "name": "Dumbwaiter Winch Head",
+          "role": "service machine prop",
+          "description": "A low luggage winch with a large spoked wheel, cable spool, hanging suitcase and three-button call plate. The wheel gives a strong circular silhouette from the front and a compact rectangular mass from above.",
+          "obj": "props3d/skyhotel_service_well/skyhotel_dumbwaiter_winch_head.obj",
+          "mtl": "props3d/skyhotel_service_well/skyhotel_dumbwaiter_winch_head.mtl",
+          "texture": "props3d/skyhotel_service_well/skyhotel_dumbwaiter_winch_head.png",
+          "bounds_m": {
+            "min": [
+              -0.75,
+              -0.36,
+              0.0
+            ],
+            "max": [
+              0.75,
+              0.48,
+              2.25
+            ],
+            "size": [
+              1.5,
+              0.84,
+              2.25
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -48.0,
+              -23.04,
+              0.0
+            ],
+            "max": [
+              48.0,
+              30.72,
+              144.0
+            ],
+            "size": [
+              96.0,
+              53.76,
+              144.0
+            ]
+          },
+          "triangle_count": 580,
+          "vertex_count": 1740,
+          "materials": {
+            "iron": {
+              "hex": "#3E5265",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "brass": {
+              "hex": "#A8834A",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "maroon": {
+              "hex": "#6B3A40",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "cloth"
+            },
+            "amber": {
+              "hex": "#D99B3F",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "box",
+            "footprint_m": [
+              1.5,
+              0.84
+            ],
+            "z_range_m": [
+              0.0,
+              2.25
+            ],
+            "solid": true,
+            "walkable_surfaces": [],
+            "notes": "Solid blocker; the wheel and case overhang the 0.8 m body depth."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        },
+        {
+          "id": "balcony_bay",
+          "name": "Staggered Balcony Bay",
+          "role": "room-over-room module",
+          "description": "A 3.0 m room bay with a walkable floor, brass guardrail, recessed maroon door, amber transom and a rain hood. The module is designed to stack offset above and below another copy.",
+          "obj": "props3d/skyhotel_service_well/skyhotel_balcony_bay.obj",
+          "mtl": "props3d/skyhotel_service_well/skyhotel_balcony_bay.mtl",
+          "texture": "props3d/skyhotel_service_well/skyhotel_balcony_bay.png",
+          "bounds_m": {
+            "min": [
+              -1.5,
+              -0.62,
+              0.0
+            ],
+            "max": [
+              1.5,
+              0.6,
+              3.0
+            ],
+            "size": [
+              3.0,
+              1.22,
+              3.0
+            ]
+          },
+          "bounds_doom_units": {
+            "min": [
+              -96.0,
+              -39.68,
+              0.0
+            ],
+            "max": [
+              96.0,
+              38.4,
+              192.0
+            ],
+            "size": [
+              192.0,
+              78.08,
+              192.0
+            ]
+          },
+          "triangle_count": 252,
+          "vertex_count": 756,
+          "materials": {
+            "concrete": {
+              "hex": "#3E5265",
+              "patch": [
+                0.03,
+                0.03,
+                0.47,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "brass": {
+              "hex": "#A8834A",
+              "patch": [
+                0.5,
+                0.03,
+                0.94,
+                0.47
+              ],
+              "style": "metal"
+            },
+            "maroon": {
+              "hex": "#6B3A40",
+              "patch": [
+                0.03,
+                0.5,
+                0.47,
+                0.94
+              ],
+              "style": "cloth"
+            },
+            "amber": {
+              "hex": "#D99B3F",
+              "patch": [
+                0.5,
+                0.5,
+                0.94,
+                0.94
+              ],
+              "style": "glow"
+            }
+          },
+          "uv_range": {
+            "min": [
+              0.03044,
+              0.03044
+            ],
+            "max": [
+              0.93956,
+              0.93956
+            ]
+          },
+          "texture_size": [
+            256,
+            256
+          ],
+          "collision": {
+            "proxy_type": "mixed",
+            "footprint_m": [
+              3.0,
+              1.22
+            ],
+            "z_range_m": [
+              0.0,
+              3.0
+            ],
+            "solid": true,
+            "walkable_surfaces": [
+              {
+                "z_m": 0.16,
+                "area_m": [
+                  3.0,
+                  1.2
+                ],
+                "note": "balcony floor; rear 0.18 m is wall"
+              }
+            ],
+            "barrier": {
+              "height_m": 1.1,
+              "edge": "-Y",
+              "climbable": false
+            },
+            "notes": "Floor at 0.16 m (10 Doom units) above the nominal level; guardrail top at 1.26 m. Stack with a 3.0 m storey pitch."
+          },
+          "readability": {
+            "from_above": "primary mass and footprint are separable in the top preview",
+            "from_below": "overhead silhouette and chain/leg gaps are separable in the bottom preview"
+          },
+          "gltf": null,
+          "status": "original source proposal; not loaded into an engine"
+        }
+      ]
+    }
+  }
+}
