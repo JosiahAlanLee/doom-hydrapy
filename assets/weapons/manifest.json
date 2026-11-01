@@ -1,0 +1,2799 @@
+{
+  "pack": "nullrun-original-weapons-v1",
+  "generator": "generate_weapons.py (pure CPU, Pillow/NumPy, no external art)",
+  "seed": 20261031,
+  "canvas": {
+    "width": 640,
+    "height": 400,
+    "mode": "RGBA",
+    "origin": "top-left, inclusive pixel coordinates"
+  },
+  "safe_view": {
+    "aim_clear_rect": [
+      220,
+      40,
+      420,
+      180
+    ],
+    "body_frames_max_y": 189,
+    "above_y_240_x_band": [
+      250,
+      440
+    ],
+    "bottom_crop_y": 400,
+    "notes": "Body frames keep the central aiming rectangle empty; muzzle/pipe tips may enter y>=190 only inside x 250..440. Forearms are deliberately cropped by the bottom edge, never by the sides."
+  },
+  "frame_conventions": {
+    "suggested_native_sprite": "640x400 RGBA at 1:1, bottom weapon layer",
+    "suggested_native_pickup": "96x64 RGBA at 1:1, integer scaling only",
+    "native_frame": "Use each 640x400 RGBA frame as a full-screen bottom-layer sprite at (0,0).",
+    "anchor": "Frames are pre-anchored to the 640x400 viewport; no per-frame origin shifts needed.",
+    "flash": "Overlay flash PNGs at (0,0) on the same viewport; they are already aligned to the matching body frame.",
+    "timings": "duration_ms is the dwell time for that single image; raise order is raise_low -> raise_mid -> idle.",
+    "warning": "Mapping labels below are descriptive only. No engine API, ZScript function or runtime test is claimed."
+  },
+  "slots": [
+    {
+      "slot": "melee",
+      "id": "fathom_hook",
+      "name": "Fathom Hook",
+      "description": "Surveyor's rule shaft, brass plumb counterweight, honed billhook; oxblood wrap; bone inlay.",
+      "origin": [
+        340,
+        390
+      ],
+      "base_rotation_deg": 16.0,
+      "grip_anchor_local": [
+        16,
+        12
+      ],
+      "support_anchor_local": null,
+      "muzzle_local": [
+        -56,
+        -162
+      ],
+      "animated_groups": [],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/melee/fathom_hook_00_idle.png",
+          "state": "idle",
+          "role": "Ready / sway loop",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 0,
+            "total_rotation_deg": 16.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            325,
+            207,
+            414,
+            399
+          ],
+          "alpha_pixels": 6547,
+          "muzzle_world": [
+            330.8,
+            218.8
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/melee/fathom_hook_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 14,
+            "total_rotation_deg": 30.0,
+            "translate_px": [
+              18,
+              120
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            390,
+            332,
+            463,
+            399
+          ],
+          "alpha_pixels": 2839,
+          "muzzle_world": [
+            390.5,
+            341.7
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/melee/fathom_hook_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 6,
+            "total_rotation_deg": 22.0,
+            "translate_px": [
+              7,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            346,
+            254,
+            435,
+            399
+          ],
+          "alpha_pixels": 4706,
+          "muzzle_world": [
+            355.8,
+            264.8
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/melee/fathom_hook_03_windup.png",
+          "state": "windup",
+          "role": "Swing windup",
+          "duration_ms": 120,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": -8,
+            "total_rotation_deg": 8.0,
+            "translate_px": [
+              -6,
+              -8
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            301,
+            199,
+            388,
+            399
+          ],
+          "alpha_pixels": 6927,
+          "muzzle_world": [
+            301.1,
+            213.8
+          ],
+          "flash": null
+        },
+        {
+          "index": 4,
+          "file": "frames/melee/fathom_hook_04_impact.png",
+          "state": "impact",
+          "role": "Swing impact (spark overlay)",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 17,
+            "total_rotation_deg": 33.0,
+            "translate_px": [
+              20,
+              8
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            345,
+            223,
+            471,
+            399
+          ],
+          "alpha_pixels": 6113,
+          "muzzle_world": [
+            401.3,
+            231.6
+          ],
+          "flash": "flashes/fathom_hook_flash_a.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/melee/fathom_hook_05_follow.png",
+          "state": "follow",
+          "role": "Swing follow-through (spark tail)",
+          "duration_ms": 160,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 25,
+            "total_rotation_deg": 41.0,
+            "translate_px": [
+              32,
+              18
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            360,
+            242,
+            500,
+            399
+          ],
+          "alpha_pixels": 5570,
+          "muzzle_world": [
+            436.0,
+            249.0
+          ],
+          "flash": "flashes/fathom_hook_flash_b.png"
+        },
+        {
+          "index": 6,
+          "file": "frames/melee/fathom_hook_06_recover.png",
+          "state": "recover",
+          "role": "Swing recover",
+          "duration_ms": 220,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 8,
+            "total_rotation_deg": 24.0,
+            "translate_px": [
+              6,
+              4
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            331,
+            212,
+            438,
+            399
+          ],
+          "alpha_pixels": 6330,
+          "muzzle_world": [
+            360.7,
+            223.2
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/melee/fathom_hook_07_guard.png",
+          "state": "guard",
+          "role": "Guard reset",
+          "duration_ms": 600,
+          "generation_pose": {
+            "base_rotation_deg": 16.0,
+            "frame_rotation_deg": 3,
+            "total_rotation_deg": 19.0,
+            "translate_px": [
+              3,
+              2
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            328,
+            209,
+            424,
+            399
+          ],
+          "alpha_pixels": 6449,
+          "muzzle_world": [
+            342.8,
+            220.6
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/fathom_hook_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 4,
+          "for_state": "impact",
+          "muzzle_world": [
+            401.3,
+            231.6
+          ],
+          "duration_ms": 90,
+          "content_bbox": [
+            362,
+            183,
+            452,
+            288
+          ],
+          "alpha_pixels": 1115,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "spark"
+        },
+        {
+          "file": "flashes/fathom_hook_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 5,
+          "for_state": "follow",
+          "muzzle_world": [
+            436.0,
+            249.0
+          ],
+          "duration_ms": 160,
+          "content_bbox": [
+            401,
+            216,
+            467,
+            283
+          ],
+          "alpha_pixels": 676,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "spark"
+        }
+      ],
+      "icon": {
+        "file": "icons/fathom_hook_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          26,
+          8,
+          64,
+          54
+        ],
+        "alpha_pixels": 595,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": [
+          "windup",
+          "impact",
+          "follow",
+          "recover"
+        ],
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    },
+    {
+      "slot": "sidearm",
+      "id": "registrar",
+      "name": "Registrar",
+      "description": "Rivet sidearm: gunmetal slide, brass register plate, vial sight, oxblood grip.",
+      "origin": [
+        372,
+        362
+      ],
+      "base_rotation_deg": -14.0,
+      "grip_anchor_local": [
+        16,
+        48
+      ],
+      "support_anchor_local": null,
+      "muzzle_local": [
+        0,
+        -112
+      ],
+      "animated_groups": [
+        "slide",
+        "mag"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/sidearm/registrar_00_idle.png",
+          "state": "idle",
+          "role": "Ready loop; grip anchor pose",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 0.0,
+            "total_rotation_deg": -14.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            322,
+            252,
+            423,
+            399
+          ],
+          "alpha_pixels": 7887,
+          "muzzle_world": [
+            344.9,
+            253.3
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/sidearm/registrar_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 12.0,
+            "total_rotation_deg": -2.0,
+            "translate_px": [
+              16,
+              118
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            356,
+            367,
+            413,
+            399
+          ],
+          "alpha_pixels": 1504,
+          "muzzle_world": [
+            384.1,
+            368.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/sidearm/registrar_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 5.0,
+            "total_rotation_deg": -9.0,
+            "translate_px": [
+              6,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            335,
+            297,
+            403,
+            399
+          ],
+          "alpha_pixels": 5519,
+          "muzzle_world": [
+            360.5,
+            297.4
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/sidearm/registrar_03_fire_peak.png",
+          "state": "fire_peak",
+          "role": "Fire peak recoil",
+          "duration_ms": 60,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": -2.2,
+            "total_rotation_deg": -16.2,
+            "translate_px": [
+              -3,
+              -4
+            ],
+            "part_offsets_px": {
+              "slide": [
+                0,
+                9
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            318,
+            257,
+            426,
+            399
+          ],
+          "alpha_pixels": 7712,
+          "muzzle_world": [
+            337.8,
+            250.4
+          ],
+          "flash": "flashes/registrar_flash_a.png"
+        },
+        {
+          "index": 4,
+          "file": "frames/sidearm/registrar_04_fire_settle.png",
+          "state": "fire_settle",
+          "role": "Fire settle, flash tail",
+          "duration_ms": 80,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": -1.0,
+            "total_rotation_deg": -15.0,
+            "translate_px": [
+              -1,
+              -2
+            ],
+            "part_offsets_px": {
+              "slide": [
+                0,
+                4
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            320,
+            254,
+            425,
+            399
+          ],
+          "alpha_pixels": 7820,
+          "muzzle_world": [
+            342.0,
+            251.8
+          ],
+          "flash": "flashes/registrar_flash_b.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/sidearm/registrar_05_recover.png",
+          "state": "recover",
+          "role": "Recoil recover",
+          "duration_ms": 110,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 0.5,
+            "total_rotation_deg": -13.5,
+            "translate_px": [
+              0,
+              1
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            322,
+            253,
+            422,
+            399
+          ],
+          "alpha_pixels": 7820,
+          "muzzle_world": [
+            345.9,
+            254.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 6,
+          "file": "frames/sidearm/registrar_06_reload_a.png",
+          "state": "reload_a",
+          "role": "Reload/cycle A",
+          "duration_ms": 240,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 3.0,
+            "total_rotation_deg": -11.0,
+            "translate_px": [
+              4,
+              28
+            ],
+            "part_offsets_px": {
+              "mag": [
+                10,
+                34
+              ],
+              "slide": [
+                0,
+                6
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            331,
+            285,
+            405,
+            399
+          ],
+          "alpha_pixels": 6142,
+          "muzzle_world": [
+            354.6,
+            280.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/sidearm/registrar_07_reload_b.png",
+          "state": "reload_b",
+          "role": "Reload/cycle B",
+          "duration_ms": 300,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 1.5,
+            "total_rotation_deg": -12.5,
+            "translate_px": [
+              2,
+              12
+            ],
+            "part_offsets_px": {
+              "mag": [
+                3,
+                12
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            326,
+            264,
+            410,
+            399
+          ],
+          "alpha_pixels": 7259,
+          "muzzle_world": [
+            349.8,
+            264.7
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/registrar_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 3,
+          "for_state": "fire_peak",
+          "muzzle_world": [
+            337.8,
+            250.4
+          ],
+          "duration_ms": 60,
+          "content_bbox": [
+            301,
+            167,
+            380,
+            313
+          ],
+          "alpha_pixels": 2998,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "star"
+        },
+        {
+          "file": "flashes/registrar_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 4,
+          "for_state": "fire_settle",
+          "muzzle_world": [
+            342.0,
+            251.8
+          ],
+          "duration_ms": 80,
+          "content_bbox": [
+            314,
+            206,
+            370,
+            306
+          ],
+          "alpha_pixels": 2104,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "star"
+        }
+      ],
+      "icon": {
+        "file": "icons/registrar_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          14,
+          16,
+          70,
+          52
+        ],
+        "alpha_pixels": 873,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": null,
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    },
+    {
+      "slot": "scattergun",
+      "id": "transit_12",
+      "name": "Transit-12",
+      "description": "Pump scattergun built from a surveyor's level: walnut pump, octagonal barrel, brass level vial.",
+      "origin": [
+        372,
+        366
+      ],
+      "base_rotation_deg": -30.0,
+      "grip_anchor_local": [
+        16,
+        48
+      ],
+      "support_anchor_local": [
+        -36,
+        -30
+      ],
+      "muzzle_local": [
+        0,
+        -176
+      ],
+      "animated_groups": [
+        "pump"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/scattergun/transit_12_00_idle.png",
+          "state": "idle",
+          "role": "Ready loop; grip anchor pose",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": 0.0,
+            "total_rotation_deg": -30.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            267,
+            200,
+            455,
+            399
+          ],
+          "alpha_pixels": 15547,
+          "muzzle_world": [
+            284.0,
+            213.6
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/scattergun/transit_12_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": 12.0,
+            "total_rotation_deg": -18.0,
+            "translate_px": [
+              16,
+              118
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            315,
+            307,
+            394,
+            399
+          ],
+          "alpha_pixels": 4276,
+          "muzzle_world": [
+            333.6,
+            316.6
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/scattergun/transit_12_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": 5.0,
+            "total_rotation_deg": -25.0,
+            "translate_px": [
+              6,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            286,
+            240,
+            417,
+            399
+          ],
+          "alpha_pixels": 10002,
+          "muzzle_world": [
+            303.6,
+            252.5
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/scattergun/transit_12_03_fire_peak.png",
+          "state": "fire_peak",
+          "role": "Fire peak recoil",
+          "duration_ms": 60,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": -2.2,
+            "total_rotation_deg": -32.2,
+            "translate_px": [
+              -3,
+              -4
+            ],
+            "part_offsets_px": {
+              "pump": [
+                0,
+                3
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            259,
+            199,
+            460,
+            399
+          ],
+          "alpha_pixels": 16087,
+          "muzzle_world": [
+            275.2,
+            213.1
+          ],
+          "flash": "flashes/transit_12_flash_a.png"
+        },
+        {
+          "index": 4,
+          "file": "frames/scattergun/transit_12_04_fire_settle.png",
+          "state": "fire_settle",
+          "role": "Fire settle, flash tail",
+          "duration_ms": 80,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": -1.0,
+            "total_rotation_deg": -31.0,
+            "translate_px": [
+              -1,
+              -2
+            ],
+            "part_offsets_px": {
+              "pump": [
+                0,
+                1
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            264,
+            199,
+            457,
+            399
+          ],
+          "alpha_pixels": 15813,
+          "muzzle_world": [
+            280.4,
+            213.1
+          ],
+          "flash": "flashes/transit_12_flash_b.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/scattergun/transit_12_05_recover.png",
+          "state": "recover",
+          "role": "Recoil recover",
+          "duration_ms": 110,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": 0.5,
+            "total_rotation_deg": -29.5,
+            "translate_px": [
+              0,
+              1
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            268,
+            200,
+            453,
+            399
+          ],
+          "alpha_pixels": 15396,
+          "muzzle_world": [
+            285.3,
+            213.8
+          ],
+          "flash": null
+        },
+        {
+          "index": 6,
+          "file": "frames/scattergun/transit_12_06_reload_a.png",
+          "state": "reload_a",
+          "role": "Reload/cycle A",
+          "duration_ms": 240,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": 3.0,
+            "total_rotation_deg": -27.0,
+            "translate_px": [
+              4,
+              28
+            ],
+            "part_offsets_px": {
+              "pump": [
+                0,
+                26
+              ]
+            },
+            "support_offset_px": [
+              0,
+              26
+            ]
+          },
+          "content_bbox": [
+            279,
+            224,
+            433,
+            399
+          ],
+          "alpha_pixels": 10962,
+          "muzzle_world": [
+            296.1,
+            237.2
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/scattergun/transit_12_07_reload_b.png",
+          "state": "reload_b",
+          "role": "Reload/cycle B",
+          "duration_ms": 300,
+          "generation_pose": {
+            "base_rotation_deg": -30.0,
+            "frame_rotation_deg": 1.5,
+            "total_rotation_deg": -28.5,
+            "translate_px": [
+              2,
+              12
+            ],
+            "part_offsets_px": {
+              "pump": [
+                0,
+                9
+              ]
+            },
+            "support_offset_px": [
+              0,
+              9
+            ]
+          },
+          "content_bbox": [
+            273,
+            210,
+            445,
+            399
+          ],
+          "alpha_pixels": 13523,
+          "muzzle_world": [
+            290.0,
+            223.3
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/transit_12_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 3,
+          "for_state": "fire_peak",
+          "muzzle_world": [
+            275.2,
+            213.1
+          ],
+          "duration_ms": 60,
+          "content_bbox": [
+            221,
+            152,
+            313,
+            265
+          ],
+          "alpha_pixels": 3002,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "star"
+        },
+        {
+          "file": "flashes/transit_12_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 4,
+          "for_state": "fire_settle",
+          "muzzle_world": [
+            280.4,
+            213.1
+          ],
+          "duration_ms": 80,
+          "content_bbox": [
+            241,
+            150,
+            311,
+            265
+          ],
+          "alpha_pixels": 2033,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "star"
+        }
+      ],
+      "icon": {
+        "file": "icons/transit_12_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          9,
+          16,
+          88,
+          42
+        ],
+        "alpha_pixels": 1093,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": null,
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    },
+    {
+      "slot": "repeater",
+      "id": "comptroller",
+      "name": "Comptroller",
+      "description": "Adding-machine repeater: paper feed, typebar fins, cooling rings, brass carry handle.",
+      "origin": [
+        380,
+        372
+      ],
+      "base_rotation_deg": -28.0,
+      "grip_anchor_local": [
+        16,
+        50
+      ],
+      "support_anchor_local": [
+        -36,
+        -30
+      ],
+      "muzzle_local": [
+        0,
+        -184
+      ],
+      "animated_groups": [
+        "feed",
+        "bolt"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/repeater/comptroller_00_idle.png",
+          "state": "idle",
+          "role": "Ready loop; grip anchor pose",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": 0.0,
+            "total_rotation_deg": -28.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            275,
+            196,
+            442,
+            399
+          ],
+          "alpha_pixels": 15018,
+          "muzzle_world": [
+            293.6,
+            209.5
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/repeater/comptroller_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": 12.0,
+            "total_rotation_deg": -16.0,
+            "translate_px": [
+              16,
+              118
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            324,
+            304,
+            398,
+            399
+          ],
+          "alpha_pixels": 4097,
+          "muzzle_world": [
+            345.3,
+            313.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/repeater/comptroller_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": 5.0,
+            "total_rotation_deg": -23.0,
+            "translate_px": [
+              6,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            294,
+            237,
+            429,
+            399
+          ],
+          "alpha_pixels": 10301,
+          "muzzle_world": [
+            314.1,
+            248.6
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/repeater/comptroller_03_fire_peak.png",
+          "state": "fire_peak",
+          "role": "Fire peak recoil",
+          "duration_ms": 60,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": -2.2,
+            "total_rotation_deg": -30.2,
+            "translate_px": [
+              -3,
+              -4
+            ],
+            "part_offsets_px": {
+              "bolt": [
+                0,
+                7
+              ],
+              "feed": [
+                0,
+                2
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            266,
+            194,
+            449,
+            399
+          ],
+          "alpha_pixels": 15470,
+          "muzzle_world": [
+            284.4,
+            209.0
+          ],
+          "flash": "flashes/comptroller_flash_a.png"
+        },
+        {
+          "index": 4,
+          "file": "frames/repeater/comptroller_04_fire_settle.png",
+          "state": "fire_settle",
+          "role": "Fire settle, flash tail",
+          "duration_ms": 80,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": -1.0,
+            "total_rotation_deg": -29.0,
+            "translate_px": [
+              -1,
+              -2
+            ],
+            "part_offsets_px": {
+              "bolt": [
+                0,
+                3
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            271,
+            195,
+            446,
+            399
+          ],
+          "alpha_pixels": 15234,
+          "muzzle_world": [
+            289.8,
+            209.1
+          ],
+          "flash": "flashes/comptroller_flash_b.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/repeater/comptroller_05_recover.png",
+          "state": "recover",
+          "role": "Recoil recover",
+          "duration_ms": 110,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": 0.5,
+            "total_rotation_deg": -27.5,
+            "translate_px": [
+              0,
+              1
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            276,
+            196,
+            440,
+            399
+          ],
+          "alpha_pixels": 14931,
+          "muzzle_world": [
+            295.0,
+            209.8
+          ],
+          "flash": null
+        },
+        {
+          "index": 6,
+          "file": "frames/repeater/comptroller_06_reload_a.png",
+          "state": "reload_a",
+          "role": "Reload/cycle A",
+          "duration_ms": 240,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": 3.0,
+            "total_rotation_deg": -25.0,
+            "translate_px": [
+              4,
+              28
+            ],
+            "part_offsets_px": {
+              "feed": [
+                0,
+                30
+              ],
+              "bolt": [
+                0,
+                5
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            287,
+            220,
+            435,
+            399
+          ],
+          "alpha_pixels": 12182,
+          "muzzle_world": [
+            306.2,
+            233.2
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/repeater/comptroller_07_reload_b.png",
+          "state": "reload_b",
+          "role": "Reload/cycle B",
+          "duration_ms": 300,
+          "generation_pose": {
+            "base_rotation_deg": -28.0,
+            "frame_rotation_deg": 1.5,
+            "total_rotation_deg": -26.5,
+            "translate_px": [
+              2,
+              12
+            ],
+            "part_offsets_px": {
+              "feed": [
+                0,
+                10
+              ],
+              "bolt": [
+                0,
+                1
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            281,
+            206,
+            427,
+            399
+          ],
+          "alpha_pixels": 13797,
+          "muzzle_world": [
+            299.9,
+            219.3
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/comptroller_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 3,
+          "for_state": "fire_peak",
+          "muzzle_world": [
+            284.4,
+            209.0
+          ],
+          "duration_ms": 60,
+          "content_bbox": [
+            238,
+            155,
+            338,
+            287
+          ],
+          "alpha_pixels": 3392,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "star"
+        },
+        {
+          "file": "flashes/comptroller_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 4,
+          "for_state": "fire_settle",
+          "muzzle_world": [
+            289.8,
+            209.1
+          ],
+          "duration_ms": 80,
+          "content_bbox": [
+            255,
+            155,
+            325,
+            264
+          ],
+          "alpha_pixels": 2156,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "star"
+        }
+      ],
+      "icon": {
+        "file": "icons/comptroller_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          9,
+          9,
+          72,
+          57
+        ],
+        "alpha_pixels": 1524,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": null,
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    },
+    {
+      "slot": "launcher",
+      "id": "plumb_bombard",
+      "name": "Plumb Bombard",
+      "description": "Breech mortar / theodolite hybrid: wide brass-ringed tube, spirit level, side shell rack.",
+      "origin": [
+        375,
+        376
+      ],
+      "base_rotation_deg": -24.0,
+      "grip_anchor_local": [
+        16,
+        52
+      ],
+      "support_anchor_local": [
+        -38,
+        -24
+      ],
+      "muzzle_local": [
+        0,
+        -170
+      ],
+      "animated_groups": [
+        "breech",
+        "shell"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/launcher/plumb_bombard_00_idle.png",
+          "state": "idle",
+          "role": "Ready loop; grip anchor pose",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 0.0,
+            "total_rotation_deg": -24.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            272,
+            200,
+            422,
+            399
+          ],
+          "alpha_pixels": 18860,
+          "muzzle_world": [
+            305.9,
+            220.7
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/launcher/plumb_bombard_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 12.0,
+            "total_rotation_deg": -12.0,
+            "translate_px": [
+              16,
+              118
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            316,
+            308,
+            419,
+            399
+          ],
+          "alpha_pixels": 7135,
+          "muzzle_world": [
+            355.7,
+            327.7
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/launcher/plumb_bombard_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 5.0,
+            "total_rotation_deg": -19.0,
+            "translate_px": [
+              6,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            289,
+            241,
+            422,
+            399
+          ],
+          "alpha_pixels": 14090,
+          "muzzle_world": [
+            325.7,
+            261.3
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/launcher/plumb_bombard_03_fire_peak.png",
+          "state": "fire_peak",
+          "role": "Fire peak recoil",
+          "duration_ms": 60,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": -2.2,
+            "total_rotation_deg": -26.2,
+            "translate_px": [
+              -3,
+              -4
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            265,
+            199,
+            430,
+            399
+          ],
+          "alpha_pixels": 19247,
+          "muzzle_world": [
+            296.9,
+            219.5
+          ],
+          "flash": "flashes/plumb_bombard_flash_a.png"
+        },
+        {
+          "index": 4,
+          "file": "frames/launcher/plumb_bombard_04_fire_settle.png",
+          "state": "fire_settle",
+          "role": "Fire settle, flash tail",
+          "duration_ms": 80,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": -1.0,
+            "total_rotation_deg": -25.0,
+            "translate_px": [
+              -1,
+              -2
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            269,
+            199,
+            426,
+            399
+          ],
+          "alpha_pixels": 19043,
+          "muzzle_world": [
+            302.2,
+            219.9
+          ],
+          "flash": "flashes/plumb_bombard_flash_b.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/launcher/plumb_bombard_05_recover.png",
+          "state": "recover",
+          "role": "Recoil recover",
+          "duration_ms": 110,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 0.5,
+            "total_rotation_deg": -23.5,
+            "translate_px": [
+              0,
+              1
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            274,
+            201,
+            422,
+            399
+          ],
+          "alpha_pixels": 18749,
+          "muzzle_world": [
+            307.2,
+            221.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 6,
+          "file": "frames/launcher/plumb_bombard_06_reload_a.png",
+          "state": "reload_a",
+          "role": "Reload/cycle A",
+          "duration_ms": 240,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 3.0,
+            "total_rotation_deg": -21.0,
+            "translate_px": [
+              4,
+              28
+            ],
+            "part_offsets_px": {
+              "breech": [
+                0,
+                18
+              ],
+              "shell": [
+                0,
+                48
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            283,
+            225,
+            427,
+            399
+          ],
+          "alpha_pixels": 15971,
+          "muzzle_world": [
+            318.1,
+            245.3
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/launcher/plumb_bombard_07_reload_b.png",
+          "state": "reload_b",
+          "role": "Reload/cycle B",
+          "duration_ms": 300,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 1.5,
+            "total_rotation_deg": -22.5,
+            "translate_px": [
+              2,
+              12
+            ],
+            "part_offsets_px": {
+              "breech": [
+                0,
+                6
+              ],
+              "shell": [
+                0,
+                14
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            278,
+            211,
+            424,
+            399
+          ],
+          "alpha_pixels": 17601,
+          "muzzle_world": [
+            311.9,
+            230.9
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/plumb_bombard_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 3,
+          "for_state": "fire_peak",
+          "muzzle_world": [
+            296.9,
+            219.5
+          ],
+          "duration_ms": 60,
+          "content_bbox": [
+            228,
+            133,
+            372,
+            304
+          ],
+          "alpha_pixels": 7491,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "blast"
+        },
+        {
+          "file": "flashes/plumb_bombard_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 4,
+          "for_state": "fire_settle",
+          "muzzle_world": [
+            302.2,
+            219.9
+          ],
+          "duration_ms": 80,
+          "content_bbox": [
+            251,
+            169,
+            355,
+            278
+          ],
+          "alpha_pixels": 4474,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "blast"
+        }
+      ],
+      "icon": {
+        "file": "icons/plumb_bombard_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          16,
+          5,
+          50,
+          52
+        ],
+        "alpha_pixels": 945,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": null,
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    },
+    {
+      "slot": "projector",
+      "id": "aethometer",
+      "name": "Aethometer",
+      "description": "Aether projector: brass coils, glass condenser, pressure gauge, forbidden green discharge.",
+      "origin": [
+        370,
+        374
+      ],
+      "base_rotation_deg": -24.0,
+      "grip_anchor_local": [
+        16,
+        48
+      ],
+      "support_anchor_local": [
+        -38,
+        -34
+      ],
+      "muzzle_local": [
+        0,
+        -172
+      ],
+      "animated_groups": [
+        "vent",
+        "lever"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/projector/aethometer_00_idle.png",
+          "state": "idle",
+          "role": "Ready loop; grip anchor pose",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 0.0,
+            "total_rotation_deg": -24.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            283,
+            211,
+            423,
+            399
+          ],
+          "alpha_pixels": 13785,
+          "muzzle_world": [
+            300.0,
+            216.9
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/projector/aethometer_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 12.0,
+            "total_rotation_deg": -12.0,
+            "translate_px": [
+              16,
+              118
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            331,
+            322,
+            404,
+            399
+          ],
+          "alpha_pixels": 3456,
+          "muzzle_world": [
+            350.2,
+            323.8
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/projector/aethometer_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 5.0,
+            "total_rotation_deg": -19.0,
+            "translate_px": [
+              6,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            302,
+            253,
+            406,
+            399
+          ],
+          "alpha_pixels": 9245,
+          "muzzle_world": [
+            320.0,
+            257.4
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/projector/aethometer_03_fire_peak.png",
+          "state": "fire_peak",
+          "role": "Fire peak recoil",
+          "duration_ms": 60,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": -2.2,
+            "total_rotation_deg": -26.2,
+            "translate_px": [
+              -3,
+              -4
+            ],
+            "part_offsets_px": {
+              "vent": [
+                0,
+                2
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            274,
+            209,
+            430,
+            399
+          ],
+          "alpha_pixels": 14179,
+          "muzzle_world": [
+            291.1,
+            215.7
+          ],
+          "flash": "flashes/aethometer_flash_a.png"
+        },
+        {
+          "index": 4,
+          "file": "frames/projector/aethometer_04_fire_settle.png",
+          "state": "fire_settle",
+          "role": "Fire settle, flash tail",
+          "duration_ms": 80,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": -1.0,
+            "total_rotation_deg": -25.0,
+            "translate_px": [
+              -1,
+              -2
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            279,
+            210,
+            427,
+            399
+          ],
+          "alpha_pixels": 13952,
+          "muzzle_world": [
+            296.3,
+            216.1
+          ],
+          "flash": "flashes/aethometer_flash_b.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/projector/aethometer_05_recover.png",
+          "state": "recover",
+          "role": "Recoil recover",
+          "duration_ms": 110,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 0.5,
+            "total_rotation_deg": -23.5,
+            "translate_px": [
+              0,
+              1
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            284,
+            211,
+            421,
+            399
+          ],
+          "alpha_pixels": 13700,
+          "muzzle_world": [
+            301.4,
+            217.3
+          ],
+          "flash": null
+        },
+        {
+          "index": 6,
+          "file": "frames/projector/aethometer_06_reload_a.png",
+          "state": "reload_a",
+          "role": "Reload/cycle A",
+          "duration_ms": 240,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 3.0,
+            "total_rotation_deg": -21.0,
+            "translate_px": [
+              4,
+              28
+            ],
+            "part_offsets_px": {
+              "vent": [
+                0,
+                22
+              ],
+              "lever": [
+                0,
+                10
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            295,
+            236,
+            405,
+            399
+          ],
+          "alpha_pixels": 10687,
+          "muzzle_world": [
+            312.4,
+            241.4
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/projector/aethometer_07_reload_b.png",
+          "state": "reload_b",
+          "role": "Reload/cycle B",
+          "duration_ms": 300,
+          "generation_pose": {
+            "base_rotation_deg": -24.0,
+            "frame_rotation_deg": 1.5,
+            "total_rotation_deg": -22.5,
+            "translate_px": [
+              2,
+              12
+            ],
+            "part_offsets_px": {
+              "vent": [
+                0,
+                8
+              ],
+              "lever": [
+                0,
+                3
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            289,
+            221,
+            409,
+            399
+          ],
+          "alpha_pixels": 12504,
+          "muzzle_world": [
+            306.2,
+            227.1
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/aethometer_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 3,
+          "for_state": "fire_peak",
+          "muzzle_world": [
+            291.1,
+            215.7
+          ],
+          "duration_ms": 60,
+          "content_bbox": [
+            202,
+            139,
+            388,
+            305
+          ],
+          "alpha_pixels": 6043,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "energy"
+        },
+        {
+          "file": "flashes/aethometer_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 4,
+          "for_state": "fire_settle",
+          "muzzle_world": [
+            296.3,
+            216.1
+          ],
+          "duration_ms": 80,
+          "content_bbox": [
+            234,
+            153,
+            368,
+            285
+          ],
+          "alpha_pixels": 3658,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "energy"
+        }
+      ],
+      "icon": {
+        "file": "icons/aethometer_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          12,
+          18,
+          68,
+          55
+        ],
+        "alpha_pixels": 1128,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": null,
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    },
+    {
+      "slot": "heavy",
+      "id": "hymnodyne",
+      "name": "Hymnodyne",
+      "description": "Heavy ritual instrument: five organ pipes on a brass hub, bone mouths, censer chain, winding crank.",
+      "origin": [
+        372,
+        384
+      ],
+      "base_rotation_deg": -14.0,
+      "grip_anchor_local": [
+        16,
+        56
+      ],
+      "support_anchor_local": [
+        -48,
+        -14
+      ],
+      "muzzle_local": [
+        0,
+        -184
+      ],
+      "animated_groups": [
+        "cluster",
+        "crank"
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/heavy/hymnodyne_00_idle.png",
+          "state": "idle",
+          "role": "Ready loop; grip anchor pose",
+          "duration_ms": 900,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 0.0,
+            "total_rotation_deg": -14.0,
+            "translate_px": [
+              0,
+              0
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            285,
+            195,
+            428,
+            399
+          ],
+          "alpha_pixels": 15836,
+          "muzzle_world": [
+            327.5,
+            205.5
+          ],
+          "flash": null
+        },
+        {
+          "index": 1,
+          "file": "frames/heavy/hymnodyne_01_raise_low.png",
+          "state": "raise_low",
+          "role": "Raise start, weapon low",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 12.0,
+            "total_rotation_deg": -2.0,
+            "translate_px": [
+              16,
+              118
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            332,
+            309,
+            431,
+            399
+          ],
+          "alpha_pixels": 5005,
+          "muzzle_world": [
+            381.6,
+            318.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 2,
+          "file": "frames/heavy/hymnodyne_02_raise_mid.png",
+          "state": "raise_mid",
+          "role": "Raise mid",
+          "duration_ms": 90,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 5.0,
+            "total_rotation_deg": -9.0,
+            "translate_px": [
+              6,
+              46
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            303,
+            238,
+            437,
+            399
+          ],
+          "alpha_pixels": 10645,
+          "muzzle_world": [
+            349.2,
+            248.3
+          ],
+          "flash": null
+        },
+        {
+          "index": 3,
+          "file": "frames/heavy/hymnodyne_03_fire_peak.png",
+          "state": "fire_peak",
+          "role": "Fire peak recoil",
+          "duration_ms": 60,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": -2.2,
+            "total_rotation_deg": -16.2,
+            "translate_px": [
+              -3,
+              -4
+            ],
+            "part_offsets_px": {
+              "cluster": [
+                3,
+                0
+              ],
+              "crank": [
+                2,
+                0
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            279,
+            191,
+            425,
+            399
+          ],
+          "alpha_pixels": 16215,
+          "muzzle_world": [
+            317.7,
+            203.3
+          ],
+          "flash": "flashes/hymnodyne_flash_a.png"
+        },
+        {
+          "index": 4,
+          "file": "frames/heavy/hymnodyne_04_fire_settle.png",
+          "state": "fire_settle",
+          "role": "Fire settle, flash tail",
+          "duration_ms": 80,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": -1.0,
+            "total_rotation_deg": -15.0,
+            "translate_px": [
+              -1,
+              -2
+            ],
+            "part_offsets_px": {
+              "cluster": [
+                1,
+                0
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            282,
+            193,
+            426,
+            399
+          ],
+          "alpha_pixels": 16087,
+          "muzzle_world": [
+            323.4,
+            204.3
+          ],
+          "flash": "flashes/hymnodyne_flash_b.png"
+        },
+        {
+          "index": 5,
+          "file": "frames/heavy/hymnodyne_05_recover.png",
+          "state": "recover",
+          "role": "Recoil recover",
+          "duration_ms": 110,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 0.5,
+            "total_rotation_deg": -13.5,
+            "translate_px": [
+              0,
+              1
+            ],
+            "part_offsets_px": {},
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            286,
+            195,
+            428,
+            399
+          ],
+          "alpha_pixels": 15778,
+          "muzzle_world": [
+            329.0,
+            206.1
+          ],
+          "flash": null
+        },
+        {
+          "index": 6,
+          "file": "frames/heavy/hymnodyne_06_reload_a.png",
+          "state": "reload_a",
+          "role": "Reload/cycle A",
+          "duration_ms": 240,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 3.0,
+            "total_rotation_deg": -11.0,
+            "translate_px": [
+              4,
+              28
+            ],
+            "part_offsets_px": {
+              "cluster": [
+                6,
+                0
+              ],
+              "crank": [
+                5,
+                4
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            302,
+            220,
+            439,
+            399
+          ],
+          "alpha_pixels": 12641,
+          "muzzle_world": [
+            340.9,
+            231.4
+          ],
+          "flash": null
+        },
+        {
+          "index": 7,
+          "file": "frames/heavy/hymnodyne_07_reload_b.png",
+          "state": "reload_b",
+          "role": "Reload/cycle B",
+          "duration_ms": 300,
+          "generation_pose": {
+            "base_rotation_deg": -14.0,
+            "frame_rotation_deg": 1.5,
+            "total_rotation_deg": -12.5,
+            "translate_px": [
+              2,
+              12
+            ],
+            "part_offsets_px": {
+              "cluster": [
+                -3,
+                0
+              ],
+              "crank": [
+                1,
+                2
+              ]
+            },
+            "support_offset_px": [
+              0,
+              0
+            ]
+          },
+          "content_bbox": [
+            288,
+            207,
+            432,
+            399
+          ],
+          "alpha_pixels": 14538,
+          "muzzle_world": [
+            334.2,
+            216.4
+          ],
+          "flash": null
+        }
+      ],
+      "flashes": [
+        {
+          "file": "flashes/hymnodyne_flash_a.png",
+          "variant": "a",
+          "for_frame_index": 3,
+          "for_state": "fire_peak",
+          "muzzle_world": [
+            317.7,
+            203.3
+          ],
+          "duration_ms": 60,
+          "content_bbox": [
+            231,
+            118,
+            402,
+            286
+          ],
+          "alpha_pixels": 8780,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "hymn"
+        },
+        {
+          "file": "flashes/hymnodyne_flash_b.png",
+          "variant": "b",
+          "for_frame_index": 4,
+          "for_state": "fire_settle",
+          "muzzle_world": [
+            323.4,
+            204.3
+          ],
+          "duration_ms": 80,
+          "content_bbox": [
+            253,
+            132,
+            397,
+            286
+          ],
+          "alpha_pixels": 5806,
+          "blend_hint": "alpha-over; optional additive blend if the engine supports it",
+          "style": "hymn"
+        }
+      ],
+      "icon": {
+        "file": "icons/hymnodyne_icon_96x64.png",
+        "canvas": [
+          96,
+          64
+        ],
+        "content_bbox": [
+          19,
+          6,
+          72,
+          61
+        ],
+        "alpha_pixels": 1519,
+        "suggested_native_size": [
+          96,
+          64
+        ],
+        "notes": "Side-profile pickup sprite; weapon only, no hands; transparent margin on all sides."
+      },
+      "suggested_mapping": {
+        "ready": "idle",
+        "raise": [
+          "raise_low",
+          "raise_mid",
+          "idle"
+        ],
+        "fire": [
+          "fire_peak",
+          "fire_settle",
+          "recover"
+        ],
+        "cycle_or_reload": [
+          "reload_a",
+          "reload_b",
+          "idle"
+        ],
+        "melee_attack": null,
+        "note": "Descriptive labels for a proposed integration; not tied to or tested against any engine."
+      }
+    }
+  ]
+}

@@ -21,6 +21,11 @@ from rogue.architecture import study,cellpoint,flats as arch_flats
 from rogue.bosses import is_boss_thing
 from rogue.creatures import FAMILIES,creature,sprite_lumps,wad_lumps
 from rogue.vending import place,picture as cabinet
+from uzdoom.models import actor_id,artwork as model_artwork,doom_ed_numbers,installation_artwork
+from uzdoom.openworld.campaign import add_floor,IDS
+from uzdoom.openworld.selection import choose as floor_choices
+from uzdoom.art_sections import add_room as add_art_room,artwork as signal_artwork
+from uzdoom.weapons import artwork as weapon_artwork,remaining_assets
 
 ROOT=Path(__file__).resolve().parents[1]
 BANK=ROOT/'assets/tower'
@@ -74,7 +79,7 @@ class Map:
         return sector
 
     def thing(self,x,y,type,angle=0,z=0,args=()):
-        row=dict(x=x,y=y,height=z,angle=angle,type=type,skill1=True,skill2=True,skill3=True,skill4=True,skill5=True,single=True)
+        row=dict(x=x,y=y,height=z,angle=int(round(angle))%360,type=type,skill1=True,skill2=True,skill3=True,skill4=True,skill5=True,single=True)
         row.update({f'arg{i}':v for i,v in enumerate(args)})
         self.things.append(row)
 
@@ -110,12 +115,17 @@ class Map:
 
     def floor_at(self,x,y):
         # Called for authored gate/prop coordinates on a known physical cell.
+        if hasattr(self,'open_geometry'):
+            from uzdoom.openworld.nrlib import point_in_poly
+            for poly,z in self.open_geometry:
+                if point_in_poly(x,y,poly):return z
         candidates=[n for n in self.nodes if abs(n['x']-x)<=n['tile']/2 and abs(n['y']-y)<=n['tile']/2]
         if not candidates:raise ValueError('No gate floor')
         return min(n['z'] for n in candidates)
 
     def nav(self):
         for i,n in enumerate(self.nodes):
+            if n.get('custom'):continue
             for dx,dy in [(n['tile'],0),(-n['tile'],0),(0,n['tile']),(0,-n['tile'])]:
                 for j in self.surface_index.get((n['x']+dx,n['y']+dy),[]):
                     o=self.nodes[j]
@@ -174,20 +184,23 @@ def kind(thing):
     return KINDS.get(thing[3],0)
 
 
-def make_maps(seed,pack):
+def make_maps(seed,pack,open_worlds=True,floor_plan=None):
     floors=apply_identity([generate(seed,n) for n in range(1,8)],seed)
     # Preserve current reviewed layouts and encounter placements. Art selection
     # is separate from the old selector, so this does not alter native runs.
     apply(floors,seed);place(floors,seed)
+    floor_plan=floor_plan or floor_choices(seed,IDS)
     result=[];manifests=[]
     for f in floors:
         m=Map(f.number);base=(f.number-1)*512
-        m.grid(f,base=base)
-        for t in f.things:
+        world=add_floor(m,f.number,seed,base,f.bosses,f.architecture['vending']['order'],floor_plan[f.number-1]) if open_worlds else None
+        if not world:m.grid(f,base=base)
+        for t in ([] if world else f.things):
             x,y,angle,type,options=t
             if type in KINDS:
                 k=kind(t);boss=next((i+1 for i,b in enumerate(f.bosses) if tuple(b['cell'])==(x//128,y//128) and b['class']==k),0)
-                m.thing(x,y,16000,angle,args=(k,(options>>11)&15,boss))
+                title=f.bosses[boss-1]['name'] if boss else None
+                m.thing(x,y,actor_id(k,title),angle,args=(k,(options>>11)&15,boss))
             elif type in (86,85,2028):m.thing(x,y,17000+(86,85,2028).index(type),angle)
             else:m.thing(x,y,type,angle)
         for b in f.bosses:
@@ -196,9 +209,13 @@ def make_maps(seed,pack):
                    9:'Hit its shield once, then use F on its marked seal. Holding F while entering also works.',
                    10:'Enter its amber A seal, then its cyan B seal.'}
             b['game_rule']=rules[b['class']]+' Break the shield for twelve seconds and 150% damage. Shielded hits still deal 60% damage.'
-            ring=cellpoint(b['binding_cell']);other=cellpoint(b.get('secondary_cell',b['binding_cell']))
-            m.meta.append('B '+' '.join(map(str,[b['class'],*ring,base+f.profiles[tuple(b['binding_cell'])].get('floor',0),*other,base+f.profiles[tuple(b.get('secondary_cell',b['binding_cell']))].get('floor',0)]))+' '+b['name'])
-        v=f.architecture['vending'];m.meta.append('V '+' '.join(map(str,[v['x'],v['y'],base+f.profiles[tuple(v['cell'])].get('floor',0),*v['order']])))
+            if not world:
+                ring=cellpoint(b['binding_cell']);other=cellpoint(b.get('secondary_cell',b['binding_cell']))
+                m.meta.append('B '+' '.join(map(str,[b['class'],*ring,base+f.profiles[tuple(b['binding_cell'])].get('floor',0),*other,base+f.profiles[tuple(b.get('secondary_cell',b['binding_cell']))].get('floor',0)]))+' '+b['name'])
+        if world:
+            for b,original in zip(world['bosses'],f.bosses):b['game_rule']=original['game_rule']
+        v=world['vending'] if world else f.architecture['vending']
+        if not world:m.meta.append('V '+' '.join(map(str,[v['x'],v['y'],base+f.profiles[tuple(v['cell'])].get('floor',0),*v['order']])))
         puzzle_kind=('corridor','pillar','memory')[(f.number-1)%3];puzzle=study(seed,puzzle_kind)
         # The far room is the way out of Unreliable Memory. The first mutation
         # is required before that door works, so the effect is encountered.
@@ -210,10 +227,11 @@ def make_maps(seed,pack):
             b=next(p for p,v in puzzle.profiles.items() if v.get('tag')==c['b'])
             ax,ay=cellpoint(a);bx,by=cellpoint(b)
             m.meta.append('C '+' '.join(map(str,[c['id'],annex[a],annex[b],c['height'],c['delay'],6000+ax,ay,6000+bx,by,base])))
-        source=(*cellpoint(f.exit),base+f.profiles[f.exit].get('floor',0))
+        source=tuple(world['exit']) if world else (*cellpoint(f.exit),base+f.profiles[f.exit].get('floor',0))
         start=cellpoint(puzzle.start);entry=(6000+start[0],start[1],base)
         end=cellpoint(puzzle.exit);end=(6000+end[0],end[1],base)
         path=tower(m,base)
+        art_room=add_art_room(m,base)
         m.gate(1,source,entry,'SERVICE_ANNEX',bosses=True)
         m.gate(2,(entry[0]-64,entry[1],base),source,'RETURN_TO_OFFICE')
         m.gate(3,end,path[0],'UPPER_SERVICE_STAIR',swaps=4 if puzzle_kind=='pillar' else 1 if puzzle_kind=='corridor' else 0,mutations=int(puzzle_kind=='memory'))
@@ -225,9 +243,10 @@ def make_maps(seed,pack):
         annex_sectors=sorted({n['sector'] for n in m.nodes if 6000<n['x']<11000})
         m.meta.append('L '+','.join(map(str,annex_sectors)))
         result.append(m)
-        manifests.append(dict(number=f.number,name=f'{pack.replace("_"," ").upper()} / {f.number:02}',office=f.bosses[0].get('source_office'),base_altitude=base,
-                              start=f.start,exit=f.exit,bosses=f.bosses,vending=v,puzzle=puzzle_kind,
-                              tower_route=path,seams=m.seams,gates=m.gates,sectors=len(m.sectors),nodes=len(m.nodes)))
+        title=world['title'].upper() if world else pack.replace('_',' ').upper()
+        manifests.append(dict(number=f.number,name=f'{title} / {f.number:02}',office=f.bosses[0].get('source_office'),base_altitude=base,
+                              start=world['start'] if world else f.start,exit=world['exit'] if world else f.exit,bosses=world['bosses'] if world else f.bosses,vending=v,puzzle=puzzle_kind,
+                              tower_route=path,seams=m.seams,gates=m.gates,sectors=len(m.sectors),nodes=len(m.nodes),open_world=world,art_room=art_room))
     return result,manifests
 
 
@@ -297,18 +316,33 @@ def artwork(wad_path,seed,pack):
             modeldefs.append(f'Model {cls} {{ Path "{obj.parent.as_posix()}" Model 0 "{obj.name}" Skin 0 "{tex.name}" Scale 64 64 64 FrameIndex COLU A 0 0 }}')
             classes.append(f'class {cls} : Actor {{ Default {{ Radius 24; Height 96; +SOLID }} States {{ Spawn: COLU A -1; Stop; }} }}')
     files['MODELDEF']='\n'.join(modeldefs).encode();files['uzdoom/props.zs']='\n'.join(classes).encode()
+    actor_files,definitions,actor_classes,numbers=model_artwork(ROOT/'assets/actors3d')
+    files.update(actor_files);files['MODELDEF']+=('\n'+definitions+'\n').encode()
+    prop_files,definitions2,prop_classes=installation_artwork(ROOT/'assets/installations')
+    files.update(prop_files);files['MODELDEF']+=('\n'+definitions2+'\n').encode()
+    files['uzdoom/models.zs']=(actor_classes+'\n'+prop_classes+'\n').encode()
+    signal_files,signal_defs=signal_artwork(seed,png)
+    files.update(signal_files);files['MODELDEF']+=('\n'+signal_defs+'\n').encode()
+    files.update(weapon_artwork(ROOT/'assets/weapons',png))
+    files['asset-audit.json']=json.dumps(remaining_assets(),indent=2).encode()
+    for frame in range(7):files[f'sprites/NRMA{chr(65+frame)}0.png']=png(Image.new('RGBA',(1,1)),True)
+    for p in (ROOT/'assets/openworld').glob('*.png'):
+        files[('flats/' if p.stem.startswith(('NRFLOOR','NRMOSS','NRWATER','NRVOID','NRGLOW','NRGLASS')) else 'textures/')+p.name]=p.read_bytes()
     return files
 
 
-def build(seed,assets,output,pack=None):
+def build(seed,assets,output,pack=None,open_worlds=True,*,floor_plan=None,recent_openers=()):
     if type(seed) is not int or not 0<=seed<=0xffffffff:raise ValueError('Unsigned 32-bit seed required')
     pack=pack or PACKS[seed%len(PACKS)]
     if pack not in PACKS:raise ValueError('Unknown environment')
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
-    maps,floors=make_maps(seed,pack);files=artwork(assets,seed,pack)
-    files['ZSCRIPT']=b'version "4.10"\n#include "uzdoom/runtime.zs"\n#include "uzdoom/props.zs"\n'
+    floor_plan=floor_plan or floor_choices(seed,IDS,recent_openers)
+    if len(floor_plan)!=7 or any(p['floor']!=i+1 or p['archetype'] not in IDS or type(p['seed']) is not int or not 0<=p['seed']<=0xffffffff for i,p in enumerate(floor_plan)):raise ValueError('Invalid saved floor plan')
+    maps,floors=make_maps(seed,pack,open_worlds,floor_plan);files=artwork(assets,seed,pack)
+    files['ZSCRIPT']=b'version "4.10"\n#include "uzdoom/runtime.zs"\n#include "uzdoom/props.zs"\n#include "uzdoom/models.zs"\n#include "uzdoom/signals.zs"\n'
     for source in (ROOT/'uzdoom/zscript').glob('*.zs'):files['uzdoom/'+source.name]=source.read_bytes()
-    info='gameinfo { AddEventHandlers = "NRDirector" PlayerClasses = "NRPlayer" }\nDoomEdNums { 16000 = NRMonster 15999 = NRVendor 16500 = NRGate 17000 = NRProp0 17001 = NRProp1 17002 = NRProp2 }\n'
+    model_numbers=doom_ed_numbers()
+    info='gameinfo { AddEventHandlers = "NRDirector" PlayerClasses = "NRPlayer" }\nDoomEdNums { 16000 = NRMonster 15999 = NRVendor 16500 = NRGate 17000 = NRProp0 17001 = NRProp1 17002 = NRProp2 18200 = NRSignal0 18201 = NRSignal1 18202 = NRSignal2 18210 = NRArtConsole '+model_numbers+' }\n'
     for m,f in zip(maps,floors):
         files[f'maps/MAP{m.number:02}.wad']=m.bytes();files[f'NRMAP{m.number:02}']=m.data()
         info+=f'map MAP{m.number:02} "NULL RUN / {pack.replace("_"," ").upper()} / {m.number:02}" {{ levelnum = {m.number} next = "MAP{m.number+1:02}" sky1 = "SKY3" nointermission allowjump nocrouch }}\n'
@@ -318,7 +352,7 @@ def build(seed,assets,output,pack=None):
         for name,data in sorted(files.items()):
             entry=zipfile.ZipInfo(name,(2026,10,31,0,0,0));entry.compress_type=zipfile.ZIP_DEFLATED;z.writestr(entry,data)
     environment=describe(pack) if pack in PACK_IDS else next(e for e in json.loads((BANK/'environments.json').read_text())['sets'] if e['id']==pack)
-    manifest=dict(format='nullrun-uzdoom-1',seed=seed,mode='campaign',identity='threshold',environment=environment,
+    manifest=dict(format='nullrun-uzdoom-1',seed=seed,mode='campaign',identity='threshold',environment=environment,floor_plan=floor_plan,
                   floors=floors,sha256=hashlib.sha256((output/'nullrun.pk3').read_bytes()).hexdigest())
     (output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     return manifest
@@ -327,4 +361,5 @@ def build(seed,assets,output,pack=None):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--seed',type=int,default=20261031)
     parser.add_argument('--assets',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--environment',choices=PACKS)
-    a=parser.parse_args();m=build(a.seed,a.assets,a.output,a.environment);print(a.output,m['sha256'])
+    parser.add_argument('--legacy-layouts',action='store_true',help='Retain office layouts for focused mechanics regression checks')
+    a=parser.parse_args();m=build(a.seed,a.assets,a.output,a.environment,not a.legacy_layouts);print(a.output,m['sha256'])

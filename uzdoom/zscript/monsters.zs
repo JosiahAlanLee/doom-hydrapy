@@ -38,7 +38,7 @@ class NRMonster : Actor {
    case 13:return 'VILE';case 14:return 'SKUL';case 15:return 'CYBR';default:return 'PAIN';
   }
  }
- void Visual() {
+ virtual void Visual() {
   sprite=GetSpriteIndex(SpriteName());
   if(health<=0) {frame=20+min(3,(level.time-DeadAt)/6);return;}
   if(Kind==7) {frame=!Awake?24:Frozen?24:20+(level.time/4)%4;return;}
@@ -191,6 +191,23 @@ class NRMonster : Actor {
   if(visible || Awake)h.Navigate(self,p,Phase==2?4.:1.3);
  }
  clearscope String JSON() {
-  return String.Format("{\"class\":%d,\"health\":%d,\"max_health\":%d,\"x\":%.4f,\"y\":%.4f,\"z\":%.4f,\"angle\":%.4f,\"awake\":%s,\"frozen\":%s,\"phase\":%d,\"attack_count\":%d,\"warning_ticks\":%d,\"boss_index\":%d,\"sight\":%s}",Kind,health,MaxHP,Pos.X,Pos.Y,Pos.Z,Angle,Awake?"true":"false",Frozen?"true":"false",Phase,AttackCount,Phase==2?max(0,EndsAt-level.time):0,BossIndex,PlayerSight?"true":"false");
+  int warning=(Kind==8?Phase==1:Phase==2)?max(0,EndsAt-level.time):0;
+  return String.Format("{\"class\":%d,\"health\":%d,\"max_health\":%d,\"x\":%.4f,\"y\":%.4f,\"z\":%.4f,\"angle\":%.4f,\"awake\":%s,\"frozen\":%s,\"phase\":%d,\"attack_count\":%d,\"warning_ticks\":%d,\"boss_index\":%d,\"sight\":%s}",Kind,health,MaxHP,Pos.X,Pos.Y,Pos.Z,Angle,Awake?"true":"false",Frozen?"true":"false",Phase,AttackCount,warning,BossIndex,PlayerSight?"true":"false");
+ }
+}
+
+// All native AI, damage, binding and collision rules remain in NRMonster.
+// A separate pose bank prevents the Hollow's hunting/death sprite frames
+// from accidentally selecting the same 3D pose.
+class NRMeshMonster : NRMonster {
+ int MeshPose;
+ Default { Scale 1; }
+ States { Spawn: NRMA A -1; Stop; Death: NRMA G -1; Stop; }
+ override void Visual() {
+  if(health<=0)MeshPose=6;
+  else if(!Awake || (Kind==7 && Frozen))MeshPose=0;
+  else if(Kind==8)MeshPose=Phase==1?3:Phase==2 || Phase==3?4:Phase==4?5:1+(level.time/8)%2;
+  else MeshPose=Phase==2?3:Phase==3?4:Phase==4?5:1+(level.time/8)%2;
+  sprite=GetSpriteIndex('NRMA');frame=MeshPose;
  }
 }

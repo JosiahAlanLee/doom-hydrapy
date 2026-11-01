@@ -1,0 +1,219 @@
+{
+  "atlas": {
+    "file": "garden-organ_atlas.png",
+    "mode": "RGB",
+    "regions": {
+      "bone": [
+        96,
+        0,
+        32,
+        32
+      ],
+      "bone2": [
+        96,
+        96,
+        32,
+        32
+      ],
+      "bronze": [
+        64,
+        0,
+        32,
+        32
+      ],
+      "glass": [
+        64,
+        32,
+        32,
+        32
+      ],
+      "glass2": [
+        64,
+        96,
+        32,
+        32
+      ],
+      "glow": [
+        96,
+        32,
+        32,
+        32
+      ],
+      "iron": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "line": [
+        0,
+        96,
+        32,
+        32
+      ],
+      "moss": [
+        64,
+        64,
+        32,
+        32
+      ],
+      "paper": [
+        32,
+        96,
+        32,
+        32
+      ],
+      "rust": [
+        32,
+        0,
+        32,
+        32
+      ],
+      "stone": [
+        0,
+        32,
+        32,
+        32
+      ],
+      "stone2": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "void": [
+        96,
+        64,
+        32,
+        32
+      ],
+      "wood": [
+        0,
+        64,
+        32,
+        32
+      ],
+      "wood2": [
+        32,
+        64,
+        32,
+        32
+      ]
+    },
+    "size": [
+      128,
+      128
+    ],
+    "tile_px": 32
+  },
+  "axis": {
+    "forward": "+Y",
+    "handed": "right",
+    "up": "+Z"
+  },
+  "bounds_max": [
+    0.882216,
+    2.095859,
+    3.421511
+  ],
+  "bounds_min": [
+    -0.861926,
+    -0.628735,
+    0.0
+  ],
+  "display_name": "Filing Organ",
+  "format": "nullrun-prop-round2-1",
+  "generator": {
+    "base_seed": 20261101,
+    "deterministic": true,
+    "script": "generate.py",
+    "seed": 20267152
+  },
+  "ground_origin": "xy footprint centre at z=0; ground plane z=0",
+  "height_m": 3.421511,
+  "integration": {
+    "axis_note": "Original OBJ stays Z-up. Parent's loader conversion is (x, z, -y) plus MODELDEF AngleOffset -90; do not pre-rotate.",
+    "collision": "static decorative; supply a simple box or cylinder in the map",
+    "engine": "UZDoom/Doom-format map or model decoration; parent owns adapter",
+    "texture_sampling": "nearest; atlas UVs inset one texel"
+  },
+  "limitations": [
+    "Static prop; no animation, lights, particles or native actor.",
+    "CPU previews are inspection renders, not UZDoom captures."
+  ],
+  "material": {
+    "map_Kd": "garden-organ_atlas.png",
+    "mtl": "garden-organ.mtl",
+    "name": "garden-organ_mat"
+  },
+  "parts": [
+    {
+      "name": "base",
+      "triangle_range": [
+        0,
+        384
+      ],
+      "vertex_range": [
+        0,
+        256
+      ]
+    },
+    {
+      "name": "pipes",
+      "triangle_range": [
+        384,
+        699
+      ],
+      "vertex_range": [
+        256,
+        438
+      ]
+    },
+    {
+      "name": "leaves",
+      "triangle_range": [
+        699,
+        771
+      ],
+      "vertex_range": [
+        438,
+        510
+      ]
+    },
+    {
+      "name": "crown",
+      "triangle_range": [
+        771,
+        835
+      ],
+      "vertex_range": [
+        510,
+        558
+      ]
+    }
+  ],
+  "placement": {
+    "anchor_roles": [
+      "landmark",
+      "overlook",
+      "vendor"
+    ],
+    "environment": "hanging-boneglass-garden",
+    "mount": "floor; pipes need 3.5 m headroom",
+    "scale": "1 Blender/OBJ unit = 1 metre; exported at real scale",
+    "yaw_deg": 20
+  },
+  "prop": "garden-organ",
+  "size_m": [
+    1.744142,
+    2.724593,
+    3.421511
+  ],
+  "topology": {
+    "flat_normals": 835,
+    "triangles": 835,
+    "uvs": 2505,
+    "vertices": 558
+  },
+  "units": "metres; exported at real scale (1 OBJ unit = 1 m)"
+}

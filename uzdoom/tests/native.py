@@ -66,6 +66,8 @@ def run(args):
                     assert e.latest['mobs'][0]['x']==before['x'],'Watched Hollow moved'
                     e.move(1024);e.wait(lambda:not e.latest['mobs'][0]['frozen']);time.sleep(.5)
                 elif test_id==5:
+                    e.wait(lambda:any(m.get('class')==8 and m.get('phase')==1 and 0<m.get('warning_ticks',0)<=28 for m in e.latest.get('mobs',[])),3)
+                    item['native_warning_telemetry']='28-tick mask phase, not lunge'
                     e.wait(lambda:e.latest['creatures']['effect']=='grip',5);hold(102)
                     e.wait(lambda:e.latest['creatures']['effect']!='grip',3);hold(102,False)
                 elif test_id==6:

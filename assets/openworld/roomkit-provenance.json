@@ -1,0 +1,552 @@
+{
+  "job": "20261031-190058-deepseek-nullrun-room-variety",
+  "folder": "/home/echevarian/dev/shared/deepseek/nullrun-room-variety-20261101",
+  "engine_verification": "none; all previews are CPU renders and all checks are structural",
+  "archetypes": [
+    "oblique-switchback-quarry",
+    "radial-negative-cathedral",
+    "amphitheatre-pump-organ",
+    "split-level-transit-hall"
+  ],
+  "not_implemented": [
+    "asymmetrical-ossuary-conservatory",
+    "inhabited-archive"
+  ],
+  "support_provenance": {
+    "copied_unmodified_from": "../nullrun-open-vertical-worlds-20261031/",
+    "files": [
+      "nrlib.py",
+      "routegraph.py",
+      "validate.py",
+      "preview.py"
+    ],
+    "note": "sha256 of the copied files is in SUPPORT_SHA256.txt; nothing in the source folder was modified."
+  },
+  "files": [
+    {
+      "path": "CLAIM.txt",
+      "sha256": "8c5d1625603f6f2048d4f1a5b50c0c1e81236088deb20488365ead69bff31300",
+      "bytes": 152
+    },
+    {
+      "path": "README.md",
+      "sha256": "357a77b024501230728e98ff903f723cd7d9ac0ee93bfca6efc4636fe5c9298e",
+      "bytes": 1530
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "d569def37f7bc847846a58c48a2649e58ebc97d0b80c87e836237c15558165c4",
+      "bytes": 5123
+    },
+    {
+      "path": "SUPPORT_SHA256.txt",
+      "sha256": "3099c02a76c1e1801673b13d5ddedfd000d83f97cc635a8c71fb1504cc7b31bc",
+      "bytes": 310
+    },
+    {
+      "path": "archetypes.py",
+      "sha256": "115bb8085c874265a23772519bb77684549a9c972a90a8910cd57efe13e1368e",
+      "bytes": 26764
+    },
+    {
+      "path": "contact.py",
+      "sha256": "9b03f5a91c3f0408db03f372473ae70383f4f7a20fc73e3f6cff1352c2bea1cc",
+      "bytes": 2353
+    },
+    {
+      "path": "generate.py",
+      "sha256": "e53d3b49658ada7cae6978f1939ad53e2485d809eebde3fc33b5ce50dbc38133",
+      "bytes": 13224
+    },
+    {
+      "path": "make_manifest.py",
+      "sha256": "6e6ff88aab1ecf90c00f7673759b2b9841d21524f2686dbfd1c6d84b79257c22",
+      "bytes": 1660
+    },
+    {
+      "path": "nrlib.py",
+      "sha256": "e8ad18d6071e3712125f2a69ab45fb5057ae301271d7dc3f95241444bb300ca0",
+      "bytes": 11843
+    },
+    {
+      "path": "out/checks/amphitheatre-pump-organ.seed17.checks.json",
+      "sha256": "b8564f3c496ff95a5be0b762a657d6d612d48f05d7ca9b6f0e876b8fe2e51910",
+      "bytes": 4082
+    },
+    {
+      "path": "out/checks/amphitheatre-pump-organ.seed211.checks.json",
+      "sha256": "3563fc5ed2a727a5dc2b5afe933fa1cf8234ecf54ad31a169643fc7b9cf8a777",
+      "bytes": 4086
+    },
+    {
+      "path": "out/checks/amphitheatre-pump-organ.seed73.checks.json",
+      "sha256": "a02cbc34b001a85d40f3fea849633964ca473453774156e399f9fbc3bb291652",
+      "bytes": 4081
+    },
+    {
+      "path": "out/checks/oblique-switchback-quarry.seed17.checks.json",
+      "sha256": "bd3694a4b76a7fc3efff169358be96049d15006f6beeb7eb6f2e4518c97efa3d",
+      "bytes": 4540
+    },
+    {
+      "path": "out/checks/oblique-switchback-quarry.seed211.checks.json",
+      "sha256": "3d0d117bf9432360d1d520767bbf51c6f6546baa1a330e10fe744a67e17efd24",
+      "bytes": 4501
+    },
+    {
+      "path": "out/checks/oblique-switchback-quarry.seed73.checks.json",
+      "sha256": "2a01fc3e5c6c74409c49bb83229e4ceb4484db2a443045387be9474f4bd68919",
+      "bytes": 4499
+    },
+    {
+      "path": "out/checks/radial-negative-cathedral.seed17.checks.json",
+      "sha256": "eabf0f8f8228d5dfff1b99eb183ecb92299cae72eeeec78903786d2988353665",
+      "bytes": 3593
+    },
+    {
+      "path": "out/checks/radial-negative-cathedral.seed211.checks.json",
+      "sha256": "494de81f277fd9ecbe433ce2da7b19765e8428e2ebdddcb3f8ecc11c4e818722",
+      "bytes": 3608
+    },
+    {
+      "path": "out/checks/radial-negative-cathedral.seed73.checks.json",
+      "sha256": "225bdc2310402d65eda229ef32ef54271a07e6865fb3f73b97891ce6fd392f23",
+      "bytes": 3596
+    },
+    {
+      "path": "out/checks/split-level-transit-hall.seed17.checks.json",
+      "sha256": "c46d2b778a7c3b4deb33538aeba1796651363e129ca5750d7fda005f6aa1fc69",
+      "bytes": 3741
+    },
+    {
+      "path": "out/checks/split-level-transit-hall.seed211.checks.json",
+      "sha256": "2f79312977f1072354aaa2c0b7b56c8ee58e78d27415838ab1e6c032735ddb36",
+      "bytes": 3812
+    },
+    {
+      "path": "out/checks/split-level-transit-hall.seed73.checks.json",
+      "sha256": "00862d470e1414876987562c3fd184eff6bf72de1b42002a1c5289416555e52e",
+      "bytes": 3813
+    },
+    {
+      "path": "out/graphs/amphitheatre-pump-organ.seed17.graph.json",
+      "sha256": "6d90f9409dc383a232213b5ba5d2d37731183cb5362605d5d2b1e081d7a4dd9d",
+      "bytes": 15614
+    },
+    {
+      "path": "out/graphs/amphitheatre-pump-organ.seed211.graph.json",
+      "sha256": "c4dab31df58cef484c69c4de2150d8efdf0929ff01bb6009b40c66f6463cf1ce",
+      "bytes": 15611
+    },
+    {
+      "path": "out/graphs/amphitheatre-pump-organ.seed73.graph.json",
+      "sha256": "a5440852f28d7212634fa5c3a883c49db926eb4df9d2c37f92efdc077348eeb2",
+      "bytes": 15613
+    },
+    {
+      "path": "out/graphs/oblique-switchback-quarry.seed17.graph.json",
+      "sha256": "e5f69ef7b1d62ae48e5f9221ac88969d281d33deef70193011c78b42d71ae60c",
+      "bytes": 17557
+    },
+    {
+      "path": "out/graphs/oblique-switchback-quarry.seed211.graph.json",
+      "sha256": "30c47f9a7bef677a871d5811e507e33446d98eb8b904988b0cf616c46ca74b70",
+      "bytes": 17264
+    },
+    {
+      "path": "out/graphs/oblique-switchback-quarry.seed73.graph.json",
+      "sha256": "4e63bf82734a78739a3ab0b2e19e3dc516d4d7cd7e7f4b3bee8e3db323c8c906",
+      "bytes": 17273
+    },
+    {
+      "path": "out/graphs/radial-negative-cathedral.seed17.graph.json",
+      "sha256": "c8f0b6990a092ee8f61d45828152662c20ba6c58baf73fc14e96869974c57c68",
+      "bytes": 23687
+    },
+    {
+      "path": "out/graphs/radial-negative-cathedral.seed211.graph.json",
+      "sha256": "5b8e7c76fbe04aa1f2dfbdf781bbce2789c6b8c219740140838f51099f398e2f",
+      "bytes": 23748
+    },
+    {
+      "path": "out/graphs/radial-negative-cathedral.seed73.graph.json",
+      "sha256": "df9da06b0d519076bec4a1d20ec3400e638a5692957c41e3ee8a031dfd4d4a62",
+      "bytes": 23694
+    },
+    {
+      "path": "out/graphs/split-level-transit-hall.seed17.graph.json",
+      "sha256": "8f8e5a626c817c437cfab37d62c7f20dc995b3f90244bf69cd7983a663784e1c",
+      "bytes": 20937
+    },
+    {
+      "path": "out/graphs/split-level-transit-hall.seed211.graph.json",
+      "sha256": "b3ee36d17a17df996755642c2e176b146011c3c6bf3489f1611338b48a474a76",
+      "bytes": 20928
+    },
+    {
+      "path": "out/graphs/split-level-transit-hall.seed73.graph.json",
+      "sha256": "04501e3ae2da87f7d5977af68d8ec189680afcf68982ac8270db8793790b9966",
+      "bytes": 20967
+    },
+    {
+      "path": "out/layouts/amphitheatre-pump-organ.seed17.layout.json",
+      "sha256": "f7f6117bf3f19f2656e9087bb868c067279d1b11633eb6ded61c7295c93d458d",
+      "bytes": 37118
+    },
+    {
+      "path": "out/layouts/amphitheatre-pump-organ.seed211.layout.json",
+      "sha256": "dca6783a86143dabb8b4b2ed39e57231c760cbab8b3e69444fe80021d57cf520",
+      "bytes": 37099
+    },
+    {
+      "path": "out/layouts/amphitheatre-pump-organ.seed73.layout.json",
+      "sha256": "b7922c4edfebdc02c98b01c9a27525ffd75c77ca1a9a57c159f4450aecb69e12",
+      "bytes": 37108
+    },
+    {
+      "path": "out/layouts/oblique-switchback-quarry.seed17.layout.json",
+      "sha256": "f004f0fd007adc33238924b3d6cfe33239ebd157b86681e3eaa74fa8642b89f7",
+      "bytes": 31526
+    },
+    {
+      "path": "out/layouts/oblique-switchback-quarry.seed211.layout.json",
+      "sha256": "0fdcc962b399b8916cd5b5c08b6c6dfa31fac01d9e3c9c4f09d67d4f8669bfeb",
+      "bytes": 30984
+    },
+    {
+      "path": "out/layouts/oblique-switchback-quarry.seed73.layout.json",
+      "sha256": "cf89eb01b969c5bb0611aefc7745b3502955c65ee81eab4bebf16acf67eaab93",
+      "bytes": 31026
+    },
+    {
+      "path": "out/layouts/radial-negative-cathedral.seed17.layout.json",
+      "sha256": "8563d06c8b0fb252e8bef195f10105f0d6aa6a1c264585f136d5fd403aeb2ae3",
+      "bytes": 42332
+    },
+    {
+      "path": "out/layouts/radial-negative-cathedral.seed211.layout.json",
+      "sha256": "7ef17594639ff406c2458ccf8c77b67457c652e60ff679de7ac60d66ac50fd42",
+      "bytes": 42612
+    },
+    {
+      "path": "out/layouts/radial-negative-cathedral.seed73.layout.json",
+      "sha256": "68a8f5f9a9e42394b5d2d1d59612390255f82bc3ac578f7ba434ed52aff7373d",
+      "bytes": 42332
+    },
+    {
+      "path": "out/layouts/split-level-transit-hall.seed17.layout.json",
+      "sha256": "75905e565dcc69ca78a484a7c7555b79977db43949552712d88a436899f0ab3e",
+      "bytes": 36336
+    },
+    {
+      "path": "out/layouts/split-level-transit-hall.seed211.layout.json",
+      "sha256": "4ac5ead7b7645cc24ed4e3621db54c66faffcf54accdbe4ec6a8de49762cd2dd",
+      "bytes": 36385
+    },
+    {
+      "path": "out/layouts/split-level-transit-hall.seed73.layout.json",
+      "sha256": "86e835d0505277c7d76ae8419d29f7a1ee77939869bd29c42b72dcf6613b762c",
+      "bytes": 36482
+    },
+    {
+      "path": "out/manifest.json",
+      "sha256": "e6235dcde2eb06ca9d231947195c1d580bce4c6f3c4384130ac74c3319d8f9fd",
+      "bytes": 14827
+    },
+    {
+      "path": "out/maps/amphitheatre-pump-organ.seed17.textmap",
+      "sha256": "44bf10d47b08e2e9aa33b921ecf7d0340c4ce4933f456bf6eaea24753a8003e5",
+      "bytes": 78082
+    },
+    {
+      "path": "out/maps/amphitheatre-pump-organ.seed211.textmap",
+      "sha256": "08ef96c237e0291291454c3844cd3e67a415aebacc5402300def7cc2924f22a2",
+      "bytes": 78071
+    },
+    {
+      "path": "out/maps/amphitheatre-pump-organ.seed73.textmap",
+      "sha256": "d32ea2ba798e014c10317055009262e828f7ae8a96065495ccd0095f44a7a34e",
+      "bytes": 78075
+    },
+    {
+      "path": "out/maps/oblique-switchback-quarry.seed17.textmap",
+      "sha256": "472362ceecf727b5dd3e2d5898289340f921732ffceeadd42eba5d88cc949a77",
+      "bytes": 50348
+    },
+    {
+      "path": "out/maps/oblique-switchback-quarry.seed211.textmap",
+      "sha256": "30d201c5f227c29f1171e26e8078bd5bf8b53771720c9c194b2c57748a311d30",
+      "bytes": 49101
+    },
+    {
+      "path": "out/maps/oblique-switchback-quarry.seed73.textmap",
+      "sha256": "6e76536395c498a7bc7acd0ceb3e2cd33a92a8f92765001a134d002d1ecda9e5",
+      "bytes": 49330
+    },
+    {
+      "path": "out/maps/radial-negative-cathedral.seed17.textmap",
+      "sha256": "7b299cb3a62621243988d8e865ea9a7b3f9cb0e4c8d0327d6cb3d39ecb7b20a3",
+      "bytes": 71111
+    },
+    {
+      "path": "out/maps/radial-negative-cathedral.seed211.textmap",
+      "sha256": "4980b24502c04f8c12def10a4c0a6b196c46bd81c0a0be80c8ae2a47d7bc8ab4",
+      "bytes": 71264
+    },
+    {
+      "path": "out/maps/radial-negative-cathedral.seed73.textmap",
+      "sha256": "31ace0019b31573849efb142aea870529cecf2d95cc2d417fe700f84a7c0603f",
+      "bytes": 71111
+    },
+    {
+      "path": "out/maps/split-level-transit-hall.seed17.textmap",
+      "sha256": "c2f9d14ac2010bfafe5a7d174950352c9d6823df3c8107b964feece1afdf1e3f",
+      "bytes": 61354
+    },
+    {
+      "path": "out/maps/split-level-transit-hall.seed211.textmap",
+      "sha256": "36d4dc7162c189527ceb2853524903679a085945e97821a4167ec3039cd9e2ba",
+      "bytes": 61336
+    },
+    {
+      "path": "out/maps/split-level-transit-hall.seed73.textmap",
+      "sha256": "3d7d00f5ada28aea99b8d633d4c8f1388ad4d26c94f90fa4db796c0ebba316a9",
+      "bytes": 61393
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed17.elevation.png",
+      "sha256": "55329e36c43110956f49ce22664e2eb5e84ede453f78e9297b86f6d08e0651bf",
+      "bytes": 20835
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed17.oblique.png",
+      "sha256": "a5507b82bb21d40ceb5e5590d6c53ad171c393d52d606c1c0b3a6c65bcb5897a",
+      "bytes": 37549
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed17.top.png",
+      "sha256": "5789c2b80a22b24820ae7a732cfe25cfe6836c5e2a81301126b6714fd688565e",
+      "bytes": 34917
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed211.elevation.png",
+      "sha256": "cfc116b0f8b848658101bc3670a3a32868505b0ae0012dbe75ed3314d0c7c1c5",
+      "bytes": 20869
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed211.oblique.png",
+      "sha256": "3fbc32b080594a58911b89d5c34185c694610306549ad084cd3f883dbf7ee65b",
+      "bytes": 38133
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed211.top.png",
+      "sha256": "6cd04cd227f3ecf2c06623398a90dc111ce81d96acecead38a5f4714ca0d9fc5",
+      "bytes": 34698
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed73.elevation.png",
+      "sha256": "981d99beeaa5cbf0db703eaed7d9fc480c838760273b57c74edde68bf1ae3724",
+      "bytes": 20986
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed73.oblique.png",
+      "sha256": "e9e95d94e367924e158a1bfb8afbe6ab52e1371ad0dc126a00a7b93aac5eb249",
+      "bytes": 38540
+    },
+    {
+      "path": "out/previews/amphitheatre-pump-organ.seed73.top.png",
+      "sha256": "245656d6ec01d8a2bc295df4031e7348a55258041f4967e0a8304db0b9fb1f3f",
+      "bytes": 34807
+    },
+    {
+      "path": "out/previews/contact.all-archetypes.png",
+      "sha256": "1568855977e7bdca060318dbc2e7a3df0c6ba1be2593cf3078fce115aa81309a",
+      "bytes": 910071
+    },
+    {
+      "path": "out/previews/contact.amphitheatre-pump-organ.png",
+      "sha256": "2a2e0a179ddc752053aa596c239c863b37ea617cd4528b31bae55935c847e2c9",
+      "bytes": 178532
+    },
+    {
+      "path": "out/previews/contact.oblique-switchback-quarry.png",
+      "sha256": "96aab213b510053e01709689851d9feb0941bf66ef8c54c0ae4bdfa42beab7f2",
+      "bytes": 268683
+    },
+    {
+      "path": "out/previews/contact.radial-negative-cathedral.png",
+      "sha256": "e38d43a93a6c07b512dc86e97529447f983c1aba50538399767c627dd2cc4719",
+      "bytes": 278889
+    },
+    {
+      "path": "out/previews/contact.split-level-transit-hall.png",
+      "sha256": "e89a0c8e3b493ee30e23a7731e7b0f0eef95e33a47cf76397f4b39acc387318e",
+      "bytes": 278472
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed17.elevation.png",
+      "sha256": "1f579f1d24f72adedc6523d1957834e3c3918283e05e6337486c1e5dbd290770",
+      "bytes": 26871
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed17.oblique.png",
+      "sha256": "171669ef5de7d4017ca6a71f799610907f9a2c84c18a498b1db0c7424c263fb6",
+      "bytes": 35535
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed17.top.png",
+      "sha256": "27564272938b944144f36a7420cbb661ff008879fa2e67c6c2ca60ae3e35a4b3",
+      "bytes": 41025
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed211.elevation.png",
+      "sha256": "c4aa233be372bece3a98b3ee70f511cd918474a71c2e3715d0a6ab3b4f6ec8be",
+      "bytes": 26949
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed211.oblique.png",
+      "sha256": "c7cc81f758a7735fc7956c24eb5043e92f86459ee4d200252d2ee8aa27eeeb6c",
+      "bytes": 34601
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed211.top.png",
+      "sha256": "7ea132fc973038168fbc988581a4872b9ea87205e00e9e02b829bdc6cceb58e7",
+      "bytes": 37866
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed73.elevation.png",
+      "sha256": "6b2115811ddda71eddd039a9421ac4de11557a7df4bcb2d1ec8b363732673858",
+      "bytes": 27005
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed73.oblique.png",
+      "sha256": "51e50fa539b1aff3dac36eff99ed064973d30390b598e4f3a391ab2f22c05756",
+      "bytes": 34419
+    },
+    {
+      "path": "out/previews/oblique-switchback-quarry.seed73.top.png",
+      "sha256": "0b9fe9f0a7f2808ed7e241abb52bedf3ccb02f897e34cba8a253fa33ff4e0310",
+      "bytes": 39479
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed17.elevation.png",
+      "sha256": "c65f9257c265211f81fcda744868921bac1677b4a52914c0ce52218af7b6cbdc",
+      "bytes": 25120
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed17.oblique.png",
+      "sha256": "5d8a582e5a333606f6cca33fc8a4ff29ad42aef43e151afaea492d3519dd87b2",
+      "bytes": 35197
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed17.top.png",
+      "sha256": "0692c45f2c03fef1672884edf2d9556cca23669623d3511b961abd651d99c318",
+      "bytes": 45750
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed211.elevation.png",
+      "sha256": "74b6e5cd33057a836cd196040a8623a923bc9b402066f2994792b34e7bedf51d",
+      "bytes": 25165
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed211.oblique.png",
+      "sha256": "950bee1afa51b354d123733c33cf815c484d1844cc0c7074a898a0cc0670b42b",
+      "bytes": 36958
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed211.top.png",
+      "sha256": "2c272222a045342ba0052f0a3d41675d971dfec245575825ba98a05c6cf81f33",
+      "bytes": 46430
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed73.elevation.png",
+      "sha256": "1cf2c0614ff0d4896cf6f0191e22faa4cb29f160c0e658f61a0c7f54dd882b59",
+      "bytes": 25278
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed73.oblique.png",
+      "sha256": "5f8e71278f62c064adb1173a73f2d44625317bd7a5ddbee52f09d0947d6487d7",
+      "bytes": 35532
+    },
+    {
+      "path": "out/previews/radial-negative-cathedral.seed73.top.png",
+      "sha256": "27276bc3e74eb23ed225b03aca85944d874d01338b2faef5f5b0109bc58f7357",
+      "bytes": 42567
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed17.elevation.png",
+      "sha256": "0177dc3611b68a7618917717054c7b45fe1f0b88303afedcb1a7bf3f59fc907c",
+      "bytes": 23161
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed17.oblique.png",
+      "sha256": "519c9ecbc7131947db478b6a170ff98ea88f1de3853e68fb63e5d84849aa6c88",
+      "bytes": 32680
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed17.top.png",
+      "sha256": "ff3c98476fea1f5a0533c07027b7e2289a34cb6652cd31c4d6e1a2d01c3aa26e",
+      "bytes": 42191
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed211.elevation.png",
+      "sha256": "bd5910c73bb6a09fe2a076e2bc79f2fc307281848f4b2321c64950e3a07bc968",
+      "bytes": 23249
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed211.oblique.png",
+      "sha256": "929980c45dc2a0c4bcc54cdcb56e49fa927de2f13d9697771e4409d0094dde90",
+      "bytes": 33843
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed211.top.png",
+      "sha256": "995e9608785827bd83c5523e35ea562f8137cd6025e247da28c8e99b2b9d0873",
+      "bytes": 39864
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed73.elevation.png",
+      "sha256": "507a212784542397b4d875bb4749702caa91e18a6c38876bbaa76e0afc1cf3d1",
+      "bytes": 23303
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed73.oblique.png",
+      "sha256": "394fd5acb39b4541176d51f0aa066938810e32a49acc897fb038418bfb61237d",
+      "bytes": 32465
+    },
+    {
+      "path": "out/previews/split-level-transit-hall.seed73.top.png",
+      "sha256": "ec14adb16db52584a88a1152c0e91349073a7a988131154935051f1edad89486",
+      "bytes": 40671
+    },
+    {
+      "path": "out/summary.json",
+      "sha256": "88faea5f71751604ef3cea30c45f96f7f3b1cf1c23cc15860f362af0a82100c5",
+      "bytes": 10296
+    },
+    {
+      "path": "preview.py",
+      "sha256": "45bfab5eeafb783c0de87dcd16d9dcb381072cac5f0e92051fbdb1645c23519b",
+      "bytes": 9059
+    },
+    {
+      "path": "roomkit.py",
+      "sha256": "bd70212208a6fd59e5d9000a9e04f19c8d1f1795de01173090df472724871488",
+      "bytes": 7682
+    },
+    {
+      "path": "routegraph.py",
+      "sha256": "817294a15516ea8c01df19f01cbbcd5ea0f15d4e70d548c44cd3d54f24cb556b",
+      "bytes": 5152
+    },
+    {
+      "path": "selector.py",
+      "sha256": "8fb0e4d1cdb9cc787319729ed0198a5edec90846861afd8b9e64a4fba181d256",
+      "bytes": 3139
+    },
+    {
+      "path": "validate.py",
+      "sha256": "ef5dc7d9ee5c13563ef1c28004cf648f10e9b5b427962ed07a1db5591c7b20a3",
+      "bytes": 11806
+    }
+  ]
+}

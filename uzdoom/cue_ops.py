@@ -8,7 +8,7 @@ from hydrapy import add_op,Op,Input
 def body(filename):
     source=(Path(__file__).with_name('shaders')/filename).read_text()
     code=source.split('void main() {',1)[1].rsplit('}',1)[0]
-    for name,value in {'v_uv':'_st','u_world':'_tex','u_resolution':'resolution','u_strength':'cueStrength','u_progress':'cueProgress','u_active':'1.0'}.items():
+    for name,value in {'v_uv':'_st','u_world':'_tex','u_resolution':'resolution','u_strength':'cueStrength','u_progress':'cueProgress','u_active':'1.0','u_family':'cueFamily','u_open':'cueOpen','u_grip':'cueGrip'}.items():
         code=re.sub(r'\b'+name+r'\b',value,code)
     code=re.sub(r'fragColor\s*=\s*([^;]+);\s*return\s*;',r'return \1;',code)
     code=re.sub(r'fragColor\s*=\s*([^;]+);',r'return \1;',code)
@@ -19,3 +19,6 @@ def body(filename):
 for name,filename in [('nullRunQuietCue','acoustic_stillness.frag'),('nullRunSurveyorCue','surveyor_bracket.frag')]:
     add_op(Op(name,'texture',[Input('cueStrength','float',0.,scalar=True),Input('cueProgress','float',0.,scalar=True)],
               glsl=body(filename),identity=('cueStrength',0.)))
+
+add_op(Op('nullRunBossRitualCue','texture',[Input('cueStrength','float',0.,scalar=True),Input('cueFamily','float',0.,scalar=True),Input('cueProgress','float',0.,scalar=True),Input('cueOpen','float',0.,scalar=True)],glsl=body('boss_ritual.frag'),identity=('cueStrength',0.)))
+add_op(Op('nullRunGripCue','texture',[Input('cueStrength','float',0.,scalar=True),Input('cueProgress','float',0.,scalar=True),Input('cueOpen','float',0.,scalar=True),Input('cueGrip','float',0.,scalar=True)],glsl=body('grip_feedback.frag'),identity=('cueStrength',0.)))

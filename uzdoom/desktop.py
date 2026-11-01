@@ -80,6 +80,10 @@ class Desktop(BaseDesktop):
             if self.show_credits:
                 d.rectangle((46,147,592,173),fill=PANEL)
                 text(d,(46,149),'3D ENGINE',MUTED);text(d,(190,149),'UZDOOM / COMMUNITY CONTRIBUTORS',INK)
+                d.rectangle((46,174,592,196),fill=PANEL)
+                text(d,(46,174),'BASE GAME CONTENT',MUTED);text(d,(190,174),'THE FREEDOOM PROJECT',INK)
+                d.rectangle((46,224,592,246),fill=PANEL)
+                text(d,(46,224),'ORIGINAL ART / SCORE',MUTED);text(d,(190,224),'DEEPSEEK / WEAPONS, MODELS + ENVIRONMENTS',INK)
             else:
                 d.rectangle((46,147,594,226),fill=PANEL)
                 for i,line in enumerate(['WASD move / MOUSE look up, down and turn','CLICK / CTRL fire / SPACE jump / F use','SHIFT run / TAB map / 1-7 weapons']):text(d,(46,149+28*i),line,INK)

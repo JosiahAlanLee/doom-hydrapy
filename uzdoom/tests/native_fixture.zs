@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // This is packed ONLY by the test runner, never by the playable builder.
-class NRFixture5 : NRMonster { Default { Args 5,0,1; } }
-class NRFixture6 : NRMonster { Default { Args 6,0,1; } }
-class NRFixture7 : NRMonster { Default { Args 7,0,0; } }
-class NRFixture8 : NRMonster { Default { Args 8,0,0; } }
-class NRFixture9 : NRMonster { Default { Args 9,0,1; } }
-class NRFixture10 : NRMonster { Default { Args 10,0,1; } }
-class NRFixture11 : NRMonster { Default { Args 11,0,0; } }
+class NRFixture5 : NRMeshRepetiel { Default { Args 5,0,1; } }
+class NRFixture6 : NRMeshCalmor { Default { Args 6,0,1; } }
+class NRFixture7 : NRMeshHollow { Default { Args 7,0,0; } }
+class NRFixture8 : NRMeshReded { Default { Args 8,0,0; } }
+class NRFixture9 : NRMeshProbator { Default { Args 9,0,1; } }
+class NRFixture10 : NRMeshJurisiel { Default { Args 10,0,1; } }
+class NRFixture11 : NRMeshSurveyor { Default { Args 11,0,0; } }
 class NRFixture12 : NRMonster { Default { Args 12,0,0; } }
 class NRFixture13 : NRMonster { Default { Args 13,0,0; } }
-class NRFixture14 : NRMonster { Default { Args 14,0,0; } }
+class NRFixture14 : NRMeshVore { Default { Args 14,0,0; } }
 class NRFixture15 : NRMonster { Default { Args 15,0,0; } }
 class NRFixture16 : NRMonster { Default { Args 16,0,0; } }
 class NRFixtureBlocker : Actor { Default { Radius 60; Height 100; +SOLID +NOGRAVITY } States { Spawn: TNT1 A -1; Stop; } }

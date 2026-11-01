@@ -1,0 +1,9 @@
+# Boneglass Conservatory -- vore
+newmtl vore_mat
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.040000 0.040000 0.040000
+Ns 4.000000
+d 1.000000
+illum 1
+map_Kd vore_atlas.png

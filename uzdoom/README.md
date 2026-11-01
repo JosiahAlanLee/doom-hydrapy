@@ -6,13 +6,44 @@ movement, damage, collisions, enemies and progress; HydraPy displays its private
 Gorgon and a minimal VCV Rack patch play the adaptive score. The existing
 `native_nullrun.py` and browser versions retain their behavior.
 
-Each seeded floor has two book demons, UPKEEP upgrades, an uncanny service annex
+Each floor has two book demons, UPKEEP upgrades, an uncanny service annex
 and a real 480-unit stair atrium. Corridor folds preserve viewing angle and pitch;
 memory rooms change their actual ceilings only when unobserved and unoccupied.
 The annex puzzle and both bosses gate the route upward. Six environment palettes
-select different art and score profiles. Reviewed Wavefront props become static
-3D models; enemies currently use animated sprites. New humanoid assets are a
-separate review task and are not included in this implementation.
+select different art and score profiles. Nine architecture families now supply
+seven distinct main floors per run: relay atrium, resonance cistern, hanging
+garden, switchback quarry, negative cathedral, pump-organ amphitheatre, transit
+hall, ossuary conservatory and inhabited archive. The geometry bank uses reviewed
+variants 17/73/211; a master seed shuffles families, starts, boss pairings and art.
+The ossuary/archive variants also add or remove real branches. New runs avoid the
+last five opening families where possible; R retries the exact saved floor plan.
+The manifest records the plan, geometry seeds, anchors and provenance.
+
+Fourteen humanoid book demons carry their role emblems. Hollow, Stone ReDead,
+Surveyor and Spindle use model-backed versions of the same native AI. Reviewed
+same-topology OBJ poses become one MD3 per identity: neutral, two movement slots,
+warning, attack, hurt and death. The bosses reuse a neutral return step; the four
+new mobs have two distinct locomotion poses. Hard-edged normals and atlas seams
+are retained. Three environmental sculptures have conservative physical bounds
+and are placed clear of route segments and seals. Other enemies retain the
+original procedural sprite art.
+
+An optional **Chladni Archive** opens from the lower service stair. Three seeded,
+suspended signal sculptures each have three forms. Nearby F consoles tune them;
+held F counts once. Changing forms are non-solid and above player height. The
+independent return gate stays usable in every state. This is the first adapted
+Argon art concept; the proposed moving labyrinth and parallax ritual remain
+design prototypes.
+
+Seven original weapon/hand designs replace all nine native weapon classes'
+ready/fire art, flashes and weapon pickups. Chainsaw uses the Fathom Hook art;
+Super Shotgun uses Transit-12. Native actions, ammo, timing and damage remain
+unchanged. 640x400 source images use 320x200 logical weapon coordinates; generated
+flash overlays are aligned to the frame actually used by each native action.
+This is still an IWAD-backed game. Every build includes **asset-audit.json**,
+listing remaining Freedoom pickups, projectiles/impacts, sounds and fallback/base
+resources. Freedoom attribution remains required; no claim of a standalone asset
+replacement is made.
 
 ## Bosses
 
@@ -109,6 +140,16 @@ Pause, menus, death, victory, disabled effects and native telemetry older than
 across floors or seeds. Texture operators and the live renderer share
 `presentation.world_effects`; the HUD is layered afterward.
 
+Argon's additional ritual/grip suggestion is adapted to the current native rules:
+families come from classes 5/6/9/10, openings count down from 420 tics, stillness is
+35 tics, and ReDead's mask warning is phase 1 for 28 tics. An active grip appears
+from escape progress 0 and follows the real 25-tic held-F escape. Family status,
+opening ticks, warning chevrons and grip rails stay peripheral. They add no
+full-world colour wash or UV displacement; logical header/bottom bands, the
+central 20% rectangle and source alpha are preserved. Invalid scalar values fail
+closed before GPU uniform upload. Grip suppresses quiet/boss decoration, while
+attack warnings retain priority. F3 RAW and F4 apply to all effects.
+
 One controller owns the game. Ordinary stop refuses while the physical player is
 active. Restarting music preserves the game. Do not use `stop --force` without
 an explicit request to interrupt play. Native engine sound effects are disabled
@@ -126,6 +167,8 @@ python -m uzdoom.tests.native --engine /path/uzdoom --bridge /path/capture.so --
 python -m uzdoom.tests.boss_encounter --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/boss-check
 python -m uzdoom.tests.architecture --help
 python -m unittest uzdoom.tests.test_cues
+python -m unittest uzdoom.tests.test_art
+python -m uzdoom.tests.encounter_render --output /new/gpu-check
 ```
 
 On 2026-10-31, all 21 native checks passed after the boss revision, including all
