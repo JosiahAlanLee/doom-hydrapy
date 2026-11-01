@@ -1,0 +1,327 @@
+{
+  "job": "20261031-190058-deepseek-nullrun-room-variety-finish",
+  "folder": "/home/echevarian/dev/shared/deepseek/nullrun-room-finish-20261101",
+  "engine_verification": "none; all previews are CPU renders and all checks are structural",
+  "archetypes": [
+    "asymmetrical-ossuary-conservatory",
+    "inhabited-archive"
+  ],
+  "not_implemented": [],
+  "support_provenance": {
+    "copied_unmodified_from": "../nullrun-room-variety-20261101/ (support originally from nullrun-open-vertical-worlds-20261031)",
+    "files": [
+      "nrlib.py",
+      "routegraph.py",
+      "validate.py",
+      "preview.py"
+    ],
+    "note": "sha256 of the copied files is in SUPPORT_SHA256.txt; nothing in the source folder was modified."
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "b68b6802215558914d12cb5466191dd92e617c73138375812b739b382e521179",
+      "bytes": 1126
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "8e1efb96472d4a4e4273eada64363a9bbc89379f383364ab6b1283c5957e725f",
+      "bytes": 3565
+    },
+    {
+      "path": "SUPPORT_SHA256.txt",
+      "sha256": "a268e2bd93a6785274fda4c987aa54631a4fd37469e04dd8d1201231b0c72912",
+      "bytes": 387
+    },
+    {
+      "path": "archetypes.py",
+      "sha256": "9dfab4279e69efb6b7d8b80f5e16898e44b8a17cd419b95b230caa1862c618d1",
+      "bytes": 11200
+    },
+    {
+      "path": "contact.py",
+      "sha256": "dff96376cbca45f5241f84ef59ce01f592030fe64d944336e8205228c43d33e8",
+      "bytes": 2304
+    },
+    {
+      "path": "generate.py",
+      "sha256": "b3ee8c0d7af79a1b9e06144413b683945155921c615f1239c6f808b310c2c76a",
+      "bytes": 12874
+    },
+    {
+      "path": "make_manifest.py",
+      "sha256": "f9f69451178135ee6439c5f44a0780b2528cbc7c5fbc94b0947b3e7e4498bcb2",
+      "bytes": 1593
+    },
+    {
+      "path": "nrlib.py",
+      "sha256": "e8ad18d6071e3712125f2a69ab45fb5057ae301271d7dc3f95241444bb300ca0",
+      "bytes": 11843
+    },
+    {
+      "path": "out/checks/asymmetrical-ossuary-conservatory.seed17.checks.json",
+      "sha256": "83a18d4ce4a17f900f9465cf0f6c267f0f6acdcb5e129d3e234b592d59f6ec28",
+      "bytes": 3453
+    },
+    {
+      "path": "out/checks/asymmetrical-ossuary-conservatory.seed211.checks.json",
+      "sha256": "76d5045f6b4f06480b0e5eb59ef944f5a397c21e754d5395666893cd0ef7cc22",
+      "bytes": 3454
+    },
+    {
+      "path": "out/checks/asymmetrical-ossuary-conservatory.seed73.checks.json",
+      "sha256": "ea6460fe9a3211fee51dbe3848397f267a42ac890160ee075af1b405ba1a2395",
+      "bytes": 3441
+    },
+    {
+      "path": "out/checks/inhabited-archive.seed17.checks.json",
+      "sha256": "d2663c15fe6045ec712cbc9e412b6c420197bfffc969c2de972c3b103e522cd5",
+      "bytes": 3301
+    },
+    {
+      "path": "out/checks/inhabited-archive.seed211.checks.json",
+      "sha256": "2ff704a377a264e76701f31b573ad1a39b128fe11aeeaad98cb4fd40842c3f4d",
+      "bytes": 3308
+    },
+    {
+      "path": "out/checks/inhabited-archive.seed73.checks.json",
+      "sha256": "8b298c8443e13970b44c3b84791e65174a92fa2f46c4f27db4f166cfe25e932c",
+      "bytes": 3295
+    },
+    {
+      "path": "out/graphs/asymmetrical-ossuary-conservatory.seed17.graph.json",
+      "sha256": "7f44c20567165cc9c0ccaafda03db3caf5582efba9cfe008e83133101afc41f0",
+      "bytes": 20936
+    },
+    {
+      "path": "out/graphs/asymmetrical-ossuary-conservatory.seed211.graph.json",
+      "sha256": "37f8162450977e43a63072a0889d743945698a955330588d866d0f8d4c9ae47c",
+      "bytes": 20523
+    },
+    {
+      "path": "out/graphs/asymmetrical-ossuary-conservatory.seed73.graph.json",
+      "sha256": "71c21a16932200096b6a3905abd402c86dd98014466af340d9ad04767a9ab9dd",
+      "bytes": 20264
+    },
+    {
+      "path": "out/graphs/inhabited-archive.seed17.graph.json",
+      "sha256": "8e5d6f83212d92e84b029cd3a9aca89869654f5647d29f4ea5d0570142b4d759",
+      "bytes": 18312
+    },
+    {
+      "path": "out/graphs/inhabited-archive.seed211.graph.json",
+      "sha256": "903a4b5f96a0dfea4e7142bc5d560a9d56999ba948827ed043cdb76321845a8e",
+      "bytes": 18323
+    },
+    {
+      "path": "out/graphs/inhabited-archive.seed73.graph.json",
+      "sha256": "3d28acf4d4be2221e912ec5170a27907a411d17a6b97e5643c6fc20791ee0ec3",
+      "bytes": 18067
+    },
+    {
+      "path": "out/layouts/asymmetrical-ossuary-conservatory.seed17.layout.json",
+      "sha256": "a486289839f20ef9972771340a6dc6ad83bfa25943b1f69e6383b16fa3f99109",
+      "bytes": 35111
+    },
+    {
+      "path": "out/layouts/asymmetrical-ossuary-conservatory.seed211.layout.json",
+      "sha256": "de5d496f595231d011f9e5077250cf38891ff74b3b1302ed34c1ac15c285b72f",
+      "bytes": 34585
+    },
+    {
+      "path": "out/layouts/asymmetrical-ossuary-conservatory.seed73.layout.json",
+      "sha256": "a453b6d9480ddf4709615db60a822dc464e209839e79f01e88d12b78ea801cb0",
+      "bytes": 34195
+    },
+    {
+      "path": "out/layouts/inhabited-archive.seed17.layout.json",
+      "sha256": "1f0fe3d7873a39302b4f91793efcca20dd0c38c6b7a7aeadad6cadb971d4ae18",
+      "bytes": 33738
+    },
+    {
+      "path": "out/layouts/inhabited-archive.seed211.layout.json",
+      "sha256": "b21fc1a7a7d4f6831a6ffdde2773beca483ac08f1d3fce08c31baabfa9f6a16e",
+      "bytes": 33755
+    },
+    {
+      "path": "out/layouts/inhabited-archive.seed73.layout.json",
+      "sha256": "bb3ea9fda1c9fa2a20a03859ca6831078b0b459785ba8a40b94830310f304607",
+      "bytes": 33240
+    },
+    {
+      "path": "out/manifest.json",
+      "sha256": "978a04d263b3cc660e78929567019c13dbbc2d62a7f7ae0eeff99f20f7f6f8ea",
+      "bytes": 7585
+    },
+    {
+      "path": "out/maps/asymmetrical-ossuary-conservatory.seed17.textmap",
+      "sha256": "623c3619de1c8c044146dc4d32dee395b4d3b1e9ccdb5dfd5d44ead49418af34",
+      "bytes": 59915
+    },
+    {
+      "path": "out/maps/asymmetrical-ossuary-conservatory.seed211.textmap",
+      "sha256": "ca5a10ec445a245a946b9c3261083c19c909d92c3426d3a80385db7486620203",
+      "bytes": 58774
+    },
+    {
+      "path": "out/maps/asymmetrical-ossuary-conservatory.seed73.textmap",
+      "sha256": "d3e0abca1cf9e3711f5475216614f385578506dd40e5bd7332d4f895867803f9",
+      "bytes": 57599
+    },
+    {
+      "path": "out/maps/inhabited-archive.seed17.textmap",
+      "sha256": "f4e66d7c70efb183b745c837c9bf269984330ce943ad5b5ca27e7efd1f3d1f5d",
+      "bytes": 58618
+    },
+    {
+      "path": "out/maps/inhabited-archive.seed211.textmap",
+      "sha256": "294d0e0016d14d0c0f377bf0c14620ad130526ebdab6cd8d28f3f366e5d48810",
+      "bytes": 58638
+    },
+    {
+      "path": "out/maps/inhabited-archive.seed73.textmap",
+      "sha256": "5a57eda82d020ddc4b5ac36166335479eafa6434ffe80ecd2a8c4c06f8f3018f",
+      "bytes": 57398
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed17.elevation.png",
+      "sha256": "cd8f51f776bb691f99516258d19dd45d7965d31f4eadae97171a865689f700a1",
+      "bytes": 26518
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed17.oblique.png",
+      "sha256": "b5ba330d0b0049ded3faab0bce301fa5465f9725182facf519318800fdbe51dc",
+      "bytes": 35273
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed17.top.png",
+      "sha256": "3ad1be4e597995637686a6363f145b44467796234d6f48a4a43283621cae3e7a",
+      "bytes": 40845
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed211.elevation.png",
+      "sha256": "79a049190f6ed84a466d7eeba4620ce857821de735a59d9d48b5c763b0231176",
+      "bytes": 26581
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed211.oblique.png",
+      "sha256": "835949266fa47a1e2fe2430c258c0f189dbc170f93b9979795f5ddd8bc6250b5",
+      "bytes": 35689
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed211.top.png",
+      "sha256": "ca76ab7a869892aa5df4079430901a5f871bbae044da95538202f2be5fd96b0c",
+      "bytes": 38725
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed73.elevation.png",
+      "sha256": "702c009eb18a8f7c9beb0ea715fed7661577e6031297564cd23ea163c837162a",
+      "bytes": 26680
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed73.oblique.png",
+      "sha256": "c2c759ab8ec47fe3acb90d9d3ac99c1f756249f5c77dc4783b6b86aa6e607c7b",
+      "bytes": 32600
+    },
+    {
+      "path": "out/previews/asymmetrical-ossuary-conservatory.seed73.top.png",
+      "sha256": "d1b321f2fb7b4214df2d6d850a68b0d7d008280974241e8bbb1d7b6dcdab8833",
+      "bytes": 39293
+    },
+    {
+      "path": "out/previews/contact.all-archetypes.png",
+      "sha256": "3944d0fc6e27c1ab8e6a77f50504a970be713681d6b82b390f24e07a62810790",
+      "bytes": 436372
+    },
+    {
+      "path": "out/previews/contact.asymmetrical-ossuary-conservatory.png",
+      "sha256": "bf92cbe52fcf9f966f3fe61aa620022f1e34687b8dadee6cc1fbcd3752035d1a",
+      "bytes": 252921
+    },
+    {
+      "path": "out/previews/contact.inhabited-archive.png",
+      "sha256": "c332ce9fba75d2a6c860d0386c6bd23e42223a2b5099f182aafa6220453f070c",
+      "bytes": 272140
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed17.elevation.png",
+      "sha256": "2c84ce82220d96dbaf6020523bcdfb66b9f45f4c7033d951887e61f17865edf0",
+      "bytes": 26428
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed17.oblique.png",
+      "sha256": "ea57c880aeb5504888750cda12d3c923a633cad6a51bdc7d0f6ca188616af5a2",
+      "bytes": 37301
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed17.top.png",
+      "sha256": "f578d4b01d3ce3039b5ed5838e21b43f1f3391ae63df812700d219eadc6aa188",
+      "bytes": 36823
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed211.elevation.png",
+      "sha256": "1d05c061aa883d7d066ea55c0c70d95b62de57ffee60ed526532b82ab0426d09",
+      "bytes": 26475
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed211.oblique.png",
+      "sha256": "b9c6a096fcb5743b7d605b51bab14aa4f193d133928781044b3a11f63c3aa2e7",
+      "bytes": 36648
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed211.top.png",
+      "sha256": "abc5ffd1fcd1f76751e35e3abc3eea5c0eb6f698ae39eb0dcf796ad7fe66cdce",
+      "bytes": 43526
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed73.elevation.png",
+      "sha256": "1071373ce0c6458221bcd17022089c9041a8ee31f0ca762bf6d3657122e0731e",
+      "bytes": 26569
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed73.oblique.png",
+      "sha256": "cf3de636fa9b7d9a811e29c6bf42f529054a23be808a7e2dab3cb5e39b06ea2f",
+      "bytes": 36047
+    },
+    {
+      "path": "out/previews/inhabited-archive.seed73.top.png",
+      "sha256": "7bcf2e1dbe0800c278966173ed85114014b13db012fa8c75af2f52150aab50ae",
+      "bytes": 36797
+    },
+    {
+      "path": "out/summary.json",
+      "sha256": "e3fe4e919fff9d5b7aeb2086eeff0ff28ec29f3ebe61f087f183f186867eb7a2",
+      "bytes": 6298
+    },
+    {
+      "path": "preview.py",
+      "sha256": "45bfab5eeafb783c0de87dcd16d9dcb381072cac5f0e92051fbdb1645c23519b",
+      "bytes": 9059
+    },
+    {
+      "path": "roomkit.py",
+      "sha256": "bd70212208a6fd59e5d9000a9e04f19c8d1f1795de01173090df472724871488",
+      "bytes": 7682
+    },
+    {
+      "path": "routegraph.py",
+      "sha256": "817294a15516ea8c01df19f01cbbcd5ea0f15d4e70d548c44cd3d54f24cb556b",
+      "bytes": 5152
+    },
+    {
+      "path": "selector.py",
+      "sha256": "347b3e264722afa0ee92f7483998189777ebbefd1d584219a2f0b40c59ce0d32",
+      "bytes": 3617
+    },
+    {
+      "path": "test_selector.py",
+      "sha256": "8cbeb839a4b90fa9fab00a8e94631a6aac14fdd06f2dccb739f19c0cd356423c",
+      "bytes": 1204
+    },
+    {
+      "path": "validate.py",
+      "sha256": "ef5dc7d9ee5c13563ef1c28004cf648f10e9b5b427962ed07a1db5591c7b20a3",
+      "bytes": 11806
+    }
+  ]
+}

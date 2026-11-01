@@ -16,12 +16,20 @@ class Game:
         if mode!='campaign':raise ValueError('This player runs the tower campaign')
         with self.lock:
             folder=self.root/f'run-{time.time_ns()}-{seed}'
-            manifest=build(seed,self.wad,folder,os.environ.get('NULLRUN_ENVIRONMENT') or None)
+            try:recent=json.loads((self.root/'room-history.json').read_text())
+            except (OSError,ValueError):recent=[]
+            if not isinstance(recent,list) or any(not isinstance(p,str) for p in recent):recent=[]
+            retry=getattr(self,'manifest',{}).get('seed')==seed
+            plan=self.manifest.get('floor_plan') if retry else None
+            manifest=build(seed,self.wad,folder,os.environ.get('NULLRUN_ENVIRONMENT') or None,floor_plan=plan,recent_openers=recent[-5:])
             candidate=Engine(os.environ['UZDOOM_BINARY'],os.environ['UZDOOM_BRIDGE'],self.wad,folder/'nullrun.pk3',folder/'engine',sound=os.environ.get('UZDOOM_SOUND')=='1')
             if candidate.latest.get('error'):candidate.close();raise RuntimeError(candidate.latest['error'])
             previous=self.engine;self.release();self.engine=candidate;self.manifest=manifest
             self.paused=True;self.owner=None;self.revision+=1;self.error=None;self.render()
             if previous:previous.close()
+            if not retry:
+                recent=(recent+[manifest['floor_plan'][0]['archetype']])[-5:]
+                temp=self.root/'room-history.tmp';temp.write_text(json.dumps(recent));temp.replace(self.root/'room-history.json')
     def release(self):
         if self.engine:
             for code in self.held:self.engine.key(code,False)

@@ -1,0 +1,9 @@
+# REDACTH material; one 128x128 atlas
+newmtl redacth_atlas
+Ka 0.250 0.250 0.250
+Kd 0.900 0.900 0.900
+Ks 0.000 0.000 0.000
+Ns 1.0
+d 1.0
+illum 1
+map_Kd redacth_atlas.png

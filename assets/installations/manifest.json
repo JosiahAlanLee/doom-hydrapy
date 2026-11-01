@@ -1,0 +1,78 @@
+{
+  "format": "nullrun-props-round2-index-1",
+  "generated_by": "props/generate.py",
+  "props": {
+    "cistern-fossil": {
+      "anchor_roles": [
+        "landmark",
+        "overlook",
+        "vendor"
+      ],
+      "atlas": "models/cistern-fossil/cistern-fossil_atlas.png",
+      "bounds_max": [
+        1.48,
+        1.52,
+        3.13
+      ],
+      "bounds_min": [
+        -1.48,
+        -1.407564,
+        0.0
+      ],
+      "environment": "flooded-resonance-cistern",
+      "height_m": 3.13,
+      "manifest": "models/cistern-fossil/cistern-fossil_manifest.json",
+      "obj": "models/cistern-fossil/cistern-fossil.obj",
+      "triangles": 828,
+      "yaw_deg": 0
+    },
+    "garden-organ": {
+      "anchor_roles": [
+        "landmark",
+        "overlook",
+        "vendor"
+      ],
+      "atlas": "models/garden-organ/garden-organ_atlas.png",
+      "bounds_max": [
+        0.882216,
+        2.095859,
+        3.421511
+      ],
+      "bounds_min": [
+        -0.861926,
+        -0.628735,
+        0.0
+      ],
+      "environment": "hanging-boneglass-garden",
+      "height_m": 3.421511,
+      "manifest": "models/garden-organ/garden-organ_manifest.json",
+      "obj": "models/garden-organ/garden-organ.obj",
+      "triangles": 835,
+      "yaw_deg": 20
+    },
+    "relay-sextant": {
+      "anchor_roles": [
+        "overlook",
+        "landmark",
+        "vendor"
+      ],
+      "atlas": "models/relay-sextant/relay-sextant_atlas.png",
+      "bounds_max": [
+        1.07,
+        0.9,
+        2.573897
+      ],
+      "bounds_min": [
+        -0.7,
+        -0.9,
+        0.0
+      ],
+      "environment": "bent-relay-atrium",
+      "height_m": 2.573897,
+      "manifest": "models/relay-sextant/relay-sextant_manifest.json",
+      "obj": "models/relay-sextant/relay-sextant.obj",
+      "triangles": 612,
+      "yaw_deg": 35
+    }
+  }
+}

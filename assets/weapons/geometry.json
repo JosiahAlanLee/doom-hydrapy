@@ -1,0 +1,1138 @@
+{
+  "pack": "nullrun-original-weapons-v1",
+  "weapons": [
+    {
+      "id": "fathom_hook",
+      "slot": "melee",
+      "name": "Fathom Hook",
+      "description": "Surveyor's rule shaft, brass plumb counterweight, honed billhook; oxblood wrap; bone inlay.",
+      "origin": [
+        340,
+        390
+      ],
+      "base_rotation_deg": 16.0,
+      "grip_anchor_local": [
+        16,
+        12
+      ],
+      "support_anchor_local": null,
+      "muzzle_local": [
+        -56,
+        -162
+      ],
+      "animated_groups": [],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 14,
+          "tr": [
+            18,
+            120
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 6,
+          "tr": [
+            7,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "windup",
+          "rot": -8,
+          "tr": [
+            -6,
+            -8
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 120
+        },
+        {
+          "state": "impact",
+          "rot": 17,
+          "tr": [
+            20,
+            8
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "follow",
+          "rot": 25,
+          "tr": [
+            32,
+            18
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 160
+        },
+        {
+          "state": "recover",
+          "rot": 8,
+          "tr": [
+            6,
+            4
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 220
+        },
+        {
+          "state": "guard",
+          "rot": 3,
+          "tr": [
+            3,
+            2
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 600
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    },
+    {
+      "id": "registrar",
+      "slot": "sidearm",
+      "name": "Registrar",
+      "description": "Rivet sidearm: gunmetal slide, brass register plate, vial sight, oxblood grip.",
+      "origin": [
+        372,
+        362
+      ],
+      "base_rotation_deg": -14.0,
+      "grip_anchor_local": [
+        16,
+        48
+      ],
+      "support_anchor_local": null,
+      "muzzle_local": [
+        0,
+        -112
+      ],
+      "animated_groups": [
+        "slide",
+        "mag"
+      ],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0.0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 12.0,
+          "tr": [
+            16,
+            118
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 5.0,
+          "tr": [
+            6,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "fire_peak",
+          "rot": -2.2,
+          "tr": [
+            -3,
+            -4
+          ],
+          "groups": {
+            "slide": [
+              0,
+              9
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 60
+        },
+        {
+          "state": "fire_settle",
+          "rot": -1.0,
+          "tr": [
+            -1,
+            -2
+          ],
+          "groups": {
+            "slide": [
+              0,
+              4
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 80
+        },
+        {
+          "state": "recover",
+          "rot": 0.5,
+          "tr": [
+            0,
+            1
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 110
+        },
+        {
+          "state": "reload_a",
+          "rot": 3.0,
+          "tr": [
+            4,
+            28
+          ],
+          "groups": {
+            "mag": [
+              10,
+              34
+            ],
+            "slide": [
+              0,
+              6
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 240
+        },
+        {
+          "state": "reload_b",
+          "rot": 1.5,
+          "tr": [
+            2,
+            12
+          ],
+          "groups": {
+            "mag": [
+              3,
+              12
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 300
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    },
+    {
+      "id": "transit_12",
+      "slot": "scattergun",
+      "name": "Transit-12",
+      "description": "Pump scattergun built from a surveyor's level: walnut pump, octagonal barrel, brass level vial.",
+      "origin": [
+        372,
+        366
+      ],
+      "base_rotation_deg": -30.0,
+      "grip_anchor_local": [
+        16,
+        48
+      ],
+      "support_anchor_local": [
+        -36,
+        -30
+      ],
+      "muzzle_local": [
+        0,
+        -176
+      ],
+      "animated_groups": [
+        "pump"
+      ],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0.0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 12.0,
+          "tr": [
+            16,
+            118
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 5.0,
+          "tr": [
+            6,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "fire_peak",
+          "rot": -2.2,
+          "tr": [
+            -3,
+            -4
+          ],
+          "groups": {
+            "pump": [
+              0,
+              3
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 60
+        },
+        {
+          "state": "fire_settle",
+          "rot": -1.0,
+          "tr": [
+            -1,
+            -2
+          ],
+          "groups": {
+            "pump": [
+              0,
+              1
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 80
+        },
+        {
+          "state": "recover",
+          "rot": 0.5,
+          "tr": [
+            0,
+            1
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 110
+        },
+        {
+          "state": "reload_a",
+          "rot": 3.0,
+          "tr": [
+            4,
+            28
+          ],
+          "groups": {
+            "pump": [
+              0,
+              26
+            ]
+          },
+          "support_off": [
+            0,
+            26
+          ],
+          "duration_ms": 240
+        },
+        {
+          "state": "reload_b",
+          "rot": 1.5,
+          "tr": [
+            2,
+            12
+          ],
+          "groups": {
+            "pump": [
+              0,
+              9
+            ]
+          },
+          "support_off": [
+            0,
+            9
+          ],
+          "duration_ms": 300
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    },
+    {
+      "id": "comptroller",
+      "slot": "repeater",
+      "name": "Comptroller",
+      "description": "Adding-machine repeater: paper feed, typebar fins, cooling rings, brass carry handle.",
+      "origin": [
+        380,
+        372
+      ],
+      "base_rotation_deg": -28.0,
+      "grip_anchor_local": [
+        16,
+        50
+      ],
+      "support_anchor_local": [
+        -36,
+        -30
+      ],
+      "muzzle_local": [
+        0,
+        -184
+      ],
+      "animated_groups": [
+        "feed",
+        "bolt"
+      ],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0.0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 12.0,
+          "tr": [
+            16,
+            118
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 5.0,
+          "tr": [
+            6,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "fire_peak",
+          "rot": -2.2,
+          "tr": [
+            -3,
+            -4
+          ],
+          "groups": {
+            "bolt": [
+              0,
+              7
+            ],
+            "feed": [
+              0,
+              2
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 60
+        },
+        {
+          "state": "fire_settle",
+          "rot": -1.0,
+          "tr": [
+            -1,
+            -2
+          ],
+          "groups": {
+            "bolt": [
+              0,
+              3
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 80
+        },
+        {
+          "state": "recover",
+          "rot": 0.5,
+          "tr": [
+            0,
+            1
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 110
+        },
+        {
+          "state": "reload_a",
+          "rot": 3.0,
+          "tr": [
+            4,
+            28
+          ],
+          "groups": {
+            "feed": [
+              0,
+              30
+            ],
+            "bolt": [
+              0,
+              5
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 240
+        },
+        {
+          "state": "reload_b",
+          "rot": 1.5,
+          "tr": [
+            2,
+            12
+          ],
+          "groups": {
+            "feed": [
+              0,
+              10
+            ],
+            "bolt": [
+              0,
+              1
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 300
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    },
+    {
+      "id": "plumb_bombard",
+      "slot": "launcher",
+      "name": "Plumb Bombard",
+      "description": "Breech mortar / theodolite hybrid: wide brass-ringed tube, spirit level, side shell rack.",
+      "origin": [
+        375,
+        376
+      ],
+      "base_rotation_deg": -24.0,
+      "grip_anchor_local": [
+        16,
+        52
+      ],
+      "support_anchor_local": [
+        -38,
+        -24
+      ],
+      "muzzle_local": [
+        0,
+        -170
+      ],
+      "animated_groups": [
+        "breech",
+        "shell"
+      ],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0.0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 12.0,
+          "tr": [
+            16,
+            118
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 5.0,
+          "tr": [
+            6,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "fire_peak",
+          "rot": -2.2,
+          "tr": [
+            -3,
+            -4
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 60
+        },
+        {
+          "state": "fire_settle",
+          "rot": -1.0,
+          "tr": [
+            -1,
+            -2
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 80
+        },
+        {
+          "state": "recover",
+          "rot": 0.5,
+          "tr": [
+            0,
+            1
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 110
+        },
+        {
+          "state": "reload_a",
+          "rot": 3.0,
+          "tr": [
+            4,
+            28
+          ],
+          "groups": {
+            "breech": [
+              0,
+              18
+            ],
+            "shell": [
+              0,
+              48
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 240
+        },
+        {
+          "state": "reload_b",
+          "rot": 1.5,
+          "tr": [
+            2,
+            12
+          ],
+          "groups": {
+            "breech": [
+              0,
+              6
+            ],
+            "shell": [
+              0,
+              14
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 300
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    },
+    {
+      "id": "aethometer",
+      "slot": "projector",
+      "name": "Aethometer",
+      "description": "Aether projector: brass coils, glass condenser, pressure gauge, forbidden green discharge.",
+      "origin": [
+        370,
+        374
+      ],
+      "base_rotation_deg": -24.0,
+      "grip_anchor_local": [
+        16,
+        48
+      ],
+      "support_anchor_local": [
+        -38,
+        -34
+      ],
+      "muzzle_local": [
+        0,
+        -172
+      ],
+      "animated_groups": [
+        "vent",
+        "lever"
+      ],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0.0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 12.0,
+          "tr": [
+            16,
+            118
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 5.0,
+          "tr": [
+            6,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "fire_peak",
+          "rot": -2.2,
+          "tr": [
+            -3,
+            -4
+          ],
+          "groups": {
+            "vent": [
+              0,
+              2
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 60
+        },
+        {
+          "state": "fire_settle",
+          "rot": -1.0,
+          "tr": [
+            -1,
+            -2
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 80
+        },
+        {
+          "state": "recover",
+          "rot": 0.5,
+          "tr": [
+            0,
+            1
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 110
+        },
+        {
+          "state": "reload_a",
+          "rot": 3.0,
+          "tr": [
+            4,
+            28
+          ],
+          "groups": {
+            "vent": [
+              0,
+              22
+            ],
+            "lever": [
+              0,
+              10
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 240
+        },
+        {
+          "state": "reload_b",
+          "rot": 1.5,
+          "tr": [
+            2,
+            12
+          ],
+          "groups": {
+            "vent": [
+              0,
+              8
+            ],
+            "lever": [
+              0,
+              3
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 300
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    },
+    {
+      "id": "hymnodyne",
+      "slot": "heavy",
+      "name": "Hymnodyne",
+      "description": "Heavy ritual instrument: five organ pipes on a brass hub, bone mouths, censer chain, winding crank.",
+      "origin": [
+        372,
+        384
+      ],
+      "base_rotation_deg": -14.0,
+      "grip_anchor_local": [
+        16,
+        56
+      ],
+      "support_anchor_local": [
+        -48,
+        -14
+      ],
+      "muzzle_local": [
+        0,
+        -184
+      ],
+      "animated_groups": [
+        "cluster",
+        "crank"
+      ],
+      "frame_states": [
+        {
+          "state": "idle",
+          "rot": 0.0,
+          "tr": [
+            0,
+            0
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 900
+        },
+        {
+          "state": "raise_low",
+          "rot": 12.0,
+          "tr": [
+            16,
+            118
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "raise_mid",
+          "rot": 5.0,
+          "tr": [
+            6,
+            46
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 90
+        },
+        {
+          "state": "fire_peak",
+          "rot": -2.2,
+          "tr": [
+            -3,
+            -4
+          ],
+          "groups": {
+            "cluster": [
+              3,
+              0
+            ],
+            "crank": [
+              2,
+              0
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 60
+        },
+        {
+          "state": "fire_settle",
+          "rot": -1.0,
+          "tr": [
+            -1,
+            -2
+          ],
+          "groups": {
+            "cluster": [
+              1,
+              0
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 80
+        },
+        {
+          "state": "recover",
+          "rot": 0.5,
+          "tr": [
+            0,
+            1
+          ],
+          "groups": {},
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 110
+        },
+        {
+          "state": "reload_a",
+          "rot": 3.0,
+          "tr": [
+            4,
+            28
+          ],
+          "groups": {
+            "cluster": [
+              6,
+              0
+            ],
+            "crank": [
+              5,
+              4
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 240
+        },
+        {
+          "state": "reload_b",
+          "rot": 1.5,
+          "tr": [
+            2,
+            12
+          ],
+          "groups": {
+            "cluster": [
+              -3,
+              0
+            ],
+            "crank": [
+              1,
+              2
+            ]
+          },
+          "support_off": [
+            0,
+            0
+          ],
+          "duration_ms": 300
+        }
+      ],
+      "construction": "procedurally painted extruded polygons in generate_weapons.py; local coords, y up-negative, grip pivot at (0,0)"
+    }
+  ]
+}

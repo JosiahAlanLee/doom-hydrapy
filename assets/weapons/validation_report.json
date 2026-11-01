@@ -1,0 +1,6510 @@
+{
+  "pack": "nullrun-original-weapons-v1",
+  "passed": true,
+  "failed_checks": 0,
+  "counts": {
+    "slots": 7,
+    "frames": 56,
+    "flashes": 14,
+    "icons": 7,
+    "png_hashes": 77
+  },
+  "checks": [
+    {
+      "check": "manifest: 7 slots",
+      "ok": true,
+      "detail": "7"
+    },
+    {
+      "check": "manifest: slot names",
+      "ok": true,
+      "detail": "['heavy', 'launcher', 'melee', 'projector', 'repeater', 'scattergun', 'sidearm']"
+    },
+    {
+      "check": "manifest: canvas 640x400",
+      "ok": true,
+      "detail": "{'width': 640, 'height': 400, 'mode': 'RGBA', 'origin': 'top-left, inclusive pixel coordinates'}"
+    },
+    {
+      "check": "manifest: safe view documented",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "fathom_hook: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'windup', 'impact', 'follow', 'recover', 'guard']"
+    },
+    {
+      "check": "fathom_hook: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "fathom_hook: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/idle: file exists",
+      "ok": true,
+      "detail": "fathom_hook_00_idle.png"
+    },
+    {
+      "check": "fathom_hook/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([325, 207, 414, 399], [325, 207, 414, 399])"
+    },
+    {
+      "check": "fathom_hook/idle: alpha count matches",
+      "ok": true,
+      "detail": "(6547, 6547)"
+    },
+    {
+      "check": "fathom_hook/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(330, 408)"
+    },
+    {
+      "check": "fathom_hook/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0256"
+    },
+    {
+      "check": "fathom_hook/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/raise_low: file exists",
+      "ok": true,
+      "detail": "fathom_hook_01_raise_low.png"
+    },
+    {
+      "check": "fathom_hook/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([390, 332, 463, 399], [390, 332, 463, 399])"
+    },
+    {
+      "check": "fathom_hook/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(2839, 2839)"
+    },
+    {
+      "check": "fathom_hook/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "fathom_hook/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.0111"
+    },
+    {
+      "check": "fathom_hook/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/raise_mid: file exists",
+      "ok": true,
+      "detail": "fathom_hook_02_raise_mid.png"
+    },
+    {
+      "check": "fathom_hook/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([346, 254, 435, 399], [346, 254, 435, 399])"
+    },
+    {
+      "check": "fathom_hook/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(4706, 4706)"
+    },
+    {
+      "check": "fathom_hook/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "fathom_hook/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.0184"
+    },
+    {
+      "check": "fathom_hook/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/windup: file exists",
+      "ok": true,
+      "detail": "fathom_hook_03_windup.png"
+    },
+    {
+      "check": "fathom_hook/windup: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/windup: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/windup: bbox matches manifest",
+      "ok": true,
+      "detail": "([301, 199, 388, 399], [301, 199, 388, 399])"
+    },
+    {
+      "check": "fathom_hook/windup: alpha count matches",
+      "ok": true,
+      "detail": "(6927, 6927)"
+    },
+    {
+      "check": "fathom_hook/windup: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/windup: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/windup: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/windup: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(301, 388)"
+    },
+    {
+      "check": "fathom_hook/windup: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/windup: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/windup: sane coverage",
+      "ok": true,
+      "detail": "0.0271"
+    },
+    {
+      "check": "fathom_hook/windup: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/windup: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/windup: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/impact: file exists",
+      "ok": true,
+      "detail": "fathom_hook_04_impact.png"
+    },
+    {
+      "check": "fathom_hook/impact: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/impact: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/impact: bbox matches manifest",
+      "ok": true,
+      "detail": "([345, 223, 471, 399], [345, 223, 471, 399])"
+    },
+    {
+      "check": "fathom_hook/impact: alpha count matches",
+      "ok": true,
+      "detail": "(6113, 6113)"
+    },
+    {
+      "check": "fathom_hook/impact: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/impact: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/impact: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/impact: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(401, 438)"
+    },
+    {
+      "check": "fathom_hook/impact: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/impact: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/impact: sane coverage",
+      "ok": true,
+      "detail": "0.0239"
+    },
+    {
+      "check": "fathom_hook/impact: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/impact: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/impact: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/follow: file exists",
+      "ok": true,
+      "detail": "fathom_hook_05_follow.png"
+    },
+    {
+      "check": "fathom_hook/follow: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/follow: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/follow: bbox matches manifest",
+      "ok": true,
+      "detail": "([360, 242, 500, 399], [360, 242, 500, 399])"
+    },
+    {
+      "check": "fathom_hook/follow: alpha count matches",
+      "ok": true,
+      "detail": "(5570, 5570)"
+    },
+    {
+      "check": "fathom_hook/follow: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/follow: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/follow: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/follow: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "fathom_hook/follow: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/follow: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/follow: sane coverage",
+      "ok": true,
+      "detail": "0.0218"
+    },
+    {
+      "check": "fathom_hook/follow: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/follow: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/follow: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/recover: file exists",
+      "ok": true,
+      "detail": "fathom_hook_06_recover.png"
+    },
+    {
+      "check": "fathom_hook/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([331, 212, 438, 399], [331, 212, 438, 399])"
+    },
+    {
+      "check": "fathom_hook/recover: alpha count matches",
+      "ok": true,
+      "detail": "(6330, 6330)"
+    },
+    {
+      "check": "fathom_hook/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(360, 425)"
+    },
+    {
+      "check": "fathom_hook/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0247"
+    },
+    {
+      "check": "fathom_hook/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/guard: file exists",
+      "ok": true,
+      "detail": "fathom_hook_07_guard.png"
+    },
+    {
+      "check": "fathom_hook/guard: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "fathom_hook/guard: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "fathom_hook/guard: bbox matches manifest",
+      "ok": true,
+      "detail": "([328, 209, 424, 399], [328, 209, 424, 399])"
+    },
+    {
+      "check": "fathom_hook/guard: alpha count matches",
+      "ok": true,
+      "detail": "(6449, 6449)"
+    },
+    {
+      "check": "fathom_hook/guard: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/guard: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/guard: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook/guard: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(342, 420)"
+    },
+    {
+      "check": "fathom_hook/guard: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/guard: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/guard: sane coverage",
+      "ok": true,
+      "detail": "0.0252"
+    },
+    {
+      "check": "fathom_hook/guard: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/guard: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/guard: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "fathom_hook: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(29.9, 4.4)"
+    },
+    {
+      "check": "fathom_hook: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "fathom_hook: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash a: file exists",
+      "ok": true,
+      "detail": "fathom_hook_flash_a.png"
+    },
+    {
+      "check": "fathom_hook/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "fathom_hook/flash a: bbox matches",
+      "ok": true,
+      "detail": "([362, 183, 452, 288], [362, 183, 452, 288])"
+    },
+    {
+      "check": "fathom_hook/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([401.3, 231.6], [362, 183, 452, 288])"
+    },
+    {
+      "check": "fathom_hook/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0044"
+    },
+    {
+      "check": "fathom_hook/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash b: file exists",
+      "ok": true,
+      "detail": "fathom_hook_flash_b.png"
+    },
+    {
+      "check": "fathom_hook/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "fathom_hook/flash b: bbox matches",
+      "ok": true,
+      "detail": "([401, 216, 467, 283], [401, 216, 467, 283])"
+    },
+    {
+      "check": "fathom_hook/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([436.0, 249.0], [401, 216, 467, 283])"
+    },
+    {
+      "check": "fathom_hook/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0026"
+    },
+    {
+      "check": "fathom_hook/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fathom_hook: icon exists",
+      "ok": true,
+      "detail": "fathom_hook_icon_96x64.png"
+    },
+    {
+      "check": "fathom_hook: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "fathom_hook: icon bbox matches",
+      "ok": true,
+      "detail": "([26, 8, 64, 54], [26, 8, 64, 54])"
+    },
+    {
+      "check": "fathom_hook: icon has transparent margin",
+      "ok": true,
+      "detail": "[26, 8, 64, 54]"
+    },
+    {
+      "check": "fathom_hook: icon coverage sane",
+      "ok": true,
+      "detail": "0.0968"
+    },
+    {
+      "check": "fathom_hook: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "registrar: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'fire_peak', 'fire_settle', 'recover', 'reload_a', 'reload_b']"
+    },
+    {
+      "check": "registrar: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "registrar: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/idle: file exists",
+      "ok": true,
+      "detail": "registrar_00_idle.png"
+    },
+    {
+      "check": "registrar/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([322, 252, 423, 399], [322, 252, 423, 399])"
+    },
+    {
+      "check": "registrar/idle: alpha count matches",
+      "ok": true,
+      "detail": "(7887, 7887)"
+    },
+    {
+      "check": "registrar/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0308"
+    },
+    {
+      "check": "registrar/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/raise_low: file exists",
+      "ok": true,
+      "detail": "registrar_01_raise_low.png"
+    },
+    {
+      "check": "registrar/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([356, 367, 413, 399], [356, 367, 413, 399])"
+    },
+    {
+      "check": "registrar/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(1504, 1504)"
+    },
+    {
+      "check": "registrar/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.0059"
+    },
+    {
+      "check": "registrar/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/raise_mid: file exists",
+      "ok": true,
+      "detail": "registrar_02_raise_mid.png"
+    },
+    {
+      "check": "registrar/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([335, 297, 403, 399], [335, 297, 403, 399])"
+    },
+    {
+      "check": "registrar/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(5519, 5519)"
+    },
+    {
+      "check": "registrar/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.0216"
+    },
+    {
+      "check": "registrar/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/fire_peak: file exists",
+      "ok": true,
+      "detail": "registrar_03_fire_peak.png"
+    },
+    {
+      "check": "registrar/fire_peak: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/fire_peak: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/fire_peak: bbox matches manifest",
+      "ok": true,
+      "detail": "([318, 257, 426, 399], [318, 257, 426, 399])"
+    },
+    {
+      "check": "registrar/fire_peak: alpha count matches",
+      "ok": true,
+      "detail": "(7712, 7712)"
+    },
+    {
+      "check": "registrar/fire_peak: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_peak: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/fire_peak: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/fire_peak: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/fire_peak: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_peak: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_peak: sane coverage",
+      "ok": true,
+      "detail": "0.0301"
+    },
+    {
+      "check": "registrar/fire_peak: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_peak: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_peak: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/fire_settle: file exists",
+      "ok": true,
+      "detail": "registrar_04_fire_settle.png"
+    },
+    {
+      "check": "registrar/fire_settle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/fire_settle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/fire_settle: bbox matches manifest",
+      "ok": true,
+      "detail": "([320, 254, 425, 399], [320, 254, 425, 399])"
+    },
+    {
+      "check": "registrar/fire_settle: alpha count matches",
+      "ok": true,
+      "detail": "(7820, 7820)"
+    },
+    {
+      "check": "registrar/fire_settle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_settle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/fire_settle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/fire_settle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/fire_settle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_settle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_settle: sane coverage",
+      "ok": true,
+      "detail": "0.0305"
+    },
+    {
+      "check": "registrar/fire_settle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_settle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_settle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/recover: file exists",
+      "ok": true,
+      "detail": "registrar_05_recover.png"
+    },
+    {
+      "check": "registrar/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([322, 253, 422, 399], [322, 253, 422, 399])"
+    },
+    {
+      "check": "registrar/recover: alpha count matches",
+      "ok": true,
+      "detail": "(7820, 7820)"
+    },
+    {
+      "check": "registrar/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0305"
+    },
+    {
+      "check": "registrar/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/reload_a: file exists",
+      "ok": true,
+      "detail": "registrar_06_reload_a.png"
+    },
+    {
+      "check": "registrar/reload_a: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/reload_a: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/reload_a: bbox matches manifest",
+      "ok": true,
+      "detail": "([331, 285, 405, 399], [331, 285, 405, 399])"
+    },
+    {
+      "check": "registrar/reload_a: alpha count matches",
+      "ok": true,
+      "detail": "(6142, 6142)"
+    },
+    {
+      "check": "registrar/reload_a: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_a: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/reload_a: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/reload_a: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/reload_a: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_a: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_a: sane coverage",
+      "ok": true,
+      "detail": "0.024"
+    },
+    {
+      "check": "registrar/reload_a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_a: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/reload_b: file exists",
+      "ok": true,
+      "detail": "registrar_07_reload_b.png"
+    },
+    {
+      "check": "registrar/reload_b: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "registrar/reload_b: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "registrar/reload_b: bbox matches manifest",
+      "ok": true,
+      "detail": "([326, 264, 410, 399], [326, 264, 410, 399])"
+    },
+    {
+      "check": "registrar/reload_b: alpha count matches",
+      "ok": true,
+      "detail": "(7259, 7259)"
+    },
+    {
+      "check": "registrar/reload_b: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_b: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/reload_b: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar/reload_b: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "registrar/reload_b: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_b: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_b: sane coverage",
+      "ok": true,
+      "detail": "0.0284"
+    },
+    {
+      "check": "registrar/reload_b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/reload_b: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "registrar: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/fire_peak: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-7.1, -2.9)"
+    },
+    {
+      "check": "registrar/fire_settle: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-2.9, -1.5)"
+    },
+    {
+      "check": "registrar/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(1.0, 0.8)"
+    },
+    {
+      "check": "registrar: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "registrar: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash a: file exists",
+      "ok": true,
+      "detail": "registrar_flash_a.png"
+    },
+    {
+      "check": "registrar/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "registrar/flash a: bbox matches",
+      "ok": true,
+      "detail": "([301, 167, 380, 313], [301, 167, 380, 313])"
+    },
+    {
+      "check": "registrar/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([337.8, 250.4], [301, 167, 380, 313])"
+    },
+    {
+      "check": "registrar/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0117"
+    },
+    {
+      "check": "registrar/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash b: file exists",
+      "ok": true,
+      "detail": "registrar_flash_b.png"
+    },
+    {
+      "check": "registrar/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "registrar/flash b: bbox matches",
+      "ok": true,
+      "detail": "([314, 206, 370, 306], [314, 206, 370, 306])"
+    },
+    {
+      "check": "registrar/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([342.0, 251.8], [314, 206, 370, 306])"
+    },
+    {
+      "check": "registrar/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0082"
+    },
+    {
+      "check": "registrar/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "registrar: icon exists",
+      "ok": true,
+      "detail": "registrar_icon_96x64.png"
+    },
+    {
+      "check": "registrar: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "registrar: icon bbox matches",
+      "ok": true,
+      "detail": "([14, 16, 70, 52], [14, 16, 70, 52])"
+    },
+    {
+      "check": "registrar: icon has transparent margin",
+      "ok": true,
+      "detail": "[14, 16, 70, 52]"
+    },
+    {
+      "check": "registrar: icon coverage sane",
+      "ok": true,
+      "detail": "0.1421"
+    },
+    {
+      "check": "registrar: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "transit_12: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'fire_peak', 'fire_settle', 'recover', 'reload_a', 'reload_b']"
+    },
+    {
+      "check": "transit_12: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "transit_12: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/idle: file exists",
+      "ok": true,
+      "detail": "transit_12_00_idle.png"
+    },
+    {
+      "check": "transit_12/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([267, 200, 455, 399], [267, 200, 455, 399])"
+    },
+    {
+      "check": "transit_12/idle: alpha count matches",
+      "ok": true,
+      "detail": "(15547, 15547)"
+    },
+    {
+      "check": "transit_12/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(267, 330)"
+    },
+    {
+      "check": "transit_12/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0607"
+    },
+    {
+      "check": "transit_12/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/raise_low: file exists",
+      "ok": true,
+      "detail": "transit_12_01_raise_low.png"
+    },
+    {
+      "check": "transit_12/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([315, 307, 394, 399], [315, 307, 394, 399])"
+    },
+    {
+      "check": "transit_12/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(4276, 4276)"
+    },
+    {
+      "check": "transit_12/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "transit_12/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.0167"
+    },
+    {
+      "check": "transit_12/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/raise_mid: file exists",
+      "ok": true,
+      "detail": "transit_12_02_raise_mid.png"
+    },
+    {
+      "check": "transit_12/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([286, 240, 417, 399], [286, 240, 417, 399])"
+    },
+    {
+      "check": "transit_12/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(10002, 10002)"
+    },
+    {
+      "check": "transit_12/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "transit_12/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.0391"
+    },
+    {
+      "check": "transit_12/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/fire_peak: file exists",
+      "ok": true,
+      "detail": "transit_12_03_fire_peak.png"
+    },
+    {
+      "check": "transit_12/fire_peak: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/fire_peak: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/fire_peak: bbox matches manifest",
+      "ok": true,
+      "detail": "([259, 199, 460, 399], [259, 199, 460, 399])"
+    },
+    {
+      "check": "transit_12/fire_peak: alpha count matches",
+      "ok": true,
+      "detail": "(16087, 16087)"
+    },
+    {
+      "check": "transit_12/fire_peak: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_peak: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/fire_peak: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/fire_peak: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(259, 322)"
+    },
+    {
+      "check": "transit_12/fire_peak: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_peak: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_peak: sane coverage",
+      "ok": true,
+      "detail": "0.0628"
+    },
+    {
+      "check": "transit_12/fire_peak: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_peak: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_peak: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/fire_settle: file exists",
+      "ok": true,
+      "detail": "transit_12_04_fire_settle.png"
+    },
+    {
+      "check": "transit_12/fire_settle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/fire_settle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/fire_settle: bbox matches manifest",
+      "ok": true,
+      "detail": "([264, 199, 457, 399], [264, 199, 457, 399])"
+    },
+    {
+      "check": "transit_12/fire_settle: alpha count matches",
+      "ok": true,
+      "detail": "(15813, 15813)"
+    },
+    {
+      "check": "transit_12/fire_settle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_settle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/fire_settle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/fire_settle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(264, 327)"
+    },
+    {
+      "check": "transit_12/fire_settle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_settle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_settle: sane coverage",
+      "ok": true,
+      "detail": "0.0618"
+    },
+    {
+      "check": "transit_12/fire_settle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_settle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_settle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/recover: file exists",
+      "ok": true,
+      "detail": "transit_12_05_recover.png"
+    },
+    {
+      "check": "transit_12/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([268, 200, 453, 399], [268, 200, 453, 399])"
+    },
+    {
+      "check": "transit_12/recover: alpha count matches",
+      "ok": true,
+      "detail": "(15396, 15396)"
+    },
+    {
+      "check": "transit_12/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(268, 331)"
+    },
+    {
+      "check": "transit_12/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0601"
+    },
+    {
+      "check": "transit_12/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/reload_a: file exists",
+      "ok": true,
+      "detail": "transit_12_06_reload_a.png"
+    },
+    {
+      "check": "transit_12/reload_a: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/reload_a: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/reload_a: bbox matches manifest",
+      "ok": true,
+      "detail": "([279, 224, 433, 399], [279, 224, 433, 399])"
+    },
+    {
+      "check": "transit_12/reload_a: alpha count matches",
+      "ok": true,
+      "detail": "(10962, 10962)"
+    },
+    {
+      "check": "transit_12/reload_a: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_a: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/reload_a: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/reload_a: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(286, 322)"
+    },
+    {
+      "check": "transit_12/reload_a: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_a: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_a: sane coverage",
+      "ok": true,
+      "detail": "0.0428"
+    },
+    {
+      "check": "transit_12/reload_a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_a: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/reload_b: file exists",
+      "ok": true,
+      "detail": "transit_12_07_reload_b.png"
+    },
+    {
+      "check": "transit_12/reload_b: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "transit_12/reload_b: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "transit_12/reload_b: bbox matches manifest",
+      "ok": true,
+      "detail": "([273, 210, 445, 399], [273, 210, 445, 399])"
+    },
+    {
+      "check": "transit_12/reload_b: alpha count matches",
+      "ok": true,
+      "detail": "(13523, 13523)"
+    },
+    {
+      "check": "transit_12/reload_b: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_b: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/reload_b: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12/reload_b: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(273, 329)"
+    },
+    {
+      "check": "transit_12/reload_b: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_b: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_b: sane coverage",
+      "ok": true,
+      "detail": "0.0528"
+    },
+    {
+      "check": "transit_12/reload_b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/reload_b: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "transit_12: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/fire_peak: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-8.8, -0.5)"
+    },
+    {
+      "check": "transit_12/fire_settle: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-3.6, -0.5)"
+    },
+    {
+      "check": "transit_12/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(1.3, 0.2)"
+    },
+    {
+      "check": "transit_12: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "transit_12: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash a: file exists",
+      "ok": true,
+      "detail": "transit_12_flash_a.png"
+    },
+    {
+      "check": "transit_12/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "transit_12/flash a: bbox matches",
+      "ok": true,
+      "detail": "([221, 152, 313, 265], [221, 152, 313, 265])"
+    },
+    {
+      "check": "transit_12/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([275.2, 213.1], [221, 152, 313, 265])"
+    },
+    {
+      "check": "transit_12/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0117"
+    },
+    {
+      "check": "transit_12/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash b: file exists",
+      "ok": true,
+      "detail": "transit_12_flash_b.png"
+    },
+    {
+      "check": "transit_12/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "transit_12/flash b: bbox matches",
+      "ok": true,
+      "detail": "([241, 150, 311, 265], [241, 150, 311, 265])"
+    },
+    {
+      "check": "transit_12/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([280.4, 213.1], [241, 150, 311, 265])"
+    },
+    {
+      "check": "transit_12/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0079"
+    },
+    {
+      "check": "transit_12/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "transit_12: icon exists",
+      "ok": true,
+      "detail": "transit_12_icon_96x64.png"
+    },
+    {
+      "check": "transit_12: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "transit_12: icon bbox matches",
+      "ok": true,
+      "detail": "([9, 16, 88, 42], [9, 16, 88, 42])"
+    },
+    {
+      "check": "transit_12: icon has transparent margin",
+      "ok": true,
+      "detail": "[9, 16, 88, 42]"
+    },
+    {
+      "check": "transit_12: icon coverage sane",
+      "ok": true,
+      "detail": "0.1779"
+    },
+    {
+      "check": "transit_12: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "comptroller: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'fire_peak', 'fire_settle', 'recover', 'reload_a', 'reload_b']"
+    },
+    {
+      "check": "comptroller: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "comptroller: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/idle: file exists",
+      "ok": true,
+      "detail": "comptroller_00_idle.png"
+    },
+    {
+      "check": "comptroller/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([275, 196, 442, 399], [275, 196, 442, 399])"
+    },
+    {
+      "check": "comptroller/idle: alpha count matches",
+      "ok": true,
+      "detail": "(15018, 15018)"
+    },
+    {
+      "check": "comptroller/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(275, 330)"
+    },
+    {
+      "check": "comptroller/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0587"
+    },
+    {
+      "check": "comptroller/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/raise_low: file exists",
+      "ok": true,
+      "detail": "comptroller_01_raise_low.png"
+    },
+    {
+      "check": "comptroller/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([324, 304, 398, 399], [324, 304, 398, 399])"
+    },
+    {
+      "check": "comptroller/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(4097, 4097)"
+    },
+    {
+      "check": "comptroller/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "comptroller/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.016"
+    },
+    {
+      "check": "comptroller/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/raise_mid: file exists",
+      "ok": true,
+      "detail": "comptroller_02_raise_mid.png"
+    },
+    {
+      "check": "comptroller/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([294, 237, 429, 399], [294, 237, 429, 399])"
+    },
+    {
+      "check": "comptroller/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(10301, 10301)"
+    },
+    {
+      "check": "comptroller/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(330, 337)"
+    },
+    {
+      "check": "comptroller/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.0402"
+    },
+    {
+      "check": "comptroller/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/fire_peak: file exists",
+      "ok": true,
+      "detail": "comptroller_03_fire_peak.png"
+    },
+    {
+      "check": "comptroller/fire_peak: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/fire_peak: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/fire_peak: bbox matches manifest",
+      "ok": true,
+      "detail": "([266, 194, 449, 399], [266, 194, 449, 399])"
+    },
+    {
+      "check": "comptroller/fire_peak: alpha count matches",
+      "ok": true,
+      "detail": "(15470, 15470)"
+    },
+    {
+      "check": "comptroller/fire_peak: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_peak: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/fire_peak: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/fire_peak: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(266, 323)"
+    },
+    {
+      "check": "comptroller/fire_peak: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_peak: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_peak: sane coverage",
+      "ok": true,
+      "detail": "0.0604"
+    },
+    {
+      "check": "comptroller/fire_peak: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_peak: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_peak: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/fire_settle: file exists",
+      "ok": true,
+      "detail": "comptroller_04_fire_settle.png"
+    },
+    {
+      "check": "comptroller/fire_settle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/fire_settle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/fire_settle: bbox matches manifest",
+      "ok": true,
+      "detail": "([271, 195, 446, 399], [271, 195, 446, 399])"
+    },
+    {
+      "check": "comptroller/fire_settle: alpha count matches",
+      "ok": true,
+      "detail": "(15234, 15234)"
+    },
+    {
+      "check": "comptroller/fire_settle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_settle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/fire_settle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/fire_settle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(271, 327)"
+    },
+    {
+      "check": "comptroller/fire_settle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_settle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_settle: sane coverage",
+      "ok": true,
+      "detail": "0.0595"
+    },
+    {
+      "check": "comptroller/fire_settle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_settle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_settle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/recover: file exists",
+      "ok": true,
+      "detail": "comptroller_05_recover.png"
+    },
+    {
+      "check": "comptroller/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([276, 196, 440, 399], [276, 196, 440, 399])"
+    },
+    {
+      "check": "comptroller/recover: alpha count matches",
+      "ok": true,
+      "detail": "(14931, 14931)"
+    },
+    {
+      "check": "comptroller/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(276, 332)"
+    },
+    {
+      "check": "comptroller/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0583"
+    },
+    {
+      "check": "comptroller/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/reload_a: file exists",
+      "ok": true,
+      "detail": "comptroller_06_reload_a.png"
+    },
+    {
+      "check": "comptroller/reload_a: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/reload_a: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/reload_a: bbox matches manifest",
+      "ok": true,
+      "detail": "([287, 220, 435, 399], [287, 220, 435, 399])"
+    },
+    {
+      "check": "comptroller/reload_a: alpha count matches",
+      "ok": true,
+      "detail": "(12182, 12182)"
+    },
+    {
+      "check": "comptroller/reload_a: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_a: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/reload_a: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/reload_a: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(288, 334)"
+    },
+    {
+      "check": "comptroller/reload_a: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_a: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_a: sane coverage",
+      "ok": true,
+      "detail": "0.0476"
+    },
+    {
+      "check": "comptroller/reload_a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_a: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/reload_b: file exists",
+      "ok": true,
+      "detail": "comptroller_07_reload_b.png"
+    },
+    {
+      "check": "comptroller/reload_b: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "comptroller/reload_b: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "comptroller/reload_b: bbox matches manifest",
+      "ok": true,
+      "detail": "([281, 206, 427, 399], [281, 206, 427, 399])"
+    },
+    {
+      "check": "comptroller/reload_b: alpha count matches",
+      "ok": true,
+      "detail": "(13797, 13797)"
+    },
+    {
+      "check": "comptroller/reload_b: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_b: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/reload_b: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller/reload_b: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(281, 334)"
+    },
+    {
+      "check": "comptroller/reload_b: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_b: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_b: sane coverage",
+      "ok": true,
+      "detail": "0.0539"
+    },
+    {
+      "check": "comptroller/reload_b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/reload_b: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "comptroller: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/fire_peak: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-9.2, -0.5)"
+    },
+    {
+      "check": "comptroller/fire_settle: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-3.8, -0.4)"
+    },
+    {
+      "check": "comptroller/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(1.4, 0.3)"
+    },
+    {
+      "check": "comptroller: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "comptroller: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash a: file exists",
+      "ok": true,
+      "detail": "comptroller_flash_a.png"
+    },
+    {
+      "check": "comptroller/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "comptroller/flash a: bbox matches",
+      "ok": true,
+      "detail": "([238, 155, 338, 287], [238, 155, 338, 287])"
+    },
+    {
+      "check": "comptroller/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([284.4, 209.0], [238, 155, 338, 287])"
+    },
+    {
+      "check": "comptroller/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0132"
+    },
+    {
+      "check": "comptroller/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash b: file exists",
+      "ok": true,
+      "detail": "comptroller_flash_b.png"
+    },
+    {
+      "check": "comptroller/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "comptroller/flash b: bbox matches",
+      "ok": true,
+      "detail": "([255, 155, 325, 264], [255, 155, 325, 264])"
+    },
+    {
+      "check": "comptroller/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([289.8, 209.1], [255, 155, 325, 264])"
+    },
+    {
+      "check": "comptroller/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0084"
+    },
+    {
+      "check": "comptroller/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "comptroller: icon exists",
+      "ok": true,
+      "detail": "comptroller_icon_96x64.png"
+    },
+    {
+      "check": "comptroller: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "comptroller: icon bbox matches",
+      "ok": true,
+      "detail": "([9, 9, 72, 57], [9, 9, 72, 57])"
+    },
+    {
+      "check": "comptroller: icon has transparent margin",
+      "ok": true,
+      "detail": "[9, 9, 72, 57]"
+    },
+    {
+      "check": "comptroller: icon coverage sane",
+      "ok": true,
+      "detail": "0.248"
+    },
+    {
+      "check": "comptroller: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "plumb_bombard: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'fire_peak', 'fire_settle', 'recover', 'reload_a', 'reload_b']"
+    },
+    {
+      "check": "plumb_bombard: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "plumb_bombard: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/idle: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_00_idle.png"
+    },
+    {
+      "check": "plumb_bombard/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([272, 200, 422, 399], [272, 200, 422, 399])"
+    },
+    {
+      "check": "plumb_bombard/idle: alpha count matches",
+      "ok": true,
+      "detail": "(18860, 18860)"
+    },
+    {
+      "check": "plumb_bombard/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(278, 365)"
+    },
+    {
+      "check": "plumb_bombard/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0737"
+    },
+    {
+      "check": "plumb_bombard/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/raise_low: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_01_raise_low.png"
+    },
+    {
+      "check": "plumb_bombard/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([316, 308, 419, 399], [316, 308, 419, 399])"
+    },
+    {
+      "check": "plumb_bombard/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(7135, 7135)"
+    },
+    {
+      "check": "plumb_bombard/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "plumb_bombard/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.0279"
+    },
+    {
+      "check": "plumb_bombard/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_02_raise_mid.png"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([289, 241, 422, 399], [289, 241, 422, 399])"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(14090, 14090)"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.055"
+    },
+    {
+      "check": "plumb_bombard/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_03_fire_peak.png"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: bbox matches manifest",
+      "ok": true,
+      "detail": "([265, 199, 430, 399], [265, 199, 430, 399])"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: alpha count matches",
+      "ok": true,
+      "detail": "(19247, 19247)"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_peak: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(270, 357)"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_peak: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_peak: sane coverage",
+      "ok": true,
+      "detail": "0.0752"
+    },
+    {
+      "check": "plumb_bombard/fire_peak: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_peak: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_peak: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_04_fire_settle.png"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: bbox matches manifest",
+      "ok": true,
+      "detail": "([269, 199, 426, 399], [269, 199, 426, 399])"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: alpha count matches",
+      "ok": true,
+      "detail": "(19043, 19043)"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_settle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(275, 362)"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_settle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_settle: sane coverage",
+      "ok": true,
+      "detail": "0.0744"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_settle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_settle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/recover: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_05_recover.png"
+    },
+    {
+      "check": "plumb_bombard/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([274, 201, 422, 399], [274, 201, 422, 399])"
+    },
+    {
+      "check": "plumb_bombard/recover: alpha count matches",
+      "ok": true,
+      "detail": "(18749, 18749)"
+    },
+    {
+      "check": "plumb_bombard/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(279, 366)"
+    },
+    {
+      "check": "plumb_bombard/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0732"
+    },
+    {
+      "check": "plumb_bombard/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/reload_a: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_06_reload_a.png"
+    },
+    {
+      "check": "plumb_bombard/reload_a: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/reload_a: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/reload_a: bbox matches manifest",
+      "ok": true,
+      "detail": "([283, 225, 427, 399], [283, 225, 427, 399])"
+    },
+    {
+      "check": "plumb_bombard/reload_a: alpha count matches",
+      "ok": true,
+      "detail": "(15971, 15971)"
+    },
+    {
+      "check": "plumb_bombard/reload_a: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_a: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/reload_a: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/reload_a: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(296, 349)"
+    },
+    {
+      "check": "plumb_bombard/reload_a: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_a: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_a: sane coverage",
+      "ok": true,
+      "detail": "0.0624"
+    },
+    {
+      "check": "plumb_bombard/reload_a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_a: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/reload_b: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_07_reload_b.png"
+    },
+    {
+      "check": "plumb_bombard/reload_b: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "plumb_bombard/reload_b: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "plumb_bombard/reload_b: bbox matches manifest",
+      "ok": true,
+      "detail": "([278, 211, 424, 399], [278, 211, 424, 399])"
+    },
+    {
+      "check": "plumb_bombard/reload_b: alpha count matches",
+      "ok": true,
+      "detail": "(17601, 17601)"
+    },
+    {
+      "check": "plumb_bombard/reload_b: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_b: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/reload_b: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard/reload_b: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(284, 363)"
+    },
+    {
+      "check": "plumb_bombard/reload_b: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_b: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_b: sane coverage",
+      "ok": true,
+      "detail": "0.0688"
+    },
+    {
+      "check": "plumb_bombard/reload_b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/reload_b: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "plumb_bombard: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/fire_peak: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-9.0, -1.2)"
+    },
+    {
+      "check": "plumb_bombard/fire_settle: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-3.7, -0.8)"
+    },
+    {
+      "check": "plumb_bombard/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(1.3, 0.4)"
+    },
+    {
+      "check": "plumb_bombard: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "plumb_bombard: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash a: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_flash_a.png"
+    },
+    {
+      "check": "plumb_bombard/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "plumb_bombard/flash a: bbox matches",
+      "ok": true,
+      "detail": "([228, 133, 372, 304], [228, 133, 372, 304])"
+    },
+    {
+      "check": "plumb_bombard/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([296.9, 219.5], [228, 133, 372, 304])"
+    },
+    {
+      "check": "plumb_bombard/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0293"
+    },
+    {
+      "check": "plumb_bombard/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash b: file exists",
+      "ok": true,
+      "detail": "plumb_bombard_flash_b.png"
+    },
+    {
+      "check": "plumb_bombard/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "plumb_bombard/flash b: bbox matches",
+      "ok": true,
+      "detail": "([251, 169, 355, 278], [251, 169, 355, 278])"
+    },
+    {
+      "check": "plumb_bombard/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([302.2, 219.9], [251, 169, 355, 278])"
+    },
+    {
+      "check": "plumb_bombard/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0175"
+    },
+    {
+      "check": "plumb_bombard/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "plumb_bombard: icon exists",
+      "ok": true,
+      "detail": "plumb_bombard_icon_96x64.png"
+    },
+    {
+      "check": "plumb_bombard: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "plumb_bombard: icon bbox matches",
+      "ok": true,
+      "detail": "([16, 5, 50, 52], [16, 5, 50, 52])"
+    },
+    {
+      "check": "plumb_bombard: icon has transparent margin",
+      "ok": true,
+      "detail": "[16, 5, 50, 52]"
+    },
+    {
+      "check": "plumb_bombard: icon coverage sane",
+      "ok": true,
+      "detail": "0.1538"
+    },
+    {
+      "check": "plumb_bombard: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "aethometer: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'fire_peak', 'fire_settle', 'recover', 'reload_a', 'reload_b']"
+    },
+    {
+      "check": "aethometer: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "aethometer: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/idle: file exists",
+      "ok": true,
+      "detail": "aethometer_00_idle.png"
+    },
+    {
+      "check": "aethometer/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([283, 211, 423, 399], [283, 211, 423, 399])"
+    },
+    {
+      "check": "aethometer/idle: alpha count matches",
+      "ok": true,
+      "detail": "(13785, 13785)"
+    },
+    {
+      "check": "aethometer/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(283, 337)"
+    },
+    {
+      "check": "aethometer/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0538"
+    },
+    {
+      "check": "aethometer/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/raise_low: file exists",
+      "ok": true,
+      "detail": "aethometer_01_raise_low.png"
+    },
+    {
+      "check": "aethometer/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([331, 322, 404, 399], [331, 322, 404, 399])"
+    },
+    {
+      "check": "aethometer/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(3456, 3456)"
+    },
+    {
+      "check": "aethometer/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "aethometer/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.0135"
+    },
+    {
+      "check": "aethometer/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/raise_mid: file exists",
+      "ok": true,
+      "detail": "aethometer_02_raise_mid.png"
+    },
+    {
+      "check": "aethometer/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([302, 253, 406, 399], [302, 253, 406, 399])"
+    },
+    {
+      "check": "aethometer/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(9245, 9245)"
+    },
+    {
+      "check": "aethometer/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "aethometer/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.0361"
+    },
+    {
+      "check": "aethometer/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/fire_peak: file exists",
+      "ok": true,
+      "detail": "aethometer_03_fire_peak.png"
+    },
+    {
+      "check": "aethometer/fire_peak: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/fire_peak: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/fire_peak: bbox matches manifest",
+      "ok": true,
+      "detail": "([274, 209, 430, 399], [274, 209, 430, 399])"
+    },
+    {
+      "check": "aethometer/fire_peak: alpha count matches",
+      "ok": true,
+      "detail": "(14179, 14179)"
+    },
+    {
+      "check": "aethometer/fire_peak: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_peak: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/fire_peak: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/fire_peak: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(274, 329)"
+    },
+    {
+      "check": "aethometer/fire_peak: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_peak: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_peak: sane coverage",
+      "ok": true,
+      "detail": "0.0554"
+    },
+    {
+      "check": "aethometer/fire_peak: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_peak: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_peak: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/fire_settle: file exists",
+      "ok": true,
+      "detail": "aethometer_04_fire_settle.png"
+    },
+    {
+      "check": "aethometer/fire_settle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/fire_settle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/fire_settle: bbox matches manifest",
+      "ok": true,
+      "detail": "([279, 210, 427, 399], [279, 210, 427, 399])"
+    },
+    {
+      "check": "aethometer/fire_settle: alpha count matches",
+      "ok": true,
+      "detail": "(13952, 13952)"
+    },
+    {
+      "check": "aethometer/fire_settle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_settle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/fire_settle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/fire_settle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(279, 334)"
+    },
+    {
+      "check": "aethometer/fire_settle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_settle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_settle: sane coverage",
+      "ok": true,
+      "detail": "0.0545"
+    },
+    {
+      "check": "aethometer/fire_settle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_settle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_settle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/recover: file exists",
+      "ok": true,
+      "detail": "aethometer_05_recover.png"
+    },
+    {
+      "check": "aethometer/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([284, 211, 421, 399], [284, 211, 421, 399])"
+    },
+    {
+      "check": "aethometer/recover: alpha count matches",
+      "ok": true,
+      "detail": "(13700, 13700)"
+    },
+    {
+      "check": "aethometer/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(284, 338)"
+    },
+    {
+      "check": "aethometer/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0535"
+    },
+    {
+      "check": "aethometer/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/reload_a: file exists",
+      "ok": true,
+      "detail": "aethometer_06_reload_a.png"
+    },
+    {
+      "check": "aethometer/reload_a: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/reload_a: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/reload_a: bbox matches manifest",
+      "ok": true,
+      "detail": "([295, 236, 405, 399], [295, 236, 405, 399])"
+    },
+    {
+      "check": "aethometer/reload_a: alpha count matches",
+      "ok": true,
+      "detail": "(10687, 10687)"
+    },
+    {
+      "check": "aethometer/reload_a: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_a: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/reload_a: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/reload_a: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(327, 336)"
+    },
+    {
+      "check": "aethometer/reload_a: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_a: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_a: sane coverage",
+      "ok": true,
+      "detail": "0.0417"
+    },
+    {
+      "check": "aethometer/reload_a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_a: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/reload_b: file exists",
+      "ok": true,
+      "detail": "aethometer_07_reload_b.png"
+    },
+    {
+      "check": "aethometer/reload_b: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "aethometer/reload_b: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "aethometer/reload_b: bbox matches manifest",
+      "ok": true,
+      "detail": "([289, 221, 409, 399], [289, 221, 409, 399])"
+    },
+    {
+      "check": "aethometer/reload_b: alpha count matches",
+      "ok": true,
+      "detail": "(12504, 12504)"
+    },
+    {
+      "check": "aethometer/reload_b: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_b: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/reload_b: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer/reload_b: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(289, 335)"
+    },
+    {
+      "check": "aethometer/reload_b: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_b: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_b: sane coverage",
+      "ok": true,
+      "detail": "0.0488"
+    },
+    {
+      "check": "aethometer/reload_b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/reload_b: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "aethometer: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/fire_peak: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-8.9, -1.2)"
+    },
+    {
+      "check": "aethometer/fire_settle: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-3.7, -0.8)"
+    },
+    {
+      "check": "aethometer/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(1.4, 0.4)"
+    },
+    {
+      "check": "aethometer: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "aethometer: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash a: file exists",
+      "ok": true,
+      "detail": "aethometer_flash_a.png"
+    },
+    {
+      "check": "aethometer/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "aethometer/flash a: bbox matches",
+      "ok": true,
+      "detail": "([202, 139, 388, 305], [202, 139, 388, 305])"
+    },
+    {
+      "check": "aethometer/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([291.1, 215.7], [202, 139, 388, 305])"
+    },
+    {
+      "check": "aethometer/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0236"
+    },
+    {
+      "check": "aethometer/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash b: file exists",
+      "ok": true,
+      "detail": "aethometer_flash_b.png"
+    },
+    {
+      "check": "aethometer/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "aethometer/flash b: bbox matches",
+      "ok": true,
+      "detail": "([234, 153, 368, 285], [234, 153, 368, 285])"
+    },
+    {
+      "check": "aethometer/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([296.3, 216.1], [234, 153, 368, 285])"
+    },
+    {
+      "check": "aethometer/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0143"
+    },
+    {
+      "check": "aethometer/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "aethometer: icon exists",
+      "ok": true,
+      "detail": "aethometer_icon_96x64.png"
+    },
+    {
+      "check": "aethometer: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "aethometer: icon bbox matches",
+      "ok": true,
+      "detail": "([12, 18, 68, 55], [12, 18, 68, 55])"
+    },
+    {
+      "check": "aethometer: icon has transparent margin",
+      "ok": true,
+      "detail": "[12, 18, 68, 55]"
+    },
+    {
+      "check": "aethometer: icon coverage sane",
+      "ok": true,
+      "detail": "0.1836"
+    },
+    {
+      "check": "aethometer: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne: 6-10 frames",
+      "ok": true,
+      "detail": "8"
+    },
+    {
+      "check": "hymnodyne: unique states",
+      "ok": true,
+      "detail": "['idle', 'raise_low', 'raise_mid', 'fire_peak', 'fire_settle', 'recover', 'reload_a', 'reload_b']"
+    },
+    {
+      "check": "hymnodyne: required states",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "hymnodyne: role and duration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne: suggested mapping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/idle: file exists",
+      "ok": true,
+      "detail": "hymnodyne_00_idle.png"
+    },
+    {
+      "check": "hymnodyne/idle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/idle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/idle: bbox matches manifest",
+      "ok": true,
+      "detail": "([285, 195, 428, 399], [285, 195, 428, 399])"
+    },
+    {
+      "check": "hymnodyne/idle: alpha count matches",
+      "ok": true,
+      "detail": "(15836, 15836)"
+    },
+    {
+      "check": "hymnodyne/idle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/idle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/idle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/idle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(289, 381)"
+    },
+    {
+      "check": "hymnodyne/idle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/idle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/idle: sane coverage",
+      "ok": true,
+      "detail": "0.0619"
+    },
+    {
+      "check": "hymnodyne/idle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/idle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/idle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/raise_low: file exists",
+      "ok": true,
+      "detail": "hymnodyne_01_raise_low.png"
+    },
+    {
+      "check": "hymnodyne/raise_low: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/raise_low: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/raise_low: bbox matches manifest",
+      "ok": true,
+      "detail": "([332, 309, 431, 399], [332, 309, 431, 399])"
+    },
+    {
+      "check": "hymnodyne/raise_low: alpha count matches",
+      "ok": true,
+      "detail": "(5005, 5005)"
+    },
+    {
+      "check": "hymnodyne/raise_low: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_low: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/raise_low: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/raise_low: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "None"
+    },
+    {
+      "check": "hymnodyne/raise_low: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_low: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_low: sane coverage",
+      "ok": true,
+      "detail": "0.0196"
+    },
+    {
+      "check": "hymnodyne/raise_low: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_low: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_low: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/raise_mid: file exists",
+      "ok": true,
+      "detail": "hymnodyne_02_raise_mid.png"
+    },
+    {
+      "check": "hymnodyne/raise_mid: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/raise_mid: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/raise_mid: bbox matches manifest",
+      "ok": true,
+      "detail": "([303, 238, 437, 399], [303, 238, 437, 399])"
+    },
+    {
+      "check": "hymnodyne/raise_mid: alpha count matches",
+      "ok": true,
+      "detail": "(10645, 10645)"
+    },
+    {
+      "check": "hymnodyne/raise_mid: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_mid: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/raise_mid: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/raise_mid: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(351, 357)"
+    },
+    {
+      "check": "hymnodyne/raise_mid: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_mid: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_mid: sane coverage",
+      "ok": true,
+      "detail": "0.0416"
+    },
+    {
+      "check": "hymnodyne/raise_mid: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_mid: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/raise_mid: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/fire_peak: file exists",
+      "ok": true,
+      "detail": "hymnodyne_03_fire_peak.png"
+    },
+    {
+      "check": "hymnodyne/fire_peak: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/fire_peak: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/fire_peak: bbox matches manifest",
+      "ok": true,
+      "detail": "([279, 191, 425, 399], [279, 191, 425, 399])"
+    },
+    {
+      "check": "hymnodyne/fire_peak: alpha count matches",
+      "ok": true,
+      "detail": "(16215, 16215)"
+    },
+    {
+      "check": "hymnodyne/fire_peak: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_peak: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/fire_peak: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/fire_peak: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(279, 376)"
+    },
+    {
+      "check": "hymnodyne/fire_peak: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_peak: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_peak: sane coverage",
+      "ok": true,
+      "detail": "0.0633"
+    },
+    {
+      "check": "hymnodyne/fire_peak: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_peak: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_peak: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/fire_settle: file exists",
+      "ok": true,
+      "detail": "hymnodyne_04_fire_settle.png"
+    },
+    {
+      "check": "hymnodyne/fire_settle: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/fire_settle: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/fire_settle: bbox matches manifest",
+      "ok": true,
+      "detail": "([282, 193, 426, 399], [282, 193, 426, 399])"
+    },
+    {
+      "check": "hymnodyne/fire_settle: alpha count matches",
+      "ok": true,
+      "detail": "(16087, 16087)"
+    },
+    {
+      "check": "hymnodyne/fire_settle: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_settle: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/fire_settle: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/fire_settle: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(283, 379)"
+    },
+    {
+      "check": "hymnodyne/fire_settle: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_settle: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_settle: sane coverage",
+      "ok": true,
+      "detail": "0.0628"
+    },
+    {
+      "check": "hymnodyne/fire_settle: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_settle: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_settle: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/recover: file exists",
+      "ok": true,
+      "detail": "hymnodyne_05_recover.png"
+    },
+    {
+      "check": "hymnodyne/recover: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/recover: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/recover: bbox matches manifest",
+      "ok": true,
+      "detail": "([286, 195, 428, 399], [286, 195, 428, 399])"
+    },
+    {
+      "check": "hymnodyne/recover: alpha count matches",
+      "ok": true,
+      "detail": "(15778, 15778)"
+    },
+    {
+      "check": "hymnodyne/recover: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/recover: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/recover: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/recover: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(290, 382)"
+    },
+    {
+      "check": "hymnodyne/recover: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/recover: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/recover: sane coverage",
+      "ok": true,
+      "detail": "0.0616"
+    },
+    {
+      "check": "hymnodyne/recover: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/recover: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/recover: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/reload_a: file exists",
+      "ok": true,
+      "detail": "hymnodyne_06_reload_a.png"
+    },
+    {
+      "check": "hymnodyne/reload_a: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/reload_a: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/reload_a: bbox matches manifest",
+      "ok": true,
+      "detail": "([302, 220, 439, 399], [302, 220, 439, 399])"
+    },
+    {
+      "check": "hymnodyne/reload_a: alpha count matches",
+      "ok": true,
+      "detail": "(12641, 12641)"
+    },
+    {
+      "check": "hymnodyne/reload_a: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_a: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/reload_a: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/reload_a: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(335, 378)"
+    },
+    {
+      "check": "hymnodyne/reload_a: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_a: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_a: sane coverage",
+      "ok": true,
+      "detail": "0.0494"
+    },
+    {
+      "check": "hymnodyne/reload_a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_a: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/reload_b: file exists",
+      "ok": true,
+      "detail": "hymnodyne_07_reload_b.png"
+    },
+    {
+      "check": "hymnodyne/reload_b: RGBA",
+      "ok": true,
+      "detail": "RGBA"
+    },
+    {
+      "check": "hymnodyne/reload_b: 640x400",
+      "ok": true,
+      "detail": "(640, 400)"
+    },
+    {
+      "check": "hymnodyne/reload_b: bbox matches manifest",
+      "ok": true,
+      "detail": "([288, 207, 432, 399], [288, 207, 432, 399])"
+    },
+    {
+      "check": "hymnodyne/reload_b: alpha count matches",
+      "ok": true,
+      "detail": "(14538, 14538)"
+    },
+    {
+      "check": "hymnodyne/reload_b: non-empty alpha",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_b: central aim clear",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/reload_b: nothing above y=190",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne/reload_b: 190-239 x band 250-440",
+      "ok": true,
+      "detail": "(302, 384)"
+    },
+    {
+      "check": "hymnodyne/reload_b: bottom crop present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_b: no left/right/top edge crop",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_b: sane coverage",
+      "ok": true,
+      "detail": "0.0568"
+    },
+    {
+      "check": "hymnodyne/reload_b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/reload_b: no pure-black edge fringe",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "hymnodyne: no per-frame scale declared",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/fire_peak: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-9.8, -2.2)"
+    },
+    {
+      "check": "hymnodyne/fire_settle: bounded muzzle motion",
+      "ok": true,
+      "detail": "(-4.1, -1.2)"
+    },
+    {
+      "check": "hymnodyne/recover: bounded muzzle motion",
+      "ok": true,
+      "detail": "(1.5, 0.6)"
+    },
+    {
+      "check": "hymnodyne: 2 flash overlays",
+      "ok": true,
+      "detail": "2"
+    },
+    {
+      "check": "hymnodyne: fire frames reference flashes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash a: file exists",
+      "ok": true,
+      "detail": "hymnodyne_flash_a.png"
+    },
+    {
+      "check": "hymnodyne/flash a: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "hymnodyne/flash a: bbox matches",
+      "ok": true,
+      "detail": "([231, 118, 402, 286], [231, 118, 402, 286])"
+    },
+    {
+      "check": "hymnodyne/flash a: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash a: muzzle inside bbox",
+      "ok": true,
+      "detail": "([317.7, 203.3], [231, 118, 402, 286])"
+    },
+    {
+      "check": "hymnodyne/flash a: coverage sane",
+      "ok": true,
+      "detail": "0.0343"
+    },
+    {
+      "check": "hymnodyne/flash a: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash a: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash a: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash b: file exists",
+      "ok": true,
+      "detail": "hymnodyne_flash_b.png"
+    },
+    {
+      "check": "hymnodyne/flash b: RGBA 640x400",
+      "ok": true,
+      "detail": "('RGBA', (640, 400))"
+    },
+    {
+      "check": "hymnodyne/flash b: bbox matches",
+      "ok": true,
+      "detail": "([253, 132, 397, 286], [253, 132, 397, 286])"
+    },
+    {
+      "check": "hymnodyne/flash b: alpha count matches",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash b: muzzle inside bbox",
+      "ok": true,
+      "detail": "([323.4, 204.3], [253, 132, 397, 286])"
+    },
+    {
+      "check": "hymnodyne/flash b: coverage sane",
+      "ok": true,
+      "detail": "0.0227"
+    },
+    {
+      "check": "hymnodyne/flash b: corners transparent",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash b: RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne/flash b: matching frame valid",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "hymnodyne: icon exists",
+      "ok": true,
+      "detail": "hymnodyne_icon_96x64.png"
+    },
+    {
+      "check": "hymnodyne: icon RGBA 96x64",
+      "ok": true,
+      "detail": "('RGBA', (96, 64))"
+    },
+    {
+      "check": "hymnodyne: icon bbox matches",
+      "ok": true,
+      "detail": "([19, 6, 72, 61], [19, 6, 72, 61])"
+    },
+    {
+      "check": "hymnodyne: icon has transparent margin",
+      "ok": true,
+      "detail": "[19, 6, 72, 61]"
+    },
+    {
+      "check": "hymnodyne: icon coverage sane",
+      "ok": true,
+      "detail": "0.2472"
+    },
+    {
+      "check": "hymnodyne: icon RGB clear under alpha=0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "frame count",
+      "ok": true,
+      "detail": "56"
+    },
+    {
+      "check": "flash count",
+      "ok": true,
+      "detail": "14"
+    },
+    {
+      "check": "icon count",
+      "ok": true,
+      "detail": "7"
+    },
+    {
+      "check": "SHA256SUMS exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: INTEGRATION.md exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: INTEGRATION.md hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: PROVENANCE.md exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: PROVENANCE.md hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: README.md exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: README.md hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/aethometer_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/aethometer_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/aethometer_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/aethometer_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/comptroller_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/comptroller_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/comptroller_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/comptroller_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/fathom_hook_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/fathom_hook_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/fathom_hook_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/fathom_hook_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/hymnodyne_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/hymnodyne_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/hymnodyne_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/hymnodyne_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/plumb_bombard_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/plumb_bombard_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/plumb_bombard_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/plumb_bombard_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/registrar_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/registrar_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/registrar_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/registrar_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/transit_12_flash_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/transit_12_flash_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/transit_12_flash_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: flashes/transit_12_flash_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_03_fire_peak.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_03_fire_peak.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_04_fire_settle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_04_fire_settle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_05_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_05_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_06_reload_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_06_reload_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_07_reload_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/heavy/hymnodyne_07_reload_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_03_fire_peak.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_03_fire_peak.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_04_fire_settle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_04_fire_settle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_05_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_05_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_06_reload_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_06_reload_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_07_reload_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/launcher/plumb_bombard_07_reload_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_03_windup.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_03_windup.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_04_impact.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_04_impact.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_05_follow.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_05_follow.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_06_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_06_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_07_guard.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/melee/fathom_hook_07_guard.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_03_fire_peak.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_03_fire_peak.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_04_fire_settle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_04_fire_settle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_05_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_05_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_06_reload_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_06_reload_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_07_reload_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/projector/aethometer_07_reload_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_03_fire_peak.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_03_fire_peak.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_04_fire_settle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_04_fire_settle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_05_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_05_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_06_reload_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_06_reload_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_07_reload_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/repeater/comptroller_07_reload_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_03_fire_peak.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_03_fire_peak.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_04_fire_settle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_04_fire_settle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_05_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_05_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_06_reload_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_06_reload_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_07_reload_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/scattergun/transit_12_07_reload_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_00_idle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_00_idle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_01_raise_low.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_01_raise_low.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_02_raise_mid.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_02_raise_mid.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_03_fire_peak.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_03_fire_peak.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_04_fire_settle.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_04_fire_settle.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_05_recover.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_05_recover.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_06_reload_a.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_06_reload_a.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_07_reload_b.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: frames/sidearm/registrar_07_reload_b.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: generate_weapons.py exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: generate_weapons.py hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: geometry.json exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: geometry.json hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/aethometer_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/aethometer_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/comptroller_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/comptroller_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/fathom_hook_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/fathom_hook_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/hymnodyne_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/hymnodyne_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/plumb_bombard_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/plumb_bombard_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/registrar_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/registrar_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/transit_12_icon_96x64.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: icons/transit_12_icon_96x64.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: manifest.json exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: manifest.json hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: materials.json exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: materials.json hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/fire_composite_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/fire_composite_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/flashes_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/flashes_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/heavy_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/heavy_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/icons_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/icons_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/launcher_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/launcher_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/master_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/master_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/melee_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/melee_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/projector_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/projector_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/repeater_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/repeater_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/scattergun_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/scattergun_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/sidearm_sheet.png exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: sheets/sidearm_sheet.png hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: validate.py exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: validate.py hash",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums: no duplicates",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "determinism: run_a generator exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "determinism: run_b generator exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "determinism: same file set",
+      "ok": true,
+      "detail": "(95, 95)"
+    },
+    {
+      "check": "determinism: all PNGs byte-identical",
+      "ok": true,
+      "detail": "{'pngs': 88, 'mismatches': []}"
+    },
+    {
+      "check": "determinism: all JSON identical",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "determinism: PNG count",
+      "ok": true,
+      "detail": "88"
+    },
+    {
+      "check": "generator reads no images",
+      "ok": true,
+      "detail": "clean"
+    },
+    {
+      "check": "no WAD/PK3/LMP assets in pack",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "generator reads no external files",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "provenance/licence file",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "integration notes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "materials source",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "geometry source",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "sums rewritten for all artefacts",
+      "ok": true,
+      "detail": "96"
+    }
+  ],
+  "limitations": [
+    "Validation is geometric and alpha-based; it cannot judge artistic quality.",
+    "No engine, palette conversion or runtime integration was tested.",
+    "The edge-fringe check only catches pure-black partial pixels; it is not a full compositing proof.",
+    "Scale stability is guaranteed by the generator having no scale parameter and is not independently measurable from silhouettes."
+  ]
+}

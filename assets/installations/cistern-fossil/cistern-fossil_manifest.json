@@ -1,0 +1,219 @@
+{
+  "atlas": {
+    "file": "cistern-fossil_atlas.png",
+    "mode": "RGB",
+    "regions": {
+      "bone": [
+        96,
+        0,
+        32,
+        32
+      ],
+      "bone2": [
+        96,
+        96,
+        32,
+        32
+      ],
+      "bronze": [
+        64,
+        0,
+        32,
+        32
+      ],
+      "glass": [
+        64,
+        32,
+        32,
+        32
+      ],
+      "glass2": [
+        64,
+        96,
+        32,
+        32
+      ],
+      "glow": [
+        96,
+        32,
+        32,
+        32
+      ],
+      "iron": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "line": [
+        0,
+        96,
+        32,
+        32
+      ],
+      "moss": [
+        64,
+        64,
+        32,
+        32
+      ],
+      "paper": [
+        32,
+        96,
+        32,
+        32
+      ],
+      "rust": [
+        32,
+        0,
+        32,
+        32
+      ],
+      "stone": [
+        0,
+        32,
+        32,
+        32
+      ],
+      "stone2": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "void": [
+        96,
+        64,
+        32,
+        32
+      ],
+      "wood": [
+        0,
+        64,
+        32,
+        32
+      ],
+      "wood2": [
+        32,
+        64,
+        32,
+        32
+      ]
+    },
+    "size": [
+      128,
+      128
+    ],
+    "tile_px": 32
+  },
+  "axis": {
+    "forward": "+Y",
+    "handed": "right",
+    "up": "+Z"
+  },
+  "bounds_max": [
+    1.48,
+    1.52,
+    3.13
+  ],
+  "bounds_min": [
+    -1.48,
+    -1.407564,
+    0.0
+  ],
+  "display_name": "Cistern Fossil",
+  "format": "nullrun-prop-round2-1",
+  "generator": {
+    "base_seed": 20261101,
+    "deterministic": true,
+    "script": "generate.py",
+    "seed": 20265135
+  },
+  "ground_origin": "xy footprint centre at z=0; ground plane z=0",
+  "height_m": 3.13,
+  "integration": {
+    "axis_note": "Original OBJ stays Z-up. Parent's loader conversion is (x, z, -y) plus MODELDEF AngleOffset -90; do not pre-rotate.",
+    "collision": "static decorative; supply a simple box or cylinder in the map",
+    "engine": "UZDoom/Doom-format map or model decoration; parent owns adapter",
+    "texture_sampling": "nearest; atlas UVs inset one texel"
+  },
+  "limitations": [
+    "Static prop; no animation, lights, particles or native actor.",
+    "CPU previews are inspection renders, not UZDoom captures."
+  ],
+  "material": {
+    "map_Kd": "cistern-fossil_atlas.png",
+    "mtl": "cistern-fossil.mtl",
+    "name": "cistern-fossil_mat"
+  },
+  "parts": [
+    {
+      "name": "base",
+      "triangle_range": [
+        0,
+        140
+      ],
+      "vertex_range": [
+        0,
+        104
+      ]
+    },
+    {
+      "name": "gantry",
+      "triangle_range": [
+        140,
+        280
+      ],
+      "vertex_range": [
+        104,
+        208
+      ]
+    },
+    {
+      "name": "fossil",
+      "triangle_range": [
+        280,
+        676
+      ],
+      "vertex_range": [
+        208,
+        412
+      ]
+    },
+    {
+      "name": "bell",
+      "triangle_range": [
+        676,
+        828
+      ],
+      "vertex_range": [
+        412,
+        516
+      ]
+    }
+  ],
+  "placement": {
+    "anchor_roles": [
+      "landmark",
+      "overlook",
+      "vendor"
+    ],
+    "environment": "flooded-resonance-cistern",
+    "mount": "floor basin; gantry stands in shallow water, fossil hangs 1.3 m clear",
+    "scale": "1 Blender/OBJ unit = 1 metre; exported at real scale",
+    "yaw_deg": 0
+  },
+  "prop": "cistern-fossil",
+  "size_m": [
+    2.96,
+    2.927564,
+    3.13
+  ],
+  "topology": {
+    "flat_normals": 828,
+    "triangles": 828,
+    "uvs": 2484,
+    "vertices": 516
+  },
+  "units": "metres; exported at real scale (1 OBJ unit = 1 m)"
+}

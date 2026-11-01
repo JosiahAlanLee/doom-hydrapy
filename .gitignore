@@ -1,6 +1,8 @@
 *.o
 *.obj
 !assets/tower/props3d/**/*.obj
+!assets/actors3d/**/*.obj
+!assets/installations/**/*.obj
 ._*
 *.exe
 *.DS_Store

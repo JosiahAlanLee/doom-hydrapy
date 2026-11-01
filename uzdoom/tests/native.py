@@ -5,6 +5,7 @@ import argparse,hashlib,json,os,subprocess,time,zipfile
 import numpy as np
 from PIL import Image
 from uzdoom.engine import Engine
+from uzdoom.tests.fixture_models import bind_fixture_models
 
 def run(args):
     root=args.output.resolve();root.mkdir(parents=True,exist_ok=False)
@@ -12,6 +13,7 @@ def run(args):
     assert not any('fixture' in n.lower() for n in files),'Production input contains test fixture'
     files['ZSCRIPT']+=b'\n#include "native_fixture.zs"\n'
     files['native_fixture.zs']=Path(__file__).with_name('native_fixture.zs').read_bytes()
+    bind_fixture_models(files,files['native_fixture.zs'])
     files['MAPINFO']=files['MAPINFO'].replace(b'AddEventHandlers = "NRDirector"',b'AddEventHandlers = "NRDirector", "NRFixture"')
     pk3=root/'instrumented.pk3'
     with zipfile.ZipFile(pk3,'w',zipfile.ZIP_DEFLATED) as z:
@@ -66,6 +68,8 @@ def run(args):
                     assert e.latest['mobs'][0]['x']==before['x'],'Watched Hollow moved'
                     e.move(1024);e.wait(lambda:not e.latest['mobs'][0]['frozen']);time.sleep(.5)
                 elif test_id==5:
+                    e.wait(lambda:any(m.get('class')==8 and m.get('phase')==1 and 0<m.get('warning_ticks',0)<=28 for m in e.latest.get('mobs',[])),3)
+                    item['native_warning_telemetry']='28-tick mask phase, not lunge'
                     e.wait(lambda:e.latest['creatures']['effect']=='grip',5);hold(102)
                     e.wait(lambda:e.latest['creatures']['effect']!='grip',3);hold(102,False)
                 elif test_id==6:

@@ -109,7 +109,9 @@ class NRDirector : StaticEventHandler {
  clearscope bool Near(Actor p,Vector3 q,double range=96) {
   if(!p || p.health<=0 || abs(p.Pos.Z-q.Z)>24)return false;
   Vector2 d=q.XY-p.Pos.XY;
-  return d.Length()<=range && abs(Delta(p.Angle,atan2(d.Y,d.X)))<=45;
+  // At the centre of a non-solid gate there is no meaningful facing vector.
+  // Arrival places the player here; let F return without an arbitrary yaw.
+  return d.Length()<=8 || d.Length()<=range && abs(Delta(p.Angle,atan2(d.Y,d.X)))<=45;
  }
  clearscope bool NearVendor() {return VendorNear;}
  clearscope bool BossesBound() {for(int i=0;i<Bosses.Size();i++)if(!Bosses[i].Bound())return false;return true;}
@@ -200,12 +202,14 @@ class NRDirector : StaticEventHandler {
    Mutations++;NavDue=0;
   }
  }
- int Nearest(Vector3 point) {
+ int Nearest(Vector3 point,int sector=-1) {
   int found=-1;double best=1e30;
   for(int i=0;i<Nodes.Size();i++) {
+   if(sector>=0 && Nodes[i].SectorIndex!=sector)continue;
    Vector3 d=Nodes[i].Point-point;double score=d.X*d.X+d.Y*d.Y+4*d.Z*d.Z;
    if(score<best) {found=i;best=score;}
   }
+  if(found<0 && sector>=0)return Nearest(point);
   return found;
  }
  bool Walkable(int index) {
@@ -213,7 +217,7 @@ class NRDirector : StaticEventHandler {
   return s.CeilingPlane.ZatPoint(n.Point.XY)-n.Point.Z>=56;
  }
  void Navigation(Actor p) {
-  int goal=Nearest(p.Pos);if(goal<0)return;
+  int goal=Nearest(p.Pos,p.CurSector.Index());if(goal<0)return;
   if(goal==NavGoal && level.time<NavDue)return;
   NavGoal=goal;NavDue=level.time+7;
   for(int i=0;i<Nodes.Size();i++)Nodes[i].Cost=-1;
@@ -228,7 +232,7 @@ class NRDirector : StaticEventHandler {
  }
  void Navigate(NRMonster m,Actor p,double speed) {
   if(Invalid || Nodes.Size()==0)return;
-  Navigation(p);int at=Nearest(m.Pos);if(at<0)return;
+  Navigation(p);int at=Nearest(m.Pos,m.CurSector.Index());if(at<0)return;
   Vector3 goal=p.Pos;let n=Nodes[at];int next=-1,cost=n.Cost;
   if(cost>0 || !m.CheckSight(p)) {
    for(int i=0;i<n.Edges.Size();i++) {int e=n.Edges[i];if(Nodes[e].Cost>=0 && (cost<0 || Nodes[e].Cost<cost)) {next=e;cost=Nodes[e].Cost;}}
@@ -257,6 +261,8 @@ class NRDirector : StaticEventHandler {
   }
  }
  clearscope String ArchitectureCue(Actor p) {
+  let art=ThinkerIterator.Create('NRArtConsole');NRArtConsole c;
+  while(c=NRArtConsole(art.Next()))if(c.Reach)return c.Hint();
   for(int i=0;i<Doors.Size();i++) {
    let g=Doors[i];if(!Near(p,g.Source))continue;
    if(g.NeedsBosses && !BossesBound())return "TWO DEMONS HOLD THIS DOOR";
@@ -316,13 +322,19 @@ class NRDirector : StaticEventHandler {
   LightTick();
   if(p.health<=0) {if(Holder)ReleaseGrip();ShopOpen=false;return;}
   BossTick(p,use);Mutate(p);
+  let consoles=ThinkerIterator.Create('NRArtConsole');NRArtConsole console;
+  while(console=NRArtConsole(consoles.Next()))console.Reach=console.InReach(p);
   if(Holder) {
    if(!ValidGrip() || level.time-GripAt>=140)ReleaseGrip();
    else {EscapeTicks=use?EscapeTicks+1:0;if(EscapeTicks>=25)ReleaseGrip();}
   }
   if(use && !LastUse) {
    if(NearVendor()) {if(!Bought[map])ShopOpen=true;}
-   else UseDoor(p);
+   else {
+    bool tuned=false;let art=ThinkerIterator.Create('NRArtConsole');NRArtConsole c;
+    while(c=NRArtConsole(art.Next()))if(c.Reach) {c.Tune();tuned=true;break;}
+    if(!tuned)UseDoor(p);
+   }
   }
   LastUse=use;
   if(ShopOpen && !NearVendor())ShopOpen=false;

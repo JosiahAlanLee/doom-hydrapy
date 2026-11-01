@@ -82,6 +82,10 @@ class EncounterHUD:
 
 def decorate(image,state,encounter=None):
     image=base_decorate(image,{**state,'bosses':[]})
+    from .weapons import LABELS
+    d=ImageDraw.Draw(image);weapon=max(0,min(len(LABELS)-1,int(state.get('weapon',0))))
+    d.rectangle((431,357,629,374),fill=PANEL)
+    text(d,(434,359),LABELS[weapon],AMBER)
     encounter=encounter if encounter is not None else EncounterHUD().prepare(state)
     if not encounter:return image
     d=ImageDraw.Draw(image);b=encounter['boss'];exposed=b['phase']=='exposed';colour=OPEN if exposed else AMBER
