@@ -78,6 +78,13 @@ class Engine:
         with self.send_lock:self.proc.stdin.write(text+'\n');self.proc.stdin.flush()
 
     def key(self,code,down):self.send(f'KEY {int(down)} {int(code)}')
+    def clear_movement(self,codes):
+        # The engine's keyboard cache can survive loading after its movement
+        # buttons were cleared. Separate these releases from the new presses by
+        # native game ticks; callers exclude fire/use/jump/slot keys.
+        if not codes:return
+        packet=''.join(f'KEY 0 {int(code)}\n' for code in sorted(codes))
+        with self.send_lock:self.proc.stdin.write(packet);self.proc.stdin.flush()
     def pulse(self,code):
         self.key(code,True);time.sleep(.04);self.key(code,False);time.sleep(.04)
     def move(self,x,y=0):self.send(f'MOVE {int(x)} {int(y)}')
