@@ -2,7 +2,7 @@
 class NRDirector : StaticEventHandler {
  Array<NRNav> Nodes; Array<NRSeam> Seams; Array<NRChange> Changes; Array<NRDoor> Doors;
  Array<NRBoss> Bosses; Array<NRMonster> Mobs; Array<int> LightSectors;
- NRVendor Vendor; NRMonster Holder;
+ NRVendor Vendor; NRMonster Holder; NRWeather Weather;
  int Ranks[5],Stock[5],Bought[8],PaidKills[8],PaidSecrets[8],PreviousAmmo[4];
  int Credits,Earned,Spent,Kind,Base,Swaps,InternalSwaps,Blocked,LastSeam,Mutations,LightLevel,Shots,FlashUntil;
  int GripAt,GripDamageAt,EscapeTicks,ImmunityUntil,ShriekUntil,NavGoal,NavDue;
@@ -29,6 +29,7 @@ class NRDirector : StaticEventHandler {
   // Deadlines from the old clock must never stun the arriving player or leave
   // their light/immunity/grip state active for most of the next floor.
   GripAt=0;GripDamageAt=0;EscapeTicks=0;ImmunityUntil=0;ShriekUntil=0;FlashUntil=0;
+  Weather=new('NRWeather');Weather.Load();
   Swaps=0;InternalSwaps=0;Blocked=0;Mutations=0;LastSeam=0;NavGoal=-1;NavDue=0;LightLevel=208;
   int lump=Wads.FindLump(String.Format("NRMAP%02d",level.levelnum));
   if(lump<0) {Invalid=true;Error="Missing authored campaign data";return;}
@@ -103,8 +104,11 @@ class NRDirector : StaticEventHandler {
   let p=players[0].mo;if(!p)return;
   for(int i=0;i<4;i++)p.SetAmmoCapacity(AmmoClass(i),AmmoCap(i));
  }
+ clearscope double SightLimit(Actor a,Actor b,double normal=1536) {
+  return Weather && Weather.Enabled && (a && Weather.Contains(a.CurSector) || b && Weather.Contains(b.CurSector))?min(normal,Weather.Visibility):normal;
+ }
  bool Watched(Actor p,Actor m) {
-  return p && m && p.Distance2D(m)<=1536 && abs(Delta(p.Angle,atan2(m.Pos.Y-p.Pos.Y,m.Pos.X-p.Pos.X)))<=45 && abs(p.Pitch)<65 && p.CheckSight(m);
+  return p && m && p.Distance2D(m)<=SightLimit(p,m) && abs(Delta(p.Angle,atan2(m.Pos.Y-p.Pos.Y,m.Pos.X-p.Pos.X)))<=45 && abs(p.Pitch)<65 && p.CheckSight(m);
  }
  clearscope bool Illuminated(Actor m) {
   for(int i=0;i<LightSectors.Size();i++)if(m.CurSector.Index()==LightSectors[i])return LightLevel>=73 || level.time<FlashUntil;
@@ -131,7 +135,7 @@ class NRDirector : StaticEventHandler {
    let b=Bosses[i];if(b.Bound()) {b.Visible=false;continue;}
    b.PlayerDistance=p.Distance2D(b.Mob);
    double look=-atan2(b.Mob.Pos.Z+b.Mob.Height*.5-(p.Pos.Z+p.Height*.75),max(1.,b.PlayerDistance));
-   b.Visible=b.PlayerDistance<=1536 && abs(Delta(p.Angle,atan2(b.Mob.Pos.Y-p.Pos.Y,b.Mob.Pos.X-p.Pos.X)))<=50 && abs(p.Pitch-look)<=40 && p.CheckSight(b.Mob);
+   b.Visible=b.PlayerDistance<=SightLimit(p,b.Mob) && abs(Delta(p.Angle,atan2(b.Mob.Pos.Y-p.Pos.Y,b.Mob.Pos.X-p.Pos.X)))<=50 && abs(p.Pitch-look)<=40 && p.CheckSight(b.Mob);
    if(b.EchoDue && level.time>=b.EchoDue) {
     b.Mob.AimYaw=b.EchoAngle;b.Mob.AimPitch=b.EchoPitch;b.Mob.Shot(p,'BaronBall',0,true);b.EchoDue=0;b.Echoes++;
    }
@@ -306,6 +310,7 @@ class NRDirector : StaticEventHandler {
   if(e.Name=="nr_buy")Buy(e.Args[0]);
   else if(e.Name=="nr_close")ShopOpen=false;
   else if(e.Name=="nr_flicker")CVar.GetCVar('nr_flicker').SetBool(e.Args[0]!=0);
+  else if(e.Name=="nr_weather" && Weather)Weather.SetEnabled(e.Args[0]==2?!Weather.Enabled:e.Args[0]!=0);
  }
  void LightTick() {
   uint h=(uint(level.time/140)+1)*0x9e3779b9;h^=h>>16;h*=0x85ebca6b;h^=h>>13;
@@ -318,6 +323,7 @@ class NRDirector : StaticEventHandler {
  override void WorldTick() {
   if(Invalid || !playeringame[0] || !players[0].mo)return;
   let p=players[0].mo;VendorNear=Vendor && Near(p,Vendor.Pos) && p.CheckSight(Vendor);int map=level.levelnum;bool use=!!(p.player.cmd.buttons&BT_USE);
+  if(Weather)Weather.Tick(p);
   int kills=level.killed_monsters,secrets=level.found_secrets,reward=0;
   if(kills>PaidKills[map]) {reward+=kills-PaidKills[map];PaidKills[map]=kills;}
   if(secrets>PaidSecrets[map]) {reward+=3*(secrets-PaidSecrets[map]);PaidSecrets[map]=secrets;}
@@ -380,6 +386,7 @@ class NRDirector : StaticEventHandler {
   String s=String.Format("{\"backend\":\"uzdoom\",\"map\":%d,\"health\":%d,\"armor\":%d,\"weapon\":%d,\"ammo\":[%d,%d,%d,%d],\"kills\":%d,\"total_kills\":%d,\"items\":%d,\"secrets\":%d,\"x\":%.4f,\"y\":%.4f,\"z\":%.4f,\"angle\":%.4f,\"pitch\":%.4f,\"level_tics\":%d,\"tic\":%d,\"dead\":%s,\"won\":%s,\"boss\":%s,\"bosses\":%s,\"mobs\":%s,",
    level.levelnum,p.health,armor?armor.Amount:0,weapon,AmmoAmount(0),AmmoAmount(1),AmmoAmount(2),AmmoAmount(3),level.killed_monsters,level.total_monsters,p.player.itemcount,level.found_secrets,p.Pos.X,p.Pos.Y,p.Pos.Z,p.Angle,p.Pitch,level.time,level.totaltime,p.health<=0?"true":"false",Won?"true":"false",Bosses.Size()?Bosses[selected].JSON(p):"null",bossesText,mobsText);
   s=s .. String.Format("\"creatures\":{\"watched\":%d,\"hunting\":%d,\"shriek_warning\":%d,\"effect\":%s,\"escape_ticks\":%d,\"remaining_ticks\":%d},\"argon\":{\"warnings\":%d,\"cue\":%s},",watched,hunting,shriek,effect,EscapeTicks,Holder?140-(level.time-GripAt):max(0,ShriekUntil-level.time),warnings,hint!=""?"\"" .. hint .. "\"":"null");
+  s=s .. "\"weather\":" .. (Weather?Weather.JSON(p):"null") .. ",";
   s=s .. String.Format("\"architecture\":{\"active\":true,\"kind\":%d,\"swaps\":%d,\"blocked\":%d,\"last_seam\":%d,\"mutations\":%d,\"invalid\":%s},\"strobe\":{\"active\":true,\"style\":\"irregular\",\"lit\":%s,\"muzzle\":%s,\"shots\":%d,\"illumination\":%.4f},\"motion\":{\"z\":%.4f,\"momx\":%.4f,\"momy\":%.4f,\"momz\":%.4f},\"vending\":%s,\"error\":%s}",Kind,Swaps,Blocked,LastSeam,Mutations,Invalid?"true":"false",LightLevel>=73?"true":"false",level.time<FlashUntil?"true":"false",Shots,LightLevel/208.,p.Pos.Z,p.Vel.X,p.Vel.Y,p.Vel.Z,VendingJSON(),Invalid?"\"" .. Error .. "\"":"null");
   return s;
  }

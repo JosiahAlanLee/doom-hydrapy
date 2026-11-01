@@ -3,4 +3,5 @@
 #include "uzdoom/types.zs"
 #include "uzdoom/monsters.zs"
 #include "uzdoom/art.zs"
+#include "uzdoom/weather.zs"
 #include "uzdoom/director.zs"

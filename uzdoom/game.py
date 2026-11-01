@@ -24,7 +24,7 @@ class Game:
             if not isinstance(recent,list) or any(not isinstance(p,str) for p in recent):recent=[]
             retry=getattr(self,'manifest',{}).get('seed')==seed
             plan=self.manifest.get('floor_plan') if retry else None
-            manifest=build(seed,self.wad,folder,os.environ.get('NULLRUN_ENVIRONMENT') or None,floor_plan=plan,recent_openers=recent[-5:])
+            manifest=build(seed,self.wad,folder,os.environ.get('NULLRUN_ENVIRONMENT') or None,floor_plan=plan,recent_openers=recent[-5:],weather=os.environ.get('NULLRUN_WEATHER','off'))
             candidate=Engine(os.environ['UZDOOM_BINARY'],os.environ['UZDOOM_BRIDGE'],self.wad,folder/'nullrun.pk3',folder/'engine',sound=os.environ.get('UZDOOM_SOUND')=='1')
             if candidate.latest.get('error'):candidate.close();raise RuntimeError(candidate.latest['error'])
             previous=self.engine;self.release();self.engine=candidate;self.manifest=manifest

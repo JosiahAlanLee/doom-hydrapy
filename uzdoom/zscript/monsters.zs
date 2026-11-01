@@ -109,7 +109,7 @@ class NRMonster : Actor {
   let p=players[0].mo;
   h.Fold(self,LastPoint);LastPoint=Pos;StopXY();
   if(!p || p.health<=0) {Visual();return;}
-  double range=Distance2D(p);bool sight=range<=1536 && CheckSight(p);
+  double range=Distance2D(p);bool sight=range<=h.SightLimit(self,p) && CheckSight(p);
   PlayerSight=sight;
   target=p;
   if(BossIndex>=0 && BossIndex<h.Bosses.Size()) {

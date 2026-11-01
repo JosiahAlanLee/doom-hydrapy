@@ -216,3 +216,33 @@ licenses for attribution. External model output is reviewed before promotion.
 `tools/ask_argon.py` is an optional Gemini helper; attachments leave the machine
 and need the owner's permission. Credentials are supplied locally and are never
 part of the game, patch or source tree.
+
+
+## Optional cistern weather experiment
+
+Weather is off by default. Build with `--weather cistern`, or explicitly set
+`NULLRUN_WEATHER=cistern` for a new native run. Only Flooded Resonance Cistern
+geometry receives fog; service annexes, stairs and other world families stay dry.
+Native sector fog preserves world depth and leaves the separate HUD and weapon
+clear. Soft mist particles drift with gentle wind, with two emissions every
+three game ticks, a 105-tick lifetime and a bound of 70 live particles. The
+weather PRNG is private and does not consume combat randomness.
+
+While either participant is in a fog sector, enemy sight, Hollow watching and
+boss visibility use a 384-unit maximum range. Nearby encounters retain normal
+line-of-sight checks. This is a sector-based gameplay approximation, not an
+integrated volumetric optical model or fluid simulation.
+
+The native test uses `nr_weather 0/1` events for clear/fog comparison, waits for
+old wisps to expire, checks another floor stays dry and exercises actual Surveyor
+awareness in an unobstructed room. The default live session is not changed by
+preparing this branch. A complete HydraPy/Rack performance comparison and human
+visibility review remain required before making weather a default.
+
+```sh
+python -m unittest uzdoom.tests.test_weather
+python -m uzdoom.tests.weather_native --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/cistern-first/nullrun.pk3 --output /new/weather-check
+```
+
+For that native visual test, put the cistern first in an explicitly saved
+`floor_plan`; normal runs retain the regular shuffled selection.
