@@ -25,6 +25,10 @@ class NRDirector : StaticEventHandler {
   if(!Initialized)ResetRun();
   Nodes.Clear();Seams.Clear();Changes.Clear();Doors.Clear();Bosses.Clear();Mobs.Clear();LightSectors.Clear();
   Vendor=null;Holder=null;ShopOpen=false;VendorNear=false;HaveLast=false;LastUse=false;Invalid=false;Error="";
+  // StaticEventHandler survives Exit_Normal; level.time restarts on each map.
+  // Deadlines from the old clock must never stun the arriving player or leave
+  // their light/immunity/grip state active for most of the next floor.
+  GripAt=0;GripDamageAt=0;EscapeTicks=0;ImmunityUntil=0;ShriekUntil=0;FlashUntil=0;
   Swaps=0;InternalSwaps=0;Blocked=0;Mutations=0;LastSeam=0;NavGoal=-1;NavDue=0;LightLevel=208;
   int lump=Wads.FindLump(String.Format("NRMAP%02d",level.levelnum));
   if(lump<0) {Invalid=true;Error="Missing authored campaign data";return;}

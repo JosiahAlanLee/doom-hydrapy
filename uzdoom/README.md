@@ -166,6 +166,8 @@ python -m uzdoom.build --assets /path/freedoom2.wad --seed 1233599628 --output /
 python -m uzdoom.tests.native --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/native-check
 python -m uzdoom.tests.boss_encounter --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/boss-check
 python -m uzdoom.tests.architecture --help
+python -m uzdoom.tests.transition --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/transition-check
+python -m uzdoom.tests.routes --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/route-check
 python -m unittest uzdoom.tests.test_cues
 python -m unittest uzdoom.tests.test_art
 python -m uzdoom.tests.encounter_render --output /new/gpu-check
@@ -187,6 +189,12 @@ nonzero stereo RMS, no clipped samples, no xruns and no clock discontinuities.
 This is a bounded measurement, not a guarantee for every future run or device.
 The boss revision leaves that audio rig and render path unchanged. Combat balance
 and complete human runs still need playtesting.
+
+Level-local grip, shriek, immunity and muzzle-flash timers reset when a new floor
+loads. The native transition regression seeds old-clock deadlines, uses real
+`Exit_Normal` changes through MAP02/MAP03, and verifies both player movement and
+retained run upgrades. `--expect-stale` reproduces the frozen arrival on an older
+package; its setup never clears the incoming timer itself.
 
 The adaptive backend tests use HydraPy's real tracker. Add
 `uzdoom/music_package` and the dependency roots to `PYTHONPATH`, set
