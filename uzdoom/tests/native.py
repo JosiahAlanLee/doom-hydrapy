@@ -5,6 +5,7 @@ import argparse,hashlib,json,os,subprocess,time,zipfile
 import numpy as np
 from PIL import Image
 from uzdoom.engine import Engine
+from uzdoom.tests.fixture_models import bind_fixture_models
 
 def run(args):
     root=args.output.resolve();root.mkdir(parents=True,exist_ok=False)
@@ -12,6 +13,7 @@ def run(args):
     assert not any('fixture' in n.lower() for n in files),'Production input contains test fixture'
     files['ZSCRIPT']+=b'\n#include "native_fixture.zs"\n'
     files['native_fixture.zs']=Path(__file__).with_name('native_fixture.zs').read_bytes()
+    bind_fixture_models(files,files['native_fixture.zs'])
     files['MAPINFO']=files['MAPINFO'].replace(b'AddEventHandlers = "NRDirector"',b'AddEventHandlers = "NRDirector", "NRFixture"')
     pk3=root/'instrumented.pk3'
     with zipfile.ZipFile(pk3,'w',zipfile.ZIP_DEFLATED) as z:

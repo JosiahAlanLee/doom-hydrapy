@@ -2,6 +2,7 @@
 """Explicit test-only native setup/driver, imported only by a headless trial."""
 from pathlib import Path
 import hashlib,json,time,zipfile
+from uzdoom.tests.fixture_models import bind_fixture_models
 _installed=False
 
 
@@ -16,6 +17,7 @@ def install():
         with zipfile.ZipFile(path) as z:files={n:z.read(n) for n in z.namelist()}
         files['ZSCRIPT']+=b'\n#include "native_fixture.zs"\n#include "cue_fixture.zs"\n'
         files['native_fixture.zs']=Path(__file__).with_name('native_fixture.zs').read_bytes()
+        bind_fixture_models(files,files['native_fixture.zs'])
         files['cue_fixture.zs']=b'class NRShaderFixture : NRFixture { override void NetworkProcess(ConsoleEvent e) { if(e.Name=="nr_shader_fixture") {TestId=e.Args[0]==77?7:e.Args[0]==88?0:e.Args[0];Setup();if(e.Args[0]==77)Make(\'NRFixture11\',players[0].mo.Pos+(256,64,0),NRDirector.Get());if(e.Args[0]==88)Place(players[0].mo,(16512,-1872,0),90);return;} Super.NetworkProcess(e); } }\n'
         files['MAPINFO']=files['MAPINFO'].replace(b'AddEventHandlers = "NRDirector"',b'AddEventHandlers = "NRDirector", "NRShaderFixture"')
         with zipfile.ZipFile(path,'w',zipfile.ZIP_DEFLATED) as z:
