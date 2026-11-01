@@ -26,6 +26,7 @@ from uzdoom.openworld.campaign import add_floor,IDS
 from uzdoom.openworld.selection import choose as floor_choices
 from uzdoom.art_sections import add_room as add_art_room,artwork as signal_artwork
 from uzdoom.weapons import artwork as weapon_artwork,remaining_assets
+from uzdoom.weather import PRESETS as WEATHER_PRESETS,configure as configure_weather,lump as weather_lump,mist_texture
 
 ROOT=Path(__file__).resolve().parents[1]
 BANK=ROOT/'assets/tower'
@@ -331,19 +332,24 @@ def artwork(wad_path,seed,pack):
     return files
 
 
-def build(seed,assets,output,pack=None,open_worlds=True,*,floor_plan=None,recent_openers=()):
+def build(seed,assets,output,pack=None,open_worlds=True,*,floor_plan=None,recent_openers=(),weather='off'):
     if type(seed) is not int or not 0<=seed<=0xffffffff:raise ValueError('Unsigned 32-bit seed required')
     pack=pack or PACKS[seed%len(PACKS)]
     if pack not in PACKS:raise ValueError('Unknown environment')
+    if weather not in WEATHER_PRESETS:raise ValueError('Unknown weather preset')
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
     floor_plan=floor_plan or floor_choices(seed,IDS,recent_openers)
     if len(floor_plan)!=7 or any(p['floor']!=i+1 or p['archetype'] not in IDS or type(p['seed']) is not int or not 0<=p['seed']<=0xffffffff for i,p in enumerate(floor_plan)):raise ValueError('Invalid saved floor plan')
     maps,floors=make_maps(seed,pack,open_worlds,floor_plan);files=artwork(assets,seed,pack)
+    if weather!='off':files['graphics/NRMIST.png']=png(mist_texture())
     files['ZSCRIPT']=b'version "4.10"\n#include "uzdoom/runtime.zs"\n#include "uzdoom/props.zs"\n#include "uzdoom/models.zs"\n#include "uzdoom/signals.zs"\n'
     for source in (ROOT/'uzdoom/zscript').glob('*.zs'):files['uzdoom/'+source.name]=source.read_bytes()
     model_numbers=doom_ed_numbers()
     info='gameinfo { AddEventHandlers = "NRDirector" PlayerClasses = "NRPlayer" }\nDoomEdNums { 16000 = NRMonster 15999 = NRVendor 16500 = NRGate 17000 = NRProp0 17001 = NRProp1 17002 = NRProp2 18200 = NRSignal0 18201 = NRSignal1 18202 = NRSignal2 18210 = NRArtConsole '+model_numbers+' }\n'
     for m,f in zip(maps,floors):
+        profile=configure_weather(m,f.get('open_world'),weather,seed)
+        f['weather']=profile
+        if profile:files[f'NRWX{m.number:02}']=weather_lump(profile)
         files[f'maps/MAP{m.number:02}.wad']=m.bytes();files[f'NRMAP{m.number:02}']=m.data()
         info+=f'map MAP{m.number:02} "NULL RUN / {pack.replace("_"," ").upper()} / {m.number:02}" {{ levelnum = {m.number} next = "MAP{m.number+1:02}" sky1 = "SKY3" nointermission allowjump nocrouch }}\n'
     files['MAPINFO']=info.encode();files['CVARINFO']=b'server bool nr_flicker = true;\n'
@@ -352,7 +358,7 @@ def build(seed,assets,output,pack=None,open_worlds=True,*,floor_plan=None,recent
         for name,data in sorted(files.items()):
             entry=zipfile.ZipInfo(name,(2026,10,31,0,0,0));entry.compress_type=zipfile.ZIP_DEFLATED;z.writestr(entry,data)
     environment=describe(pack) if pack in PACK_IDS else next(e for e in json.loads((BANK/'environments.json').read_text())['sets'] if e['id']==pack)
-    manifest=dict(format='nullrun-uzdoom-1',seed=seed,mode='campaign',identity='threshold',environment=environment,floor_plan=floor_plan,
+    manifest=dict(format='nullrun-uzdoom-1',seed=seed,mode='campaign',identity='threshold',environment=environment,floor_plan=floor_plan,weather=weather,
                   floors=floors,sha256=hashlib.sha256((output/'nullrun.pk3').read_bytes()).hexdigest())
     (output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     return manifest
@@ -362,4 +368,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--seed',type=int,default=20261031)
     parser.add_argument('--assets',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--environment',choices=PACKS)
     parser.add_argument('--legacy-layouts',action='store_true',help='Retain office layouts for focused mechanics regression checks')
-    a=parser.parse_args();m=build(a.seed,a.assets,a.output,a.environment,not a.legacy_layouts);print(a.output,m['sha256'])
+    parser.add_argument('--weather',choices=WEATHER_PRESETS,default='off',help='Optional cistern fog/particles; default is off')
+    a=parser.parse_args();m=build(a.seed,a.assets,a.output,a.environment,not a.legacy_layouts,weather=a.weather);print(a.output,m['sha256'])

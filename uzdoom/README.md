@@ -167,6 +167,7 @@ python -m uzdoom.tests.native --engine /path/uzdoom --bridge /path/capture.so --
 python -m uzdoom.tests.boss_encounter --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/boss-check
 python -m uzdoom.tests.architecture --help
 python -m uzdoom.tests.transition --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/transition-check
+python -m uzdoom.tests.held_input --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/held-input-check
 python -m uzdoom.tests.routes --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/build/nullrun.pk3 --output /new/route-check
 python -m unittest uzdoom.tests.test_cues
 python -m unittest uzdoom.tests.test_art
@@ -196,6 +197,15 @@ loads. The native transition regression seeds old-clock deadlines, uses real
 retained run upgrades. `--expect-stale` reproduces the frozen arrival on an older
 package; its setup never clears the incoming timer itself.
 
+The Python controller also invalidates its sent-key cache when the native map
+changes. The engine releases buttons during a transition; the next physical
+input snapshot must therefore reassert movement that is still held. Once the
+new floor is ticking, movement is released and rearmed after seven native ticks
+to cover delayed input clearing during loading; use, attack, jump and weapon
+selection keep their press edges. The separate
+`held_input` runner uses the real `Game.input` loop and a straight test lane to
+isolate this from terrain collision. `input_resyncs` is exposed in game status.
+
 The adaptive backend tests use HydraPy's real tracker. Add
 `uzdoom/music_package` and the dependency roots to `PYTHONPATH`, set
 `NULLRUN_INITIAL_SCORE` to the supplied score and `NULLRUN_ROOT` to an owned
@@ -206,3 +216,33 @@ licenses for attribution. External model output is reviewed before promotion.
 `tools/ask_argon.py` is an optional Gemini helper; attachments leave the machine
 and need the owner's permission. Credentials are supplied locally and are never
 part of the game, patch or source tree.
+
+
+## Optional cistern weather experiment
+
+Weather is off by default. Build with `--weather cistern`, or explicitly set
+`NULLRUN_WEATHER=cistern` for a new native run. Only Flooded Resonance Cistern
+geometry receives fog; service annexes, stairs and other world families stay dry.
+Native sector fog preserves world depth and leaves the separate HUD and weapon
+clear. Soft mist particles drift with gentle wind, with two emissions every
+three game ticks, a 105-tick lifetime and a bound of 70 live particles. The
+weather PRNG is private and does not consume combat randomness.
+
+While either participant is in a fog sector, enemy sight, Hollow watching and
+boss visibility use a 384-unit maximum range. Nearby encounters retain normal
+line-of-sight checks. This is a sector-based gameplay approximation, not an
+integrated volumetric optical model or fluid simulation.
+
+The native test uses `nr_weather 0/1` events for clear/fog comparison, waits for
+old wisps to expire, checks another floor stays dry and exercises actual Surveyor
+awareness in an unobstructed room. The default live session is not changed by
+preparing this branch. A complete HydraPy/Rack performance comparison and human
+visibility review remain required before making weather a default.
+
+```sh
+python -m unittest uzdoom.tests.test_weather
+python -m uzdoom.tests.weather_native --engine /path/uzdoom --bridge /path/capture.so --iwad /path/freedoom2.wad --pk3 /new/cistern-first/nullrun.pk3 --output /new/weather-check
+```
+
+For that native visual test, put the cistern first in an explicitly saved
+`floor_plan`; normal runs retain the regular shuffled selection.
